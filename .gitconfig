@@ -3,6 +3,21 @@
 	status = auto
     branch = auto
     grep = auto
+
 [user]
 	name = Kent Chen
-	email = chenkaie@gmail.com
+    email = chenkaie@gmail.com
+
+[core]
+    whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+
+[alias]
+    st = status
+    ci = commit
+    br = branch
+    co = checkout
+    di = diff
+    lg = log -p
+
+[branch]
+	autosetupmerge = true
