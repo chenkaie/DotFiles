@@ -1,0 +1,8 @@
+[color]
+	diff = auto
+	status = auto
+    branch = auto
+    grep = auto
+[user]
+	name = Kent Chen
+	email = chenkaie@gmail.com

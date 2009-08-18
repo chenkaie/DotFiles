@@ -1,0 +1,198 @@
+#!/bin/sh
+#
+# Usage: update_eptzsetting [all|preset|crop]
+#     all: clean all settings, include resolution, roi, preset
+#     preset: clean preset
+#     crop: initial roi & resolution setting
+# 
+# PS: If no parameter given, we assume it will clean all
+
+ARGUMENT="$1"
+[ -z "$ARGUMENT" ] && ARGUMENT="all"
+
+if [ "$ARGUMENT" != "preset" ] && [ "$ARGUMENT" != "crop" ] && [ "$ARGUMENT" != "all" ]; then
+    echo "Usage: $0 {all|preset|crop}"
+    exit 1
+fi
+
+CONFCLIENT='/usr/sbin/confclient'
+PRESET_NUMBER=`$CONFCLIENT -g capability_npreset -p 99 -t Value`
+[ -z $PRESET_NUMBER ] && PRESET_NUMBER=20
+
+STREAM_NUMBER=`$CONFCLIENT -g capability_nmediastream -p 99 -t Value`
+[ -z $STREAM_NUMBER ] && STREAM_NUMBER=4
+
+#General value, this value should be model-dependent
+PRIVACYMASK_NUMBER=5
+MOTION_NUMBER=3
+
+#Get current value
+tempstatus="/tmp/tmpstatus.$$"
+
+CLEAR_RESO_PARAMS=""
+CLEAR_PARAMS=""
+
+###############################################################################
+Calc_Preset_Params()
+{
+    $CONFCLIENT -g "eptz" -p 99 > $tempstatus
+    . $tempstatus && rm -f $tempstatus
+
+	indexS=0
+	indexP=0
+	while [ $indexS -lt $(($STREAM_NUMBER)) ]
+	do
+	    eval tmpPatrolSeq=\$eptz_c0_s${indexS}_patrolseq
+        if [ -n "$tmpPatrolSeq" ]; then
+            CLEAR_PARAMS="${CLEAR_PARAMS}&eptz_c0_s${indexS}_patrolseq="
+        fi
+
+	    eval tmpPatrolDwelling=\$eptz_c0_s${indexS}_patroldwelling
+	    if [ -n "$tmpPatrolDwelling" ]; then
+            CLEAR_PARAMS="${CLEAR_PARAMS}&eptz_c0_s${indexS}_patroldwelling="
+	    fi
+
+        while [ $indexP -lt $PRESET_NUMBER ]
+        do
+            eval tmpPresetName=\$eptz_c0_s${indexS}_preset_i${indexP}_name
+            if [ -n "$tmpPresetName" ]; then
+                CLEAR_PARAMS="${CLEAR_PARAMS}&eptz_c0_s${indexS}_preset_i${indexP}_name=&eptz_c0_s${indexS}_preset_i${indexP}_pos=&eptz_c0_s${indexS}_preset_i${indexP}_size="
+            fi
+            indexP=$(($indexP+1))
+        done
+
+	    indexP=0
+	    indexS=$(($indexS+1))
+	done
+}
+
+###############################################################################
+Calc_Motion_Privacy_Params()
+{
+    $CONFCLIENT -g "motion&privacymask" -p 99 > $tempstatus
+    . $tempstatus && rm -f $tempstatus
+    
+    #Rreset motion window
+	indexS=0
+    while [ $indexS -lt $(($MOTION_NUMBER)) ]
+    do
+        eval tmpMotionEnable=\$motion_c0_win_i${indexS}_enable
+        if [ $tmpMotionEnable != "0" ]; then
+            CLEAR_PARAMS="${CLEAR_PARAMS}&motion_c0_win_i${indexS}_enable=0"
+        fi
+
+        eval tmpMotionProfileEnable=\$motion_c0_profile_i0_win_i${indexS}_enable
+        if [ $tmpMotionProfileEnable != 0 ]; then
+            CLEAR_PARAMS="${CLEAR_PARAMS}&motion_c0_profile_i0_win_i${indexS}_enable=0"
+        fi
+
+        indexS=$(($indexS+1))
+    done
+
+    #Reset privacymask
+    indexS=0
+    while [ $indexS -lt $(($PRIVACYMASK_NUMBER)) ]
+    do
+        eval tmpPrivacyEnable=\$privacymask_c0_win_i${indexS}_enable
+        if [ $tmpPrivacyEnable != "0" ]; then
+            CLEAR_PARAMS="${CLEAR_PARAMS}&privacymask_c0_win_i${indexS}_enable=0"
+        fi
+
+        indexS=$(($indexS+1))
+    done
+}
+###############################################################################
+# Calculate the maximum mobile stream ROI size (in the ratio W:H = 176:144) for 3rd stream
+Calc_Crop_Params()
+{
+    $CONFCLIENT -g "videoin_c0_crop" -p 99 > $tempstatus
+    . $tempstatus && rm -f $tempstatus
+    
+    # when videoin_c0_crop_preview = 1, used for switch to fullview stream for setting crop window, don't need to init crop params
+    [ $videoin_c0_crop_preview -eq 1 ] && exit 1
+
+    CROP_SIZE_W=`echo $videoin_c0_crop_size | cut -d 'x' -f 1`
+    CROP_SIZE_H=`echo $videoin_c0_crop_size | cut -d 'x' -f 2`
+    if [ `expr 176 \* $CROP_SIZE_H` -gt `expr 144 \* $CROP_SIZE_W` ]; then
+        MOBILE_CROP_SIZE=${CROP_SIZE_W}x`expr 144 \* $CROP_SIZE_W / 176` 
+    else
+        MOBILE_CROP_SIZE=`expr 176 \* $CROP_SIZE_H / 144`x${CROP_SIZE_H}
+    fi
+
+    CLEAR_RESO_PARAMS="videoin_c0_s0_resolution=${videoin_c0_crop_size}&videoin_c0_s1_resolution=${videoin_c0_crop_size}&videoin_c0_s2_resolution=176x144&videoin_c0_s3_resolution=${videoin_c0_crop_size}&videoin_c0_s4_resolution=${videoin_c0_crop_size}&roi_c0_s0_home=0,0&roi_c0_s0_size=${videoin_c0_crop_size}&roi_c0_s1_home=0,0&roi_c0_s1_size=${videoin_c0_crop_size}&roi_c0_s2_home=0,0&roi_c0_s2_size=${MOBILE_CROP_SIZE}&roi_c0_s3_home=0,0&roi_c0_s3_size=${videoin_c0_crop_size}&roi_c0_s4_home=0,0&roi_c0_s4_size=${videoin_c0_crop_size}"
+
+    $CONFCLIENT -s $CLEAR_RESO_PARAMS -p 99
+
+    # That means maxframe should be <= 15
+    if [ ${CROP_SIZE_W} -gt 1280 ] || [ ${CROP_SIZE_H} -gt 720 ]; then 
+        Calc_Maxframe
+    fi
+}
+
+###############################################################################
+Calc_ROI_Resolution_Params()
+{
+    $CONFCLIENT -g "videoin_c0_options&videoin_c0_preoptions" -p 99 > $tempstatus
+    . $tempstatus && rm -f $tempstatus
+
+	#Note, Hard code below line, this line maybe differ from other model!
+	if [ $videoin_c0_options = "quality" ]; then
+	    CLEAR_RESO_PARAMS="videoin_c0_s0_resolution=800x600&videoin_c0_s1_resolution=320x240&videoin_c0_s2_resolution=176x144&videoin_c0_s3_resolution=1600x1200&videoin_c0_s4_resolution=1600x1200&roi_c0_s0_home=400,300&roi_c0_s0_size=800x600&roi_c0_s1_home=640,480&roi_c0_s1_size=320x240&roi_c0_s2_home=0,0&roi_c0_s2_size=1600x1200&roi_c0_s3_home=0,0&roi_c0_s3_size=1600x1200&roi_c0_s4_home=0,0&roi_c0_s4_size=1600x1200"
+        $CONFCLIENT -s $CLEAR_RESO_PARAMS -p 99
+        Calc_Maxframe
+        [ $videoin_c0_preoptions = "crop" ] && Calc_Motion_Privacy_Params
+
+    elif [ $videoin_c0_options = "framerate" ]; then
+	    CLEAR_RESO_PARAMS="videoin_c0_s0_resolution=800x600&videoin_c0_s1_resolution=320x240&videoin_c0_s2_resolution=176x144&videoin_c0_s3_resolution=800x600&videoin_c0_s4_resolution=800x600&roi_c0_s0_home=0,0&roi_c0_s0_size=800x600&roi_c0_s1_home=240,180&roi_c0_s1_size=320x240&roi_c0_s2_home=0,0&roi_c0_s2_size=800x600&roi_c0_s3_home=0,0&roi_c0_s3_size=800x600&roi_c0_s4_home=0,0&roi_c0_s4_size=800x600"
+        $CONFCLIENT -s $CLEAR_RESO_PARAMS -p 99
+        [ $videoin_c0_preoptions = "crop" ] && Calc_Motion_Privacy_Params
+
+    elif [ $videoin_c0_options = "crop" ]; then
+        Calc_Crop_Params 
+        Calc_Motion_Privacy_Params
+	fi
+}
+
+###############################################################################
+#capability_videoin_codec=mpeg4,mjpeg
+Calc_Maxframe()
+{
+    $CONFCLIENT -g "videoin&capability_videoin_codec" -p 99 > $tempstatus
+    . $tempstatus && rm -f $tempstatus
+
+	indexS=0
+	while [ $indexS -lt $STREAM_NUMBER ]
+	do
+        for codectype in ${capability_videoin_codec/,/ }
+        do
+            eval tmpMaxframe=\$videoin_c0_s${indexS}_${codectype}_maxframe
+            if [ $tmpMaxframe -gt 15 ]; then
+                CLEAR_PARAMS="${CLEAR_PARAMS}&videoin_c0_s${indexS}_${codectype}_maxframe=15"
+            fi
+        done
+	    indexS=$(($indexS+1))
+	done
+}
+
+###############################################################################
+
+case $ARGUMENT in
+    preset)
+        Calc_Preset_Params
+    ;;
+    crop)
+        Calc_Crop_Params
+    ;;
+    all)
+        Calc_ROI_Resolution_Params
+        Calc_Preset_Params
+    ;;
+esac
+
+#echo $CLEAR_PARAMS
+$CONFCLIENT -s $CLEAR_PARAMS -p 99
+
+# In general, preset only be allowed to be set by CGI command, thus, when preset is set by CGI,
+# we don't reload config_eptz.xml to avoid repeated reloading. So as preset is set by internal command such
+# as $CONFCLIENT, we must reload venc.
+kill -40 `cat /var/run/venc.pid`

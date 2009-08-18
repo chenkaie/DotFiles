@@ -1,0 +1,41 @@
+#!/bin/sh
+
+export LSPDIR=/opt/Vivotek/lsp/DM365
+export PROJECT=kernel_platform
+export PRJROOT=${LSPDIR}/${PROJECT}
+export TOOLSDIR=/opt/montavista/pro5.0/devkit/arm/v5t_le/bin
+. ${PRJROOT}/scripts/archive/devel_DM365
+
+# Product definition
+export PRODUCTDIR=`pwd | sed -e 's/\/build//'`
+export ROOTFS_SRCDIR=${PRODUCTDIR}/rootfs
+export FLASHFS_SRCDIR=${PRODUCTDIR}/flashfs
+export ROOTFSDIR=${PRODUCTDIR}/release/rootfs
+export FLASHFSDIR=${PRODUCTDIR}/release/flashfs
+export WEBDIR=${FLASHFSDIR}/www
+export ETCDIR=${FLASHFSDIR}/etc
+export PRODUCTVER=VS8102-VVTK-0100a
+export IMAGEDIR=${PRODUCTDIR}/release/package/${PRODUCTVER}
+export CFGXML=${PRODUCTDIR}/build/config/VS8102_VVTK.xml
+#export EXTENSION_SRCDIR=${PRODUCTDIR}/IP8161
+export KERNEL_CONFIG=build/config/linux-2.6.18-dm365.config
+export L1BOOT=ublDM365-nand-216M.bin
+#export L1BOOT=ublDM365-nand.bin
+export L2BOOT=u-boot-1.3.4-dm365_evm.bin
+export KERNEL=uImage-2.6.18-dm365
+
+# Overwrite environment variable
+export DVSDK=${PRODUCTDIR}/build
+cd ../apps/app_cluster
+source proj_env
+cd ../../build
+
+# aenc.new
+export AUDIOCODEC=TLV320AIC3X
+export AUDIODRV_INTERFACE=alsa
+export aenc_codec_gamr=yes
+export aenc_codec_aac4=yes
+export aenc_codec_g711=no
+
+export MAKEINC=/home/kent/makcomm
+export MAKEINC=/home/baboo/tools/makcomm_1_0_5_1

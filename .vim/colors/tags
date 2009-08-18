@@ -1,0 +1,38 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.6	//
+E2T	vividchalk.vim	/^function! E2T(a)$/;"	f	language:Vim
+M	inkpot.vim	/^fun! <SID>M(a)$/;"	f	language:Vim
+M	vividchalk.vim	/^fun! s:M(a)$/;"	f	language:Vim
+X	inkpot.vim	/^fun! <SID>X(a)$/;"	f	language:Vim
+X	vividchalk.vim	/^fun! s:X(a)$/;"	f	language:Vim
+choose	vividchalk.vim	/^function! s:choose(mediocre,good)$/;"	f	language:Vim
+colors_name	c9s.vim	/^let g:colors_name = "c9s"$/;"	v	language:Vim
+colors_name	desertEx.vim	/^let g:colors_name="desertEx"$/;"	v	language:Vim
+colors_name	gor.vim	/^let g:colors_name = "gor"$/;"	v	language:Vim
+colors_name	inkpot.vim	/^let colors_name = "inkpot"$/;"	v	language:Vim
+colors_name	ir_black.vim	/^let colors_name = "ir_black"$/;"	v	language:Vim
+colors_name	lucius.vim	/^let g:colors_name="lucius"$/;"	v	language:Vim
+colors_name	moria.vim	/^let colors_name = "moria"$/;"	v	language:Vim
+colors_name	peaksea.vim	/^let g:colors_name = expand("<sfile>:t:r")$/;"	v	language:Vim
+colors_name	peaksea_new.vim	/^let g:colors_name = expand("<sfile>:t:r")$/;"	v
+colors_name	railscasts.vim	/^let g:colors_name = "railscasts"$/;"	v	language:Vim
+colors_name	rdark.vim	/^let colors_name = "rdark"$/;"	v	language:Vim
+colors_name	relaxedgreen.vim	/^let g:colors_name = "relaxedgreen"$/;"	v	language:Vim
+colors_name	vividchalk.vim	/^let colors_name = "vividchalk"$/;"	v	language:Vim
+colors_name	wombat.vim	/^let colors_name = "wombat"$/;"	v	language:Vim
+hibg	vividchalk.vim	/^function! s:hibg(group,guibg,first,second)$/;"	f	language:Vim
+hifg	vividchalk.vim	/^function! s:hifg(group,guifg,first,second,...)$/;"	f	language:Vim
+inkpot_black_background	inkpot.vim	/^    let g:inkpot_black_background = 0$/;"	v	language:Vim
+inkpot_black_background	inkpot.vim	/^let g:inkpot_black_background = 1$/;"	v	language:Vim
+moria_fontface	moria.vim	/^    let s:moria_fontface = "plain"$/;"	v	language:Vim
+moria_fontface	moria.vim	/^    let s:moria_fontface = g:moria_fontface$/;"	v	language:Vim
+moria_monochrome	moria.vim	/^    let s:moria_monochrome = 0$/;"	v	language:Vim
+moria_monochrome	moria.vim	/^    let s:moria_monochrome = g:moria_monochrome$/;"	v	language:Vim
+moria_style	moria.vim	/^    let s:moria_style = &background $/;"	v	language:Vim
+moria_style	moria.vim	/^    let s:moria_style = &background$/;"	v	language:Vim
+moria_style	moria.vim	/^    let s:moria_style = g:moria_style$/;"	v	language:Vim
+rdark_current_line	rdark.vim	/^let rdark_current_line = 1$/;"	v	language:Vim

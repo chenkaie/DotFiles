@@ -1,0 +1,62 @@
+#---------------------------------------------------------------------
+#  $Header:$
+#  Copyright (c) 2000-2008 Vivotek Inc. All rights reserved.
+#
+#  +-----------------------------------------------------------------+
+#  | THIS SOFTWARE IS FURNISHED UNDER A LICENSE AND MAY ONLY BE USED |
+#  | AND COPIED IN ACCORDANCE WITH THE TERMS AND CONDITIONS OF SUCH  |
+#  | A LICENSE AND WITH THE INCLUSION OF THE THIS COPY RIGHT NOTICE. |
+#  | THIS SOFTWARE OR ANY OTHER COPIES OF THIS SOFTWARE MAY NOT BE   |
+#  | PROVIDED OR OTHERWISE MADE AVAILABLE TO ANY OTHER PERSON. THE   |
+#  | OWNERSHIP AND TITLE OF THIS SOFTWARE IS NOT TRANSFERRED.        |
+#  |                                                                 |
+#  | THE INFORMATION IN THIS SOFTWARE IS SUBJECT TO CHANGE WITHOUT   |
+#  | ANY PRIOR NOTICE AND SHOULD NOT BE CONSTRUED AS A COMMITMENT BY |
+#  | VIVOTEK INC.                                                    |
+#  +-----------------------------------------------------------------+
+#
+#  Project name         : NONE
+#  Module name          : event customize tool
+#  Module description   : event customize tool
+#  Author               : Mei-Yun Hsu
+#  Created at           : 2008/01/29
+#  $History:$
+#
+#---------------------------------------------------------------------
+
+# environment settings
+include $(MAKEINC)/default.mk
+include $(MAKEINC)/version.mk
+include config.mk
+include $(MAKEINC)/filepp.mk
+-include $(PP_DIR_VAR_OUTPUT)
+
+# Targets
+all: pp_replace
+
+# Dependent modules
+COMPATIBLE_VERSION_APP_imgbufmgr = "1.0.1.0"
+COMPATIBLE_VERSION_APP_taskgen = "1.0.1.0"
+COMPATIBLE_VERSION_APP_confclient = "1.0.1.0"
+COMPATIBLE_VERSION_APP_configer = "1.1.1.0"
+
+# install variables
+#package_bin_dir = /usr/bin
+#package_etc_dir = /etc
+#host_package_bin_dir=${ROOTFSDIR}$(package_bin_dir)
+#host_package_etc_dir=${ROOTFSDIR}$(package_etc_dir)
+
+
+#ifeq "$(findstring _DF_MODE, $(recorder_usrdef))" "_DF_MODE"
+#recording_task_bin = recording_task@df
+#else
+#recording_task_bin = recording_task
+#endif
+
+$(warning $(PP_DIR), $(PP_INSTALL_OBJ))
+
+install:
+	@echo $(APPTARGET)
+	$(call version_check)
+	cp -r $(PP_DIR)/scr/etc ${ROOTFSDIR}
+	cp -r $(PP_DIR)/scr/usr ${ROOTFSDIR}

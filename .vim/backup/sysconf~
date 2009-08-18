@@ -1,0 +1,40 @@
+# Product
+MAC_ADDR=`/usr/bin/sysparam get macaddress`
+SERIAL_NO=`echo $MAC_ADDR | sed 's/://g'`
+read MACHINE_TYPE < /etc/firmware-version
+SERVER_NAME="VS8102"
+MANUFACTURER="VIVOTEK INC."
+MANUFACTURE_URL="http://www.vivotek.com/"
+
+# Language
+LANG=en
+
+# DRM Service
+HTTP_PORT=`/usr/sbin/confclient -g network_http_port -t Value -p 9`
+FTP_PORT=`/usr/sbin/confclient -g network_ftp_port -t Value -p 9`
+
+EZ_FW_ID=8388608 # support xml config file 8388608 (bit 23 is "1") 
+EZ_STREAM_TYPE=131072 # support dual stream 131072 (bit 17 is "1")
+EZ_FW_TYPE=2 # support Anubis architecture 2
+EZ_SMART_MODE=1 # support smart mode 1
+
+EZ_VERSION=$(($EZ_FW_ID + $EZ_STREAM_TYPE + $EZ_FW_TYPE + $EZ_SMART_MODE))
+	
+#AUTO_REGISTRATION=1
+#REGISTRATION_PERIOD=1
+
+# UPnP device -- always constant
+UPNP_DEVICE_NAME="H.264 VideoServer"
+UPNP_MODEL_NAME="H.264 Video Server"
+UPNP_MODEL_NUM="VS8102"
+UPNP_DESCRIPTION="H.264 Video Server"
+UPNP_DEVICE_UUID="`uuidapp -g $MAC_ADDR`"
+PNPX_HARDWARE_ID="$MACHINE_TYPE"
+
+# Window Rally -- always constant
+WCN_NET_ENABLE=1
+
+# DDNS client -- always constant
+DDNS_VVTK_SERVER_NAME="ns1.safe100.net"
+DDNS_VVTK_SERVER_IP0="203.160.252.247"
+DDNS_VVTK_SERVER_IP1="61.66.157.246"

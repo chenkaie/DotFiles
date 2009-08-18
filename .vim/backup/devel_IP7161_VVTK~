@@ -1,0 +1,49 @@
+#!/bin/sh
+
+export LSPDIR=/opt/Vivotek/lsp/haydn
+export BUILDROOTDIR=${LSPDIR}/buildroot
+export PROJECT=kernel_platform
+export PRJROOT=${LSPDIR}/${PROJECT}
+export TOOLSDIR=${BUILDROOTDIR}/build_arm_nofpu/staging_dir/bin
+. ${PRJROOT}/scripts/archive/devel_haydn
+
+# Product definition
+export PRODUCTDIR=${PWD}/..
+export ROOTFS_SRCDIR=${PRODUCTDIR}/rootfs
+export FLASHFS_SRCDIR=${PRODUCTDIR}/flashfs
+export ROOTFSDIR=${PRODUCTDIR}/release/rootfs
+export FLASHFSDIR=${PRODUCTDIR}/release/flashfs
+export WEBDIR=${FLASHFSDIR}/www
+export ETCDIR=${FLASHFSDIR}/etc
+export PRODUCTVER=IP7161-VVTK-0101c
+export PLUGINVER=2.0.0.117
+export IMAGEDIR=${PRODUCTDIR}/release/package/${PRODUCTVER}
+export CFGXML=${PRODUCTDIR}/build/config/IP7161_VVTK.xml
+#
+export L1BOOT=L1boot.bin
+export L2BOOT=armboot.bin
+export PARIMG=sysparam.img
+
+cd ../apps/app_cluster
+source proj_env
+cd ../../build
+
+export MAKEINC=/home/klaymen/makcomm
+
+export BACKUPFW=yes
+
+# Image sensor definition
+export SENSORTYPE=_MT9D131
+export AUDIOCODEC=ADSSM2603
+export AUDIODRV_INTERFACE=alsa
+export aenc_codec_gamr=yes
+export aenc_codec_aac4=yes
+export aenc_codec_g711=no
+
+#Network function definition
+export IPV6_ENABLE=yes
+export SESSMGR_ENABLE=yes
+export SHMEM_ENABLE=yes
+export SIP_ENABLE=yes
+export SESSION_MGR_ENABLE=yes
+

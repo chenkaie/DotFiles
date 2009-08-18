@@ -1,0 +1,49 @@
+#!/bin/sh
+if [ -z "${PRJROOT}" ]; then
+	echo "Please source environment file first!"
+	exit 1
+fi
+
+APP_CONFIG="${PRODUCTDIR}/build/apps_config"
+
+APP_XML="${APP_CONFIG}.xml"
+APP_SH="${APP_CONFIG}.config"
+echo "Reading software config from ${APP_XML}"
+
+if [ -n ${EXTENSION_SRCDIR} ]; then
+cp "${EXTENSION_SRCDIR}/build/apps_config.xml" ${APP_XML} > "${APP_CONFIG}.log"
+fi
+
+if [ -f ${APP_XML} ]; then
+	pushd ..
+	getshconfig ${APP_XML}
+	source ${APP_SH}
+	popd
+else
+	echo "${APP_CONFIG} is missing. Stop."
+	exit
+fi
+
+set -a
+modelname=`echo ${PRODUCTVER} | cut -c -11 | sed 's/-/_/'`
+
+if [ -f ../config/$modelname.xml ]; then
+	eval `./pyxmltoconf < ../config/$modelname.xml`
+else
+	echo -e "\033[5m"
+	echo "$modelname.xml isn't existent"
+	echo -e "\033[0m"
+	exit 1
+fi
+
+echo Building all applications.......
+cd ${PRODUCTDIR}/apps
+cmake 
+
+if [ $? -eq 0 ]; then
+echo Applications are built.
+	exit 0
+else
+	echo Problems when build Applications.
+	exit 1
+fi

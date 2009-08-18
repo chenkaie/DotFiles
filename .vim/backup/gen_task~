@@ -1,0 +1,79 @@
+#!/bin/sh
+# /usr/bin/gen_task - This script executes taskgen & prepare scripts
+# $Id: 1.0.0.5 event_application $
+
+TASK_GEN="/usr/bin/taskgen"
+PREPROCESS_MEDIA="/tmp/pre_media"
+PREPROCESS_RECORDING="/tmp/pre_recording"
+PREPROCESS_SERVER="/tmp/pre_server"
+PrintUsage="Usage: $0 [-r][-e][-s][-er][-esr]"
+
+#=====Script Start Here=====
+[ "$#" -eq 0 ] && echo $PrintUsage && exit 1
+
+case "$1" in
+    -e)
+    IS_E="-e"
+    ;;
+    -r)
+    IS_R="-r"
+    ;;
+    -s)
+    IS_S="-s"
+    killall -10 automount 
+    ;;
+    -er)
+    IS_E="-e"
+    IS_R="-r"
+    ;;
+    -esr)
+    IS_E="-e"
+    IS_S="-s"
+    IS_R="-r"
+#ifdef _MOTION_PROFILE 
+    $TASK_GEN -p /etc/conf.d/config_motion.xml -o motion_profiletask.xml
+#endif  
+
+#ifdef _SENSOR_PROFILE 
+    $TASK_GEN -p /etc/conf.d/config_videoin.xml -o sensor_profiletask.xml
+#endif  
+
+    ;;
+esac
+
+if [ -n "$IS_E" ];then
+	[ -d "/mnt/ramdisk/imgbufmgr" ] || mkdir /mnt/ramdisk/imgbufmgr
+	killall -SIGTERM imgbufmgr
+fi
+
+if [  -n "$IS_R" ];then
+    if [ -n "$2" ] ;then
+        /usr/bin/recording_task recording_i${2} stop
+    else
+        /usr/bin/recording_task recording_i0 stop
+        /usr/bin/recording_task recording_i1 stop
+    fi
+fi
+
+#Generate event_task file
+$TASK_GEN $IS_E $IS_S $IS_R
+
+#Prepare media
+[ -n "$IS_E" ] && $PREPROCESS_MEDIA
+#Prepare Recording CF link if any
+[ -n "$IS_R" ] && $PREPROCESS_RECORDING
+#Prepare NAS server link if any
+[ -n "$IS_S" ] && $PREPROCESS_SERVER
+
+#Make NAS server link folder after saved
+if [ -n "$IS_S" ] && [ -L "/mnt/samba/link${2}" ]; then
+    if [ -d "/mnt/auto/i${2}" ] && [ ! -d "/mnt/samba/link${2}" ] ;then
+        mkdir "`ls /mnt/samba/link${2} -l | sed 's/^.*-> //g'`"
+    fi
+fi
+
+if [ -n "$IS_E" ] || [ -n "$IS_R" ];then
+    kill -SIGUSR1 `cat /var/run/eventmgr.pid`
+    sync
+fi
+exit 0

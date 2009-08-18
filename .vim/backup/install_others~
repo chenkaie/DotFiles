@@ -1,0 +1,65 @@
+#!/bin/sh
+
+if [ -z "${PRJROOT}" ]; then
+	echo "Please source environment file first!"
+	exit 1
+fi
+
+##########################################
+# Build symbolic 
+##########################################
+./privilege.sh
+
+#######################
+# drivers from lsp
+#######################
+
+#LSPDRIVER_DIR=${PRJROOT}/scripts/archive/drivers-${OSVERSION}
+LSPDRIVER_DIR=${PRODUCTDIR}/drivers/lspdrivers
+
+cp -f ${LSPDRIVER_DIR}/vma_ae.o ${ROOTFSDIR}/drivers
+cp -f ${LSPDRIVER_DIR}/vma_be.o ${ROOTFSDIR}/drivers
+cp -f ${LSPDRIVER_DIR}/vma_me.o ${ROOTFSDIR}/drivers
+cp -f ${LSPDRIVER_DIR}/vma_vpe.o ${ROOTFSDIR}/drivers
+cp -f ${LSPDRIVER_DIR}/vpl_edmc.o ${ROOTFSDIR}/drivers
+cp -f ${LSPDRIVER_DIR}/vpl_mmrc.o ${ROOTFSDIR}/drivers
+cp -f ${LSPDRIVER_DIR}/vaudio.o ${ROOTFSDIR}/drivers
+#cp -f ${LSPDRIVER_DIR}/CF.o ${ROOTFSDIR}/drivers
+cp -f ${LSPDRIVER_DIR}/gpio.o ${ROOTFSDIR}/drivers
+
+#######################
+# shared library
+#######################
+#RELEASE_DIR=${PROJ_ROOT}_Build/armlinux_release/
+RELEASE_DIR=${PROJ_ROOT}/../../release/`basename ${PROJ_ROOT}`_Build/armlinux_release/vivaldi
+SHARED_LIB_DEST=${ROOTFSDIR}/usr/lib
+
+cp -f ${RELEASE_DIR}/expat/bin/libexpat.so.*.*.* ${SHARED_LIB_DEST}
+cp -f ${RELEASE_DIR}/xmlsparser/bin/libxmlsparser.so.*.*.*.* ${SHARED_LIB_DEST}
+#cp -f ${RELEASE_DIR}/message/bin/libmessage.so.*.*.*.* ${SHARED_LIB_DEST}
+cp -f ${RELEASE_DIR}/account/bin/libaccount.so.*.*.*.* ${SHARED_LIB_DEST}
+cp -f ${RELEASE_DIR}/osisolate/bin/libosisolate.so.*.*.*.* ${SHARED_LIB_DEST}
+cp -f ${RELEASE_DIR}/escdec/bin/libescdec.so.*.*.*.* ${SHARED_LIB_DEST}
+cp -f ${RELEASE_DIR}/tunpair/bin/libtunpair.so.*.*.*.* ${SHARED_LIB_DEST}
+
+#######################
+# strip library
+#######################
+find ${SHARED_LIB_DEST} -type f | xargs arm-linux-strip
+arm-linux-strip ${ROOTFSDIR}/lib/libgcc_s.so.*.*.*
+arm-linux-strip ${ROOTFSDIR}/lib/libpthread-*.*.*.so
+
+#######################
+# construct symbolic links
+#######################
+echo "Now current folder : $SHARED_LIB_DEST "
+cd $SHARED_LIB_DEST
+
+SHARED_LIBS=`find *.so.*.*`
+echo "${SHARED_LIBS}"
+echo "Do symbolic link .."
+for f in ${SHARED_LIBS} ; do
+	echo "ln -s $f ${f%.*.*.*}"
+	ln -s $f ${f%.*.*.*}
+done
+

@@ -1,0 +1,54 @@
+#!/bin/sh
+
+CAM_IP='172.16.7.16'
+
+IP_ADDR='http://'$CAM_IP'/cgi-bin/viewer/camctrl.cgi'
+CGI_Command='channel=1&quality=4'
+ARG='--limit-rate 50'
+ARG_UP="--user=root --password=11111"
+FILE_POS="/dev/null"
+
+wget="wget $ARG_UP --timeout=5"
+
+SYS_INFO='http://'$CAM_IP'/cgi-bin/sysinfo.cgi'
+
+MaxCamPos=9
+
+szCamCommand_0="setpan=5447&settilt=1493&setzoom=0"
+szCamCommand_1="setpan=9920&settilt=0&setzoom=11776"
+szCamCommand_2="setpan=10883&settilt=248&setzoom=0"
+szCamCommand_3="setpan=11880&settilt=0&setzoom=16384"
+szCamCommand_4="setpan=19580&settilt=1927&setzoom=0"
+szCamCommand_5="setpan=16935&settilt=1351&setzoom=0"
+szCamCommand_6="setpan=14560&settilt=1649&setzoom=0"
+szCamCommand_7="setpan=5983&settilt=2083&setzoom=0"
+szCamCommand_8="setpan=5263&settilt=320&setzoom=13824"
+
+
+TimeGap=3000000
+
+
+while [ 1 ]
+do
+#	echo "Send Camctrl Command to " $CAM_IP
+
+	($wget "$IP_ADDR?$szCamCommand_0" -O $FILE_POS ; echo "`date`;camctrl;$?" >> camctrl.log ) &
+	usleep $TimeGap
+	($wget "$IP_ADDR?$szCamCommand_1" -O $FILE_POS ; echo "`date`;camctrl;$?" >> camctrl.log ) &
+	usleep $TimeGap
+	($wget "$IP_ADDR?$szCamCommand_2" -O $FILE_POS ; echo "`date`;camctrl;$?" >> camctrl.log ) &
+	usleep $TimeGap
+	($wget "$IP_ADDR?$szCamCommand_3" -O $FILE_POS ; echo "`date`;camctrl;$?" >> camctrl.log ) &
+	usleep $TimeGap
+	($wget "$IP_ADDR?$szCamCommand_4" -O $FILE_POS ; echo "`date`;camctrl;$?" >> camctrl.log ) &
+	usleep $TimeGap
+	($wget "$IP_ADDR?$szCamCommand_5" -O $FILE_POS ; echo "`date`;camctrl;$?" >> camctrl.log ) &
+	usleep $TimeGap
+	($wget "$IP_ADDR?$szCamCommand_6" -O $FILE_POS ; echo "`date`;camctrl;$?" >> camctrl.log ) &
+	usleep $TimeGap
+	($wget "$IP_ADDR?$szCamCommand_7" -O $FILE_POS ; echo "`date`;camctrl;$?" >> camctrl.log ) &
+	usleep $TimeGap
+	($wget "$IP_ADDR?$szCamCommand_8" -O $FILE_POS ; echo "`date`;camctrl;$?" >> camctrl.log ) &
+	usleep $TimeGap
+done
+

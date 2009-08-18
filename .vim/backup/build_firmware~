@@ -1,0 +1,58 @@
+#!/bin/sh
+
+if [ -z "${PRJROOT}" ]; then
+	echo "Please source environment file first!"
+	exit 1
+fi
+
+if [ ! -f ${CFGXML} ]; then	
+	echo -e "\033[5m"
+	echo "${CFGXML} isn't existent"
+	echo -e "\033[0m"
+	exit 1
+fi
+
+mkdir -p ${ROOTFSDIR} ${FLASHFSDIR}
+rm -rf ${ROOTFSDIR}/* ${FLASHFSDIR}/*
+./pymkdir < ${CFGXML}
+
+cd ${PRJROOT}/scripts
+./install_Clibc || exit 1
+./install_busybox || exit 1
+./install_mtdutils || exit 1
+
+cd ${PRODUCTDIR}/build/scripts
+./build_apps || exit 1
+./install_sharedlib || exit 1
+
+cp -Rf ${ROOTFS_SRCDIR}/* ${ROOTFSDIR}
+cp -Rf ${FLASHFS_SRCDIR}/* ${FLASHFSDIR}
+
+if [ -n ${EXTENSION_SRCDIR} ]; then
+cp -Rf ${EXTENSION_SRCDIR}/rootfs/* ${ROOTFSDIR}
+cp -Rf ${EXTENSION_SRCDIR}/flashfs/* ${FLASHFSDIR}
+fi
+
+./pylink < ${CFGXML}
+# link /mnt/flash/etc/* to /etc/
+LINK=`ls ${FLASHFSDIR}/etc`
+for i in ${LINK}
+do
+	if [ -f ${ROOTFSDIR}/etc/$i ]; then
+		rm ${ROOTFSDIR}/etc/$i
+	fi
+	ln -s ../mnt/flash/etc/${i} ${ROOTFSDIR}/etc/
+done
+
+echo flashfs and rootfs are installed.
+
+cd ${PRODUCTDIR}/release
+find . -name ".svn" | xargs rm -rf
+
+cd ${PRODUCTDIR}/build/scripts
+fakeroot ./frbuildFW || exit 1
+
+echo diff rootfs log with previous one.
+di-rootfslog 
+echo diff flashfs log with previous one.
+di-flashfslog

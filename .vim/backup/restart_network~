@@ -1,0 +1,9 @@
+#!/bin/sh
+
+#restart network service
+/etc/init.d/upnpigdcp restart
+/etc/init.d/httpd restart
+/etc/init.d/drmd restart
+/etc/init.d/upnpdd restart
+/etc/init.d/rtsps restart
+/etc/init.d/ddnsc restart

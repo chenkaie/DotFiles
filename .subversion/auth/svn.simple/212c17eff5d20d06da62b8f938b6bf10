@@ -1,0 +1,17 @@
+K 8
+passtype
+V 6
+simple
+K 8
+password
+V 8
+2rjudoru
+K 15
+svn:realmstring
+V 45
+<http://172.16.5.30:80> Subversion repository
+K 8
+username
+V 4
+kent
+END

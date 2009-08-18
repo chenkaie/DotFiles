@@ -1,0 +1,87 @@
+#!/bin/sh
+
+#export LSPDIR=/opt/Vivotek/lsp
+# use the newest integrated lsp
+export LSPDIR=/opt/Vivotek/lsp/vivaldi
+export BUILDROOTDIR=${LSPDIR}/buildroot-2.0.0.0
+#export PROJECT=vivaldi-2.0.0.0_8M32M_sq
+#export PROJECT=vivaldi-2.0.0.0_8M32M_lz
+export PROJECT=kernel_platform
+export VIVALDIDIR=${LSPDIR}/${PROJECT}
+
+. ${VIVALDIDIR}/scripts/archive/devel_vivaldi
+
+# Product definition
+# ** this should be re-assigned to a product directory **
+export PRODUCTNAME=warden
+export PRODUCTDIR=${PWD}/../
+export ROOTFS_SRCDIR=${PRODUCTDIR}/rootfs
+export FLASHFS_SRCDIR=${PRODUCTDIR}/flashfs/IP7330
+export ROOTFSDIR=${PRODUCTDIR}/release/rootfs
+export FLASHFSDIR=${PRODUCTDIR}/release/flashfs
+export WEBDIR=${FLASHFSDIR}/www
+export ETCDIR=${FLASHFSDIR}/etc
+export PRODUCTVER=IP7330-VVTK-0102b
+export PLUGINVER=2.0.0.107
+export IMAGEDIR=${PRODUCTDIR}/release/package/${PRODUCTVER}
+
+# check product folder
+if [ ! -d "${PRODUCTDIR}" ]; then
+    echo "The product directory ${PRODUCTDIR} doesn't exist."
+    echo "Please modify devel file or create the directory."
+fi
+
+# source FTP site
+export FTP_HOST_SITE=ftp://rd2-3
+
+# Hardware definition
+export BOARDTYPE=vivaldi
+# Warden v0.4
+#export L1BOOT=L1boot_f8m_r2b64m_c110.bin
+#export L1LOADER=L1load.bin
+export L0BOOT=R1b32m.bin
+export L2BOOT=armboot.bin
+#export L1ALL=l1boot.bin
+export ENVIMG=bootenv.img
+#export ENVIMG1=bootenv1.img
+#export ENVIMG2=bootenv2.img
+export PARIMG=sysparam.img
+
+# Linux kernel definition
+export OSTOOLNAME=linux
+export OSVERSION=2.4.26
+export OSEXTENSION=vvtk1000
+
+cd ../apps/app_cluster
+source proj_env
+cd ../../build
+
+# Image sensor definition
+#export SENSORTYPE=MT9V111
+#export SENSORTYPE=MT9M111
+#export SENSORTYPE=SAA7113H
+#export SENSORTYPE=MTV54K35
+#export SENSORTYPE=VICAM3
+#export SENSORTYPE=PV480
+export SENSORTYPE=OV7725
+
+#remove by Kent, IP7330 no Privay_button
+#export PRIVACY_FUNCTION=ON
+
+# Audio codec chip type
+#NO Audio by Kent
+#export AUDIOCODEC=TLV320AIC23
+
+#Network function definition
+
+# root file system
+export ROOT_TYPE=CRAMFS_ROOT
+
+export MAKEINC=/home/klaymen/hr/makcomm-git
+#export MAKEINC=/home/kent/makcomm
+#export MAKEINC=/home/evan/project/makecomm
+#export MAKEINC=/home/baboo/makecomm_1_0_3_1_Jeffrey
+
+export PROJECT_NAME=IP7330
+export SUB_PROJECT_NAME=VVTK
+export LENS_MODEL=KINGMATE_4015D
