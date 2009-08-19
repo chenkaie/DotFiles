@@ -3,7 +3,7 @@
 LN="ln"
 RCFILE_DIR=dotfiles
 #RCFILES=".bashrc .inputrc .vimrc .cdargs .gitconfig .cdargsresult .bash_logout .gitk .bash_profile .lftp .ssh .subversion .vim"
-RCFILES=".bashrc .inputrc .screenrc .vimrc .cdargs .ctags .gitconfig .gitk .subversion .vim"
+RCFILES=".bashrc .inputrc .screenrc .vimrc .cdargs .ctags .htoprc .muttrc .irssi .gitconfig .gitk .subversion .vim"
 
 for rcfile in $RCFILES; do 
 	if [ -f $HOME/$rcfile ]; then
