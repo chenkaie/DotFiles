@@ -1,6 +1,0 @@
-#!/bin/sh
-# disconnect all rtsp connections
-
-QUERY_STRING='_a=4' /usr/bin/connst
-
-

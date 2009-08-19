@@ -1,4 +1,0 @@
-#!/bin/sh
-
-/usr/bin/getshconfig $1
-source apps_config.config

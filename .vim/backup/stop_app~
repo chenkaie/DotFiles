@@ -1,2 +1,0 @@
-killall -9 aenc recorder rtsps serverpush adec shm_allocate
-ipcs

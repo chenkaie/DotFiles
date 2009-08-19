@@ -1,8 +1,0 @@
-#!/bin/sh
-
-if [ -z "${PRODUCTDIR}" ]; then
-    echo "Please source environment file first!"
-    exit 1
-fi
-./remove_unused_files
-fakeroot ./build_xxx

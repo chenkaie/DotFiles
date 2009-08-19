@@ -1,0 +1,15 @@
+set meta-flag on 
+set input-meta on 
+set output-meta on 
+set convert-meta off 
+set show-all-if-ambiguous on
+
+"\e[1~": beginning-of-line 
+"\e[2~": yank-nth-arg 
+"\e[3~": delete-char 
+"\e[4~": end-of-line 
+"\e[5~": history-search-backward 
+"\e[6~": history-search-forward 
+
+
+

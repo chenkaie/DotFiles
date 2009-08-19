@@ -20,4 +20,8 @@
     lg = log -p
 
 [branch]
-	autosetupmerge = true
+    autosetupmerge = true
+
+[github]
+	user = chenkaie
+	token = bffcf6bc66d10d4fbb3bb9d334fe4b07

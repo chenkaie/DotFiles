@@ -1,6 +1,0 @@
-#!/bin/sh
-cd ${PRODUCTDIR}/release/log
-new=`ls -t flashfs* | cut -f 1 |sed -n '1p'`
-last=`ls -t flashfs* | cut -f 1 |sed -n '2p'`
-vimdiff $new $last
-
