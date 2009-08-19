@@ -1,0 +1,20 @@
+#!/bin/sh
+
+LN="ln"
+RCFILE_DIR=dotfiles
+#RCFILES=".bashrc .inputrc .vimrc .cdargs .gitconfig .cdargsresult .bash_logout .gitk .bash_profile .lftp .ssh .subversion .vim"
+RCFILES=".bashrc .inputrc .screenrc .vimrc .cdargs .ctags .gitconfig .gitk .subversion .vim"
+
+for rcfile in $RCFILES; do 
+	if [ -f $HOME/$rcfile ]; then
+		echo "$HOME/$rcfile exists, exit.";
+		#exit;
+	fi
+done
+
+cd ..
+
+for rcfile in $RCFILES; do 
+	$LN -sf $RCFILE_DIR/$rcfile 
+done
+
