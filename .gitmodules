@@ -1,0 +1,3 @@
+[submodule "rcfiles"]
+	path = rcfiles
+	url = git://github.com/klaymenr/rcfiles.git
