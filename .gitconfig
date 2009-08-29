@@ -1,16 +1,16 @@
 [color]
-	diff = auto
-	status = auto
+    diff = auto
+    status = auto
     branch = auto
     grep = auto
 
 [user]
-	name = Kent Chen
+    name = Kent Chen
     email = chenkaie@gmail.com
 
 [core]
     whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
-	autocrlf = false
+    autocrlf = false
 
 [alias]
     st = status
@@ -24,5 +24,5 @@
     autosetupmerge = true
 
 [github]
-	user = chenkaie
-	token = bffcf6bc66d10d4fbb3bb9d334fe4b07
+    user = chenkaie
+    token = bffcf6bc66d10d4fbb3bb9d334fe4b07
