@@ -5,6 +5,7 @@ set cpo&vim
 inoremap <S-Tab> 
 inoremap <C-Tab> 	
 inoremap <silent> <Plug>NERDCommenterInInsert  <BS>:call NERDComment(0, "insert")
+map  viwy:!ydict "
 nmap  h
 smap 	 i<BS>	
 xmap 	 >gv
@@ -14,8 +15,8 @@ map  viwy:!ydict "
 nmap  l
 snoremap  b<BS>
 map c :qall
-nmap l do   
-nmap h dp   
+nmap l dp   
+nmap h do   
 map <PageUp> :call SmoothPageScrollUp() 
 map <PageDown> :call SmoothPageScrollDown()
 nmap d :VCSVimDiff
@@ -54,8 +55,8 @@ nmap s :cs find s =expand("<cword>")
 nnoremap   :call g:SrcExpl_GoBack()
 snoremap % b<BS>%
 snoremap ' b<BS>'
-nmap ,h :helptags $HOME/.vim/doc 
 nmap ,wm :w:make cleanall;make;make install
+nmap ,h :helptags $HOME/.vim/doc 
 nmap ,ca <Plug>NERDCommenterAltDelims
 vmap ,cA <Plug>NERDCommenterAppend
 nmap ,cA <Plug>NERDCommenterAppend
@@ -94,14 +95,14 @@ nmap K :Man <cword>
 xmap S <Plug>VSurround
 snoremap U b<BS>U
 vmap [% [%m'gv``
-nmap <silent> \dcd <Plug>DiffChangesDiffToggle
-nmap <silent> \dcp <Plug>DiffChangesPatchToggle
-nmap <silent> \vR <Plug>EgMapReplaceCurrentWord_R
-nmap <silent> \vr <Plug>EgMapReplaceCurrentWord_r
-nmap <silent> \vA <Plug>EgMapGrepCurrentWord_A
-nmap <silent> \va <Plug>EgMapGrepCurrentWord_a
-nmap <silent> \vV <Plug>EgMapGrepCurrentWord_V
 nmap <silent> \vv <Plug>EgMapGrepCurrentWord_v
+nmap <silent> \vV <Plug>EgMapGrepCurrentWord_V
+nmap <silent> \va <Plug>EgMapGrepCurrentWord_a
+nmap <silent> \vA <Plug>EgMapGrepCurrentWord_A
+nmap <silent> \vr <Plug>EgMapReplaceCurrentWord_r
+nmap <silent> \vR <Plug>EgMapReplaceCurrentWord_R
+nmap <silent> \dcp <Plug>DiffChangesPatchToggle
+nmap <silent> \dcd <Plug>DiffChangesDiffToggle
 snoremap \ b<BS>\
 nmap <silent> \cv <Plug>VCSVimDiff
 nmap <silent> \cu <Plug>VCSUpdate
@@ -177,19 +178,19 @@ nmap ySs <Plug>YSsurround
 nmap yss <Plug>Yssurround
 nmap yS <Plug>YSurround
 nmap ys <Plug>Ysurround
-nnoremap <F10> :call g:SrcExpl_UpdateTags()
-nnoremap <silent> <F3> :Grep
-vmap <F3> \vv
-nnoremap <SNR>22_DiffChangesDiffToggle :DiffChangesDiffToggle
-nnoremap <SNR>22_DiffChangesPatchToggle :DiffChangesPatchToggle
-nnoremap <SNR>21_DiffChangesDiffToggle :DiffChangesDiffToggle
-nnoremap <SNR>21_DiffChangesPatchToggle :DiffChangesPatchToggle
-nnoremap <SNR>23_DiffChangesPatchToggle :DiffChangesPatchToggle
-nnoremap <SNR>23_DiffChangesDiffToggle :DiffChangesDiffToggle
-nnoremap <SNR>19_DiffChangesPatchToggle :DiffChangesPatchToggle
-nnoremap <SNR>19_DiffChangesDiffToggle :DiffChangesDiffToggle
-nnoremap <SNR>20_DiffChangesDiffToggle :DiffChangesDiffToggle
 nnoremap <SNR>20_DiffChangesPatchToggle :DiffChangesPatchToggle
+nnoremap <SNR>20_DiffChangesDiffToggle :DiffChangesDiffToggle
+nnoremap <SNR>19_DiffChangesDiffToggle :DiffChangesDiffToggle
+nnoremap <SNR>19_DiffChangesPatchToggle :DiffChangesPatchToggle
+nnoremap <SNR>23_DiffChangesDiffToggle :DiffChangesDiffToggle
+nnoremap <SNR>23_DiffChangesPatchToggle :DiffChangesPatchToggle
+nnoremap <SNR>21_DiffChangesPatchToggle :DiffChangesPatchToggle
+nnoremap <SNR>21_DiffChangesDiffToggle :DiffChangesDiffToggle
+nnoremap <SNR>22_DiffChangesPatchToggle :DiffChangesPatchToggle
+nnoremap <SNR>22_DiffChangesDiffToggle :DiffChangesDiffToggle
+vmap <F3> \vv
+nnoremap <silent> <F3> :Grep
+nnoremap <F10> :call g:SrcExpl_UpdateTags()
 snoremap <Left> bi
 snoremap <Right> a
 snoremap <BS> b<BS>
@@ -270,10 +271,13 @@ xmap <S-Tab> <gv
 nmap <S-Tab> V<
 imap S <Plug>ISurround
 imap s <Plug>Isurround
+cnoremap 	 :call SearchComplete()/s
 imap 	 <Plug>Jumper
+cnoremap <silent>  :call SearchCompleteStop()
 inoremap <silent> 	 =ShowAvailableSnips()
 imap  <Plug>Isurround
 imap  =CtrlXPP()
+cnoremap <silent>  :call SearchCompleteStop()
 inoremap b :Hexmode
 imap \ihn :IHN
 imap \is :IHS:A
@@ -300,6 +304,7 @@ set foldlevelstart=99
 set formatoptions=tcql
 set helplang=en
 set history=500
+set hlsearch
 set ignorecase
 set incsearch
 set laststatus=2
@@ -334,90 +339,91 @@ set window=23
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
-cd ~/Project/IP7161_VVTK/rootfs/www/include
+cd ~/Project/IP7161_VVTK/rootfs/www/setup
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
 badd +1 ~/Project/IP7161_VVTK/rootfs/www/index.html
-badd +2 index.js
-badd +1 viewing.js
-badd +1060 common.js
-badd +252 eptz.js
-badd +127 plugindef.js
-badd +145 cropping.js
-badd +27 ~/Project/IP7161_VVTK/rootfs/www/setup/cropping.html
-badd +60 ~/Project/IP7161_VVTK/rootfs/www/setup/audiovideo.html
-badd +315 ~/Project/IP7161_VVTK/rootfs/www/setup/cameracontrol.html
-badd +366 audiovideo.js
+badd +2 ~/Project/IP7161_VVTK/rootfs/www/include/index.js
+badd +1 ~/Project/IP7161_VVTK/rootfs/www/include/viewing.js
+badd +1060 ~/Project/IP7161_VVTK/rootfs/www/include/common.js
+badd +1 ~/Project/IP7161_VVTK/rootfs/www/include/eptz.js
+badd +127 ~/Project/IP7161_VVTK/rootfs/www/include/plugindef.js
+badd +145 ~/Project/IP7161_VVTK/rootfs/www/include/cropping.js
+badd +27 cropping.html
+badd +60 audiovideo.html
+badd +315 cameracontrol.html
+badd +366 ~/Project/IP7161_VVTK/rootfs/www/include/audiovideo.js
 badd +1 ~/Project/IP7161_VVTK/rootfs/www/SVN\ review\ (current)\ audiovideo.js
 badd +72 ~/Project/IP7161_VVTK/rootfs/www/default.css
 badd +285 ~/Project/IP7161_VVTK/rootfs/www/homepage.css
-badd +1 index
+badd +1 ~/Project/IP7161_VVTK/rootfs/www/include/index
 badd +69 ~/Project/IP7161_VVTK/rootfs/usr/bin/update_eptzsetting
 badd +2042 ~/Project/IP7161_VVTK/flashfs/etc/CDF.xml
-badd +1 image.js
-badd +18 ~/Project/IP7161_VVTK/rootfs/www/setup/image.html
-badd +12 SVN\ review\ (current)\ audiovideo.js
-badd +4 SVN\ review\ (current)\ cropping.js
-badd +6 SVN\ commitlog\ cropping.js
-badd +1 ro
-badd +1 viewingi
-badd +1 SVN\ review\ (current)\ eptz.js
-badd +37 ~/Project/IP7161_VVTK/rootfs/www/setup/system.html
-badd +1 jquery.cr
-badd +1166 jquery.Jcrop.js
-badd +1 ~/Project/IP7161_VVTK/rootfs/www/setup/SVN\ review\ (current)\ index.js
-badd +226 ~/Project/IP7161_VVTK/rootfs/www/setup/SVN\ review\ (current)\ index.js\ (1)
-badd +1 ~/Project/IP7161_VVTK/rootfs/www/setup/SVN\ review\ (current)\ index.js\ (2)
-badd +1 ~/Project/IP7161_VVTK/rootfs/www/setup/SVN\ review\ (current)\ cropping.js\ (1)
-badd +238 ~/Project/IP7161_VVTK/rootfs/www/setup/SVN\ review\ (current)\ eptz.js\ (1)
-badd +241 ~/Project/IP7161_VVTK/rootfs/www/setup/SVN\ review\ (current)\ eptz.js\ (2)
-badd +1 ~/Project/IP7161_VVTK/rootfs/www/setup/SVN\ review\ (current)\ eptz.js\ (3)
-badd +1 ~/Project/IP7161_VVTK/rootfs/www/setup/SVN\ review\ (current)\ index.js\ (3)
-badd +1 ~/Project/IP7161_VVTK/rootfs/www/setup/SVN\ review\ (current)\ eptz.js\ (4)
-badd +1 ~/Project/IP7161_VVTK/rootfs/www/setup/SVN\ review\ (current)\ eptz.js\ (5)
-badd +1 jquery.selectboxes.pack.js
-badd +1 SVN\ review\ (current)\ audiovideo.js\ (1)
-badd +423 SVN\ review\ (current)\ audiovideo.js\ (2)
-badd +128 cameracontrol.js
+badd +1 ~/Project/IP7161_VVTK/rootfs/www/include/image.js
+badd +18 image.html
+badd +12 ~/Project/IP7161_VVTK/rootfs/www/include/SVN\ review\ (current)\ audiovideo.js
+badd +4 ~/Project/IP7161_VVTK/rootfs/www/include/SVN\ review\ (current)\ cropping.js
+badd +6 ~/Project/IP7161_VVTK/rootfs/www/include/SVN\ commitlog\ cropping.js
+badd +1 ~/Project/IP7161_VVTK/rootfs/www/include/ro
+badd +1 ~/Project/IP7161_VVTK/rootfs/www/include/viewingi
+badd +1 ~/Project/IP7161_VVTK/rootfs/www/include/SVN\ review\ (current)\ eptz.js
+badd +37 system.html
+badd +1 ~/Project/IP7161_VVTK/rootfs/www/include/jquery.cr
+badd +1166 ~/Project/IP7161_VVTK/rootfs/www/include/jquery.Jcrop.js
+badd +1 SVN\ review\ (current)\ index.js
+badd +226 SVN\ review\ (current)\ index.js\ (1)
+badd +1 SVN\ review\ (current)\ index.js\ (2)
 badd +1 SVN\ review\ (current)\ cropping.js\ (1)
-badd +77 SVN\ review\ (current)\ cropping.js\ (2)
-badd +1 SVN\ review\ (current)\ audiovideo.js\ (3)
-badd +1091 translator.xml
-badd +13 ~/Project/IP7161_VVTK/rootfs/www/setup/viewer.html
-badd +9 privacy.js
-badd +10 sensor.js
-badd +12 sensor_profile.js
-badd +1 motion_profile.js
-badd +1 ~/Project/IP7161_VVTK/rootfs/www/setup/motion_profile.html
-badd +35 ~/Project/IP7161_VVTK/rootfs/www/setup/privacy.html
-badd +191 application.js
-badd +198 ajaxfileupload.js
-badd +1 jquery.blockUI.js
-badd +397 network_ctrl.js
-badd +1 SVN\ review\ (current)\ cropping.js\ (3)
-badd +12 SVN\ review\ (current)\ cropping.js\ (4)
-badd +1 SVN\ review\ (current)\ cropping.js\ (5)
-badd +1 SVN\ review\ (current)\ index.html
-badd +222 SVN\ review\ (current)\ index.html\ (1)
-badd +1 SVN\ review\ (current)\ cropping.js\ (6)
-badd +8 SVN\ review\ (current)\ cropping.js\ (7)
-badd +1089 SVN\ review\ (current)\ translator.xml
-badd +1 SVN\ review\ (current)\ eptz.js\ (1)
+badd +238 SVN\ review\ (current)\ eptz.js\ (1)
+badd +241 SVN\ review\ (current)\ eptz.js\ (2)
+badd +1 SVN\ review\ (current)\ eptz.js\ (3)
+badd +1 SVN\ review\ (current)\ index.js\ (3)
+badd +1 SVN\ review\ (current)\ eptz.js\ (4)
+badd +1 SVN\ review\ (current)\ eptz.js\ (5)
+badd +1 ~/Project/IP7161_VVTK/rootfs/www/include/jquery.selectboxes.pack.js
+badd +1 ~/Project/IP7161_VVTK/rootfs/www/include/SVN\ review\ (current)\ audiovideo.js\ (1)
+badd +423 ~/Project/IP7161_VVTK/rootfs/www/include/SVN\ review\ (current)\ audiovideo.js\ (2)
+badd +128 ~/Project/IP7161_VVTK/rootfs/www/include/cameracontrol.js
+badd +1 ~/Project/IP7161_VVTK/rootfs/www/include/SVN\ review\ (current)\ cropping.js\ (1)
+badd +77 ~/Project/IP7161_VVTK/rootfs/www/include/SVN\ review\ (current)\ cropping.js\ (2)
+badd +1 ~/Project/IP7161_VVTK/rootfs/www/include/SVN\ review\ (current)\ audiovideo.js\ (3)
+badd +1291 ~/Project/IP7161_VVTK/rootfs/www/include/translator.xml
+badd +13 viewer.html
+badd +9 ~/Project/IP7161_VVTK/rootfs/www/include/privacy.js
+badd +10 ~/Project/IP7161_VVTK/rootfs/www/include/sensor.js
+badd +12 ~/Project/IP7161_VVTK/rootfs/www/include/sensor_profile.js
+badd +1 ~/Project/IP7161_VVTK/rootfs/www/include/motion_profile.js
+badd +1 motion_profile.html
+badd +35 privacy.html
+badd +191 ~/Project/IP7161_VVTK/rootfs/www/include/application.js
+badd +198 ~/Project/IP7161_VVTK/rootfs/www/include/ajaxfileupload.js
+badd +1 ~/Project/IP7161_VVTK/rootfs/www/include/jquery.blockUI.js
+badd +397 ~/Project/IP7161_VVTK/rootfs/www/include/network_ctrl.js
+badd +1 ~/Project/IP7161_VVTK/rootfs/www/include/SVN\ review\ (current)\ cropping.js\ (3)
+badd +12 ~/Project/IP7161_VVTK/rootfs/www/include/SVN\ review\ (current)\ cropping.js\ (4)
+badd +1 ~/Project/IP7161_VVTK/rootfs/www/include/SVN\ review\ (current)\ cropping.js\ (5)
+badd +1 ~/Project/IP7161_VVTK/rootfs/www/include/SVN\ review\ (current)\ index.html
+badd +222 ~/Project/IP7161_VVTK/rootfs/www/include/SVN\ review\ (current)\ index.html\ (1)
+badd +1 ~/Project/IP7161_VVTK/rootfs/www/include/SVN\ review\ (current)\ cropping.js\ (6)
+badd +8 ~/Project/IP7161_VVTK/rootfs/www/include/SVN\ review\ (current)\ cropping.js\ (7)
+badd +1089 ~/Project/IP7161_VVTK/rootfs/www/include/SVN\ review\ (current)\ translator.xml
+badd +1 ~/Project/IP7161_VVTK/rootfs/www/include/SVN\ review\ (current)\ eptz.js\ (1)
 badd +1 ~/Project/IP7161_VVTK/rootfs/usr/bin/SVN\ review\ (current)\ audiovideo.js\ (4)
-badd +1 accesslist.js
-badd +1 ~/Project/IP7161_VVTK/rootfs/www/setup/accesslist.html
-badd +369 SVN\ review\ (current)\ audiovideo.js\ (4)
-badd +1 SVN\ review\ (current)\ audiovideo.js\ (5)
-badd +1 SVN\ review\ (current)\ plugindef.js
-badd +1 SVN\ review\ (current)\ plugindef.js\ (1)
-badd +405 rtspctrl.js
-badd +7 ~/Project/IP7161_VVTK/rootfs/www/setup/SVN\ review\ (current)\ plugindef.js\ (2)
-badd +1 ~/Project/IP7161_VVTK/rootfs/www/setup/SVN\ review\ (current)\ rtspctrl.js
-badd +1 ~/Project/IP7161_VVTK/rootfs/www/setup/SVN\ review\ (current)\ viewing.js
+badd +1 ~/Project/IP7161_VVTK/rootfs/www/include/accesslist.js
+badd +1 accesslist.html
+badd +369 ~/Project/IP7161_VVTK/rootfs/www/include/SVN\ review\ (current)\ audiovideo.js\ (4)
+badd +1 ~/Project/IP7161_VVTK/rootfs/www/include/SVN\ review\ (current)\ audiovideo.js\ (5)
+badd +1 ~/Project/IP7161_VVTK/rootfs/www/include/SVN\ review\ (current)\ plugindef.js
+badd +1 ~/Project/IP7161_VVTK/rootfs/www/include/SVN\ review\ (current)\ plugindef.js\ (1)
+badd +1 ~/Project/IP7161_VVTK/rootfs/www/include/rtspctrl.js
+badd +7 SVN\ review\ (current)\ plugindef.js\ (2)
+badd +1 SVN\ review\ (current)\ rtspctrl.js
+badd +1 SVN\ review\ (current)\ viewing.js
+badd +0 https.html
 silent! argdel *
-edit ~/Project/IP7161_VVTK/rootfs/www/setup/audiovideo.html
+edit audiovideo.html
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
@@ -527,7 +533,7 @@ exe s:l
 normal! zt
 60
 normal! 096l
-tabedit audiovideo.js
+tabedit ~/Project/IP7161_VVTK/rootfs/www/include/audiovideo.js
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
@@ -639,7 +645,7 @@ exe s:l
 normal! zt
 366
 normal! 0
-tabedit plugindef.js
+tabedit ~/Project/IP7161_VVTK/rootfs/www/include/plugindef.js
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
@@ -751,7 +757,7 @@ exe s:l
 normal! zt
 1
 normal! 0
-tabedit ~/Project/IP7161_VVTK/rootfs/www/setup/accesslist.html
+tabedit accesslist.html
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
@@ -861,7 +867,7 @@ exe s:l
 normal! zt
 1
 normal! 01l
-tabedit viewing.js
+tabedit ~/Project/IP7161_VVTK/rootfs/www/include/viewing.js
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
@@ -973,7 +979,7 @@ exe s:l
 normal! zt
 1
 normal! 0
-tabedit index.js
+tabedit ~/Project/IP7161_VVTK/rootfs/www/include/index.js
 set splitbelow splitright
 wincmd _ | wincmd |
 split
@@ -1423,7 +1429,6 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 wincmd w
-2wincmd w
 exe '1resize ' . ((&lines * 37 + 24) / 49)
 exe 'vert 1resize ' . ((&columns * 23 + 92) / 184)
 exe '2resize ' . ((&lines * 37 + 24) / 49)
@@ -1431,7 +1436,7 @@ exe 'vert 2resize ' . ((&columns * 136 + 92) / 184)
 exe '3resize ' . ((&lines * 37 + 24) / 49)
 exe 'vert 3resize ' . ((&columns * 23 + 92) / 184)
 exe '4resize ' . ((&lines * 8 + 24) / 49)
-tabedit eptz.js
+tabedit ~/Project/IP7161_VVTK/rootfs/www/include/eptz.js
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
@@ -1543,8 +1548,7 @@ exe s:l
 normal! zt
 1
 normal! 0
-2wincmd w
-tabedit plugindef.js
+tabedit ~/Project/IP7161_VVTK/rootfs/www/include/plugindef.js
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
@@ -1656,8 +1660,227 @@ exe s:l
 normal! zt
 127
 normal! 06l
-2wincmd w
-tabedit rtspctrl.js
+tabedit ~/Project/IP7161_VVTK/rootfs/www/include/translator.xml
+set splitbelow splitright
+set nosplitbelow
+set nosplitright
+wincmd t
+set winheight=1 winwidth=1
+argglobal
+inoremap <buffer> \> >
+inoremap <buffer> \. >
+setlocal noautoindent
+setlocal balloonexpr=
+setlocal nobinary
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
+setlocal cindent
+setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinwords=if,else,while,do,for,switch
+setlocal comments=s:<!--,m:\ \ \ \ \ ,e:-->
+setlocal commentstring=<!--%s-->
+setlocal complete=.,w,b,u,t,i
+setlocal completefunc=
+setlocal nocopyindent
+setlocal nocursorcolumn
+set cursorline
+setlocal cursorline
+setlocal define=
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=%E%f:%l:\ error:\ %m,%W%f:%l:\ warning:\ %m,%E%f:%l:\ validity\ error:\ %m,%W%f:%l:\ validity\ warning:\ %m,%-Z%p^,%-G%.%#
+setlocal expandtab
+if &filetype != 'xml'
+setlocal filetype=xml
+endif
+setlocal foldcolumn=0
+setlocal foldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+set foldlevel=1000
+setlocal foldlevel=99
+setlocal foldmarker={{{,}}}
+set foldmethod=marker
+setlocal foldmethod=marker
+setlocal foldminlines=1
+set foldnestmax=3
+setlocal foldnestmax=3
+set foldtext=XMLFoldLabel()
+setlocal foldtext=XMLFoldLabel()
+setlocal formatexpr=
+setlocal formatoptions=croql
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal grepprg=
+setlocal iminsert=2
+setlocal imsearch=2
+setlocal include=
+setlocal includeexpr=
+setlocal indentexpr=XmlIndentGet(v:lnum,1)
+setlocal indentkeys=o,O,*<Return>,<>>,<<>,/,{,}
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255
+setlocal keywordprg=
+setlocal nolinebreak
+setlocal nolisp
+setlocal nolist
+setlocal makeprg=xmllint\ --valid\ --noout\ 
+setlocal matchpairs=(:),{:},[:],<:>
+setlocal modeline
+setlocal modifiable
+setlocal nrformats=octal,hex
+set number
+setlocal number
+setlocal numberwidth=4
+setlocal omnifunc=xmlcomplete#CompleteTags
+setlocal path=
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal noscrollbind
+setlocal shiftwidth=4
+setlocal noshortname
+setlocal nosmartindent
+setlocal softtabstop=0
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=
+setlocal suffixesadd=
+setlocal swapfile
+setlocal synmaxcol=3000
+if &syntax != 'xml'
+setlocal syntax=xml
+endif
+setlocal tabstop=4
+setlocal tags=
+setlocal textwidth=78
+setlocal thesaurus=
+setlocal nowinfixheight
+setlocal nowinfixwidth
+setlocal wrap
+setlocal wrapmargin=0
+let s:l = 1291 - ((21 * winheight(0) + 23) / 46)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+1291
+normal! 08l
+tabedit https.html
+set splitbelow splitright
+set nosplitbelow
+set nosplitright
+wincmd t
+set winheight=1 winwidth=1
+argglobal
+inoremap <buffer> \> >
+inoremap <buffer> \. >
+setlocal noautoindent
+setlocal balloonexpr=
+setlocal nobinary
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
+setlocal cindent
+setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinwords=if,else,while,do,for,switch
+setlocal comments=s:<!--,m:\ \ \ \ \ ,e:-->
+setlocal commentstring=<!--%s-->
+setlocal complete=.,w,b,u,t,i
+setlocal completefunc=
+setlocal nocopyindent
+setlocal nocursorcolumn
+set cursorline
+setlocal cursorline
+setlocal define=
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=%E%f:%l:\ error:\ %m,%W%f:%l:\ warning:\ %m,%E%f:%l:\ validity\ error:\ %m,%W%f:%l:\ validity\ warning:\ %m,%-Z%p^,%-G%.%#
+setlocal expandtab
+if &filetype != 'xhtml'
+setlocal filetype=xhtml
+endif
+setlocal foldcolumn=0
+setlocal foldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+set foldlevel=1000
+setlocal foldlevel=1000
+setlocal foldmarker={{{,}}}
+set foldmethod=marker
+setlocal foldmethod=marker
+setlocal foldminlines=1
+set foldnestmax=3
+setlocal foldnestmax=3
+set foldtext=XMLFoldLabel()
+setlocal foldtext=XMLFoldLabel()
+setlocal formatexpr=
+setlocal formatoptions=croql
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal grepprg=
+setlocal iminsert=2
+setlocal imsearch=2
+setlocal include=
+setlocal includeexpr=
+setlocal indentexpr=HtmlIndentGet(v:lnum)
+setlocal indentkeys=o,O,*<Return>,<>>,{,}
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255,$
+setlocal keywordprg=
+setlocal nolinebreak
+setlocal nolisp
+setlocal nolist
+setlocal makeprg=xmllint\ --valid\ --noout\ 
+setlocal matchpairs=(:),{:},[:],<:>
+setlocal modeline
+setlocal modifiable
+setlocal nrformats=octal,hex
+set number
+setlocal number
+setlocal numberwidth=4
+setlocal omnifunc=htmlcomplete#CompleteTags
+setlocal path=
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal noscrollbind
+setlocal shiftwidth=4
+setlocal noshortname
+setlocal nosmartindent
+setlocal softtabstop=0
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=
+setlocal suffixesadd=
+setlocal swapfile
+setlocal synmaxcol=3000
+if &syntax != 'xhtml'
+setlocal syntax=xhtml
+endif
+setlocal tabstop=4
+setlocal tags=
+setlocal textwidth=78
+setlocal thesaurus=
+setlocal nowinfixheight
+setlocal nowinfixwidth
+setlocal wrap
+setlocal wrapmargin=0
+let s:l = 162 - ((38 * winheight(0) + 23) / 46)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+162
+normal! 052l
+tabedit ~/Project/IP7161_VVTK/rootfs/www/include/rtspctrl.js
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
@@ -1769,7 +1992,6 @@ exe s:l
 normal! zt
 1
 normal! 0
-2wincmd w
 tabedit ~/Project/IP7161_VVTK/rootfs/www/index.html
 set splitbelow splitright
 set nosplitbelow
@@ -1880,8 +2102,7 @@ exe s:l
 normal! zt
 338
 normal! 0169l
-2wincmd w
-tabnext 6
+tabnext 10
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
 endif

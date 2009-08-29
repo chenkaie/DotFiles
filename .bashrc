@@ -44,6 +44,7 @@ alias cless="less -R"
 alias mkdir='mkdir -p -v'
 alias reload='source ~/.bashrc'
 alias wget='wget -c'
+alias xmllint='xmllint --noout'
 
 alias grep='grep -i --colour=auto'
 #alias wcgrep='wcgrep -inh --colour=auto' has been defined in wcgrep

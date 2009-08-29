@@ -82,7 +82,7 @@ Uncomments the selected line(s).
 
 ------------------------------------------------------------------------------
 5. minibufexpl.vim : Elegant buffer explorer - takes very little screen space *minibufexpl*
-    1. <Tab> and <Shift-Tab> move forward and backward respectively through the buffer list. 
+    1. <Ctrl-Tab> and <Shift-Tab> move forward and backward respectively through the buffer list. 
 
 ------------------------------------------------------------------------------
 7. surround.vim: Delete/change/add parentheses/quotes/XML-tags/much more with ease 
@@ -108,7 +108,9 @@ Uncomments the selected line(s).
     <CTRL-s><CTRL-s> - in insert mode, add a new line + surrounding + indent
     <CTRL-g>s - same as <CTRL-s>
     <CTRL-g>S - same as <CTRL-s><CTRL-s>
-
+------------------------------------------------------------------------------
+ diff
+     o use ':vnew' to new a window for realtime diff
 
 ------------------------------------------------------------------------------
  make

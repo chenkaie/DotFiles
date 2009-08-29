@@ -56,7 +56,7 @@ caption always "%{= KW}%-w%{= ky} [%n] %t %{-}%+w %-= %{= Kk}[%l] %{= Kk}[%Y/%m/
 caption always "%{= KW}%-w%{= kc} [%n] %t %{-}%+w %-= %{= Kk}[%H | %l | %m/%d %c]"
 
 # hardstatus style
-#hardstatus alwaysignore
+hardstatus alwaysignore
 #hardstatus alwayslastline "%{= .K} [%l]%<%=%{= .W}@%H %=%{= .y} %Y/%m/%d%{= .m} %C %A"
 #hardstatus alwayslastline '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d/%m %{W}%c %{g}]'
 #hardstatus alwayslastline "%{R}[ %{w}%1` %{R}]%=%{M}%e %{G}%H %{Y} %c %{R} %d/%m/%Y %{K} Load: %l %{w}"
@@ -81,13 +81,15 @@ bindkey "^[[1;5C" next
 #bindkey "^l" next 
 
 # /*Need to hack putty*/
-# For iTerm, just add key mapping! Cool iTerm
-Ctrl + , : prev
-Ctrl + . : next
-bindkey "\274" prev
-bindkey "\276" next
+# (Mac - iTerm) just add key mapping! Cool iTerm
+# (Win - PuTTY) Resolved by AutoHotkey 
+#Ctrl + , : prev
+#Ctrl + . : next
+#bindkey "\274" prev
+#bindkey "\276" next
 
-# /*Need to hack putty*/
+# (Win - PuTTY) Resolved by AutoHotkey 
+# <s>/*Need to hack putty*/</s>
 # Ctrl + Tab         : prev   (Firefox-way)
 # Ctrl + Shift + Tab : next   (Firefox-way) 
 #bindkey "^[[27;5;9~" next 
@@ -134,8 +136,7 @@ bindkey "^[[A" number 1
 #bindkey -k k4 select 3
 #bindkey -k k5 select 4
 #bindkey -k k6 select 5
-%{R} %d/%m/%Y %{K} Load: %l %{w}""
-# F4 : kill all[2~
+# F4 : kill all
 bindkey -k k4 quit
 #bindkey "^[[24~" quit
 
@@ -161,3 +162,6 @@ bind = resize =
 bind + resize +1
 bind - resize -1
 bind _ resize max
+
+# Integrating GNU Screen copy/scrollback mode with the local system clipboard. i.e. Copying to the Mac Clipboard
+bind y eval "writebuf" "exec sh -c 'pbcopy < /tmp/screen-exchange'"              
