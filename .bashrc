@@ -1,3 +1,6 @@
+#!/bin/bash
+# ~/.bashrc
+
 export PATH=$HOME/hr:$HOME/Tools:$HOME/Tools/subversion-scripts:$HOME/Tools/git-scripts:$HOME/usr/bin:/sbin/:/opt/Vivotek/lsp/buildroot-2.0.0.0/build_arm_nofpu/staging_dir/bin/:$PATH
 export MANPATH=$HOME/usr/man:$HOME/usr/share/man:$MANPATH
 
