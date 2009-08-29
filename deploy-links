@@ -1,20 +1,20 @@
 #!/bin/sh
 
 LN="ln"
-RCFILE_DIR=dotfiles
+RCFILE_DIR=`pwd`
 #RCFILES=".bashrc .inputrc .vimrc .cdargs .gitconfig .cdargsresult .bash_logout .gitk .bash_profile .lftp .ssh .subversion .vim"
 RCFILES=".bashrc .inputrc .screenrc .vimrc .cdargs .ctags .htoprc .muttrc .irssi .gitconfig .gitk .subversion .vim .vnc"
-
+# test
 for rcfile in $RCFILES; do
     if [ -L $HOME/$rcfile ]; then
-        echo "symbolic link : $HOME/$rcfile exists, skip.";
-        # Used to remove all
-        #rm $HOME/$rcfile
+        echo "[Symbolic Link] : $HOME/$rcfile exists, skip.";
+        # uncomment below line to to remove all exist symbolic links
+        # rm $HOME/$rcfile
     elif [ -f $HOME/$rcfile ] || [ -d $HOME/$rcfile ]; then
-        echo "$HOME/$rcfile exists, skip.";
+        echo "[File or Dirs ] : $HOME/$rcfile exists, skip.";
     else
-        $LN -sf $HOME/$RCFILE_DIR/$rcfile $HOME/
-        echo "build symbolic link: $HOME/$rcfile";
+        $LN -sf $RCFILE_DIR/$rcfile $HOME/
+        echo "[Successfully!] : build symbolic link: $HOME/$rcfile";
     fi
 done
 

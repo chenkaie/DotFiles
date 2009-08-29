@@ -137,10 +137,11 @@ alias dd-wrt='ssh chenkaie.no-ip.org -p2222 -lroot'
 echo "Welcome to RD1-2" | cowsay -f default
 
 # source bash related script
-source $HOME/rcfiles/completion/bash_completion
-source $HOME/rcfiles/completion/svn_completion
-source $HOME/rcfiles/completion/git-completion
-source $HOME/rcfiles/completion/cdargs-bash.sh
+rcfiles="$HOME/Repos/DotFiles/rcfiles"
+source $rcfiles/completion/bash_completion
+source $rcfiles/completion/svn_completion
+source $rcfiles/completion/git-completion
+source $rcfiles/completion/cdargs-bash.sh
 
 #######################
 # Functions           # 
