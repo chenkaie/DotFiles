@@ -1,0 +1,22 @@
+ABOUT
+=====
+
+My dotfiles / rcfiles used on Unix, mainly on Linux & Mac OS X
+
+Usage
+=====
+
+1. git clone this repo 
+
+2. Simply execute below script to deploy these links! Once they are detecting exist, remove them first, but 'be careful' !
+
+        ./deploy-links
+
+AUTHOR
+======
+
+Kent Chen (Kaie) <chenkaie@gmail.com>
+
+* [@chenkaie](http://www.plurk.com/chenkaie) on Plurk 
+* <http://chenkaie.blogspot.com>
+
