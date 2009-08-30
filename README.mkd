@@ -1,7 +1,8 @@
 ABOUT
 =====
 
-My dotfiles / rcfiles used on Unix, mainly on Linux & Mac OS X
+My dotfiles / rcfiles used on Unix, mainly on Linux & Mac OS X. 
+Inspired by [Klaymen rcfiles](http://github.com/chenkaie/rcfiles/tree/master)
 
 Usage
 =====
