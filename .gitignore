@@ -1,2 +1,4 @@
 .svn
 .DS_Store
+.vim/backup
+.ssh
