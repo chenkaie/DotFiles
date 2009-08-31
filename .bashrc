@@ -6,9 +6,12 @@ if [ -f /etc/bashrc ]; then
 fi
 
 export EDITOR=vim
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # MANPATH
 export MANPATH=$HOME/usr/man:$HOME/usr/share/man:$HOME/usr/cpan/share/man:$MANPATH
+export dotfiles="$HOME/Repos/DotFiles"
 
 #######################
 # JOB Related         # 
@@ -74,70 +77,86 @@ case $OS in
         alias ls='ls -FG'
         ;;
     Linux)
-        alias ls='ls -FN --color=auto'
+        alias ls='ls -FN --color=auto --time-style=long-iso'
         ;;
 esac
 
-alias ll="ls -al"
-alias lk="ls -lk"
-alias lt="ls -ltr"        # sort by date
-alias lx="ls -lXB"        # sort by extension
-#alias tree="tree -Cs"    # nice alternative to "ls"
-alias vim="vim -X -p"
-alias vi="vim"
-alias cp="cp -i"
-alias mv="mv -i"
-alias rm="rm -i"
-alias df="df -h"
-alias ln="ln -i"
-alias top="htop"
-alias gdb="cgdb"
-# colorful "less"
-alias less="less -R"
-alias mkdir="mkdir -p -v"
-alias reload="source ~/.bashrc"
-alias wget="wget -c"
-alias xmllint="xmllint --noout"
+alias ll='ls -al'
+alias lk='ls -lk'
+alias lt='ls -ltr'                  # sort by date
+alias lx='ls -lXB'                  # sort by extension
+alias ld='ls -d */'                 # ls Dirs
+alias l.='ls -dAFh .[^.]*'          # ls Dotfiles
+alias lst='ls -hFtal | grep $(date +%Y-%m-%d)' #ls Today
 
-alias grep="grep -i --colour=auto"
-#alias wcgrep="wcgrep -inh --colour=auto" has been defined in wcgrep
-alias mdiff="diff -ruN --exclude=.svn"
-alias diff="colordiff.pl"
+#alias tree='tree -Cs'              # nice alternative to 'ls'
+alias vim='vim -X -p'
+alias vi='vim'
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
+alias df='df -h'
+alias ln='ln -i'
+alias psg='ps -ef | grep $1'
+alias h='history | grep $1'
+alias top='htop'
+alias gdb='cgdb'
+# colorful 'less'
+alias less='less -R'
+alias mkdir='mkdir -p -v'
+alias reload='source ~/.bashrc'
+alias wget='wget -c'
+alias xmllint='xmllint --noout'
+
+alias grep='grep -i --colour=auto'
+#alias wcgrep='wcgrep -inh --colour=auto' has been defined in wcgrep
+alias mdiff='diff -ruN --exclude=.svn'
+alias diff='colordiff.pl'
 
 #aliases and export for Project
-alias cdpd="cd ${PRODUCTDIR}"
-alias cdrd="cd ${IMAGEDIR}"
-alias pd="echo ${PRODUCTDIR}"
-#export PD=$PRODUCTDIR
+alias cdpd='cd ${PRODUCTDIR}'
+alias cdrd='cd ${IMAGEDIR}'
+alias pd='echo ${PRODUCTDIR}'
 
 #make for fun
-alias make="cmake"
-alias m="make"
-alias mc="m cleanall"
-alias mi="m install"
-alias mall="mc && m && mi"
-alias rm-release="rm -rf app_cluster_Build/ flashfs/ rootfs/"
+alias make='cmake'
+alias m='make'
+alias mc='m cleanall'
+alias mi='m install'
+alias mall='mc && m && mi'
+alias rm-release='rm -rf app_cluster_Build/ flashfs/ rootfs/'
 #gcc
-alias agcc="arm-linux-gcc -Wall"
-alias gcc="gcc -Wall"
+alias agcc='arm-linux-gcc -Wall'
+alias gcc='gcc -Wall'
 
 #Lint related
-alias jsl="jsl -conf ~/Tools/jsl.conf -process"
-alias lint-gnu="lint +v ~/makcomm/std_gnu_kent.lnt ~/makcomm/env-vim.lnt"
-alias lint-gnu-xml="lint-gnu ~/makcomm/env-xml.lnt"
-alias lint-gnu-html="lint-gnu ~/makcomm/env-html.lnt"
-alias lint-arm="lint +v ~/makcomm/std_armgcc_kent.lnt ~/makcomm/env-vim.lnt"
-alias lint-arm-xml="lint-arm ~/makcomm/env-xml.lnt"
-alias lint-arm-html="lint-arm ~/makcomm/env-html.lnt"
+alias jsl='jsl -conf ~/Tools/jsl.conf -process'
+alias lint-gnu='lint +v ~/makcomm/std_gnu_kent.lnt ~/makcomm/env-vim.lnt'
+alias lint-gnu-xml='lint-gnu ~/makcomm/env-xml.lnt'
+alias lint-gnu-html='lint-gnu ~/makcomm/env-html.lnt'
+alias lint-arm='lint +v ~/makcomm/std_armgcc_kent.lnt ~/makcomm/env-vim.lnt'
+alias lint-arm-xml='lint-arm ~/makcomm/env-xml.lnt'
+alias lint-arm-html='lint-arm ~/makcomm/env-html.lnt'
 
-## Moving around & all that jazz
-alias back="cd $OLDPWD"
-alias cd..="cd .."
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-alias ......="cd ../../../../.."
+# Moving around & all that jazz
+#alias cd='pushd > /dev/null' 
+#alias back='popd > /dev/null'
+alias b='cd -' # back to $OLDPWD
+alias cd..='cd ..'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+
+alias path='echo -e ${PATH//:/\\n}'
+
+#Personal Help
+alias l?='cat ~/.bashrc | grep "alias l.=" | grep ^a | more' 
+alias a?='alias'
+alias f?='cat $dotfiles/.function.help'
+alias dn='OPTIONS=$(\ls -F | grep /$); select s in $OPTIONS; do cd $PWD/$s; break;done'
+#alias help='OPTIONS=$(\ls $dotfiles/.tips -F);select s in $OPTIONS; do less $dotfiles/.tips/$s; break;done' 
 
 #######################
 # Default             # 
@@ -159,6 +178,7 @@ PROMPT_COMMAND='echo -n -e "\033k\033\134"'
 #history control, ignorespace & ignoredups
 export HISTCONTROL=ignoreboth
 export HISTSIZE=5000
+export HISTTIMEFORMAT="%Y-%m-%d_%H:%M:%S_%a  "
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -182,10 +202,10 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 # For all SSH (Reverse) Tunnel
 case $OS in
     Darwin|*BSD)
-        alias dd-wrt="ssh 192.168.1.1 -p2222 -lroot"
+        alias dd-wrt='ssh 192.168.1.1 -p2222 -lroot'
         alias dd-wrt_rd1-2='ssh -L 7322:127.0.0.1:7322 192.168.1.1 -lroot -p2222'
-        alias rd1-2="ssh localhost -p 7322"
-        alias rd1-2-proxy="ssh -D 8080 localhost -p7322"
+        alias rd1-2='ssh localhost -p 7322'
+        alias rd1-2-proxy='ssh -D 8080 localhost -p7322'
         ;;
 
     Linux)
@@ -202,11 +222,18 @@ esac
 echo "Welcome to $HOSTNAME" | cowsay -f default
 
 # source bash related script
-rcfiles="$HOME/Repos/DotFiles/rcfiles"
+rcfiles="$dotfiles/rcfiles"
 source $rcfiles/completion/bash_completion
 source $rcfiles/completion/svn_completion
 source $rcfiles/completion/git-completion
 source $rcfiles/completion/cdargs-bash.sh
+
+# search through history on C-P , C-N, Usage: ls => C-P
+bind "C-p":history-search-backward
+bind "C-n":history-search-forward
+# PageUp / PageDown to do the same thing
+bind '"\e[5~"':history-search-backward
+bind '"\e[6~"':history-search-forward
 
 #######################
 # Functions           # 
