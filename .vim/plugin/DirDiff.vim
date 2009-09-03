@@ -228,7 +228,7 @@ map <unique> <script> <Plug>DirDiffQuit    :call <SID>DirDiffQuit()<CR>
 " eg. in your .vimrc file: let g:DirDiffExcludes = "CVS,*.class,*.o"
 "                           let g:DirDiffIgnore = "Id:"
 "                          " ignore white space in diff
-"                           let g:DirDiffAddArgs = "-w" 
+                           let g:DirDiffAddArgs = "-w" 
 "
 " You can set the pattern that diff excludes.  Defaults to the CVS directory
 if !exists("g:DirDiffExcludes")
