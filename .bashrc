@@ -1,9 +1,8 @@
 #!/bin/bash
 
 # Source global definitions                                                                                                                                                         
-if [ -f /etc/bashrc ]; then
-    . /etc/bashrc
-fi
+[ -f /etc/bashrc ] && . /etc/bashrc
+[ -f /etc/profile ] && . /etc/profile
 
 export EDITOR=vim
 export LC_ALL=en_US.UTF-8
@@ -13,6 +12,7 @@ export LANG=en_US.UTF-8
 export MANPATH=$HOME/usr/man:$HOME/usr/share/man:$HOME/usr/cpan/share/man:$MANPATH
 export dotfiles="$HOME/Repos/DotFiles"
 
+exist () { type "$1" &> /dev/null; }
 #######################
 # JOB Related         # 
 #######################
@@ -99,19 +99,40 @@ alias df='df -h'
 alias ln='ln -i'
 alias psg='ps -ef | grep $1'
 alias h='history | grep $1'
-alias top='htop'
-alias gdb='cgdb'
-# colorful 'less'
-alias less='less -R'
+alias j='jobs'
+alias less='less -R'                # colorful 'less'
+alias more='less'
 alias mkdir='mkdir -p -v'
 alias reload='source ~/.bashrc'
 alias wget='wget -c'
+
+# have to check exist()
+alias top='htop'
+alias gdb='cgdb'
 alias xmllint='xmllint --noout'
 
 alias grep='grep -i --colour=auto'
 #alias wcgrep='wcgrep -inh --colour=auto' has been defined in wcgrep
 alias mdiff='diff -ruN --exclude=.svn'
 alias diff='colordiff.pl'
+
+# Moving around & all that jazz
+#alias cd='pushd > /dev/null' 
+#alias back='popd > /dev/null'
+alias b='cd -' # back to $OLDPWD
+alias cd..='cd ..'
+
+alias path='echo -e ${PATH//:/\\n}'
+
+#Personal Help
+alias l?='cat ~/.bashrc | grep "alias l.=" | grep ^a | more' 
+alias a?='alias'
+alias f?='cat $dotfiles/.function.help'
+alias dn='OPTIONS=$(\ls -F | grep /$); select s in $OPTIONS; do cd $PWD/$s; break;done'
+#alias help='OPTIONS=$(\ls $dotfiles/.tips -F);select s in $OPTIONS; do less $dotfiles/.tips/$s; break;done' 
+
+#delete
+alias del='mv --target-directory=$HOME/.Trash/'
 
 #aliases and export for Project
 alias cdpd='cd ${PRODUCTDIR}'
@@ -130,50 +151,62 @@ alias agcc='arm-linux-gcc -Wall'
 alias gcc='gcc -Wall'
 
 #Lint related
-alias jsl='jsl -conf ~/Tools/jsl.conf -process'
-alias lint-gnu='lint +v ~/makcomm/std_gnu_kent.lnt ~/makcomm/env-vim.lnt'
-alias lint-gnu-xml='lint-gnu ~/makcomm/env-xml.lnt'
-alias lint-gnu-html='lint-gnu ~/makcomm/env-html.lnt'
-alias lint-arm='lint +v ~/makcomm/std_armgcc_kent.lnt ~/makcomm/env-vim.lnt'
-alias lint-arm-xml='lint-arm ~/makcomm/env-xml.lnt'
-alias lint-arm-html='lint-arm ~/makcomm/env-html.lnt'
-
-# Moving around & all that jazz
-#alias cd='pushd > /dev/null' 
-#alias back='popd > /dev/null'
-alias b='cd -' # back to $OLDPWD
-alias cd..='cd ..'
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-alias ......='cd ../../../../..'
-
-alias path='echo -e ${PATH//:/\\n}'
-
-#Personal Help
-alias l?='cat ~/.bashrc | grep "alias l.=" | grep ^a | more' 
-alias a?='alias'
-alias f?='cat $dotfiles/.function.help'
-alias dn='OPTIONS=$(\ls -F | grep /$); select s in $OPTIONS; do cd $PWD/$s; break;done'
-#alias help='OPTIONS=$(\ls $dotfiles/.tips -F);select s in $OPTIONS; do less $dotfiles/.tips/$s; break;done' 
+exist jsl  && alias jsl='jsl -conf ~/Tools/jsl.conf -process'
+if exist lint ; then
+    alias lint-gnu='lint +v ~/makcomm/std_gnu_kent.lnt ~/makcomm/env-vim.lnt'
+    alias lint-gnu-xml='lint-gnu ~/makcomm/env-xml.lnt'
+    alias lint-gnu-html='lint-gnu ~/makcomm/env-html.lnt'
+    alias lint-arm='lint +v ~/makcomm/std_armgcc_kent.lnt ~/makcomm/env-vim.lnt'
+    alias lint-arm-xml='lint-arm ~/makcomm/env-xml.lnt'
+    alias lint-arm-html='lint-arm ~/makcomm/env-html.lnt'
+fi
 
 #######################
 # Default             # 
 #######################
 set -o noclobber 
 
-# A fancy prompt
-COLOR1="\[\033[0;33m\]"
-COLOR2="\[\033[0;35m\]"
-[ "$OS" == "Darwin" ] && COLOR2="\[\033[0;31m\]"
-COLOR3="\[\033[0;39m\]"
-COLOR4="\[\033[0;32m\]"
+# Define Colors {{{
+TXTBLK='\e[0;30m' # Black - Regular
+TXTRED='\e[0;31m' # Red
+TXTGRN='\e[0;32m' # Green
+TXTYLW='\e[0;33m' # Yellow
+TXTBLU='\e[0;34m' # Blue
+TXTPUR='\e[0;35m' # Purple
+TXTCYN='\e[0;36m' # Cyan
+TXTWHT='\e[0;37m' # White
+BLDBLK='\e[1;30m' # Black - Bold
+BLDRED='\e[1;31m' # Red
+BLDGRN='\e[1;32m' # Green
+BLDYLW='\e[1;33m' # Yellow
+BLDBLU='\e[1;34m' # Blue
+BLDPUR='\e[1;35m' # Purple
+BLDCYN='\e[1;36m' # Cyan
+BLDWHT='\e[1;37m' # White
+UNDBLK='\e[4;30m' # Black - Underline
+UNDRED='\e[4;31m' # Red
+UNDGRN='\e[4;32m' # Green
+UNDYLW='\e[4;33m' # Yellow
+UNDBLU='\e[4;34m' # Blue
+UNDPUR='\e[4;35m' # Purple
+UNDCYN='\e[4;36m' # Cyan
+UNDWHT='\e[4;37m' # White
+BAKBLK='\e[40m'   # Black - Background
+BAKRED='\e[41m'   # Red
+BAKGRN='\e[42m'   # Green
+BAKYLW='\e[43m'   # Yellow
+BAKBLU='\e[44m'   # Blue
+BAKPUR='\e[45m'   # Purple
+BAKCYN='\e[46m'   # Cyan
+BAKWHT='\e[47m'   # White
+TXTRST='\e[0m'    # Text Reset
+# }}}
 
-PS1=$COLOR1'[\u]'$COLOR3'@'$COLOR2'\h'$COLOR3':'$COLOR4'\W'$COLOR3'\$ '
+PS1=$TXTYLW'[\u]'$TXTWHT'@'$TXTPUR'\h'$TXTWHT':'$TXTGRN'\W'$TXTWHT'\$ '
+[ "$OS" == "Darwin" ] &&  PS1=$TXTYLW'[\u]'$TXTWHT'@'$TXTRED'\h'$TXTWHT':'$TXTGRN'\W'$TXTWHT'\$ '
 
 # add for screen to dynamically update title
-PROMPT_COMMAND='echo -n -e "\033k\033\134"'
+#PROMPT_COMMAND='echo -n -e "\033k\033\134"'
 
 #history control, ignorespace & ignoredups
 export HISTCONTROL=ignoreboth
@@ -227,13 +260,10 @@ source $rcfiles/completion/bash_completion
 source $rcfiles/completion/svn_completion
 source $rcfiles/completion/git-completion
 source $rcfiles/completion/cdargs-bash.sh
+source $rcfiles/completion/cdots.sh
 
-# search through history on C-P , C-N, Usage: ls => C-P
-bind "C-p":history-search-backward
-bind "C-n":history-search-forward
-# PageUp / PageDown to do the same thing
-bind '"\e[5~"':history-search-backward
-bind '"\e[6~"':history-search-forward
+# make less more friendly for non-text input files, see lesspipe(1)
+exist lesspipe && eval "$(lesspipe)"
 
 #######################
 # Functions           # 
@@ -261,10 +291,19 @@ extract () {
   fi
 }
 
-# Creates an archive from given directory
-mktar() { tar cvf  "${1%%/}.tar"     "${1%%/}/"; }
-mktgz() { tar cvzf "${1%%/}.tar.gz"  "${1%%/}/"; }
-mktbz() { tar cvjf "${1%%/}.tar.bz2" "${1%%/}/"; }
+# easy compress - archive wrapper
+# usage: compress <foo.tar.gz> ./foo ./bar
+compress ()
+{
+    FILE=$1
+    case $FILE in
+    *.tar.bz2) shift && tar cjf $FILE $* ;;
+    *.tar.gz) shift && tar czf $FILE $* ;;
+    *.tgz) shift && tar czf $FILE $* ;;
+    *.zip) shift && zip $FILE $* ;;
+    *.rar) shift && rar $FILE $* ;;
+    esac
+}
 
 function sysinfo() # get current host related info
 {
@@ -286,3 +325,42 @@ function myip {
 encrypt () { gpg -ac --no-options "$1"; }
 decrypt () { gpg --no-options "$1"; }
 
+# finds directory sizes and lists them for the current directory
+dirsize ()
+{
+    du -shx * .[a-zA-Z0-9_]* 2> /dev/null | \
+    egrep '^ *[0-9.]*[MG]' | sort -n > /tmp/list
+    egrep '^ *[0-9.]*M' /tmp/list
+    egrep '^ *[0-9.]*G' /tmp/list
+    rm -rf /tmp/list
+}
+
+# ls when cd, it's useful
+cd () {
+    if [ -n "$1" ]; then
+        builtin cd "$@"&& ls
+    else
+        builtin cd ~&& ls
+    fi
+}
+
+# swap() -- switch 2 filenames around
+function swap()
+{
+    local TMPFILE=tmp.$$
+    mv "$1" $TMPFILE
+    mv "$2" "$1"
+    mv $TMPFILE "$2"
+}
+
+# repeat() -- repeat a given command N times
+function repeat() # repeat n times command
+{
+    local i max
+    max=$1; shift;
+    for ((i=1; i <= max ; i++)); do
+        eval "$@";
+    done
+}
+
+# vim: fdm=marker ts=4 sw=4 et:
