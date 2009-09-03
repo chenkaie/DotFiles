@@ -10,7 +10,7 @@
 "                ||     ||
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
-" Last Modified: Wed Aug 26, 2009  09:41AM
+" Last Modified: Thu Sep 03, 2009  10:23PM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -177,6 +177,16 @@ nmap <C-k> <C-w>k
 nmap <C-h> <C-w>h
 nmap <C-l> <C-w>l
 
+" move to 'first non-whitespace character of a line' <Alt-(>
+" move to 'end of a line' <Alt-)>
+nmap 9 ^
+nmap 0 $
+imap 9 <ESC>^i
+imap 0 <ESC>$i
+
+" useful abbrev
+ab vds vertical diffsplit
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tab Operation Mac-Mapping by Klaymen
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -209,7 +219,6 @@ nmap 5 <Esc>:tabn 5<Enter>
 nmap 6 <Esc>:tabn 6<Enter>
 nmap 7 <Esc>:tabn 7<Enter>
 nmap 8 <Esc>:tabn 8<Enter>
-nmap 9 <Esc>:tabn 9<Enter>
 
 "reload this file
 nmap r <Esc>:edit<Enter>
@@ -268,8 +277,6 @@ if has("autocmd")
        \    nmap l do   |
        \ endif
 endif
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Programming Language 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
