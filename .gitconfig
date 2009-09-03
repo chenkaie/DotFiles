@@ -3,6 +3,7 @@
     status = auto
     branch = auto
     grep = auto
+	sh = auto
 
 [user]
     name = Kent Chen
@@ -19,6 +20,7 @@
     co = checkout
     di = diff
     lg = log -p
+	sh = !git-sh
 
 [branch]
     autosetupmerge = true
@@ -26,3 +28,7 @@
 [github]
     user = chenkaie
     token = bffcf6bc66d10d4fbb3bb9d334fe4b07
+[color "sh"]
+	branch = yellow reverse
+	workdir = blue bold
+	dirty = red
