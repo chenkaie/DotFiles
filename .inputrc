@@ -11,5 +11,16 @@ set show-all-if-ambiguous on
 "\e[5~": history-search-backward 
 "\e[6~": history-search-forward 
 
+# Ctrl + w/b : word movement
+"\C-f": forward-word
+"\C-b": backward-word 
 
+# Ctrl+ <-/-> word movement
+"\e[5C": forward-word
+"\e[5D": backward-word
+"\e\e[C": forward-word
+"\e\e[D": backward-word
 
+# Ctrl + p/n : history search
+"\C-p": history-search-backward 
+"\C-n": history-search-forward
