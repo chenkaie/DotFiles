@@ -85,6 +85,7 @@ alias ll='ls -al'
 alias lk='ls -lk'
 alias lt='ls -ltr'                  # sort by date
 alias lx='ls -lXB'                  # sort by extension
+alias lz='ls -lS'                   # sort by size 
 alias ld='ls -d */'                 # ls Dirs
 alias l.='ls -dAFh .[^.]*'          # ls Dotfiles
 alias lst='ls -hFtal | grep $(date +%Y-%m-%d)' #ls Today
