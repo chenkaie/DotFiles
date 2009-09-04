@@ -29,6 +29,6 @@
     user = chenkaie
     token = bffcf6bc66d10d4fbb3bb9d334fe4b07
 [color "sh"]
-	branch = yellow reverse
+	branch = yellow ul 
 	workdir = blue bold
 	dirty = red
