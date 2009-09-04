@@ -10,7 +10,7 @@
 "                ||     ||
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
-" Last Modified: Thu Sep 03, 2009  10:23PM
+" Last Modified: Fri Sep 04, 2009  03:38PM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -177,12 +177,10 @@ nmap <C-k> <C-w>k
 nmap <C-h> <C-w>h
 nmap <C-l> <C-w>l
 
-" move to 'first non-whitespace character of a line' <Alt-(>
-" move to 'end of a line' <Alt-)>
-nmap 9 ^
-nmap 0 $
-imap 9 <ESC>^i
-imap 0 <ESC>$i
+" Use <Alt-H> move to home, <Alt-L> move to the end
+nmap h      :call ToggleHomeActionN()<CR>
+imap h <ESC>:call ToggleHomeActionI()<CR>
+map l $
 
 " useful abbrev
 ab vds vertical diffsplit
@@ -269,13 +267,15 @@ nmap k [c
 " Switch key mapping for Left/Right window
 if has("autocmd")
     autocmd BufEnter *
-       \ if winnr() == 1  |
-       \    nmap h do   |
-       \    nmap l dp   |
-       \ else             |
-       \    nmap h dp   |
-       \    nmap l do   |
-       \ endif
+       \ if (&diff == 1)      |
+       \     if winnr() == 1  |
+       \        nmap h do   |
+       \        nmap l dp   |
+       \     else             |
+       \        nmap h dp   |
+       \        nmap l do   |
+       \     endif            |
+       \ endif                
 endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Programming Language 
