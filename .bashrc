@@ -81,13 +81,13 @@ case $OS in
         ;;
 esac
 
-alias ll='ls -al'
-alias lk='ls -lk'
+alias ll='ls -al'                   # long list format
+alias lk='ls -lk'                   # --block-size=1K
 alias lt='ls -ltr'                  # sort by date
 alias lx='ls -lXB'                  # sort by extension
 alias lz='ls -lS'                   # sort by size 
-alias ld='ls -d */'                 # ls Dirs
-alias l.='ls -dAFh .[^.]*'          # ls Dotfiles
+alias ld='ls -d */'                 # es only Dirs
+alias l.='ls -dAFh .[^.]*'          # ls only Dotfiles
 alias lst='ls -hFtal | grep $(date +%Y-%m-%d)' #ls Today
 
 #alias tree='tree -Cs'              # nice alternative to 'ls'
@@ -126,7 +126,7 @@ alias cd..='cd ..'
 alias path='echo -e ${PATH//:/\\n}'
 
 #Personal Help
-alias l?='cat ~/.bashrc | grep "alias l.=" | grep ^a | more' 
+alias l?='cat ~/.bashrc | grep "alias l.=.ls" | grep ^a | less' 
 alias a?='alias'
 alias f?='cat $dotfiles/.function.help'
 alias dn='OPTIONS=$(\ls -F | grep /$); select s in $OPTIONS; do cd $PWD/$s; break;done'
@@ -139,6 +139,7 @@ alias del='mv --target-directory=$HOME/.Trash/'
 alias cdpd='cd ${PRODUCTDIR}'
 alias cdrd='cd ${IMAGEDIR}'
 alias pd='echo ${PRODUCTDIR}'
+alias rmrd='cd ${PRODUCTDIR}/release; rm -rf app_cluster_Build/ flashfs/ rootfs/'
 
 #make for fun
 alias make='cmake'
@@ -146,7 +147,7 @@ alias m='make'
 alias mc='m cleanall'
 alias mi='m install'
 alias mall='mc && m && mi'
-alias rm-release='rm -rf app_cluster_Build/ flashfs/ rootfs/'
+
 #gcc
 alias agcc='arm-linux-gcc -Wall'
 alias gcc='gcc -Wall'
