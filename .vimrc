@@ -10,7 +10,7 @@
 "                ||     ||
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
-" Last Modified: Fri Sep 04, 2009  03:38PM
+" Last Modified: Tue Sep 08, 2009  12:24AM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -41,7 +41,7 @@ set bs=2
 set backup
 set backupdir=$HOME/.vim/backup
 
-syntax on
+syntax on 
 
 set vb
 "add runtimepath to make 'vim -u ~kent/.vimrc" work properly
@@ -54,7 +54,7 @@ endif
 "For Colorscheme
 "colorscheme peaksea
 set bg=dark
-colorscheme peaksea_new
+colorscheme peaksea_new 
 "colorscheme inkpot
 "GuiColorScheme rdark
 
@@ -102,6 +102,9 @@ set enc=utf-8
 set tenc=utf8
 set fenc=utf-8
 " }}}
+
+" For ambiguous characters, ex: ”, and BBS XD
+set ambiwidth=double
 
 " Edit your .vimrc in new tab
 nmap ,s :source $MYVIMRC <CR>
@@ -167,6 +170,10 @@ set backspace=indent,eol,start  " Allow backspacing over these
 " Spell Check
 hi SpellBad term=underline cterm=underline ctermfg=red
 map <F5> :set spell!<CR><BAR>:echo "Spell check: " . strpart("OffOn", 3 * &spell, 3)<CR>
+
+"Visualize some special chars
+set listchars=tab:>-,trail:-,eol:$,nbsp:%,extends:>,precedes:< 
+map <F8> :set list!<bar>set list?<CR>
 
 " Add new keyword in search under cursor (*)
 map a* :exec "/\\(".getreg('/')."\\)\\\\|".expand("<cword>")<CR>

@@ -508,7 +508,7 @@ elseif &background=='dark'
     " NOTE THIS IS IN THE COOL SECTION
     " hi CursorIM	ctermfg=16	ctermbg=201	cterm=NONE
     hi StatusLine	ctermfg=16	ctermbg=153	cterm=NONE
-    hi LineNr		ctermfg=249	ctermbg=NONE	cterm=NONE
+    hi LineNr		ctermfg=249	ctermbg=232	cterm=NONE
     hi Question		ctermfg=16	ctermbg=186	cterm=NONE
     hi ModeMsg		ctermfg=fg	ctermbg=18	cterm=NONE
     hi VisualNOS	ctermfg=fg	ctermbg=18	cterm=NONE
@@ -559,7 +559,7 @@ elseif &background=='dark'
       hi TabLineSel	ctermfg=fg	ctermbg=NONE	cterm=NONE
       hi CursorColumn	ctermfg=NONE	ctermbg=88	cterm=NONE
       "modify by Kent, ctermbg=236
-      hi CursorLine	ctermfg=NONE	ctermbg=236	cterm=NONE
+      hi CursorLine	ctermfg=NONE	ctermbg=232	cterm=NONE
       hi MatchParen	ctermfg=NONE	ctermbg=90
       hi TabLine	cterm=underline  
       hi TabLineFill	cterm=underline  
@@ -594,7 +594,7 @@ hi link		MyTagListTagName	IncSearch
 hi link		MyTagListTagScope	Constant
 
 "Add by Kent
-hi LineNr	ctermfg=NONE	ctermbg=237	cterm=NONE
+"hi LineNr	ctermfg=NONE	ctermbg=232	cterm=NONE
 " COLOR LINKS DEFINE END
 
 " vim:et:nosta:sw=2:ts=8:
