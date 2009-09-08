@@ -8,9 +8,13 @@
 # "C-a C-a" : fast switch between 2 screens
 #################################################################################
 
+altscreen on # erase screen when quit apps
 defutf8 on
-defc1 off
+defc1 off # treat input chars 128 ~ 159 as control functions 
+defflow on 
+vbell_msg "Ding Ding!!"
 defencoding utf8
+# cjkwidth on
 
 # 256 Color Support
 termcapinfo xterm "Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm"

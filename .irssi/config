@@ -259,6 +259,15 @@ statusbar = {
   };
 };
 settings = {
-  core = { real_name = "Kent Chen"; user_name = "kent"; nick = "kent"; };
+  core = {
+    real_name = "Kent Chen";
+    user_name = "kent";
+    nick = "kent";
+    recode_transliterate = "yes";
+    recode_fallback = "UTF-8 ";
+    recode_out_default_charset = "UTF-8";
+  };
   "fe-text" = { actlist_sort = "refnum"; };
+  "fe-common/core" = { term_charset = "UTF-8"; };
 };
+conversions = { "#bsdchat" = "UTF-8"; user = "Big5"; };
