@@ -508,7 +508,7 @@ elseif &background=='dark'
     " NOTE THIS IS IN THE COOL SECTION
     " hi CursorIM	ctermfg=16	ctermbg=201	cterm=NONE
     hi StatusLine	ctermfg=16	ctermbg=153	cterm=NONE
-    hi LineNr		ctermfg=249	ctermbg=232	cterm=NONE
+    hi LineNr		ctermfg=240	ctermbg=232	cterm=NONE
     hi Question		ctermfg=16	ctermbg=186	cterm=NONE
     hi ModeMsg		ctermfg=fg	ctermbg=18	cterm=NONE
     hi VisualNOS	ctermfg=fg	ctermbg=18	cterm=NONE

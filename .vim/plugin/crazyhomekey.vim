@@ -3,7 +3,7 @@
 " Description:   Finetune Home key operation for Programmer
 " Maintainer:    Kent Chen <chenkaie at gmail dot com>
 " Version:       1.0
-" Last Modified: Fri Sep 04, 2009  03:54PM
+" Last Modified: Fri Sep 04, 2009  11:17PM
 " License:       This program is free software. It comes without any warranty,
 "                to the extent permitted by applicable law. You can redistribute
 "                it and/or modify it under the terms of the Do What The Fuck You
@@ -28,7 +28,7 @@
 " Use <Alt-H> move to home, <Alt-L> move to the end
 "     nmap h      :call ToggleHomeActionN()<CR>
 "     imap h <ESC>:call ToggleHomeActionI()<CR>
-"     map l $
+"     map  l $
 "
 " History:
 "    1.0  Initial Release

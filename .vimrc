@@ -10,7 +10,7 @@
 "                ||     ||
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
-" Last Modified: Tue Sep 08, 2009  12:24AM
+" Last Modified: Tue Sep 08, 2009  08:17PM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -30,20 +30,18 @@ elseif has("win32")
 endif
 
 if OS != "Darwin"
-"change to the directory containing the file which was opened or selected
-set autochdir
+    "change to the directory containing the file which was opened or selected
+    set autochdir
 endif
 
-" 游標移動後, 一樣可以用 backsapce, del 等刪除動作
-set bs=2
+set backspace=2
 
 " auto generated file: filename~ 
 set backup
 set backupdir=$HOME/.vim/backup
-
 syntax on 
-
 set vb
+
 "add runtimepath to make 'vim -u ~kent/.vimrc" work properly
 set runtimepath+=~kent/.vim
 
@@ -77,7 +75,7 @@ set smarttab       " Smart handling of the tab key
 set expandtab      " Use spaces for tabs
 set shiftround     " Round indent to multiple of shiftwidth
 set shiftwidth=4   " Number of spaces for each indent
-set tabstop=4      " Number of spaces for tab key
+"set tabstop=4     " Number of spaces for tab key
 
 set history=500    " keep 200 lines of command line history
 set ruler          " show the cursor position all the time
@@ -183,11 +181,8 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-h> <C-w>h
 nmap <C-l> <C-w>l
-
-" Use <Alt-H> move to home, <Alt-L> move to the end
-nmap h      :call ToggleHomeActionN()<CR>
-imap h <ESC>:call ToggleHomeActionI()<CR>
-map l $
+nmap - <C-w>-
+nmap + <C-w>+
 
 " useful abbrev
 ab vds vertical diffsplit
@@ -271,10 +266,13 @@ let g:DirDiffWindowSize = 10
 " WinMerge-style (Alt + hjkl) mapping for vimdiff
 nmap j ]c
 nmap k [c
-" Switch key mapping for Left/Right window
+
+" non-Diff mode: Use <Alt-H> move to home, <Alt-L> move to the end
+"     Diff mode: Used to do diffput and diffget
+" Switch key mapping in Left/Right window under DiffMode
 if has("autocmd")
-    autocmd BufEnter *
-       \ if (&diff == 1)      |
+    autocmd BufEnter,BufLeave *
+       \ if &diff             |
        \     if winnr() == 1  |
        \        nmap h do   |
        \        nmap l dp   |
@@ -282,6 +280,10 @@ if has("autocmd")
        \        nmap h dp   |
        \        nmap l do   |
        \     endif            |
+       \ else                 |
+       \     nmap h      :call ToggleHomeActionN()<CR>|
+       \     imap h <ESC>:call ToggleHomeActionI()<CR>|
+       \     map l $|
        \ endif                
 endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -379,9 +381,7 @@ function ToggleHex()
     let &modifiable=l:oldmodifiable
 endfunction
 
-nnoremap b :Hexmode<CR>
-inoremap b <Esc>:Hexmode<CR>
-vnoremap b :<C-U>Hexmode<CR>
+nnoremap <C-x> :Hexmode<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin configuration
@@ -390,8 +390,8 @@ vnoremap b :<C-U>Hexmode<CR>
 map <F3> <ESC>\vv
 " EasyGrep
 let g:EasyGrepRecursive = 1
-let g:EasyGrepIgnoreCase= 1
-let g:EasyGrepJumpToMatch=0
+let g:EasyGrepIgnoreCase= 0 
+let g:EasyGrepJumpToMatch= 1
 
 "VCS
 nmap d <Esc>:VCSVimDiff<Enter>
@@ -446,7 +446,7 @@ function! QFixToggle(forced)
         cclose
         unlet g:qfix_win
     else
-        copen 8
+        copen 6 
         let g:qfix_win = bufnr("$")
     endif
 endfunction

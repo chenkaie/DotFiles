@@ -8,7 +8,7 @@
 "               the quickfix window.  JavaScript Lint must be installed on your system
 "               for this plugin to work properly.  This page should get you started:
 "               http://www.javascriptlint.com/docs/index.htm
-" Last Modified: March 9, 2009
+" Last Modified: Tue Sep 08, 2009  01:37PM
 if !exists("CLint_command")
   let CLint_command = 'lint +v ~/makcomm/std_gnu_kent.lnt ~/makcomm/env-vim.lnt'
 endif
@@ -55,7 +55,7 @@ function CLint()
     call s:SetCursorLineColor()
 
     " open the quicfix window
-    botright copen 8
+    botright copen 5 
     let s:qfix_win = bufnr("$")
 
     " delete the temp file
