@@ -1,3 +1,9 @@
+#!/bin/sh  $HOME/.inputrc
+# 1. List current readline function names and bindings
+#  $ bind -p 
+# 2. re-read-init-file, reload .inputrc
+#  "\C-x\C-r"
+
 set meta-flag on 
 set input-meta on 
 set output-meta on 

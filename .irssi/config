@@ -26,16 +26,42 @@ servers = (
   { address = "irc.webchat.org"; chatnet = "WebChat"; port = "6667"; },
   { address = "irc.rizon.net"; chatnet = "Rizon"; port = "6667"; },
   { address = "irc.link-net.org"; chatnet = "LinkNet"; port = "6667"; },
-  { address = "silc.silcnet.org"; chatnet = "SILC"; port = "706"; }
+  { address = "silc.silcnet.org"; chatnet = "SILC"; port = "706"; },
+  {
+    address = "irc.seed.net.tw";
+    chatnet = "IRCnet";
+    port = "6667";
+    use_ssl = "no";
+    ssl_verify = "no";
+    autoconnect = "yes";
+  },
+  {
+    address = "asimov.freenode.net";
+    chatnet = "freenode";
+    port = "6667";
+    use_ssl = "no";
+    ssl_verify = "no";
+    autoconnect = "yes";
+  },
+  {
+    address = "ADD";
+    chatnet = "/CHANNEL";
+    port = "0";
+    password = "#bsdchat";
+    use_ssl = "no";
+    ssl_verify = "no";
+    autoconnect = "yes";
+  }
 );
 
 chatnets = {
   IRCnet = {
     type = "IRC";
-    max_kicks = "4";
-    max_msgs = "5";
-    max_whois = "4";
     max_query_chans = "5";
+    max_kicks = "4";
+    max_msgs = "1";
+    max_modes = "4";
+    max_whois = "1";
   };
   EFNet = { 
     type = "IRC";
@@ -92,11 +118,24 @@ chatnets = {
     max_whois = "30";
   };
   SILC = { type = "SILC"; };
+  freenode = {
+    type = "IRC";
+    max_kicks = "4";
+    max_msgs = "1";
+    max_modes = "4";
+    max_whois = "1";
+  };
+  "/CHANNEL" = { type = "IRC"; };
 };
 
 channels = (
   { name = "#irssi"; chatnet = "ircnet"; autojoin = "No"; },
-  { name = "silc"; chatnet = "silc"; autojoin = "No"; }
+  { name = "silc"; chatnet = "silc"; autojoin = "No"; },
+  { name = "#coscup"; chatnet = "ircnet"; autojoin = "yes"; },
+  { name = "#osdc.tw"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#bsdchat"; chatnet = "ircnet"; autojoin = "yes"; },
+  { name = "#git"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#svn"; chatnet = "freenode"; autojoin = "yes"; }
 );
 
 aliases = {
@@ -261,13 +300,28 @@ statusbar = {
 settings = {
   core = {
     real_name = "Kent Chen";
-    user_name = "kent";
-    nick = "kent";
+    user_name = "ChenKaie";
+    nick = "ChenKaie";
     recode_transliterate = "yes";
-    recode_fallback = "UTF-8 ";
+    recode_fallback = "           Big5";
     recode_out_default_charset = "UTF-8";
   };
   "fe-text" = { actlist_sort = "refnum"; };
-  "fe-common/core" = { term_charset = "UTF-8"; };
+  "fe-common/core" = {
+    term_charset = "UTF-8";
+    autolog_path = "~/logs/irc-$tag-$0-%Y%m%d";
+  };
 };
-conversions = { "#bsdchat" = "UTF-8"; user = "Big5"; };
+conversions = { "#bsdchat" = "UTF-8"; user = "Big5"; "#osdc.tw" = "UTF-8"; };
+logs = {
+  "~/logs/irc-coscup-%Y%m%d" = {
+    auto_open = "yes";
+    level = "ALL";
+    items = ( { type = "target"; name = "#coscup"; } );
+  };
+  "~/logs/irc-osdc.tw-%Y%m%d" = {
+    auto_open = "yes";
+    level = "ALL";
+    items = ( { type = "target"; name = "#osdc.tw"; } );
+  };
+};

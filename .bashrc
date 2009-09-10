@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Source global definitions                                                                                                                                                         
+# Source global definitions
+
 [ -f /etc/bashrc ] && . /etc/bashrc
 [ -f /etc/profile ] && . /etc/profile
 

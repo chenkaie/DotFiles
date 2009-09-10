@@ -10,7 +10,7 @@
 "                ||     ||
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
-" Last Modified: Tue Sep 08, 2009  08:17PM
+" Last Modified: Wed Sep 09, 2009  10:44PM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -75,7 +75,7 @@ set smarttab       " Smart handling of the tab key
 set expandtab      " Use spaces for tabs
 set shiftround     " Round indent to multiple of shiftwidth
 set shiftwidth=4   " Number of spaces for each indent
-"set tabstop=4     " Number of spaces for tab key
+set tabstop=4      " Number of spaces for tab key
 
 set history=500    " keep 200 lines of command line history
 set ruler          " show the cursor position all the time
@@ -147,6 +147,7 @@ set completeopt=longest,menu,menuone
 set wildmenu
 "in ESC: (command mode), disbled auto completion next part, Cool!
 set wildmode=list:longest
+set wildignore+=*.o,*.a,*.so,*.obj,*.exe,*.lib,*.ncb,*.opt,*.plg,.svn,.git
 
 " for :TOhtml
 "let html_use_css=1
@@ -155,8 +156,8 @@ let html_number_lines = 1
 let html_no_pre = 1 
 let html_ignore_folding = 1
 
-set scrolloff=25
-set sidescrolloff=4
+set scrolloff=10
+set sidescrolloff=10
 set ignorecase
 set smartcase
 
