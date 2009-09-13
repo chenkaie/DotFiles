@@ -2,4 +2,5 @@
 .DS_Store
 .vim/backup
 .vim/sessions
+.vim/view
 .ssh
