@@ -10,7 +10,7 @@
 "                ||     ||
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
-" Last Modified: Wed Sep 09, 2009  10:44PM
+" Last Modified: Sun Sep 13, 2009  09:53PM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -184,6 +184,8 @@ nmap <C-h> <C-w>h
 nmap <C-l> <C-w>l
 nmap - <C-w>-
 nmap + <C-w>+
+nmap < <C-w><
+nmap > <C-w>>
 
 " useful abbrev
 ab vds vertical diffsplit
@@ -432,13 +434,16 @@ endfun
 autocmd BufWritePre * call LastModified()
 
 " Remember the line number been edited last time
-if has("autocmd")
-    autocmd BufRead *.txt set tw=78
-    autocmd BufReadPost *
-       \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-       \   exe "normal g'\"" |
-       \ endif
-endif
+"if has("autocmd")
+    "autocmd BufRead *.txt set tw=78
+    "autocmd BufReadPost *
+       "\ if line("'\"") > 0 && line ("'\"") <= line("$") |
+       "\   exe "normal g'\"" |
+       "\ endif
+"endif
+"
+autocmd BufWinLeave *.* silent mkview 
+autocmd BufWinEnter *.* silent loadview 
 
 " QUICKFIX WINDOW for :make
 command -bang -nargs=? QFix call QFixToggle(<bang>0)

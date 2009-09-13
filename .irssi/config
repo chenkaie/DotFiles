@@ -303,7 +303,6 @@ settings = {
     user_name = "ChenKaie";
     nick = "ChenKaie";
     recode_transliterate = "yes";
-    recode_fallback = "           Big5";
     recode_out_default_charset = "UTF-8";
   };
   "fe-text" = { actlist_sort = "refnum"; };

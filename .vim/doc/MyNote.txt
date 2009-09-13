@@ -1,4 +1,4 @@
-*MyNote.txt*
+ *MyNote.txt*
 ==============================================================================
   MyTempalte                                                      *MyTemplate*
 ==============================================================================
@@ -153,5 +153,5 @@ Uncomments the selected line(s).
 3. regex of find/wcfind  (a.k.a. Emacs regex)
     http://jamesthornton.com/emacs/node/emacs_97.html
 
-==============================================================================
-vim:ts=4:ft=help:norl:fdm=marker:ma
+------------------------------------------------------------------------------
+ vim:tw=78:fo=tcq2:isk=!-~,^*,^\|,^\":ts=8:ft=help:norl:
