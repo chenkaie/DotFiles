@@ -10,7 +10,7 @@
 "                ||     ||
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
-" Last Modified: Sun Sep 13, 2009  09:53PM
+" Last Modified: Tue Sep 15, 2009  06:34PM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -186,10 +186,22 @@ nmap - <C-w>-
 nmap + <C-w>+
 nmap < <C-w><
 nmap > <C-w>>
+" this allows all window commands in insert mode and i'm not accidentally deleting words anymore :-) 
+imap <C-w> <C-o><C-w> 
 
-" useful abbrev
-ab vds vertical diffsplit
 
+" useful ab
+cabbrev vds vertical diffsplit
+
+" Force to split right!
+set splitright
+cabbrev split vsplit
+cabbrev h vertical help
+cabbrev help vertical help
+cabbrev new vnew
+
+" Remove 'recording' key mapping
+nmap q <ESC>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tab Operation Mac-Mapping by Klaymen
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -389,6 +401,8 @@ nnoremap <C-x> :Hexmode<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd BufEnter * lcd %:p:h 
+
 "Grep 'pattern' in the indicate range (need EasyGrep.vim plugin)
 map <F3> <ESC>\vv
 " EasyGrep
@@ -442,8 +456,11 @@ autocmd BufWritePre * call LastModified()
        "\ endif
 "endif
 "
-autocmd BufWinLeave *.* silent mkview 
-autocmd BufWinEnter *.* silent loadview 
+"autocmd BufWinEnter *.* silent loadview 
+"autocmd BufWinLeave *.* silent mkview 
+autocmd BufWinLeave * if expand("%") != "" | mkview | endif
+autocmd BufWinEnter * if expand("%") != "" | loadview | endif
+
 
 " QUICKFIX WINDOW for :make
 command -bang -nargs=? QFix call QFixToggle(<bang>0)
@@ -477,7 +494,6 @@ nnoremap <leader>q :QFix<CR>
 "endfunction
 "
 "autocmd CursorMoved * call ColumnHighlight()
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MISC
