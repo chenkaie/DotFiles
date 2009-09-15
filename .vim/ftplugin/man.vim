@@ -135,8 +135,9 @@ func <SID>GetPage(...)
       endwhile
     endif
     if &filetype != "man"
-      " Kent@2009.09.15 replace new with vertical new for better view, and add 'non-view' param to force not opening new window for viman
-      if page != "non-new"
+      " Kent@2009.09.15 replace new with vertical new for better view.
+      " Add 'fromShell' param to force a:0=3, thus never opening new window calling from Shell.
+      if a:0 <= 2
         vnew
       endif
       setl nonu fdc=0
