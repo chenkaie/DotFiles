@@ -137,6 +137,7 @@ Uncomments the selected line(s).
 1. GNU Screen
     Lock   screen: xoff s (Ctrl-a , s)
     Unlock Screen: xon  q (Ctrl-a , q)
+    Screen is locked in some cases, using "wrap ^R r" to unlock
 
     Split screen: split S (Ctrl-a, S)
         1. switch between splitted screen : Ctrl-Tab
@@ -144,6 +145,7 @@ Uncomments the selected line(s).
 
     Fit screen: (Ctrl-a, F) used for login at iMac, but the screen size doesn't match that at VVTK
     Move screen to n-th: goto command mode, :number n
+
 ------------------------------------------------------------------------------
 2. SVN tool
     http://svn.collab.net/repos/svn/trunk/tools/client-side/
