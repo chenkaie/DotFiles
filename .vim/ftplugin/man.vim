@@ -139,6 +139,8 @@ func <SID>GetPage(...)
       " Add 'fromShell' param to force a:0=3, thus never opening new window calling from Shell.
       if a:0 <= 2
         vnew
+      else
+        nmap q <Esc>:q!<Cr>
       endif
       setl nonu fdc=0
     endif
