@@ -10,7 +10,7 @@
 "                ||     ||
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
-" Last Modified: Tue Sep 15, 2009  06:34PM
+" Last Modified: Wed Sep 16, 2009  10:43AM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -184,11 +184,20 @@ nmap <C-h> <C-w>h
 nmap <C-l> <C-w>l
 nmap - <C-w>-
 nmap + <C-w>+
-nmap < <C-w><
-nmap > <C-w>>
+" Define different behavior in left/right window
+if has("autocmd")
+    autocmd BufEnter,BufLeave *
+    \     if winnr() == 1     |
+    \        nmap < <C-w><    |
+    \        nmap > <C-w>>    |
+    \     else                |
+    \        nmap < <C-w>>    |
+    \        nmap > <C-w><    |
+    \     endif               |
+endif
+
 " this allows all window commands in insert mode and i'm not accidentally deleting words anymore :-) 
 imap <C-w> <C-o><C-w> 
-
 
 " useful ab
 cabbrev vds vertical diffsplit

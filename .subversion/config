@@ -25,7 +25,7 @@
 ###   examines by default to find this information ($EDITOR, 
 ###   et al).
 # editor-cmd = editor (vi, emacs, notepad, etc.)
-editor-cmd = vim
+editor-cmd = vim -X
 ### Set diff-cmd to the absolute path of your 'diff' program.
 ###   This will override the compile-time default, which is to use
 ###   Subversion's internal diff implementation.
@@ -38,7 +38,7 @@ editor-cmd = vim
 ### Set diff3-has-program-arg to 'true' or 'yes' if your 'diff3'
 ###   program accepts the '--diff-program' option.
 # diff3-has-program-arg = [true | false]
-merge-tool-cmd = /usr/bin/vimdiff
+merge-tool-cmd = vimdiff -X
 ### Section for configuring tunnel agents.
 [tunnels]
 ### Configure svn protocol tunnel schemes here.  By default, only
