@@ -10,7 +10,7 @@
 "                ||     ||
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
-" Last Modified: Wed Sep 16, 2009  10:43AM
+" Last Modified: Fri Sep 18, 2009  09:30AM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -45,19 +45,23 @@ set vb
 "add runtimepath to make 'vim -u ~kent/.vimrc" work properly
 set runtimepath+=~kent/.vim
 
-if ! has("gui_running")
+if &term == "xterm-color" || &term == "xterm-16color"
+    set t_Co=16
+elseif ! has("gui_running")
     set t_Co=256
 endif 
 
-"For Colorscheme
-"colorscheme peaksea
-set bg=dark
-colorscheme peaksea_new 
-"colorscheme inkpot
-"GuiColorScheme rdark
-
-"for GVim
-"colorscheme wombat 
+" for GVim
+if has("gui_running")
+    set guioptions-=T
+    colorscheme wombat
+    set gfn=Consolas:h14
+else
+    "For Colorscheme
+    set bg=dark
+    colorscheme peaksea_new 
+    "GuiColorScheme rdark
+endif
 
 " Status Line
 set laststatus=2
@@ -68,9 +72,11 @@ highlight StatusLine ctermfg=black ctermbg=white
 set hlsearch
 set showmatch
 set number
-set cindent
 
-"set autoindent    " Use indent from previous line
+set autoindent     " Auto Indent 
+set smartindent    " Smart Indent
+set cindent        " C-style Indent
+
 set smarttab       " Smart handling of the tab key
 set expandtab      " Use spaces for tabs
 set shiftround     " Round indent to multiple of shiftwidth
@@ -81,6 +87,9 @@ set history=500    " keep 200 lines of command line history
 set ruler          " show the cursor position all the time
 set showcmd        " display incomplete commands
 set incsearch      " do incremental searching
+
+set lazyredraw     " Do not redraw while running macros (much faster) (LazyRedraw)
+set hid            " Change buffer without saving"
 
 nmap <tab> V>
 nmap <s-tab> V<
@@ -103,6 +112,9 @@ set fenc=utf-8
 
 " For ambiguous characters, ex: ”, and BBS XD
 set ambiwidth=double
+
+" Favorite file types
+set ffs=unix,dos,mac
 
 " Edit your .vimrc in new tab
 nmap ,s :source $MYVIMRC <CR>
