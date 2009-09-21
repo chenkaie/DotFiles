@@ -10,7 +10,7 @@
 "                ||     ||
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
-" Last Modified: Mon Sep 21, 2009  11:20AM
+" Last Modified: Tue Sep 22, 2009  12:46AM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -236,8 +236,14 @@ noremap <C-LeftMouse> <LeftMouse><Esc><C-V>
 noremap <C-LeftDrag> <LeftDrag>
 
 " Copy to System-Clipboard
-map <C-c> :w! ~/tmp/vimbuffer<CR>:!nc 172.16.2.54 4573 < ~/tmp/vimbuffer<CR><CR>
+if OS == "Darwin"
+    map <C-c> :w! ~/tmp/vimbuffer<CR>:!pbcopy < ~/tmp/vimbuffer<CR><CR>
+else
+    map <C-c> :w! ~/tmp/vimbuffer<CR>:!nc 172.16.2.54 4573 < ~/tmp/vimbuffer<CR><CR>
+endif
+
 map c <C-c>
+
 " Select all
 map a <ESC>ggVG
 
