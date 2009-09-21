@@ -240,8 +240,8 @@ case $OS in
     Darwin|*BSD)
         alias dd-wrt='ssh 192.168.1.1 -p2222 -lroot'
         alias dd-wrt_rd1-2='ssh -L 7322:127.0.0.1:7322 192.168.1.1 -lroot -p2222'
-        alias rd1-2='ssh localhost -p 7322'
-        alias rd1-2-proxy='ssh -D 8080 localhost -p7322'
+        alias rd1-2='ssh -X localhost -p 7322'
+        alias rd1-2-proxy='ssh -X -D 8080 localhost -p7322'
         ;;
 
     Linux)
