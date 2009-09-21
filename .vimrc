@@ -10,7 +10,7 @@
 "                ||     ||
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
-" Last Modified: Sat Sep 19, 2009  02:30AM
+" Last Modified: Mon Sep 21, 2009  11:20AM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -68,10 +68,6 @@ set laststatus=2
 "set statusline=%<%f\ %m%=\ %h%r\ %-19([%p%%]\ %3l,%02c%03V%)%y
 set statusline=File:\ %t\%r%h%w\ [%{&ff},%{&fileencoding},%Y]\ %m%=\ [AscII=\%03.3b]\ [Hex=\%02.2B]\ [Pos=%l,%v,%p%%]\ [LINE=%L]
 highlight StatusLine ctermfg=black ctermbg=white
-
-" This is AWESOME, INCREDIBLE! [gVim-Killer] Could be used do Tab-Click, window resizing, scrolling... 
-" Enable use of the mouse for all modes. 
-set mouse=a
 
 set hlsearch
 set showmatch
@@ -227,10 +223,27 @@ cabbrev new vnew
 
 " Remove 'recording' key mapping
 nmap q <ESC>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Mouse + gVim-Killer Related Setting
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" This is AWESOME, INCREDIBLE! Could be used do Tab-Click, window resizing, scrolling... 
+set mouse=a           " Enable use of the mouse for all modes.
+set ttymouse=xterm2   " To function correctly in Screen
+
+" Enable block-mode selection
+noremap <C-LeftMouse> <LeftMouse><Esc><C-V>
+noremap <C-LeftDrag> <LeftDrag>
+
+" Copy to System-Clipboard
+map <C-c> :w! ~/tmp/vimbuffer<CR>:!nc 172.16.2.54 4573 < ~/tmp/vimbuffer<CR><CR>
+map c <C-c>
+" Select all
+map a <ESC>ggVG
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tab Operation Mac-Mapping by Klaymen
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " default 1000
 set timeoutlen=500
 nmap q <Esc>:qall<Enter>
