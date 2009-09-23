@@ -10,7 +10,7 @@
 "                ||     ||
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
-" Last Modified: Wed Sep 23, 2009  10:43PM
+" Last Modified: Thu Sep 24, 2009  12:17AM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -29,10 +29,11 @@ elseif has("win32")
     let OS = "Win32"
 endif
 
-if OS != "Darwin"
+try
     "change to the directory containing the file which was opened or selected
     set autochdir
-endif
+catch
+endtry
 
 set backspace=2
 
@@ -537,6 +538,25 @@ nnoremap <leader>q :QFix<CR>
 "endfunction
 "
 "autocmd CursorMoved * call ColumnHighlight()
+
+" Visual Search : From an idea by Michael Naumann
+function! VisualSearch(direction) range
+    let l:saved_reg = @"
+    execute "normal! vgvy"
+    let l:pattern = escape(@", '\\/.*$^~[]')
+    let l:pattern = substitute(l:pattern, "\n$", "", "")
+    if a:direction == 'b'
+        execute "normal ?" . l:pattern . "^M"
+    else
+        execute "normal /" . l:pattern . "^M"
+    endif
+    let @/ = l:pattern
+    let @" = l:saved_reg
+endfunction
+
+"Basically you press * or # to search for the current selection !! Really useful
+vnoremap <silent> * :call VisualSearch('f')<CR>
+vnoremap <silent> # :call VisualSearch('b')<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MISC
