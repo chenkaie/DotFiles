@@ -10,7 +10,7 @@
 "                ||     ||
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
-" Last Modified: Tue Sep 22, 2009  12:46AM
+" Last Modified: Tue Sep 22, 2009  01:47PM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -67,7 +67,6 @@ endif
 set laststatus=2
 "set statusline=%<%f\ %m%=\ %h%r\ %-19([%p%%]\ %3l,%02c%03V%)%y
 set statusline=File:\ %t\%r%h%w\ [%{&ff},%{&fileencoding},%Y]\ %m%=\ [AscII=\%03.3b]\ [Hex=\%02.2B]\ [Pos=%l,%v,%p%%]\ [LINE=%L]
-highlight StatusLine ctermfg=black ctermbg=white
 
 set hlsearch
 set showmatch
@@ -199,13 +198,13 @@ nmap + <C-w>+
 " Define different behavior in left/right window
 if has("autocmd")
     autocmd BufEnter,BufLeave *
-    \     if winnr() == 1     |
-    \        nmap < <C-w><    |
-    \        nmap > <C-w>>    |
-    \     else                |
-    \        nmap < <C-w>>    |
-    \        nmap > <C-w><    |
-    \     endif               |
+    \     if winnr() == 1 |
+    \        nmap < <C-w><|
+    \        nmap > <C-w>>|
+    \     else            |
+    \        nmap < <C-w>>|
+    \        nmap > <C-w><|
+    \     endif           |
 endif
 
 " this allows all window commands in insert mode and i'm not accidentally deleting words anymore :-) 
@@ -353,7 +352,7 @@ endif
 set tags=./tags,./../tags
 
 " init cscope hotkey
-nnoremap <F11> <ESC>:cs add ../cscope.out ..<CR>:cs add /home/kent/cscope_ctag/Horus/cscope.out /home/kent/Project/Horus<CR>
+nnoremap <F11> <ESC>:cs add ../cscope.out ..<CR>:cs add /home/kent/cscope_ctag/Horus/cscope.out /home/kent/Project/Horus/apps<CR>
 
 " To avoid using wrong cscope(/opt/montavista/pro5.0/bin/cscope) once sourcing devel_IP8161_VVTK
 set cscopeprg=/usr/bin/cscope
@@ -502,8 +501,9 @@ autocmd BufWritePre * call LastModified()
 "
 "autocmd BufWinEnter *.* silent loadview 
 "autocmd BufWinLeave *.* silent mkview 
-autocmd BufWinLeave * if expand("%") != "" | mkview | endif
-autocmd BufWinEnter * if expand("%") != "" | loadview | endif
+"autocmd BufWinLeave * if expand("%") != "" | mkview | endif
+"autocmd BufWinEnter * if expand("%") != "" | loadview | endif
+autocmd BufReadPost * if line ("'\"") > 0 && line ("'\"") <= line("$") | exe "normal g'\"" | endif
 
 
 " QUICKFIX WINDOW for :make
