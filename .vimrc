@@ -10,7 +10,7 @@
 "                ||     ||
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
-" Last Modified: Tue Sep 22, 2009  01:47PM
+" Last Modified: Wed Sep 23, 2009  10:43PM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -88,7 +88,6 @@ set showcmd        " display incomplete commands
 set incsearch      " do incremental searching
 
 set lazyredraw     " Do not redraw while running macros (much faster) (LazyRedraw)
-set hid            " Change buffer without saving"
 
 nmap <tab> V>
 nmap <s-tab> V<
