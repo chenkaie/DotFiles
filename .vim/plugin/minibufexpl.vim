@@ -164,13 +164,13 @@
 "               function that will bring up the next or previous buffer in the
 "               current window, you can put the following into your .vimrc:
 "
-                 let g:miniBufExplMapCTabSwitchBufs = 1
+"                 let g:miniBufExplMapCTabSwitchBufs = 1
 "
 "               To enable the optional mapping of <C-TAB> and <C-S-TAB> to mappings
 "               that will move to the next and previous (respectively) window, you
 "               can put the following into your .vimrc:
 "
-                 let g:miniBufExplMapCTabSwitchWindows = 1
+"                 let g:miniBufExplMapCTabSwitchWindows = 1
 "
 "
 "               NOTE: If you set the ...TabSwitchBufs AND ...TabSwitchWindows, 

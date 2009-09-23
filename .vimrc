@@ -10,7 +10,7 @@
 "                ||     ||
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
-" Last Modified: Thu Sep 24, 2009  12:17AM
+" Last Modified: Thu Sep 24, 2009  01:45AM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -444,39 +444,56 @@ nnoremap <C-x> :Hexmode<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd BufEnter * lcd %:p:h 
 
-"Grep 'pattern' in the indicate range (need EasyGrep.vim plugin)
-map <F3> <ESC>\vv
-" EasyGrep
-let g:EasyGrepRecursive = 1
-let g:EasyGrepIgnoreCase= 0 
-let g:EasyGrepJumpToMatch= 1
+    """"""""""""""""""""""""
+    " EasyGrep
+    """"""""""""""""""""""""
+    "Grep 'pattern' in the indicate range (need EasyGrep.vim plugin)
+    map <F3> <ESC>\vv
+    let g:EasyGrepRecursive = 1
+    let g:EasyGrepIgnoreCase= 0 
+    let g:EasyGrepJumpToMatch= 1
 
-"VCS
-nmap d <Esc>:VCSVimDiff<Enter>
+    """"""""""""""""""""""""""""""
+    " VCSCommand
+    """"""""""""""""""""""""""""""
+    nmap d <Esc>:VCSVimDiff<Enter>
 
-"Smooth Scroll
-map <PageDown> :call SmoothPageScrollDown()<CR>
-map <PageUp>   :call SmoothPageScrollUp()<CR> 
+    """"""""""""""""""""""""""""""
+    " Smooth Scroll
+    """"""""""""""""""""""""""""""
+    "Smooth Scroll
+    map <PageDown> :call SmoothPageScrollDown()<CR>
+    map <PageUp>   :call SmoothPageScrollUp()<CR> 
 
-""""""""""""""""""""""""
-" Trinity related Start
-""""""""""""""""""""""""
-" Open and close all the three plugins on the same time ,wired toggle Trinity,  will caue hlsearch to no effect, add set hlsearch again manually
-nmap <F12>   :TrinityToggleTagList<CR> :set hlsearch<CR>
-" nmap <F9>   :TrinityToggleSourceExplorer<CR>
-" nmap <F10>  :TrinityToggleTagList<CR>
-" nmap <F11>  :TrinityToggleNERDTree<CR> 
+    """"""""""""""""""""""""
+    " Trinity related Start
+    """"""""""""""""""""""""
+    " Open and close all the three plugins on the same time ,wired toggle Trinity,  will caue hlsearch to no effect, add set hlsearch again manually
+    nmap <F12>   :TrinityToggleTagList<CR> :set hlsearch<CR>
+    " nmap <F9>   :TrinityToggleSourceExplorer<CR>
+    " nmap <F10>  :TrinityToggleTagList<CR>
+    " nmap <F11>  :TrinityToggleNERDTree<CR> 
 
-"let s:SrcExpl_tagsPath = '/home/kent/cscope_ctag/lsp/'
-"let s:SrcExpl_workPath = '/home/kent/cscope_ctag/lsp/'
-" Let the Source Explorer update the tags file when opening
-let g:SrcExpl_updateTags = 0
+
+   """"""""""""""""""""""""""""""
+   " Minibuffer
+   """"""""""""""""""""""""""""""
+   let g:miniBufExplModSelTarget = 1 
+
+   """"""""""""""""""""""""""""""
+   " SrcExplorer 
+   """"""""""""""""""""""""""""""
+   "let s:SrcExpl_tagsPath = '/home/kent/cscope_ctag/lsp/'
+   "let s:SrcExpl_workPath = '/home/kent/cscope_ctag/lsp/'
+   " Let the Source Explorer update the tags file when opening
+   let g:SrcExpl_updateTags = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Functions & autocmd
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd BufEnter * lcd %:p:h 
+
 " Automatically update 'Last Modified' field
 " If buffer modified, update any 'Last modified: ' in the first 20 lines.
 function! LastModified()
@@ -498,11 +515,10 @@ autocmd BufWritePre * call LastModified()
        "\   exe "normal g'\"" |
        "\ endif
 "endif
-"
-"autocmd BufWinEnter *.* silent loadview 
-"autocmd BufWinLeave *.* silent mkview 
+
 "autocmd BufWinLeave * if expand("%") != "" | mkview | endif
 "autocmd BufWinEnter * if expand("%") != "" | loadview | endif
+"Restore cursor to file position in previous editing session
 autocmd BufReadPost * if line ("'\"") > 0 && line ("'\"") <= line("$") | exe "normal g'\"" | endif
 
 
