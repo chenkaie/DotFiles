@@ -140,7 +140,7 @@ alias del='mv --target-directory=$HOME/.Trash/'
 alias cdpd='cd ${PRODUCTDIR}'
 alias cdrd='cd ${IMAGEDIR}'
 alias pd='echo ${PRODUCTDIR}'
-alias rmrd='cd ${PRODUCTDIR}/release; rm -rf app_cluster_Build/ flashfs/ rootfs/'
+alias rmrd='[ -n "$PRODUCTDIR" ] && cd ${PRODUCTDIR}/release; rm -rf app_cluster_Build/ flashfs/ rootfs/'
 
 #make for fun
 alias make='cmake'
