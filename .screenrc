@@ -43,6 +43,9 @@ shell -$SHELL
 # setup 10,000 lines of available scrollback ¡X copy/paste
 defscrollback 10000
 
+# If a window goes unresponsive, don't block the whole session waiting for it.
+nonblock on
+
 # fix scrollback in putty, this is cool!
 termcapinfo xterm* ti@:te@
 #termcapinfo xterm|xterms|xs|rxvt ti@:te@
@@ -56,7 +59,7 @@ logfile $HOME/screen-%Y%m%d-%n.log
 #caption always "%{.KW} %-w%{.mW}[%n] %t%{.KW}%+w"
 #caption always "%{=u .G} %-w%<%{=ub .y}%n %t%{=u .G}%+w "
 #caption always "%{=u kC} %= %-w%L>%{=b G}[:%n %t:]%{-}%52<%+w %L="
-caption always "%{= KW}%-w%{= ky} [%n] %t %{-}%+w %-= %{= Kk}[%l] %{= Kk}[%Y/%m/%d %c]"
+#caption always "%{= KW}%-w%{= ky} [%n] %t %{-}%+w %-= %{= Kk}[%l] %{= Kk}[%Y/%m/%d %c]"
 caption always "%{= KW}%-w%{= kc} [%n] %t %{-}%+w %-= %{= Kk}[%H | %l | %m/%d %c]"
 
 # hardstatus style
@@ -168,4 +171,8 @@ bind - resize -1
 bind _ resize max
 
 # Integrating GNU Screen copy/scrollback mode with the local system clipboard. i.e. Copying to the Mac Clipboard
-bind y eval "writebuf" "exec sh -c 'pbcopy < /tmp/screen-exchange'"              
+bind y eval "writebuf" "exec sh -c 'pbcopy < /tmp/screen-exchange'"
+
+# Buffer file : where the screen copy buffer will be saved to.
+bufferfile ~/tmp/screen-copy-buffer
+bind y eval "writebuf" "exec sh -c 'nc 172.16.2.54 4573 < ~/tmp/screen-copy-buffer'"
