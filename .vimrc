@@ -10,7 +10,7 @@
 "                ||     ||
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
-" Last Modified: Fri Sep 25, 2009  10:57AM
+" Last Modified: Thu Sep 24, 2009  01:45AM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -177,9 +177,6 @@ set cursorline
 
 set backspace=indent,eol,start  " Allow backspacing over these
 
-" Determining the highlight group that the word under the cursor belongs to
-nmap <silent> <F4>   :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-
 " Spell Check
 hi SpellBad term=underline cterm=underline ctermfg=red
 map <F5> :set spell!<CR><BAR>:echo "Spell check: " . strpart("OffOn", 3 * &spell, 3)<CR>
@@ -344,47 +341,31 @@ if has("autocmd")
        \ else                 |
        \     nmap h      :call ToggleHomeActionN()<CR>|
        \     imap h <ESC>:call ToggleHomeActionI()<CR>|
-       \     nmap l $|
-       \     imap l <ESC>$a|
+       \     map l $|
        \ endif                
 endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Programming Language 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    """"""""""""""""""""""""""""""
-    " ctags 
-    """"""""""""""""""""""""""""""
-    " Set tags path
-    set tags=./tags,./../tags
+" Set tags path
+set tags=./tags,./../tags
 
-    """"""""""""""""""""""""""""""
-    " cscope 
-    """"""""""""""""""""""""""""""
-    " init cscope hotkey
-    nnoremap <F11> <ESC>:cs add ../cscope.out ..<CR>:cs add /home/kent/cscope_ctag/Horus/cscope.out /home/kent/Project/Horus/apps<CR>
+" init cscope hotkey
+nnoremap <F11> <ESC>:cs add ../cscope.out ..<CR>:cs add /home/kent/cscope_ctag/Horus/cscope.out /home/kent/Project/Horus/apps<CR>
 
-    " To avoid using wrong cscope(/opt/montavista/pro5.0/bin/cscope) once sourcing devel_IP8161_VVTK
-    set cscopeprg=/usr/bin/cscope
+" To avoid using wrong cscope(/opt/montavista/pro5.0/bin/cscope) once sourcing devel_IP8161_VVTK
+set cscopeprg=/usr/bin/cscope
 
-    """"""""""""""""""""""""""""""
-    " Vi Man
-    """"""""""""""""""""""""""""""
-    " color/paged man 
-    runtime! ftplugin/man.vim
-    nmap K <esc>:Man <cword><cr>
+" color/paged man 
+runtime! ftplugin/man.vim
+nmap K <esc>:Man <cword><cr>
 
-    """"""""""""""""""""""""""""""
-    " Javascript
-    """"""""""""""""""""""""""""""
-    autocmd FileType javascript set dictionary=~/.vim/dict/javascript.dict
+autocmd FileType javascript set dictionary=~/.vim/dict/javascript.dict
 
-    """"""""""""""""""""""""""""""
-    " C/C++
-    """"""""""""""""""""""""""""""
-    "if filename is test.c => make test
-    "set makeprg=make
-    "set errorformat=%f:%l:\ %m
+"if filename is test.c => make test
+"set makeprg=make
+"set errorformat=%f:%l:\ %m
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Hex/Binary Edit                                             "
@@ -499,10 +480,6 @@ nnoremap <C-x> :Hexmode<CR>
    " Minibuffer
    """"""""""""""""""""""""""""""
    let g:miniBufExplModSelTarget = 1 
-   hi MBENormal ctermfg=7
-   hi MBEVisibleNormal ctermfg=2
-   hi MBEChanged ctermfg=14
-   hi MBEVisibleChanged ctermfg=2
 
    """"""""""""""""""""""""""""""
    " SrcExplorer 
