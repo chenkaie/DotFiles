@@ -82,6 +82,7 @@ case $OS in
         ;;
 esac
 
+alias l='ls -FG'
 alias ll='ls -al'                   # long list format
 alias lk='ls -lk'                   # --block-size=1K
 alias lt='ls -ltr'                  # sort by date
