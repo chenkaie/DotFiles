@@ -10,7 +10,7 @@
 "                ||     ||
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
-" Last Modified: Fri Sep 25, 2009  10:57AM
+" Last Modified: Sun Sep 27, 2009  09:56PM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -96,10 +96,9 @@ xmap <tab> >gv
 xmap <s-tab> <gv
 
 set foldmethod=marker
-"set foldmethod=syntax
 set foldlevel=1000
 set foldnestmax=3
-nnoremap <SPACE> za
+nnoremap ,<SPACE> za
 
 " {{{ file encoding setting
 set fileencodings=utf-8,big5,euc-jp,gbk,euc-kr,utf-bom,iso8859-1
@@ -178,7 +177,7 @@ set cursorline
 set backspace=indent,eol,start  " Allow backspacing over these
 
 " Determining the highlight group that the word under the cursor belongs to
-nmap <silent> <F4>   :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+nmap <silent> ,c :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 " Spell Check
 hi SpellBad term=underline cterm=underline ctermfg=red
@@ -344,7 +343,7 @@ if has("autocmd")
        \ else                 |
        \     nmap h      :call ToggleHomeActionN()<CR>|
        \     imap h <ESC>:call ToggleHomeActionI()<CR>|
-       \     nmap l $|
+       \     map  l $|
        \     imap l <ESC>$a|
        \ endif                
 endif
@@ -365,7 +364,7 @@ endif
     nnoremap <F11> <ESC>:cs add ../cscope.out ..<CR>:cs add /home/kent/cscope_ctag/Horus/cscope.out /home/kent/Project/Horus/apps<CR>
 
     " To avoid using wrong cscope(/opt/montavista/pro5.0/bin/cscope) once sourcing devel_IP8161_VVTK
-    set cscopeprg=/usr/bin/cscope
+    set cscopeprg=~/usr/bin/cscope
 
     """"""""""""""""""""""""""""""
     " Vi Man
