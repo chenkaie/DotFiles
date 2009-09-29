@@ -10,7 +10,7 @@
 "                ||     ||
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
-" Last Modified: Sun Sep 27, 2009  09:56PM
+" Last Modified: Mon Sep 28, 2009  02:37PM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -223,7 +223,7 @@ cabbrev help vertical help
 cabbrev new vnew
 
 " Remove 'recording' key mapping
-nmap q <ESC>
+nmap q <Cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mouse + gVim-Killer Related Setting
