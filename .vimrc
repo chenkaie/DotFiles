@@ -10,7 +10,7 @@
 "                ||     ||
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
-" Last Modified: Mon Sep 28, 2009  02:37PM
+" Last Modified: Sun Oct 04, 2009  02:33AM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -229,7 +229,7 @@ nmap q <Cr>
 " Mouse + gVim-Killer Related Setting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " This is AWESOME, INCREDIBLE! Could be used do Tab-Click, window resizing, scrolling... 
-set mouse=a           " Enable use of the mouse for all modes.
+"set mouse=a           " Enable use of the mouse for all modes.
 set ttymouse=xterm2   " To function correctly in Screen
 
 " Enable block-mode selection
@@ -332,21 +332,22 @@ nmap k [c
 " Switch key mapping in Left/Right window under DiffMode
 if has("autocmd")
     autocmd BufEnter,BufLeave *
-       \ if &diff             |
-       \     if winnr() == 1  |
-       \        nmap h do   |
-       \        nmap l dp   |
-       \     else             |
-       \        nmap h dp   |
-       \        nmap l do   |
-       \     endif            |
-       \ else                 |
-       \     nmap h      :call ToggleHomeActionN()<CR>|
+       \ if &diff                 |
+       \     if winnr() == 1      |
+       \        nmap h do       |
+       \        nmap l dp       |
+       \     else                 |
+       \        nmap h dp       |
+       \        nmap l do       |
+       \     endif                |
+       \ else                     |
+       \     nmap <silent> <S-H> :call ToggleHomeActionN()<CR>|
        \     imap h <ESC>:call ToggleHomeActionI()<CR>|
-       \     map  l $|
+       \     map  <silent> <S-L> $|
        \     imap l <ESC>$a|
        \ endif                
 endif
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Programming Language 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
