@@ -1,17 +1,17 @@
 #$HOME/.screenrc
 #################################################################################
-# Usage: 
+# Usage:
 # [kent]@rd1-2:~$ screen -r     ==> resumes a detached screen session
 # [kent]@rd1-2:~$ screen -x     ==> Cool, Attach to a not detached screen session. (Multi display mode)
 # detach : Press F10 or "C-a d"
-# HELP: "C-a, ?" 
+# HELP: "C-a, ?"
 # "C-a C-a" : fast switch between 2 screens
 #################################################################################
 
-altscreen on # erase screen when quit apps
+altscreen on # Refresh the display when exiting programs like vim, nano, irssi and etc.
 defutf8 on
-defc1 off # treat input chars 128 ~ 159 as control functions 
-defflow on 
+defc1 off # treat input chars 128 ~ 159 as control functions
+defflow on
 vbell_msg "Ding Ding!!"
 defencoding utf8
 # cjkwidth on
@@ -85,22 +85,22 @@ bindkey "^[[1;5D" prev
 bindkey "^[[1;5C" next
 
 # Vim-style
-#bindkey "^h" prev 
-#bindkey "^l" next 
+#bindkey "^h" prev
+#bindkey "^l" next
 
 # /*Need to hack putty*/
 # (Mac - iTerm) just add key mapping! Cool iTerm
-# (Win - PuTTY) Resolved by AutoHotkey 
+# (Win - PuTTY) Resolved by AutoHotkey
 #Ctrl + , : prev
 #Ctrl + . : next
 #bindkey "\274" prev
 #bindkey "\276" next
 
-# (Win - PuTTY) Resolved by AutoHotkey 
+# (Win - PuTTY) Resolved by AutoHotkey
 # <s>/*Need to hack putty*/</s>
 # Ctrl + Tab         : prev   (Firefox-way)
-# Ctrl + Shift + Tab : next   (Firefox-way) 
-#bindkey "^[[27;5;9~" next 
+# Ctrl + Shift + Tab : next   (Firefox-way)
+#bindkey "^[[27;5;9~" next
 #bindkey "^[[27;6;9~" prev
 
 # Ctrl + t : new screen       (Firefox-way), shit conflict with cscope
@@ -121,8 +121,8 @@ bindkey "^[[1;5C" next
 bind b encoding big5 utf8
 bind u encoding utf8 utf8
 
-# C-a $num : Switch to window number 0 - 9, or to the blank window. 
-bindkey "^[[A" number 1 
+# C-a $num : Switch to window number 0 - 9, or to the blank window.
+bindkey "^[[A" number 1
 
 # C-b $num : move current window to number $num
 #bind -c move 0 number 0
@@ -145,22 +145,28 @@ bindkey "^[[A" number 1
 #bindkey -k k5 select 4
 #bindkey -k k6 select 5
 # F4 : kill all
-bindkey -k k4 quit
-#bindkey "^[[24~" quit
+bindkey -k k4 quit # This does not work in v4.01.00devel, wired!
+bindkey "^[[14~" quit
 
-# F10 : detach 
+# F10 : detach
 bindkey -k k; detach
 
 # F11 : fast kill, shit conflict with Vim, replace by F4
 #bindkey "^[[23~" kill
 
-# sets  the  title  (a.k.a.)  for  the  default shell or specified program. 
-screen -t Tab1     0
-screen -t Tab2     1 
-screen -t Tab3     2 
-screen -t Top      9 htop
-#screen -t PTT     4 telnet -8 140.112.172.11
-#screen -t irssi   5 irssi
+# sets  the  title  (a.k.a.)  for  the  default shell or specified program.
+screen -t Tab1     1
+screen -t Tab2     2
+screen -t Tab3     3
+#screen -t Dotfiles 7
+#screen -t IRC      8 irssi
+#screen -t Misc     9 telnet -8 140.112.172.11
+screen -t Top      10 htop
+
+# Start at window 1
+bind c screen 1
+bind 0 select 10
+select 1
 
 #backtick 1 60 60 $HOME/Tools/get_freemem
 #hardstatus alwayslastline "Free: %1`"
