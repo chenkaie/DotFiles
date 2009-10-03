@@ -76,6 +76,8 @@ case $OS in
         export CLICOLOR=1
         export LSCOLORS=ExFxCxDxBxegedabagacad
         alias ls='ls -FG'
+        # By installing Macports: GNU coreutils, alias as Linux-way
+        alias ls='ls -FN --color=auto --time-style=long-iso'
         ;;
     Linux)
         alias ls='ls -FN --color=auto --time-style=long-iso'
