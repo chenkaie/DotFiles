@@ -3,7 +3,7 @@
 " Description:   Finetune Home key operation for Programmer
 " Maintainer:    Kent Chen <chenkaie at gmail dot com>
 " Version:       1.0
-" Last Modified: Fri Sep 04, 2009  11:17PM
+" Last Modified: Thu Oct 01, 2009  04:44PM
 " License:       This program is free software. It comes without any warranty,
 "                to the extent permitted by applicable law. You can redistribute
 "                it and/or modify it under the terms of the Do What The Fuck You
@@ -66,7 +66,7 @@ function! ToggleHomeActionI()
     endif
 endfunction
 
-nmap [1~      :call ToggleHomeActionN()<CR>
-imap [1~ <ESC>:call ToggleHomeActionI()<CR>
+nmap <silent> [1~      :call ToggleHomeActionN()<CR>
+imap <silent> [1~ <ESC>:call ToggleHomeActionI()<CR>
 
 " vim:set ft=vim et sw=4 sts=4:
