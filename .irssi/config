@@ -309,6 +309,7 @@ settings = {
   "fe-common/core" = {
     term_charset = "UTF-8";
     autolog_path = "~/logs/irc-$tag-$0-%Y%m%d";
+    theme = "revolutionaryv3";
   };
 };
 conversions = { "#bsdchat" = "UTF-8"; user = "Big5"; "#osdc.tw" = "UTF-8"; };
