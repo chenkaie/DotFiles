@@ -3,7 +3,7 @@
 " Description:   Finetune Home key operation for Programmer
 " Maintainer:    Kent Chen <chenkaie at gmail dot com>
 " Version:       1.0
-" Last Modified: Thu Oct 01, 2009  04:44PM
+" Last Modified: Sun Oct 04, 2009  02:45AM
 " License:       This program is free software. It comes without any warranty,
 "                to the extent permitted by applicable law. You can redistribute
 "                it and/or modify it under the terms of the Do What The Fuck You
@@ -33,6 +33,7 @@
 " History:
 "    1.0  Initial Release
 "    1.1  Fine tune this script and layout
+"    1.2  Add <silent> to hide annoying msg!
 " ============================================================================
 
 if v:version < 700
