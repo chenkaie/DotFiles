@@ -9,8 +9,6 @@ export EDITOR=vim
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-# MANPATH
-export MANPATH=$HOME/usr/man:$HOME/usr/share/man:$HOME/usr/cpan/share/man:$MANPATH
 export dotfiles="$HOME/Repos/DotFiles"
 
 exist () { type "$1" &> /dev/null; }
@@ -42,7 +40,9 @@ case $OS in
         fi
 
         # PATH
-        export PATH=$HOME/Tools:$HOME/Tools/subversion-scripts:$HOME/Tools/git-scripts:$PATH
+        export PATH=$HOME/Tools:$HOME/Tools/subversion-scripts:$HOME/Tools/git-scripts:$HOME/usr/bin:$PATH
+        # MANPATH
+        export MANPATH=$HOME/usr/man:$HOME/usr/share/man:$MANPATH
         ;;
 
     Linux)
@@ -57,6 +57,8 @@ case $OS in
         fi
         # PATH
         export PATH=$HOME/hr:$HOME/Tools:$HOME/Tools/subversion-scripts:$HOME/Tools/git-scripts:$HOME/usr/bin:/sbin/:/opt/Vivotek/lsp/buildroot-2.0.0.0/build_arm_nofpu/staging_dir/bin/:$PATH
+        # MANPATH
+        export MANPATH=$HOME/usr/man:$HOME/usr/share/man:$HOME/usr/cpan/share/man:$MANPATH
         ;;
 
     *)
