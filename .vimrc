@@ -10,7 +10,7 @@
 "                ||     ||
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
-" Last Modified: Sun Oct 04, 2009  02:33AM
+" Last Modified: Tue Oct 06, 2009  01:39PM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -305,9 +305,10 @@ nmap tt :call SwitchLastUsedTab()<CR>
 "force vim diff to ignore whitespace
 set diffopt+=iwhite
 " highlight diff color
-hi diffchange ctermbg=7 ctermfg=0
+hi diffchange ctermbg=234
 hi diffadd ctermbg=4 ctermfg=7
-hi difftext ctermbg=1 ctermfg=3
+hi DiffDelete ctermfg=69 ctermbg=234
+hi difftext ctermbg=3 ctermfg=0
 
 function! s:DiffWithSaved()
   let filetype=&ft
