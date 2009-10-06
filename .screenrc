@@ -177,6 +177,12 @@ bind + resize +1
 bind - resize -1
 bind _ resize max
 
+# Useful bindings as Vim(hjkl)
+bind j focus down
+bind k focus up
+bind h focus left
+bind l focus right
+
 # Integrating GNU Screen copy/scrollback mode with the local system clipboard. i.e. Copying to the Mac Clipboard
 bind y eval "writebuf" "exec sh -c 'pbcopy < /tmp/screen-exchange'"
 
