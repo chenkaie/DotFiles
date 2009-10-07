@@ -10,7 +10,7 @@
 "                ||     ||
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
-" Last Modified: Tue Oct 06, 2009  01:39PM
+" Last Modified: Wed Oct 07, 2009  10:39AM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -305,7 +305,7 @@ nmap tt :call SwitchLastUsedTab()<CR>
 "force vim diff to ignore whitespace
 set diffopt+=iwhite
 " highlight diff color
-hi diffchange ctermbg=234
+hi diffchange ctermbg=236
 hi diffadd ctermbg=4 ctermfg=7
 hi DiffDelete ctermfg=69 ctermbg=234
 hi difftext ctermbg=3 ctermfg=0
