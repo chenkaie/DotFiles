@@ -177,6 +177,10 @@ bind + resize +1
 bind - resize -1
 bind _ resize max
 
+# Ctrl + ARROW_UP/ARROW_DOWN
+bindkey "^[[A" resize +1
+bindkey "^[[B" resize -1
+
 # Useful bindings as Vim(hjkl)
 bind j focus down
 bind k focus up
@@ -184,8 +188,14 @@ bind h focus left
 bind l focus right
 
 # Integrating GNU Screen copy/scrollback mode with the local system clipboard. i.e. Copying to the Mac Clipboard
-bind y eval "writebuf" "exec sh -c 'pbcopy < /tmp/screen-exchange'"
+# bind y eval "writebuf" "exec sh -c 'pbcopy < /tmp/screen-exchange'"
 
 # Buffer file : where the screen copy buffer will be saved to.
 bufferfile ~/tmp/screen-copy-buffer
 bind y eval "writebuf" "exec sh -c 'nc 172.16.2.54 4573 < ~/tmp/screen-copy-buffer'"
+
+# hardcopydir:  The directory which contains all hardcopies.
+hardcopydir ~/.screen
+
+msgwait 10
+setenv DISPLAY ':0'
