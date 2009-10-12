@@ -264,7 +264,7 @@ echo "Welcome to $HOSTNAME" | cowsay -f default
 
 # source bash related script
 rcfiles="$dotfiles/rcfiles"
-source $rcfiles/completion/bash_completion
+[ "$OS" == "Linux" ] && source $rcfiles/completion/bash_completion || source /opt/local/etc/bash_completion
 source $rcfiles/completion/svn_completion
 source $rcfiles/completion/git-completion
 source $rcfiles/completion/cdargs-bash.sh
