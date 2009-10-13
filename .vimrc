@@ -10,7 +10,7 @@
 "                ||     ||
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
-" Last Modified: Wed Oct 07, 2009  10:39AM
+" Last Modified: Mon Oct 12, 2009  04:22PM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -217,10 +217,10 @@ cabbrev vds vertical diffsplit
 
 " Force to split right!
 set splitright
-cabbrev split vsplit
 cabbrev h vertical help
 cabbrev help vertical help
-cabbrev new vnew
+"cabbrev split vsplit
+"cabbrev new vnew
 
 " Remove 'recording' key mapping
 nmap q <Cr>
@@ -333,19 +333,21 @@ nmap k [c
 " Switch key mapping in Left/Right window under DiffMode
 if has("autocmd")
     autocmd BufEnter,BufLeave *
-       \ if &diff                 |
-       \     if winnr() == 1      |
-       \        nmap h do       |
-       \        nmap l dp       |
-       \     else                 |
-       \        nmap h dp       |
-       \        nmap l do       |
-       \     endif                |
-       \ else                     |
-       \     nmap <silent> <S-H> :call ToggleHomeActionN()<CR>|
-       \     imap h <ESC>:call ToggleHomeActionI()<CR>|
-       \     map  <silent> <S-L> $|
-       \     imap l <ESC>$a|
+       \ if &diff                                                 |
+       \     if winnr() == 1                                      |
+       \        nmap h do                                       |
+       \        nmap l dp                                       |
+       \     else                                                 |
+       \        nmap h dp                                       |
+       \        nmap l do                                       |
+       \     endif                                                |
+       \ else                                                     |
+       \     if (g:vimgdb_debug_file == "")                       |
+       \         nmap <silent> <S-H> :call ToggleHomeActionN()<CR>|
+       \         imap h <ESC>:call ToggleHomeActionI()<CR>|
+       \         map  <silent> <S-L> $|
+       \         imap l <ESC>$a|
+       \     endif|
        \ endif                
 endif
 
@@ -512,6 +514,12 @@ nnoremap <C-x> :Hexmode<CR>
    "let s:SrcExpl_workPath = '/home/kent/cscope_ctag/lsp/'
    " Let the Source Explorer update the tags file when opening
    let g:SrcExpl_updateTags = 0
+
+   """"""""""""""""""""""""""""""
+   " vimgdb
+   """"""""""""""""""""""""""""""
+    let g:vimgdb_debug_file = ""
+    run macros/gdb_mappings.vim 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Functions & autocmd

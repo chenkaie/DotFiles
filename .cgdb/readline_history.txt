@@ -1,0 +1,1455 @@
+quit
+s
+run
+n
+n
+n
+help
+help
+data
+data g+path
+data g_path
+run
+ls
+be
+bye
+quit
+bye
+quit
+r
+10
+r
+r
+y
+1000
+r
+n
+n
+n
+s
+s
+i
+i
+r
+100
+bye
+ls
+cgd
+quit
+bye
+y
+bye
+quit
+r
+b
+n
+n
+n
+n
+bye
+help
+status
+running
+r
+y
+quit
+y
+n
+n
+n
+s
+s
+b
+b 190
+b 10
+b 12
+r
+n
+n
+n
+d
+n
+help
+data
+data dwlen
+data dwLen
+status
+help data
+inspect dwLen
+inspect i
+inspect argc
+inspect argcc
+display i
+display dwLen
+n
+n
+n
+nn
+n
+n
+n
+n
+n
+n
+n
+n
+n
+help
+stack
+display
+display/i
+display/i $pc
+n
+n
+n
+n
+n
+info 
+info register
+b 19
+r
+n
+n
+info
+info variables
+info register
+info
+backtrace 
+backtrace 
+backtrace 
+backtrace(bt)
+backtrace(i)
+backtrace(i)
+backtrace(i)
+backtrace(i)
+backtrace(i)
+backtrace(i)
+backtrace(i)
+backtrace(i)
+backtrace(i)
+jobs
+ls
+bye
+quit
+ls
+y
+target remote 172.16.7.67:1111
+r
+n
+target remote 172.16.7.67:1111
+y
+n
+n
+n
+r
+quit
+y
+target remote 172.16.7.67
+target remote 172.16.7.67:1111
+r
+bye
+quit
+y
+target remote 172.16.7.67:1111
+b 12
+r
+n
+n
+n
+n
+n
+n
+n
+n
+bye
+quit
+y
+ls
+b 12
+target remote 172.16.7.67:1234
+n
+n
+n
+r
+n
+n
+n
+n
+n
+n
+n
+n
+dispaly i
+display i
+display dwLen
+n
+n
+n
+l 10
+. 12
+l 12
+n
+n
+info register
+n
+n
+n
+r
+y
+n
+n
+n
+bye
+qut
+quiot
+quit
+y
+target remote 172.16.7.67:1111
+target remote 172.16.7.67:1111
+bye
+quit
+target remote 172.16.7.67:1111
+b 1
+b 11
+r
+n
+n
+n
+n
+n
+n
+n
+n
+n
+n
+n
+n
+quit
+y
+target remote 172.16.7.67:1111
+quit
+target remote 172.16.7.67:1111
+target remote 172.16.7.67:1111
+target remote 172.16.7.67:1111
+target remote 172.16.7.67:1111
+target remote 172.16.7.67:1114
+target remote 172.16.7.67:1111
+target remote 172.16.7.67:1111
+target remote 172.16.7.67:1111
+bye
+quit
+quit
+target remote 172.16.7.67:1234
+quit
+target remote 172.16.7.67:1234
+target remote 172.16.7.67:1234
+target remote 172.16.7.67:1234
+target remote 172.16.7.67:1234
+n
+n
+r
+n
+n
+n
+n
+quit
+y
+target remote 172.16.7.67:1234
+target remote 172.16.7.67:1234
+target remote 172.16.7.67:1234
+bye
+quit
+target remote 172.16.7.67:12345
+target remote 172.16.7.67:12345
+target remote 172.16.7.67:12345
+target remote 172.16.7.67:12345
+target remote 172.16.7.67:12345
+target remote 172.16.7.67:12345
+target remote 172.16.7.67:12345
+target remote 172.16.7.67:12345
+n
+n
+b 10
+n
+l
+r
+n
+n
+n
+display dwLen
+display i
+n
+n
+n
+n
+quit
+y
+q
+b 43
+l
+r
+n
+n
+show
+d
+n
+show paddingZero
+display paddingZero
+display lTotalSize
+quit
+y
+b 45
+r
+n
+n
+n
+n
+n
+n
+n
+n
+n
+n
+display tmpbuf
+display buf
+n
+n
+n
+n
+quit
+y
+;q
+quit
+b 57
+r
+buf
+display buf
+n
+n
+strlen
+f
+display f
+n
+n
+n
+n
+r
+n
+n
+n
+n
+b 48
+r
+display tempbuf
+display tmpbuf
+n
+n
+n
+n
+n
+n
+n
+n
+n
+n
+n
+n
+n
+n
+n
+n
+q
+y
+quit
+l
+l
+q
+l
+r
+l
+display pchTest
+n
+n
+r
+y
+s
+s
+bt
+bt
+bt
+s
+bt
+s
+bt
+s
+bt
+s
+bt
+s
+s
+s
+s
+n
+n
+ggqt
+quit
+q
+quit
+quit
+quit
+quit
+b
+exit
+quit
+run
+r
+r
+b 8
+r
+n
+n
+p
+p i
+p result
+n
+n
+n
+n
+n
+ s
+s
+s
+s
+s
+s
+S
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+bt
+s
+by
+bt
+tty
+tty /dev/pts/12
+s
+s
+p
+tty /dev/pts/12
+p
+tty 
+tty
+help tty
+t
+n
+n
+n
+quit
+b 8
+tty /dev/pts/12
+.
+s
+r
+n
+s
+s
+s
+s
+s
+n
+n
+n
+s
+s
+where result
+where
+backtrace 
+backtrace full
+frame 
+frame 0
+frame 1
+s
+s
+s
+s
+f
+bt
+bt
+n
+n
+n
+n
+n
+bt
+n
+n
+bt
+p result
+display result
+x 0x7fffffffd0b8
+x result
+x/w
+x/w 0x00
+x/w 0x001
+x/w 0x00a
+a
+c
+c
+r
+f
+f
+f
+o
+o
+whatis 
+what
+thread 
+thread 
+set variable 
+set variable i
+p i
+set variable i 2
+set variable i=2
+p i
+n
+n
+n
+n
+n
+n
+n
+n
+n
+n
+r
+reverse-next
+n
+n
+rn
+rs
+rs
+rsi
+rf
+rs
+fn
+rn
+rn
+directory 
+n
+list 
+l
+l
+l
+list
+list
+n
+n
+l
+disassemble 
+n
+n
+disa
+n
+n
+ni
+si
+si
+si
+si
+si
+l
+si
+s
+s
+si
+si
+l
+si
+disassemble 
+si
+disassemble 
+disassemble 
+info 
+info source
+info threads 
+info locals 
+info variables 
+info display 
+info sharedlibrary 
+show directories 
+show listsize 
+whatis result
+whatis n
+whatis r
+whatis *r
+pwd
+n
+bye
+quit
+y
+n
+b 10
+n
+n
+n
+r
+n
+n
+n
+q
+quit
+b 12
+n
+r
+n
+n
+n
+n
+n
+n
+n
+n
+n
+n
+n
+q
+y
+b 10
+r
+i
+l
+T
+show env
+show
+n
+r
+n
+n
+info break
+info watch
+info locals 
+info registers 
+p
+print
+p x result
+p /x result
+p /a result
+p /c result
+p /f result
+p /df result
+p result
+x 
+x 0x1
+x 1
+x
+x
+/
+p result
+p /a result
+p /addr
+p /addr result
+n
+n
+n
+n
+p
+p result
+p /a result
+p /x result
+call result
+x/N
+x/N result
+x /N result
+x /u result
+p /c result
+p /c result
+p /d result
+disassemble 
+disassemble 1
+disassemble 0x1
+disassemble 0x2
+disassemble 0x00000000004004e7
+disassemble 0x00000000004004e7
+help
+d
+n
+display 
+display result
+n
+n
+n
+n
+r
+n
+n
+n
+n
+n
+n
+n
+n
+info
+info address 
+info address result
+info address i
+info address "result"
+info address result
+info variables 
+info variables result
+x 0x0000003ac7d4c460
+p result
+ptype result
+ptype &result
+ptype *result
+listsize
+listsize 10
+listsize 20
+set listsize 
+set listsize 10
+set listsize 20
+set listsize 30
+n
+set listsize=30
+help list 
+h list 
+help listsize
+set verbose on
+n
+n
+n
+n
+bt
+n
+r
+p address
+show command
+info files 
+q
+y
+n
+q
+b 10
+r
+n
+n
+n
+path
+show path
+info share
+info files
+show dir
+show dirs
+l
+n
+n
+r
+y
+exit
+q
+y
+b main
+r
+s
+s
+s
+s
+info share
+info line 
+quit
+help core
+exit
+quit
+b main
+r
+s
+s
+jserv
+b main
+r
+si
+si
+s
+si
+si
+si
+l
+si
+si
+si
+si
+si
+si
+si
+si
+si
+si
+s
+s
+jsjsjsjsjsjsjsjsjsjsj
+p string
+s
+s
+a
+b
+c
+d
+e
+q
+'
+
+np
+f
+r
+y
+S
+s
+s
+y
+b8
+r
+y
+quit
+y
+b8
+b 8
+r
+s
+set variable string="jserv_longer"
+s
+c
+c
+c
+b 8
+r
+set variable string="jserv_longer"
+b 11
+c
+a
+b
+c
+c
+d
+e
+f
+r
+F
+R
+l
+l
+l
+l
+continue 
+b 8
+set variable string="jserv_longer"
+p string
+r
+set variable string="jserv_longer"
+p string
+b 11
+c
+jserv
+f
+adf
+\n
+\d
+quit
+help
+b main
+y
+file input
+b 8
+r
+set variable string="jserv_longer"
+p string
+c
+test
+q
+b 10
+r
+s
+abc
+c
+quit
+y
+file input
+b 8
+r
+n
+n
+test
+c
+asjfijwerioaoitutuc,.vv,m.vm,.kleioeioeioerio2356789v cvnbvn
+b main
+r
+p my_str
+p my_str
+c
+quit
+b main
+r
+l
+jump 7
+bye
+quit
+b main
+y
+b main
+y
+quit
+b main
+r
+jump 10
+r
+r
+j 13
+r
+y
+n
+p buff
+p string
+info local
+info locals 
+n
+jserv
+I
+i
+si
+si
+s
+si
+b fib
+commands 
+info args
+list
+continue
+end
+r
+n
+n
+r
+b fib
+n
+r
+b 20
+r
+n
+n
+n
+r
+s
+s
+s
+b fib
+commands 
+info args
+b fib if n==1
+r
+n
+n
+n
+n
+n
+n
+n
+n
+s
+c
+r
+y
+clear 
+b fib if n==1
+clear
+clear
+b fib if n==3
+r
+y
+info locals 
+n
+n
+info locals 
+p n
+r
+y
+quit
+y
+quit
+quit
+start
+p argc
+p argv
+s
+s
+s
+p args
+ptype args
+p INTERP_CONSOLE
+p INTERP_CONSOLE
+s
+s
+n
+n
+n
+n
+n
+s
+start
+print 1 + 2
+print
+print strcmp("00","CC")
+print strcmp("00","-1")
+print strcmp("00","00")
+print strncmp("00","00")
+print strncmp("00","00",1)
+print strncmp("00","00",2)
+print strncmp("00","00",3)
+print strncmp("00","00",4)
+print strncmp("1")
+print strncmp("1","2")
+print strncmp("1","2",1)
+print strncmp("01","02",1)
+print strncmp("01","02",2)
+print strncmp("01","02",3)
+print strncmp("01","02", 1)
+quit
+y
+start
+y
+ls
+print  1 + 2
+print strncmp()
+quit
+quit
+start
+s
+s
+s
+s
+s
+n
+n
+n
+n
+n
+n
+n
+n
+n
+n
+n
+n
+n
+n
+q
+y
+start
+n
+p path
+p home
+x path
+x/s path
+x/s home
+n
+x/s 
+x/s $
+x/s home
+p path
+p home
+p getenv ("PATH")
+p (char *)getenv ("PATH")
+p (char *) getenv ("PATH")
+p (char) getenv ("PATH")
+p (const char) getenv ("PATH")
+p (const char*) getenv ("PATH")
+p getenv ("PATH")
+p getenv ("PATH")
+p getenv ("PATH")
+p getenv ("PATH")
+p path
+x path
+disassemble 
+disassemble $
+disassemble $5095
+disassemble 0x5095
+disassemble 0x0000000000400575
+disassemble 0x0000000000400575
+x 0x0000000000400575
+x 0x0000000000400576
+x 0x0000000000400577
+x 0x000000000040057
+x 0x000000000040057
+x 0x0000000000400575
+x 0x0000000000400575
+x/s 0x0000000000400575
+x/s 0x0000000000400575
+x/s 0x0000000000400576
+x/s 0x0000000000400577
+x/s 0x0000000000400578
+x/s 0x0000000000400579
+x/s 0x0000000000400580
+x/s 0x0000000000400581
+x/s 0x0000000000400582
+x/s 0x0000000000400584
+x/s 0x0000000000400585
+x/s 0x0000000000400585
+x 0x0000000000400585
+disa
+disassemble 
+x 400528
+x 0x400528
+x 0x400688
+x/s 0x400688
+x/b 0x400688
+x/w 0x400688
+x 0x400688
+disable 
+disassemble 
+disassemble 0x400688
+a
+p path
+p home
+p &path
+p &home
+exit
+quit
+y
+quit
+start
+n
+n
+s
+r
+y
+s
+start
+r
+n
+n
+s
+si
+l
+si
+si
+si
+si
+l
+si
+quit
+y
+b 18
+r
+b main
+r
+y
+n
+n
+p strcmp("", "")
+p strcmp("", "") == 0
+p strcmp("", "") == 1
+p crypt("admin")
+p crypt("admin","")
+p crypt("admin","$1$")
+p crypt("admin","$1")
+p crypt("admin","$1$$")
+p crypt("admin","$1$")
+p crypt("admin","$1")
+p crypt("admin","$")
+p crypt("admin","1")
+p crypt("admin","2")
+p crypt("admin","3")
+p crypt("admin","3")
+quit
+y
+start
+n
+n
+p crypt("admin")
+p crypt("admin",)
+p crypt("admin",'')
+p crypt("admin",'1')
+p crypt("admin","")
+p crypt("admin","cc")
+p crypt("admin","cccccc")
+p crypt("admin","cccccc")
+p/x crypt("admin","cccccc")
+p/t crypt("admin","cccccc")
+p/s crypt("admin","cccccc")
+p/c crypt("admin","cccccc")
+p/d crypt("admin","cccccc")
+p/d crypt("admin","cccccc")
+p strcmp("", -6813111)
+p strcmp("", -6813111) == 0
+p strcmp("", -6813111)
+p strcmp("", (const char*)-6813111)
+p strcmp("", (const char*)(-6813111))
+p strcmp("", "cc")
+p strcmp("", (const char)(-6813111))
+p strcmp("", (const char)(6813111))
+p strcmp("", (const char)(1))
+p strcmp("", (const char*)(1))
+p crypt("admin","cccccc")
+p crypt("admin","$1$")
+p crypt("admin","$1$2")
+p crypt("admin","$1$23")
+p crypt("admin","$1$234")
+p strcmp("", "aa")
+p strcmp("", "123")
+p strcmp("", "-123")
+p strcmp("", -123)
+p strcmp("", 123)
+p strcmp("", "123")
+p strcmp("", (-123))
+p strcmp("", (const)(-123))
+p strcmp("", (const char)(-123))
+p strcmp("", (const char *)(-123))
+p strcmp("", (const char)(-123))
+p strcmp("", (const char &)(-123))
+p strcmp("", (const char)&(-123))
+p strcmp("", (-123))
+p crypt("admin","$1$234")
+x crypt("admin","$1$234")
+x/s crypt("admin","$1$234")
+p crypt("admin","$1$234")
+p/s crypt("admin","$1$234")
+p/h crypt("admin","$1$234")
+p crypt("admin","$1$234")
+x crypt("admin","$1$234")
+x crypt("admin","$1$234")
+x/s crypt("admin","$1$234")
+x crypt("admin","$11$234")
+x crypt("admin","$1$21134")
+x crypt("admin","$1$2113224")
+x crypt("admin","$1$")
+x crypt("admin","$1$")
+x crypt("admin","$1$")
+x crypt("admin","$111")
+x crypt("admin","$1$")
+x/N crypt("admin","$1$")
+x/b crypt("admin","$1$")
+x/h crypt("admin","$1$")
+x/w crypt("admin","$1$")
+x crypt("admin","$1$")
+x crypt("admin","$1$")
+startr
+r
+start
+y
+n
+n
+x crypt("admin","$1$")
+x/s crypt("admin","$1$")
+x/i crypt("admin","$1$")
+p/x crypt("admin","$1$")
+p crypt("admin","$1$")
+x crypt("admin","$1$")
+x crypt("admin","$1$")
+x/s crypt("admin","$1$")
+x/s crypt("admin","$1$")
+x $0x601050
+x 0x601050
+x/s 0x601050
+x strcmp("", 0x601050)
+x strcmp("", "0x601050")
+p strcmp("", "0x601050")
+p strcmp("", )
+x/s crypt("admin","$1$")
+x/s crypt("admin","$1$1")
+x/s crypt("admin","$11")
+p crypt("admin","$11")
+p strcmp("", 0xffffffffd7633160)
+p strcmp("", 681365152)
+p strcmp("", "681365152")
+p strcmp("", "0xffffffffd7633160")
+p crypt("admin","$11")
+p crypt("admin","$11$")
+p crypt("admin","$11$")
+p strcmp("", $35)
+p strcmp("", $1)
+p strcmp("", $2)
+p strcmp("", 1)
+p strcmp("", 2)
+p strcmp("", crypt("admin","$11$"))
+p strcmp("", crypt("admin","$1$"))
+p strcmp("", crypt("admin","$1$"))
+p strcmp("", crypt("admin","$1"))
+p strcmp("", crypt("admin","$1"))
+p crypt("admin","$1")
+p crypt("admin","$1")
+s
+s
+r
+r
+y
+n
+start
+n
+n
+p crypt("admin","$1")
+p
+set var strCrypt=crypt("admin","$11$")
+p strCrypt 
+p strCrypt
+x strCrypt
+x/s strCrypt
+x/i strCrypt
+x strCrypt
+x strCrypt
+p strcmp("", strCrypt)
+p strcmp("", "strCrypt")
+x strCrypt
+x strCrypt
+si
+s
+s
+s
+n
+n
+r
+start
+n
+start
+y
+n
+n
+set var strCrypt=crypt("admin","$1$")
+x strCrypt 
+x strCrypt 
+x strCrypt 
+x strCrypt 
+x strCrypt 
+x 0x601050 
+x strCrypt 
+p strCrypt 
+p *strCrypt 
+p &strCrypt 
+p &strCrypt 
+p &strCrypt 
+p strCrypt 
+p strCrypt 
+quit
+y
+attach 
+attach 6248
+l
+l
+s
+l
+l
+l
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+s
+n
+bt
+bt
+n
+bt
+bt
+b
+b
+b
+b
+r
+y
+n
+n
+n
+n
+n
+n
+n
+n
+n
+n
+info locals 
+p
+bt
+bt
+frame 
+info frame 
+p $lf
+p $l11
+p $pc
+p $sp
+p $lr
+p $fp
+qui
+y
+start
+n
+p
+p ret
+set print pretty on
+p ret
+s
+s
+s
+s
+bt
+p func
+p func1
+p func2
+p $pc
+p $main
+p $sp
+quit
+n
+help print 
+quit
+start
+n
+p rect
+set print pretty on
+p rect
+n
+quit
+y
+start
+info registers 
+quit
+ls
+y
+quit
+start
+r
+y
+quit
+y
+start
+n
+start
+y
+s
+s
+p ptr
+p *ptr
+s
+y
+r
+y
+qut
+quti
+quit
+y
+r
+b21
+r
+b 21
+r
+bt
+backtrace 
