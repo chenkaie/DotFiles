@@ -160,7 +160,6 @@ func <SID>GetPage(...)
   while getline('$') =~ '^\s*$'
     silent norm Gdd
   endwhile
-  1
   setl ft=man nomod
   setl bufhidden=hide
   setl nobuflisted
