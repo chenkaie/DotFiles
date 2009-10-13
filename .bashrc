@@ -115,7 +115,6 @@ alias wget='wget -c'
 
 # have to check exist()
 alias top='htop'
-alias gdb='cgdb'
 alias xmllint='xmllint --noout'
 
 alias grep='grep -i --colour=auto'
@@ -132,7 +131,7 @@ alias cd..='cd ..'
 alias path='echo -e ${PATH//:/\\n}'
 
 #Personal Help
-alias l?='cat ~/.bashrc | grep "alias l.=.ls" | grep ^a | less' 
+alias l?='cat ~/.bashrc | grep "alias l.=.ls" | grep ^a' 
 alias a?='alias'
 alias f?='cat $dotfiles/.function.help'
 alias dn='OPTIONS=$(\ls -F | grep /$); select s in $OPTIONS; do cd $PWD/$s; break;done'
