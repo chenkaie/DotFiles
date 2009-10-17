@@ -108,6 +108,16 @@ Uncomments the selected line(s).
     <CTRL-s><CTRL-s> - in insert mode, add a new line + surrounding + indent
     <CTRL-g>s - same as <CTRL-s>
     <CTRL-g>S - same as <CTRL-s><CTRL-s>
+
+------------------------------------------------------------------------------
+ Remove lines that contain [searchitem]
+    a. vim way
+         :g/color/d
+    b. Standard ex sequence:
+         :/color/d
+    c. *nix CLI 
+         :%!grep -v color
+
 ------------------------------------------------------------------------------
  diff
      o use ':vnew' to new a window for realtime diff
