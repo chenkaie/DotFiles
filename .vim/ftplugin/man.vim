@@ -17,6 +17,9 @@ if &filetype == "man"
 
   " allow dot and dash in manual page name.
   setlocal iskeyword+=\.,-
+  " Kent@2009.10.17 tabstop value for man should be 8 to get fancy layout,
+  " especially for Man(3)
+  setlocal tabstop=8
 
   " Add mappings, unless the user didn't want this.
   if !exists("no_plugin_maps") && !exists("no_man_maps")
