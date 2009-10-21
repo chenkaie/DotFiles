@@ -10,7 +10,7 @@
 "                ||     ||
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
-" Last Modified: Mon Oct 12, 2009  04:22PM
+" Last Modified: Wed Oct 21, 2009  11:56PM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -344,9 +344,7 @@ if has("autocmd")
        \ else                                                     |
        \     if (g:vimgdb_debug_file == "")                       |
        \         nmap <silent> <S-H> :call ToggleHomeActionN()<CR>|
-       \         imap h <ESC>:call ToggleHomeActionI()<CR>|
        \         map  <silent> <S-L> $|
-       \         imap l <ESC>$a|
        \     endif|
        \ endif                
 endif
