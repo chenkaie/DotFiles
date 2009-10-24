@@ -27,6 +27,7 @@ function! ToggleGDB(...)
             endif
             call gdb("file " . g:vimgdb_debug_file)
         else
+            let g:vimgdb_debug_file = a:1 
             call gdb("file " . a:1)
         endif
         " easwy (Kent) end 
