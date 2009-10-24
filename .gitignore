@@ -4,3 +4,6 @@
 .vim/sessions
 .vim/view
 .ssh
+*~
+,*
+.*.sw?
