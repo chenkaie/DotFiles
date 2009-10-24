@@ -108,6 +108,34 @@ Uncomments the selected line(s).
     <CTRL-s><CTRL-s> - in insert mode, add a new line + surrounding + indent
     <CTRL-g>s - same as <CTRL-s>
     <CTRL-g>S - same as <CTRL-s><CTRL-s>
+------------------------------------------------------------------------------
+8. vimgdb hotkeys
+
+    <Space> launch the interactive gdb input-line window
+    CTRL-Z  send an interrupt to GDB and the program it is running
+    B	info breakpoints
+    L	info locals
+    A	info args
+    S	step
+    I	stepi
+    CTRL-N	next: next source line, skipping all function calls
+    X	nexti
+    F	finish
+    R	run
+    Q	quit
+    C	continue
+    W	where
+    CTRL-U	up: go up one frame
+    CTRL-D	down: go down one frame
+    CTRL-B	set a breakpoint on the line where the cursor is located
+    CTRL-E	clear all breakpoints on the line where the cursor is located
+    CTRL-P	Normal mode: print value of word under cursor
+    Visual mode: GDB command "createvar" selected expression, see
+    |gdb-variables|
+    CTRL-X	print value of data referenced by word under cursor
+
+    CTRL-B and CTRL-E operate both on source code and on disassembled code in
+    assembly buffers.
 
 ------------------------------------------------------------------------------
  Remove lines that contain [searchitem]
