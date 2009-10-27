@@ -114,7 +114,12 @@ func <SID>GetPage(...)
   endif
   if s:FindPage(sect, page) == 0
     echo "\nCannot find a '".page."'."
-    return
+    if a:0 >= 2
+      sleep 1
+      quit
+    else
+      return
+    endif
   endif
   exec "let s:man_tag_buf_".s:man_tag_depth." = ".bufnr("%")
   exec "let s:man_tag_lin_".s:man_tag_depth." = ".line(".")
