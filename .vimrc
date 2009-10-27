@@ -10,7 +10,7 @@
 "                ||     ||
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
-" Last Modified: Wed Oct 21, 2009  11:56PM
+" Last Modified: Tue Oct 27, 2009  08:29PM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -306,7 +306,7 @@ nmap tt :call SwitchLastUsedTab()<CR>
 set diffopt+=iwhite
 " highlight diff color
 hi diffchange ctermbg=236
-hi diffadd ctermbg=4 ctermfg=7
+hi diffadd ctermbg=4
 hi DiffDelete ctermfg=69 ctermbg=234
 hi difftext ctermbg=3 ctermfg=0
 
