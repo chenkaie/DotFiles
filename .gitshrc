@@ -32,6 +32,7 @@ alias  st='git status'
 # git log
 gitalias  L='git log'
 gitalias  l='git log --pretty=oneline --abbrev-commit'
+gitalias  lg='git log --graph'
 #gitalias ll='git log --pretty=oneline --abbrev-commit --max-count=15'
 
 # experimental

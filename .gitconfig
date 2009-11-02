@@ -20,6 +20,7 @@
     co = checkout
     di = diff
     lg = log -p
+    l = log --graph
 	sh = !git-sh
 
 [branch]
