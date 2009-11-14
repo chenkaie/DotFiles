@@ -10,7 +10,7 @@
 "                ||     ||
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
-" Last Modified: Tue Oct 27, 2009  08:29PM
+" Last Modified: Mon Nov 02, 2009  10:35PM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -61,7 +61,7 @@ else
     "For Colorscheme
     set bg=dark
     colorscheme peaksea_new 
-    "GuiColorScheme rdark
+    " colorscheme ir_black 
 endif
 
 " Status Line
