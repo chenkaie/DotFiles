@@ -10,7 +10,7 @@
 "                ||     ||
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
-" Last Modified: Mon Nov 02, 2009  10:35PM
+" Last Modified: Sun Nov 15, 2009  01:01AM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -28,12 +28,6 @@ elseif has("unix")
 elseif has("win32")
     let OS = "Win32"
 endif
-
-try
-    "change to the directory containing the file which was opened or selected
-    set autochdir
-catch
-endtry
 
 set backspace=2
 
@@ -522,8 +516,12 @@ nnoremap <C-x> :Hexmode<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Functions & autocmd
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd BufEnter * lcd %:p:h 
-
+" set vim to chdir for each file
+if exists('+autochdir')
+    set autochdir
+else
+    autocmd BufEnter * silent! lcd %:p:h:gs/ /\\ /
+endif
 " Automatically update 'Last Modified' field
 " If buffer modified, update any 'Last modified: ' in the first 20 lines.
 function! LastModified()
