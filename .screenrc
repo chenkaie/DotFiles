@@ -191,7 +191,7 @@ bind l focus right
 # bind y eval "writebuf" "exec sh -c 'pbcopy < /tmp/screen-exchange'"
 
 # Buffer file : where the screen copy buffer will be saved to.
-bufferfile ~/tmp/screen-copy-buffer
+bufferfile $HOME/tmp/screen-copy-buffer
 bind y eval "writebuf" "exec sh -c 'nc 172.16.2.54 4573 < ~/tmp/screen-copy-buffer'"
 
 # hardcopydir:  The directory which contains all hardcopies.
