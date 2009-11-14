@@ -279,7 +279,7 @@ elseif has("gui_running") || &t_Co == 256
     CSAHi Question term=NONE cterm=bold ctermbg=bg ctermfg=46 gui=bold guibg=bg guifg=#00ff00
     CSAHi StatusLine term=reverse,bold cterm=NONE ctermbg=153 ctermfg=16 gui=italic guibg=#202020 guifg=#cccccc
     CSAHi StatusLineNC term=reverse cterm=NONE ctermbg=250 ctermfg=16 gui=NONE guibg=#202020 guifg=#000000
-    CSAHi VertSplit term=reverse cterm=NONE ctermbg=233 ctermfg=234 gui=NONE guibg=#202020 guifg=#202020
+    CSAHi VertSplit term=reverse cterm=NONE ctermbg=240 ctermfg=234 gui=NONE guibg=#202020 guifg=#202020
     CSAHi Title term=bold cterm=bold ctermbg=bg ctermfg=252 gui=bold guibg=bg guifg=#f6f3e8
     CSAHi Visual term=reverse cterm=NONE ctermbg=17 ctermfg=fg gui=NONE guibg=#262d51 guifg=fg
     CSAHi VisualNOS term=bold,underline cterm=bold,underline ctermbg=bg ctermfg=fg gui=bold,underline guibg=bg guifg=fg
