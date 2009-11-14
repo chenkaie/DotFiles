@@ -164,6 +164,10 @@ Uncomments the selected line(s).
     o `[a,b,c,...,z] => goto mark [a,b,c,...,z]
     o  :marks => list all marks list 
 
+------------------------------------------------------------------------------
+ Go to last/prev edited line
+    Try g; and g,. They jump backward and forward in the changelist.
+    See |changelist| for more details.
 
 ------------------------------------------------------------------------------
  Web: http://172.16.5.30/rd1wiki/index.php/User:Kent:VIM:Note
