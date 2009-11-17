@@ -10,6 +10,9 @@ let s:gdb_k = 1
 "nmap ,<F7> :call <SID>ToggleGDB()<CR>
 nmap ,<F7> :call ToggleGDB()<CR>
 
+" Add this to split gdb window at right side
+set splitright
+
 " Toggle between vim default and custom mappings
 "function! s:Toggle()
 function! ToggleGDB(...)
