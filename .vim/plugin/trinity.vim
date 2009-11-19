@@ -392,15 +392,18 @@ function! <SID>Trinity_ToggleTagList()
     if s:Trinity_switch == 0
         if s:tag_list_switch == 0
             call <SID>Trinity_InitTagList()
+            set updatetime=300
             Tlist
             let s:tag_list_switch = 1
         endif
     else
         if s:tag_list_switch == 1
             TlistClose
+            set updatetime=4000
             let s:tag_list_switch = 0
         else
             call <SID>Trinity_InitTagList()
+            set updatetime=300
             Tlist
             let s:tag_list_switch = 1
         endif

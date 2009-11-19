@@ -559,7 +559,7 @@ elseif &background=='dark'
       hi TabLineSel	ctermfg=fg	ctermbg=NONE	cterm=NONE
       hi CursorColumn	ctermfg=NONE	ctermbg=88	cterm=NONE
       "modify by Kent, ctermbg=236
-      hi CursorLine	ctermfg=NONE	ctermbg=233	cterm=NONE
+      hi CursorLine	ctermfg=NONE	ctermbg=236	cterm=NONE
       hi MatchParen	ctermfg=NONE	ctermbg=90
       hi TabLine	cterm=underline  
       hi TabLineFill	cterm=underline  
