@@ -10,7 +10,7 @@
 "                ||     ||
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
-" Last Modified: Sun Nov 15, 2009  01:01AM
+" Last Modified: Thu Nov 19, 2009  10:02PM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -484,7 +484,7 @@ nnoremap <C-x> :Hexmode<CR>
     " Trinity related Start
     """"""""""""""""""""""""
     " Open and close all the three plugins on the same time ,wired toggle Trinity,  will caue hlsearch to no effect, add set hlsearch again manually
-    nmap <F12>   :TrinityToggleTagList<CR> :set hlsearch<CR>
+    nmap <F12>   :TrinityToggleTagList<CR>
     " nmap <F9>   :TrinityToggleSourceExplorer<CR>
     " nmap <F10>  :TrinityToggleTagList<CR>
     " nmap <F11>  :TrinityToggleNERDTree<CR> 
