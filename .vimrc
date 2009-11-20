@@ -10,7 +10,7 @@
 "                ||     ||
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
-" Last Modified: Thu Nov 19, 2009  10:02PM
+" Last Modified: Thu Nov 19, 2009  11:52PM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -390,7 +390,7 @@ if has("autocmd")
   " vim -b : edit binary using xxd-format!
   augroup Binary
     au!
-    au BufReadPre *.bin,*.hex,*.pkg,*.img setlocal binary
+    au BufReadPre *.bin,*.hex,*.pkg,*.img,*.out setlocal binary
     au BufReadPost *
           \ if &binary | Hexmode | endif
     au BufWritePre *
