@@ -19,7 +19,7 @@
     br = branch
     co = checkout
     di = diff
-    lg = log -p
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
     l = log --graph
 	sh = !git-sh
 
@@ -33,3 +33,6 @@
 	branch = yellow ul 
 	workdir = blue bold
 	dirty = red
+
+[merge]
+    tool = vimdiff
