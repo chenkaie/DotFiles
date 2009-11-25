@@ -36,7 +36,7 @@ function! ToggleGDB(...)
         " easwy (Kent) end 
 
         map <Space> :call gdb("")<CR>
-        nmap <silent> <C-Z> :call gdb("\032")<CR>
+        nmap <silent> Z :call gdb("\032")<CR>
 
         nmap <silent> B :call gdb("info breakpoints")<CR>
         nmap <silent> L :call gdb("info locals")<CR>
@@ -87,7 +87,7 @@ function! ToggleGDB(...)
         " end easwy  (Kent)
 
         nunmap <Space>
-        nunmap <C-Z>
+        nunmap Z
 
         nunmap B
         nunmap L
