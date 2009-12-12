@@ -10,7 +10,7 @@
 "                ||     ||
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
-" Last Modified: Thu Nov 19, 2009  11:52PM
+" Last Modified: Sat Dec 12, 2009  10:51PM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -488,7 +488,7 @@ nnoremap <C-x> :Hexmode<CR>
     " nmap <F9>   :TrinityToggleSourceExplorer<CR>
     " nmap <F10>  :TrinityToggleTagList<CR>
     " nmap <F11>  :TrinityToggleNERDTree<CR> 
-
+    let Tlist_Use_Right_Window=1
 
    """"""""""""""""""""""""""""""
    " Minibuffer
