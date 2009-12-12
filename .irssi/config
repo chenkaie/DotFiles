@@ -136,6 +136,7 @@ channels = (
   { name = "#bsdchat"; chatnet = "ircnet"; autojoin = "yes"; },
   { name = "#git"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "#svn"; chatnet = "freenode"; autojoin = "yes"; }
+  { name = "#vim-tw"; chatnet = "freenode"; autojoin = "yes"; }
 );
 
 aliases = {
@@ -308,18 +309,18 @@ settings = {
   "fe-text" = { actlist_sort = "refnum"; };
   "fe-common/core" = {
     term_charset = "UTF-8";
-    autolog_path = "~/logs/irc-$tag-$0-%Y%m%d";
+    autolog_path = "~/tmp/irssi-logs/irc-$tag-$0-%Y%m%d";
     theme = "revolutionaryv3";
   };
 };
 conversions = { "#bsdchat" = "UTF-8"; user = "Big5"; "#osdc.tw" = "UTF-8"; };
 logs = {
-  "~/logs/irc-coscup-%Y%m%d" = {
+  "~/tmp/irssi-logs/irc-coscup-%Y%m%d" = {
     auto_open = "yes";
     level = "ALL";
     items = ( { type = "target"; name = "#coscup"; } );
   };
-  "~/logs/irc-osdc.tw-%Y%m%d" = {
+  "~/tmp/irssi-logs/irc-osdc.tw-%Y%m%d" = {
     auto_open = "yes";
     level = "ALL";
     items = ( { type = "target"; name = "#osdc.tw"; } );
