@@ -8,3 +8,4 @@
 ,*
 .*.sw?
 .cgdb/readline_history.txt
+.vim/doc/tags
