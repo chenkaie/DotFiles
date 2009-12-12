@@ -598,9 +598,10 @@ let s:debugIndex = 0
 " that keep our explorer updated automatically.
 "
 augroup MiniBufExplorer
-autocmd MiniBufExplorer BufDelete   *.c,*.h call <SID>DEBUG('-=> BufDelete AutoCmd', 10) |call <SID>AutoUpdate(expand('<abuf>'))
-autocmd MiniBufExplorer BufEnter    *.c,*.h call <SID>DEBUG('-=> BufEnter  AutoCmd', 10) |call <SID>AutoUpdate(-1)
-autocmd MiniBufExplorer VimEnter    *.c,*.h call <SID>DEBUG('-=> VimEnter  AutoCmd', 10) |let g:miniBufExplorerAutoUpdate = 1 |call <SID>AutoUpdate(-1)
+"autocmd MiniBufExplorer BufDelete   *.c,*.h call <SID>DEBUG('-=> BufDelete AutoCmd', 10) |call <SID>AutoUpdate(expand('<abuf>'))
+"autocmd MiniBufExplorer BufEnter    *.c,*.h call <SID>DEBUG('-=> BufEnter  AutoCmd', 10) |call <SID>AutoUpdate(-1)
+"autocmd MiniBufExplorer VimEnter    *.c,*.h call <SID>DEBUG('-=> VimEnter  AutoCmd', 10) |let g:miniBufExplorerAutoUpdate = 1 |call <SID>AutoUpdate(-1)
+augroup End
 " }}}
 
 " Functions
