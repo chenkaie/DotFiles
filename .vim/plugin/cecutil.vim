@@ -2,8 +2,8 @@
 "               save/restore mark position
 "               save/restore selected user maps
 "  Author:	Charles E. Campbell, Jr.
-"  Version:	18d	ASTRO-ONLY
-"  Date:	Aug 20, 2009
+"  Version:	18b	ASTRO-ONLY
+"  Date:	Aug 27, 2008
 "
 "  Saving Restoring Destroying Marks: {{{1
 "       call SaveMark(markname)       let savemark= SaveMark(markname)
@@ -33,10 +33,10 @@
 if &cp || exists("g:loaded_cecutil")
  finish
 endif
-let g:loaded_cecutil = "v18d"
+let g:loaded_cecutil = "v18b"
 let s:keepcpo        = &cpo
 set cpo&vim
-"DechoRemOn
+"DechoTabOn
 
 " =======================
 "  Public Interface: {{{1
@@ -77,9 +77,9 @@ endif
 "    call SaveWinPosn()          will save window position in b:cecutil_winposn{b:cecutil_iwinposn}
 "    let winposn= SaveWinPosn(0) will *only* save window position in winposn variable (no stacking done)
 fun! SaveWinPosn(...)
-"  echomsg "Decho: SaveWinPosn() a:0=".a:0
+"  call Dfunc("SaveWinPosn() a:0=".a:0)
   if line(".") == 1 && getline(1) == ""
-"   echomsg "Decho: SaveWinPosn : empty buffer"
+"   call Dfunc("SaveWinPosn : empty buffer")
    return ""
   endif
   let so_keep   = &l:so
@@ -87,19 +87,14 @@ fun! SaveWinPosn(...)
   let ss_keep   = &l:ss
   setlocal so=0 siso=0 ss=0
 
-  let swline    = line(".")                        " save-window line in file
-  let swcol     = col(".")                         " save-window column in file
-  if swcol >= col("$")
-   let swcol= swcol + virtcol(".") - virtcol("$")  " adjust for virtual edit (cursor past end-of-line)
-  endif
-  let swwline   = winline() - 1                    " save-window window line
-  let swwcol    = virtcol(".") - wincol()          " save-window window column
-"  echomsg "Decho: sw[".swline.",".swcol."] sww[".swwline.",".swwcol."]"
+  let swline    = line(".")
+  let swcol     = col(".")
+  let swwline   = winline() - 1
+  let swwcol    = virtcol(".") - wincol()
   let savedposn = "call GoWinbufnr(".winbufnr(0).")|silent ".swline
   let savedposn = savedposn."|".s:modifier."norm! 0z\<cr>"
   if swwline > 0
-"   let savedposn= savedposn.":".s:modifier."norm! ".swwline."\<c-y>\<cr>"
-   let savedposn= savedposn.":while winline() != ".(swwline+1)."\<bar>".s:modifier."norm! \<c-y>\<cr>\<bar>endwhile\<cr>"
+   let savedposn= savedposn.":".s:modifier."norm! ".swwline."\<c-y>\<cr>"
   endif
   if swwcol > 0
    let savedposn= savedposn.":".s:modifier."norm! 0".swwcol."zl\<cr>"
@@ -111,11 +106,11 @@ fun! SaveWinPosn(...)
   " only when SaveWinPosn() is used
   if a:0 == 0
    if !exists("b:cecutil_iwinposn")
-    let b:cecutil_iwinposn= 1
+   	let b:cecutil_iwinposn= 1
    else
-    let b:cecutil_iwinposn= b:cecutil_iwinposn + 1
+   	let b:cecutil_iwinposn= b:cecutil_iwinposn + 1
    endif
-"   echomsg "Decho: saving posn to SWP stack"
+"   call Decho("saving posn to SWP stack")
    let b:cecutil_winposn{b:cecutil_iwinposn}= savedposn
   endif
 
@@ -123,12 +118,12 @@ fun! SaveWinPosn(...)
   let &siso = siso_keep
   let &l:ss = ss_keep
 
-"  if exists("b:cecutil_iwinposn")                                                                  " Decho
-"   echomsg "Decho: b:cecutil_winpos{".b:cecutil_iwinposn."}[".b:cecutil_winposn{b:cecutil_iwinposn}."]"
-"  else                                                                                             " Decho
-"   echomsg "Decho: b:cecutil_iwinposn doesn't exist"
-"  endif                                                                                            " Decho
-"  echomsg "Decho: SaveWinPosn [".savedposn."]"
+"  if exists("b:cecutil_iwinposn")	 " Decho
+"   call Decho("b:cecutil_winpos{".b:cecutil_iwinposn."}[".b:cecutil_winposn{b:cecutil_iwinposn}."]")
+"  else                      " Decho
+"   call Decho("b:cecutil_iwinposn doesn't exist")
+"  endif                     " Decho
+"  call Dret("SaveWinPosn [".savedposn."]")
   return savedposn
 endfun
 
@@ -421,11 +416,11 @@ fun! SaveUserMaps(mapmode,maplead,mapchx,suffix)
   let dobuffer = ""
   while mapmode =~ '^[bu]'
    if     mapmode =~ '^u'
-    let dounmap = 1
-    let mapmode = strpart(a:mapmode,1)
+    let dounmap= 1
+    let mapmode= strpart(a:mapmode,1)
    elseif mapmode =~ '^b'
-    let dobuffer = "<buffer> "
-    let mapmode  = strpart(a:mapmode,1)
+    let dobuffer= "<buffer> "
+    let mapmode= strpart(a:mapmode,1)
    endif
   endwhile
 "  call Decho("dounmap=".dounmap."  dobuffer<".dobuffer.">")
@@ -458,7 +453,7 @@ fun! SaveUserMaps(mapmode,maplead,mapchx,suffix)
    let s:restoremap_{a:suffix} = s:restoremap_{a:suffix}."|silent! ".mapmode."unmap ".dobuffer.amap
    if maparg(a:mapchx,mapmode) != ""
     let maprhs                  = substitute(maparg(amap,mapmode),'|','<bar>','ge')
-	let s:restoremap_{a:suffix} = s:restoremap_{a:suffix}."|".mapmode."map ".dobuffer.amap." ".maprhs
+	let s:restoremap_{a:suffix} = s:restoremap_{a:suffix}."|".mapmode."map ".amap." ".dobuffer.maprhs
    endif
    if dounmap
 	exe "silent! ".mapmode."unmap ".dobuffer.amap
@@ -476,7 +471,7 @@ fun! SaveUserMaps(mapmode,maplead,mapchx,suffix)
 	let s:restoremap_{a:suffix} = s:restoremap_{a:suffix}."|silent! ".mapmode."unmap ".dobuffer.amap
     if maparg(amap,mapmode) != ""
      let maprhs                  = substitute(maparg(amap,mapmode),'|','<bar>','ge')
-	 let s:restoremap_{a:suffix} = s:restoremap_{a:suffix}."|".mapmode."map ".dobuffer.amap." ".maprhs
+	 let s:restoremap_{a:suffix} = s:restoremap_{a:suffix}."|".mapmode."map ".amap." ".dobuffer.maprhs
     endif
 	if dounmap
 	 exe "silent! ".mapmode."unmap ".dobuffer.amap
