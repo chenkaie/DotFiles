@@ -85,6 +85,12 @@ Uncomments the selected line(s).
     1. <Ctrl-Tab> and <Shift-Tab> move forward and backward respectively through the buffer list. 
 
 ------------------------------------------------------------------------------
+6. Buffer Exploerer: Plugin for easily exploring (or browsing) Vim
+    \be  or  :BufExplorer
+    \bs  or  :HSBufExplorer
+    \bv  or  :VSBufExplorer
+
+------------------------------------------------------------------------------
 7. surround.vim: Delete/change/add parentheses/quotes/XML-tags/much more with ease 
     
     Normal mode
@@ -112,7 +118,7 @@ Uncomments the selected line(s).
 8. vimgdb hotkeys
 
     <Space> launch the interactive gdb input-line window
-    CTRL-Z  send an interrupt to GDB and the program it is running
+    Z  send an interrupt to GDB and the program it is running
     B	info breakpoints
     L	info locals
     A	info args
@@ -168,6 +174,16 @@ Uncomments the selected line(s).
  Go to last/prev edited line
     Try g; and g,. They jump backward and forward in the changelist.
     See |changelist| for more details.
+
+------------------------------------------------------------------------------
+ Vimball
+    1st. vim filename.vba
+    o list vimball file list
+        :VimballList            *:VimballList*
+    o install this vimball
+        :UseVimball [path]      *:UseVimball*
+    o unistall this vimball
+        :RmVimball vimballfile  *:RmVimball*
 
 ------------------------------------------------------------------------------
  Web: http://172.16.5.30/rd1wiki/index.php/User:Kent:VIM:Note
