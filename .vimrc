@@ -10,7 +10,7 @@
 "                ||     ||
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
-" Last Modified: Sat Dec 12, 2009  10:51PM
+" Last Modified: Sun Dec 13, 2009  01:31PM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -138,7 +138,7 @@ nnoremap <F9> <ESC>:w \| !gcc -Wall -ansi -pedantic -Wextra -std=c99 % && ./a.ou
 nnoremap ; :
 
 "Yahoo Dictionary
-map <C-D> viwy:!ydict <C-R>"<CR>
+map <C-D> viwy:!clear; ydict <C-R>"<CR>
 
 "tab function hotkey
 nmap tl :tabnext<CR>
