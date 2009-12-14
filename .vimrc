@@ -7,14 +7,15 @@
 "         \  (oo)\_______
 "            (__)\       )\/\
 "                ||----w |
-"                ||     ||
+"                oo     oo
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
-" Last Modified: Sun Dec 13, 2009  01:31PM
+" Web:           http://chenkaie.blogspot.com
+" Last Modified: Tue Dec 15, 2009  12:26AM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" General Setting
+" [ General Setting ]                                       {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Use Vim settings, rather then Vi settings (much better!). This must be first, because it changes other options as a side effect.
@@ -219,8 +220,10 @@ cabbrev help vertical help
 " Remove 'recording' key mapping
 nmap q <Cr>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Mouse + gVim-Killer Related Setting
+" }}}
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" 
+" [ Mouse + gVim-Killer Related Setting ]                   {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " This is AWESOME, INCREDIBLE! Could be used do Tab-Click, window resizing, scrolling... 
 "set mouse=a           " Enable use of the mouse for all modes.
@@ -242,8 +245,10 @@ map c <C-c>
 " Select all
 map a <ESC>ggVG
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Tab Operation Mac-Mapping by Klaymen
+" }}}
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" 
+" [ Tab Operation Mac-Mapping by Klaymen ]                  {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " default 1000
 set timeoutlen=500
@@ -292,8 +297,10 @@ function! SwitchLastUsedTab()
 endfunction
 nmap tt :call SwitchLastUsedTab()<CR>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Diff related
+" }}}
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" 
+" [ Diff related ]                                          {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "force vim diff to ignore whitespace
@@ -343,8 +350,10 @@ if has("autocmd")
        \ endif                
 endif
 
+" }}}
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Programming Language 
+" [ Programming Language ]                                  {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     """"""""""""""""""""""""""""""
@@ -381,8 +390,10 @@ endif
     "set makeprg=make
     "set errorformat=%f:%l:\ %m
 
+" }}}
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Hex/Binary Edit                                             "
+" [ Hex/Binary Edit ]                                       {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " autocmds to automatically enter hex mode and handle file writes properly
@@ -455,8 +466,10 @@ endfunction
 
 nnoremap <C-x> :Hexmode<CR>
 
+" }}}
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin configuration
+" [ Plugin configuration ]                                  {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     """"""""""""""""""""""""
@@ -513,8 +526,10 @@ nnoremap <C-x> :Hexmode<CR>
     let g:vimgdb_debug_file = ""
     run macros/gdb_mappings.vim 
 
+" }}}
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Functions & autocmd
+" [ Functions & autocmd ]                                   {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " set vim to chdir for each file
 if exists('+autochdir')
@@ -602,6 +617,11 @@ endfunction
 vnoremap <silent> * :call VisualSearch('f')<CR>
 vnoremap <silent> # :call VisualSearch('b')<CR>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" MISC
+" }}}
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" [ MISC ]                                                  {{{
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" }}}
+" vim:fdm=marker:et:fdl=0:
