@@ -11,7 +11,7 @@
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
 " Web:           http://chenkaie.blogspot.com
-" Last Modified: Tue Dec 15, 2009  12:26AM
+" Last Modified: Wed Dec 16, 2009  12:55PM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -92,7 +92,7 @@ xmap <s-tab> <gv
 
 set foldmethod=marker
 set foldlevel=1000
-set foldnestmax=3
+set foldnestmax=5
 nnoremap ,<SPACE> za
 
 " {{{ file encoding setting
@@ -219,7 +219,7 @@ cabbrev help vertical help
 
 " Remove 'recording' key mapping
 nmap q <Cr>
-
+hi Folded ctermbg=237
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" 
@@ -493,15 +493,31 @@ nnoremap <C-x> :Hexmode<CR>
     map <PageDown> :call SmoothPageScrollDown()<CR>
     map <PageUp>   :call SmoothPageScrollUp()<CR> 
 
-    """"""""""""""""""""""""
+    """"""""""""""""""""""""""""""
     " Trinity related Start
-    """"""""""""""""""""""""
+    """"""""""""""""""""""""""""""
+    " Smooth Scroll
     " Open and close all the three plugins on the same time ,wired toggle Trinity,  will caue hlsearch to no effect, add set hlsearch again manually
-    nmap <F12>   :TrinityToggleTagList<CR>
+    " nmap <F12>  :TrinityToggleTagList<CR>
     " nmap <F9>   :TrinityToggleSourceExplorer<CR>
     " nmap <F10>  :TrinityToggleTagList<CR>
     " nmap <F11>  :TrinityToggleNERDTree<CR> 
-    let Tlist_Use_Right_Window=1
+    
+    """"""""""""""""""""""""""""""
+    " Tag List 
+    """"""""""""""""""""""""""""""
+    nmap <F12>   :TlistToggle<CR>
+
+    " Split to the right side of the screen
+    let g:Tlist_Use_Right_Window = 1
+    " Sort by the order
+    let g:Tlist_Sort_Type = "order"
+    " If you are the last, kill yourself
+    let g:Tlist_Exit_OnlyWindow = 1
+    " Do not show folding tree
+    let g:Tlist_Enable_Fold_Column = 0
+    " Always display one file tags
+    let g:Tlist_Show_One_File = 1
 
    """"""""""""""""""""""""""""""
    " Minibuffer

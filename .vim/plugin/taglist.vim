@@ -1,7 +1,7 @@
 " File: taglist.vim
 " Author: Yegappan Lakshmanan (yegappan AT yahoo DOT com)
 " Version: 4.5
-" Last Modified: September 21, 2007
+" Last Modified: Wed Dec 16, 2009  10:59PM
 " Copyright: Copyright (C) 2002-2007 Yegappan Lakshmanan
 "            Permission is hereby granted to use and distribute this code,
 "            with or without modifications, provided that this copyright
@@ -2508,6 +2508,7 @@ endfunction
 " Tlist_Window_Close
 " Close the taglist window
 function! s:Tlist_Window_Close()
+    set updatetime=4000
     call s:Tlist_Log_Msg('Tlist_Window_Close()')
     " Make sure the taglist window exists
     let winnum = bufwinnr(g:TagList_title)
@@ -2551,6 +2552,7 @@ endfunction
 " Tlist_Window_Open
 " Open and refresh the taglist window
 function! s:Tlist_Window_Open()
+    set updatetime=300
     call s:Tlist_Log_Msg('Tlist_Window_Open()')
     " If the window is open, jump to it
     let winnum = bufwinnr(g:TagList_title)
