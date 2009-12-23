@@ -11,7 +11,7 @@
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
 " Web:           http://chenkaie.blogspot.com
-" Last Modified: Wed Dec 16, 2009  12:55PM
+" Last Modified: Wed Dec 23, 2009  02:42PM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -283,11 +283,10 @@ nmap 8 <Esc>:tabn 8<Enter>
 nmap r <Esc>:edit<Enter>
 
 "Tab Highlight color
-hi TabLine	ctermfg=fg	ctermbg=28	cterm=NONE
-hi TabLineFill	ctermfg=fg	ctermbg=28	cterm=NONE
-hi TabLineSel	ctermfg=fg	ctermbg=NONE	cterm=NONE
-hi TabLine	cterm=underline  
-hi TabLineFill	cterm=underline
+hi TabLine	   ctermfg=fg	ctermbg=28	 cterm=underline
+hi TabLineFill ctermfg=fg	ctermbg=28	 cterm=underline
+hi TabLineSel  ctermfg=fg	ctermbg=NONE cterm=NONE
+hi Title       ctermfg=219  ctermbg=NONE cterm=NONE
 
 autocmd TabLeave * let g:LastUsedTabPage = tabpagenr()
 function! SwitchLastUsedTab()
