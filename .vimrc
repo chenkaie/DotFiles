@@ -11,7 +11,7 @@
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
 " Web:           http://chenkaie.blogspot.com
-" Last Modified: Wed Dec 23, 2009  02:42PM
+" Last Modified: Wed Dec 23, 2009  08:15PM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -368,7 +368,9 @@ endif
     nnoremap <F11> <ESC>:cs add ../cscope.out ..<CR>:cs add /home/kent/cscope_ctag/Horus/cscope.out /home/kent/Project/Horus/apps<CR>
 
     " To avoid using wrong cscope(/opt/montavista/pro5.0/bin/cscope) once sourcing devel_IP8161_VVTK
-    set cscopeprg=~/usr/bin/cscope
+    if match(system('ls ~/usr/bin/cscope'), 'cscope') != -1
+        set cscopeprg=~/usr/bin/cscope
+    endif
 
     """"""""""""""""""""""""""""""
     " Vi Man
