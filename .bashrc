@@ -43,6 +43,8 @@ case $OS in
         export PATH=$HOME/Tools:$HOME/Tools/subversion-scripts:$HOME/Tools/git-scripts:$HOME/usr/bin:$PATH
         # MANPATH
         export MANPATH=$HOME/usr/man:$HOME/usr/share/man:$MANPATH
+        # PERL5LIB
+        export PERL5LIB=$HOME/usr/lib/perl5/site_perl/5.10.1:$HOME/usr/lib/perl5/5.10.1:$PERL5LIB
         ;;
 
     Linux)
@@ -59,6 +61,8 @@ case $OS in
         export PATH=$HOME/hr:$HOME/Tools:$HOME/Tools/subversion-scripts:$HOME/Tools/git-scripts:$HOME/usr/bin:$PATH
         # MANPATH
         export MANPATH=$HOME/usr/man:$HOME/usr/share/man:$HOME/usr/cpan/share/man:$MANPATH
+        # PERL5LIB
+        export PERL5LIB=$HOME/usr/lib/perl5/site_perl/5.10.1:$HOME/usr/lib/perl5/5.10.1:$PERL5LIB
         ;;
 
     *)
@@ -218,7 +222,7 @@ PS1=$TXTYLW'[\u]'$TXTWHT'@'$TXTPUR'\h'$TXTWHT':'$TXTGRN'\W'$TXTWHT'\$ '
 
 #history control, ignorespace & ignoredups
 export HISTCONTROL=ignoreboth
-export HISTSIZE=5000
+export HISTSIZE=10000
 export HISTTIMEFORMAT="%Y-%m-%d_%H:%M:%S_%a  "
 
 # check the window size after each command and, if necessary,
