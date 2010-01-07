@@ -11,7 +11,7 @@
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
 " Web:           http://chenkaie.blogspot.com
-" Last Modified: Wed Dec 23, 2009  08:15PM
+" Last Modified: Wed Jan 06, 2010  08:09PM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -633,6 +633,24 @@ endfunction
 "Basically you press * or # to search for the current selection !! Really useful
 vnoremap <silent> * :call VisualSearch('f')<CR>
 vnoremap <silent> # :call VisualSearch('b')<CR>
+
+" Vim Eval snippet by c9s
+fun! EvalVimScriptRegion(s,e)
+    let lines = getline(a:s,a:e)
+    let file = tempname()
+    cal writefile(lines,file)
+    silent exec ':source '.file
+    redraw
+    cal delete(file)
+    echo "Region evaluated."
+    sleep 500m
+    "normal gv
+endf
+augroup VimEval
+    au!
+    au filetype vim :command! -range Eval :cal EvalVimScriptRegion(<line1>,<line2>)
+    au filetype vim :vnoremap <silent> e :Eval<CR>
+augroup END
 
 " }}}
 
