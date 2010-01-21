@@ -153,9 +153,10 @@ alias rmrd='[ -n "$PRODUCTDIR" ] && cd ${PRODUCTDIR}/release; rm -rf app_cluster
 #make for fun
 alias make='cmake'
 alias m='make'
-alias mc='m cleanall'
+alias mc='m cleal'
+alias mca='m cleanall'
 alias mi='m install'
-alias mall='mc && m && mi'
+alias mall='mca && m && mi'
 
 #gcc
 alias agcc='arm-linux-gcc -Wall -g -fno-omit-frame-pointer'
