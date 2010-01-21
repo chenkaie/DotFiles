@@ -158,8 +158,8 @@ alias mi='m install'
 alias mall='mc && m && mi'
 
 #gcc
-alias agcc='arm-linux-gcc -Wall'
-alias gcc='gcc -Wall'
+alias agcc='arm-linux-gcc -Wall -g -fno-omit-frame-pointer'
+alias gcc='gcc -Wall -g -fno-omit-frame-pointer'
 alias objdump='objdump -d -S'
 
 #Lint related
