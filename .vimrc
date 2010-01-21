@@ -11,7 +11,7 @@
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
 " Web:           http://chenkaie.blogspot.com
-" Last Modified: Wed Jan 06, 2010  08:09PM
+" Last Modified: Mon Jan 18, 2010  01:11PM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -136,7 +136,7 @@ map ,<F2> <ESC>:cp<CR>
 nnoremap <F9> <ESC>:w \| !gcc -Wall -ansi -pedantic -Wextra -std=c99 % && ./a.out
 
 "replace 'SHIFT+:' with ';' COOL! 
-nnoremap ; :
+noremap ; :
 
 "Yahoo Dictionary
 map <C-D> viwy:!clear; ydict <C-R>"<CR>
