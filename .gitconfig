@@ -15,7 +15,7 @@
     excludesfile = ~/.gitignore
 [alias]
     st = status
-    ci = commit
+    ci = commit --verbose
     br = branch
     co = checkout
     di = diff
@@ -36,3 +36,8 @@
 
 [merge]
     tool = vimdiff
+
+[sync "github"]
+    github = chenkaie 
+    into = /home/kent/Repos
+
