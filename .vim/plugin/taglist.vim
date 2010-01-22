@@ -1,7 +1,7 @@
 " File: taglist.vim
 " Author: Yegappan Lakshmanan (yegappan AT yahoo DOT com)
 " Version: 4.5
-" Last Modified: Wed Dec 16, 2009  10:59PM
+" Last Modified: Mon Jan 18, 2010  06:17PM
 " Copyright: Copyright (C) 2002-2007 Yegappan Lakshmanan
 "            Permission is hereby granted to use and distribute this code,
 "            with or without modifications, provided that this copyright
@@ -1684,7 +1684,8 @@ function! s:Tlist_Window_Init()
             endif
         endif
         if v:version >= 700
-            autocmd TabEnter * silent call s:Tlist_Refresh_Folds()
+            " Comment by Kent, won't refresh temporarily!
+            "autocmd TabEnter * silent call s:Tlist_Refresh_Folds()
         endif
     augroup end
 
