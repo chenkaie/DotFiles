@@ -11,7 +11,7 @@
 "
 " Author:        Kent Chen <chenkaie at gmail.com>
 " Web:           http://chenkaie.blogspot.com
-" Last Modified: Mon Jan 18, 2010  01:11PM
+" Last Modified: Fri Jan 22, 2010  02:40PM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -481,6 +481,7 @@ nnoremap <C-x> :Hexmode<CR>
     let g:EasyGrepRecursive = 1
     let g:EasyGrepIgnoreCase= 0 
     let g:EasyGrepJumpToMatch= 1
+    let g:EasyGrepWindow=1         " user 'location list' rather than 'Quickfix'
 
     """"""""""""""""""""""""""""""
     " VCSCommand
