@@ -187,8 +187,10 @@ Uncomments the selected line(s).
 ------------------------------------------------------------------------------
  Copy from search mode to ex mode
     o <C-R>/
-    <C-R> allows you to insert the contents of a register, and the "/" register
-    contains the last search pattern used.
+        <C-R> allows you to insert the contents of a register, and the "/" register
+        contains the last search pattern used.
+    o <C-R>0
+        copy text from what you have yanked. 
 
 ------------------------------------------------------------------------------
  Web: http://172.16.5.30/rd1wiki/index.php/User:Kent:VIM:Note
