@@ -10,4 +10,6 @@ augroup filetypedetect
     au BufRead *.htm*,*.css,*.js colorscheme ir_black_cterm
     " Set default fdm for *.c,*.h file
     au BufRead *.c,*.h set fdm=syntax
+    " set Spell check: ON when svn,git commit
+    au BufRead svn-commit.*.tmp,COMMIT_EDITMSG :set spell
 augroup END
