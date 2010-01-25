@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Sat Jan 23, 2010  05:16PM
+" Last Modified: Mon Jan 25, 2010  01:32PM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -235,6 +235,9 @@ try
   set switchbuf=usetab
 catch
 endtry
+
+" use Enter key to insert a blank line
+nnoremap <silent> <enter> :put =''<cr>
 
 " }}}
 
