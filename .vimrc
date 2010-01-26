@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Mon Jan 25, 2010  01:32PM
+" Last Modified: Tue Jan 26, 2010  09:51AM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -236,8 +236,8 @@ try
 catch
 endtry
 
-" use Enter key to insert a blank line
-nnoremap <silent> <enter> :put =''<cr>
+" use ,<Enter> key to insert a blank line
+nnoremap <silent> ,<enter> :put =''<cr>
 
 " }}}
 
