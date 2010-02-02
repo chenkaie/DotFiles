@@ -13,6 +13,7 @@ defutf8 on
 defc1 off # treat input chars 128 ~ 159 as control functions
 defflow on
 vbell_msg "Ding Ding!!"
+vbell off  # i.e. set to audible bell, used to redirect bell to terminal (putty) for "flashing effect"
 defencoding utf8
 # cjkwidth on
 
