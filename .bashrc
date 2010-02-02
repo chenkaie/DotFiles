@@ -58,7 +58,7 @@ case $OS in
             . /etc/bash_completion
         fi
         # PATH
-        export PATH=$HOME/hr:$HOME/Tools:$HOME/Tools/subversion-scripts:$HOME/Tools/git-scripts:$HOME/usr/bin:$PATH
+        export PATH=$HOME/hr:$HOME/Tools:$HOME/Tools/subversion-scripts:$HOME/Tools/git-scripts:$HOME/usr/bin:$HOME/usr/sbin:$PATH
         # MANPATH
         export MANPATH=$HOME/usr/man:$HOME/usr/share/man:$HOME/usr/cpan/share/man:$MANPATH
         # PERL5LIB
@@ -145,15 +145,17 @@ alias dn='OPTIONS=$(\ls -F | grep /$); select s in $OPTIONS; do cd $PWD/$s; brea
 alias del='mv --target-directory=$HOME/.Trash/'
 
 #aliases and export for Project
-alias cdpd='cd ${PRODUCTDIR}'
-alias cdrd='cd ${IMAGEDIR}'
+alias pcd='cd ${PRODUCTDIR}'
+alias icd='cd ${IMAGEDIR}'
+alias scd='cd ${PRODUCTDIR}/build/scripts'
+alias rcd='cd ${PRODUCTDIR}/release;pwd'
 alias pd='echo ${PRODUCTDIR}'
 alias rmrd='[ -n "$PRODUCTDIR" ] && cd ${PRODUCTDIR}/release; rm -rf app_cluster_Build/ flashfs/ rootfs/; cd -'
 
 #make for fun
 alias make='cmake'
 alias m='make'
-alias mc='m cleal'
+alias mc='m clean'
 alias mca='m cleanall'
 alias mi='m install'
 alias mall='mca && m && mi'
@@ -215,8 +217,14 @@ BAKWHT="\[\033[47m\]"   # White
 TXTRST="\[\033[0m\]"    # Text Reset
 # }}}
 
-PS1=$TXTYLW'[\u]'$TXTWHT'@'$TXTPUR'\h'$TXTWHT':'$TXTGRN'\W'$TXTWHT'\$ '
-[ "$OS" == "Darwin" ] &&  PS1=$TXTYLW'[\u]'$TXTWHT'@'$TXTRED'\h'$TXTWHT':'$TXTGRN'\W'$TXTWHT'\$ '
+# Git shell prompt
+if [ "\$(type -t __git_ps1)" ]; then
+    PS1=$TXTYLW'[\u]'$TXTWHT'@'$TXTPUR'\h'$TXTWHT':'$TXTGRN'\W'$TXTWHT'$(__git_ps1)\$ '
+    [ "$OS" == "Darwin" ] &&  PS1=$TXTYLW'[\u]'$TXTWHT'@'$TXTRED'\h'$TXTWHT':'$TXTGRN'\W'$TXTWHT'$(__git_ps1)\$ '
+else
+    PS1=$TXTYLW'[\u]'$TXTWHT'@'$TXTPUR'\h'$TXTWHT':'$TXTGRN'\W'$TXTWHT'\$ '
+    [ "$OS" == "Darwin" ] &&  PS1=$TXTYLW'[\u]'$TXTWHT'@'$TXTRED'\h'$TXTWHT':'$TXTGRN'\W'$TXTWHT'\$ '
+fi
 
 # add for screen to dynamically update title
 #PROMPT_COMMAND='echo -n -e "\033k\033\134"'
