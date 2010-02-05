@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Tue Jan 26, 2010  09:51AM
+" Last Modified: Sat Feb 06, 2010  12:11AM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -82,6 +82,7 @@ set expandtab      " Use spaces for tabs
 set shiftround     " Round indent to multiple of shiftwidth
 set shiftwidth=4   " Number of spaces for each indent
 set tabstop=4      " Number of spaces for tab key
+set softtabstop=4  " Number of spaces for tab key while performing editing operations
 
 set history=500    " keep 200 lines of command line history
 set ruler          " show the cursor position all the time
