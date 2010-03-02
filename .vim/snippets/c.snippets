@@ -125,10 +125,14 @@ snippet pr
 snippet fpr
 	fprintf(${1:stderr}, "${2:%s}\n"${3});${4}
 snippet prd
-	printf("%s:%d: ${1:%s}\n",__FILE__, __LINE__, ${2});${3}
+	printf("[%s] ${1:%s}\n", __FUNCTION__, ${2});${3}
+snippet prda
+	printf("[%s] %s:%d (%s) => ${1:%s}\n", __FUNCTION__, __FILE__, __LINE__, __TIME__, ${2});${3}
 # fprintf (again, this isn't as nice as TextMate's version, but it works)
 snippet fprd
-	fprintf(${1:stderr}, "%s:%d ${2:%s}\n",__FILE__, __LINE__, ${3});${4}
+	fprintf(${1:stderr}, "[%s] ${2:%s}\n", __LINE__, ${3});${4}
+snippet fprda
+	fprintf(${1:stderr}, "[%s] %s:%d (%s) => ${2:%s}\n", __FUNCTION__, __FILE__, __LINE__, __TIME__, ${3});${4}
 snippet .
 	[${1}]${2}
 snippet un
