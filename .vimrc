@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Sat Feb 06, 2010  12:11AM
+" Last Modified: Mon Mar 15, 2010  11:29PM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -96,7 +96,7 @@ nmap <s-tab> V<
 xmap <tab> >gv
 xmap <s-tab> <gv
 
-set foldmethod=marker
+set foldmethod=indent
 set foldlevel=1000
 set foldnestmax=5
 nnoremap ,<SPACE> za
@@ -672,6 +672,40 @@ augroup VimEval
     au filetype vim :command! -range Eval :cal EvalVimScriptRegion(<line1>,<line2>)
     au filetype vim :vnoremap <silent> e :Eval<CR>
 augroup END
+
+set foldtext=MyFoldText()                                                                                                                                                              
+function! MyFoldText()
+    let lines = 1 + v:foldend - v:foldstart
+    let ind = indent(v:foldstart)
+
+    let spaces = ''
+    let i = 0 
+    while i < ind 
+        let spaces .= ' ' 
+        let i += 1
+    endwhile
+
+    let linestxt = 'lines'
+    if lines == 1
+        linestxt = 'line'
+    endif
+
+    let firstline = getline(v:foldstart)
+    let line = firstline[ind : ind+80]
+
+    return spaces . '+' . v:folddashes . ' ' . lines . ' ' . linestxt . ': ' . line . ' ' 
+endfunction
+
+" Highlight long lines
+nnoremap <silent> <Leader>l
+      \ :if exists('w:long_line_match') <Bar>
+      \   silent! call matchdelete(w:long_line_match) <Bar>
+      \   unlet w:long_line_match <Bar>
+      \ elseif &textwidth > 0 <Bar>
+      \   let w:long_line_match = matchadd('ErrorMsg', '\%>'.&tw.'v.\+', -1) <Bar>
+      \ else <Bar>
+      \   let w:long_line_match = matchadd('ErrorMsg', '\%<81v.\%>77v', -1) <Bar>
+      \ endif<CR>
 
 " }}}
 
