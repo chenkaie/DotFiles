@@ -412,7 +412,7 @@ function! <SID>DirDiff(srcA, srcB)
     call append(0, "[A]=". DirDiffAbsSrcA)
     call append(1, "[B]=". DirDiffAbsSrcB)
     call append(2, "Usage:   <Enter>/'o'=open,'s'=sync,'\\dj'=next,'\\dk'=prev, 'q'=quit")
-    call append(3, "Options: 'u'=update,'x'=set excludes,'i'=set ignore,'a'=set args, 'b'=hex/binary mode" )
+    call append(3, "Options: 'u'=update,'x'=set excludes,'i'=set ignore,'a'=set args, 'b'=hex/binary mode, 'w'=wrap mode" )
     call append(4, "Diff Args:" . cmdarg)
     call append(5, "")
     " go to the beginning of the file
@@ -435,6 +435,7 @@ function! <SID>DirDiff(srcA, srcB)
     nnoremap <buffer> a :call <SID>ChangeArguments()<CR>
     nnoremap <buffer> i :call <SID>ChangeIgnore()<CR>
     nnoremap <buffer> b :call <SID>DirDiffHexmode()<CR>
+    nnoremap <buffer> w :call <SID>DirDiffWrapmode()<CR>
     nnoremap <buffer> q :call <SID>DirDiffQuit()<CR>
 
     nnoremap <buffer> o    :call <SID>DirDiffOpen()<CR>
@@ -549,6 +550,15 @@ function! <SID>DirDiffHexmode()
     call <SID>ToggleHex()
     wincmd l
     call <SID>ToggleHex()
+    " Go back to the diff window
+    wincmd j
+endfunction
+
+function! <SID>DirDiffWrapmode()
+    wincmd k
+    setlocal wrap!
+    wincmd l
+    setlocal wrap!
     " Go back to the diff window
     wincmd j
 endfunction
