@@ -992,7 +992,7 @@ function! VCSCommandGetVCSType(buffer)
 	for vcsType in keys(s:plugins)
 		let identified = s:plugins[vcsType][1].Identify(a:buffer)
 		if identified
-			if identified == g:VCSCOMMAND_IDENTIFY_EXACT
+			if identified == g:VCSCOMMAND_IDENTIFY_INEXACT
 				let matches = [vcsType]
 				break
 			else
