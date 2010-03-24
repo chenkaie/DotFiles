@@ -1,7 +1,7 @@
 " File: taglist.vim
 " Author: Yegappan Lakshmanan (yegappan AT yahoo DOT com)
 " Version: 4.5
-" Last Modified: Mon Jan 18, 2010  06:17PM
+" Last Modified: Mon Mar 08, 2010  01:44PM
 " Copyright: Copyright (C) 2002-2007 Yegappan Lakshmanan
 "            Permission is hereby granted to use and distribute this code,
 "            with or without modifications, provided that this copyright
@@ -383,7 +383,7 @@ let s:tlist_def_c_settings = 'c;d:macro;g:enum;s:struct;u:union;t:typedef;' .
                            \ 'v:variable;f:function'
 
 " c++ language
-let s:tlist_def_cpp_settings = 'c++;n:namespace;v:variable;d:macro;t:typedef;' .
+let s:tlist_def_cpp_settings = 'c++;n:namespace;c:member;v:variable;d:macro;t:typedef;' .
                              \ 'c:class;g:enum;s:struct;u:union;f:function'
 
 " c# language
