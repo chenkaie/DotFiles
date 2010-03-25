@@ -554,6 +554,7 @@ function! <SID>DirDiffHexmode()
     wincmd j
 endfunction
 
+"Add by Kent
 function! <SID>DirDiffWrapmode()
     wincmd k
     setlocal wrap!
@@ -612,6 +613,8 @@ function! <SID>DirDiffOpen()
         exe (b:currentDiff)
         " Center the line
         exe ("normal z.")
+        " Kent, set wrap mode by default
+        call <SID>DirDiffWrapmode()
     else
         echo "There is no diff at the current line!"
     endif
