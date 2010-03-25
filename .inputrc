@@ -10,11 +10,18 @@ set output-meta on
 set convert-meta off 
 set show-all-if-ambiguous on
 
+# Home
 "\e[1~": beginning-of-line 
+"\C-g":  beginning-of-line 
+# Insert 
 "\e[2~": yank-nth-arg 
+# Delete 
 "\e[3~": delete-char 
+# End 
 "\e[4~": end-of-line 
+# PageUp
 "\e[5~": history-search-backward 
+# PageDown
 "\e[6~": history-search-forward 
 
 # Ctrl + w/b : word movement
