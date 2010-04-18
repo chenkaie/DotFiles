@@ -687,7 +687,7 @@ end
 
 set print pretty on
 set print object on
-set print static-members on
+set print static-members off
 set print vtbl on
 set print demangle on
 set demangle-style gnu-v3
@@ -696,3 +696,8 @@ set print sevenbit-strings off
 set print pretty on
 set print array on
 #set logging on
+
+set history save on
+set history size 10000
+set history filename ~/.gdb_history
+set charset ASCII
