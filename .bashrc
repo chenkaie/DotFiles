@@ -94,8 +94,10 @@ alias l='ls -FG'
 alias ll='ls -al'                   # long list format
 alias lk='ls -lk'                   # --block-size=1K
 alias lt='ls -ltr'                  # sort by date
+alias lc='ls -ltcr'                 # sort by and show change time
+alias la='ls -ltur'                 # sort by and show access time
 alias lx='ls -lXB'                  # sort by extension
-alias lz='ls -lS'                   # sort by size 
+alias lz='ls -lSr'                  # sort by size 
 alias ld='ls -d */'                 # es only Dirs
 alias l.='ls -dAFh .[^.]*'          # ls only Dotfiles
 alias lst='ls -hFtal | grep $(date +%Y-%m-%d)' #ls Today
@@ -106,7 +108,7 @@ alias vi='vim'
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
-alias df='df -h'
+alias df='df -kTh'
 alias ln='ln -i'
 alias psg='ps -ef | grep $1'
 alias h='history | grep $1'
@@ -116,6 +118,7 @@ alias more='less'
 alias mkdir='mkdir -p -v'
 alias reload='source ~/.bashrc'
 alias wget='wget -c'
+alias which='type -a'
 
 # have to check exist()
 alias top='htop'
@@ -177,9 +180,33 @@ if exist lint ; then
 fi
 
 #######################
+# Bash SHell opts     # 
+#######################
+
+#history control, ignorespace & ignoredups
+export HISTCONTROL=ignoreboth
+export HISTSIZE=10000
+export HISTTIMEFORMAT="%Y-%m-%d_%H:%M:%S_%a  "
+export HISTIGNORE="&:bg:fg:ll:h"
+
+#Specify that it (Ctrl+D) must pressed twice to exit Bash
+export IGNOREEOF=1
+
+set -o noclobber 
+set -o notify
+#set -o xtrace          # Useful for debuging.
+
+# Enable options:
+# check the window size after each command and, if necessary, update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+shopt -s histappend
+shopt -s no_empty_cmd_completion
+shopt -s cdspell
+shopt -s checkhash
+
+#######################
 # Default             # 
 #######################
-set -o noclobber 
 
 # Define Colors {{{
 TXTBLK="\[\033[0;30m\]" # Black - Regular
@@ -229,15 +256,7 @@ fi
 # add for screen to dynamically update title
 #PROMPT_COMMAND='echo -n -e "\033k\033\134"'
 
-#history control, ignorespace & ignoredups
-export HISTCONTROL=ignoreboth
-export HISTSIZE=10000
-export HISTTIMEFORMAT="%Y-%m-%d_%H:%M:%S_%a  "
 
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
-shopt -s histappend
 export PROMPT_COMMAND='history -a'
 
 #export MANPAGER="most -s"
@@ -285,6 +304,9 @@ source $rcfiles/completion/cdots.sh
 
 # make less more friendly for non-text input files, see lesspipe(1)
 exist lesspipe && eval "$(lesspipe)"
+
+export LESS='-i -N -w  -z-4 -g -e -M -X -F -R -P%t?f%f \
+:stdin .?pb%pb\%:?lbLine %lb:?bbByte %bb:-...'
 
 #######################
 # Functions           # 
@@ -383,5 +405,9 @@ function repeat() # repeat n times command
         eval "$@";
     done
 }
+
+# Find a file with pattern $1 in name and Execute $2 on it:
+function fe()
+{ wcfind . -type f -iname '*'${1:-}'*' -exec ${2:-ls} {} \;  ; }
 
 # vim: fdm=marker ts=4 sw=4 et:
