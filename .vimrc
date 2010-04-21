@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Mon Mar 15, 2010  11:29PM
+" Last Modified: Tue Mar 30, 2010  01:10PM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -191,6 +191,9 @@ map <F8> :set list!<bar>set list?<CR>
 " Add new keyword in search under cursor (*)
 map a* :exec "/\\(".getreg('/')."\\)\\\\|".expand("<cword>")<CR>
 
+map * g*
+map # g#
+
 " Use Ctrl+hjkl to switch between Window
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
@@ -342,7 +345,7 @@ nmap ,d :DiffSaved<CR>
 
 "DirDiff
 let g:DirDiffExcludes = "*.git,*.svn,.*.swp,tags,cscope.*"
-let g:DirDiffWindowSize = 10
+let g:DirDiffWindowSize = 6 
 
 " WinMerge-style (Alt + hjkl) mapping for vimdiff
 nmap j ]c
