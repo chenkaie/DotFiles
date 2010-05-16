@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Tue Mar 30, 2010  01:10PM
+" Last Modified: Wed May 12, 2010  09:41AM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -110,7 +110,7 @@ set fenc=utf-8
 " }}}
 
 " For ambiguous characters, ex: ”, and BBS XD
-set ambiwidth=double
+set ambiwidth=single
 
 " Favorite file types
 set ffs=unix,dos,mac
