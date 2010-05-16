@@ -164,8 +164,8 @@ alias mi='m install'
 alias mall='mca && m && mi'
 
 #gcc
-alias agcc='arm-linux-gcc -Wall -g -fno-omit-frame-pointer -fno-inline'
-alias gcc='gcc -Wall -g -fno-omit-frame-pointer -fno-inline'
+alias agcc='arm-linux-gcc -Wall -g3 -fno-omit-frame-pointer -fno-inline'
+alias gcc='gcc -Wall -g3 -fno-omit-frame-pointer -fno-inline'
 alias objdump='objdump -d -S'
 
 #Lint related
@@ -305,8 +305,7 @@ source $rcfiles/completion/cdots.sh
 # make less more friendly for non-text input files, see lesspipe(1)
 exist lesspipe && eval "$(lesspipe)"
 
-export LESS='-i -N -w  -z-4 -g -e -M -X -F -R -P%t?f%f \
-:stdin .?pb%pb\%:?lbLine %lb:?bbByte %bb:-...'
+#export LESS='-i -N -w  -z-4 -g -e -M -X -F -R -P%t?f%f :stdin .?pb%pb\%:?lbLine %lb:?bbByte %bb:-...'
 
 #######################
 # Functions           # 
