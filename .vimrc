@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Wed May 12, 2010  09:41AM
+" Last Modified: Wed May 19, 2010  02:53PM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -222,7 +222,7 @@ cabbrev vds vertical diffsplit
 " Force to split right!
 set splitright
 cabbrev h vertical help
-cabbrev help vertical help
+"cabbrev help vertical help
 "cabbrev split vsplit
 "cabbrev new vnew
 
