@@ -105,7 +105,7 @@ endfunction
 "============================================================================"
 
 function! s:OpenSession(name)
-	set noautochdir
+	"set noautochdir
 	if a:name != '' && a:name[0] != '"'
 		call s:RestoreDefaults()
 		execute 'silent! 1,' . bufnr('$') . 'bwipeout!'
@@ -119,7 +119,7 @@ function! s:OpenSession(name)
 		endif
 		let g:LAST_SESSION = a:name
 	endif
-	set autochdir
+	"set autochdir
 endfunction
 
 "============================================================================"
@@ -225,7 +225,7 @@ endfunction
 "============================================================================"
 
 function! s:SaveSessionAs(...)
-	set noautochdir
+	"set noautochdir
 	if a:0 == 0 || a:1 == ''
 		let name = input('Save session as: ', substitute(v:this_session, '.*\(/\|\\\)', '', ''))
 	else
@@ -240,7 +240,7 @@ function! s:SaveSessionAs(...)
 		execute 'silent mksession! ' . s:sessions_path . '/' . name
 		redraw | echo 'Saved session "' . name . '"'
 	endif
-	set autochdir
+	"set autochdir
 endfunction
 
 "============================================================================"
