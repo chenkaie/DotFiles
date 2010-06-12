@@ -9,3 +9,5 @@
 .*.sw?
 .cgdb/readline_history.txt
 tags
+.vim/doc/tags-ja
+.vim/record
