@@ -1,4 +1,5 @@
 .svn
+.subversion/auth/
 .DS_Store
 .vim/backup
 .vim/sessions
