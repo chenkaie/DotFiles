@@ -58,11 +58,14 @@ case $OS in
             . /etc/bash_completion
         fi
         # PATH
-        export PATH=$HOME/hr:$HOME/Tools:$HOME/Tools/subversion-scripts:$HOME/Tools/git-scripts:$HOME/usr/bin:$HOME/usr/sbin:$PATH
+        export PATH=$HOME/hr:$HOME/perl5/bin:$HOME/Tools:$HOME/Tools/subversion-scripts:$HOME/Tools/git-scripts:$HOME/usr/bin:$HOME/usr/sbin:$PATH
         # MANPATH
         export MANPATH=$HOME/usr/man:$HOME/usr/share/man:$HOME/usr/cpan/share/man:$MANPATH
-        # PERL5LIB
-        export PERL5LIB=$HOME/usr/lib/perl5/site_perl/5.10.1:$HOME/usr/lib/perl5/5.10.1:$PERL5LIB
+
+        # PERL5
+        source $HOME/perl5/perlbrew/etc/bashrc
+        export PERL_CPANM_OPT="-l ~/perl5"
+        export PERL5LIB=$HOME/perl5/lib/perl5:$PERL5LIB
         ;;
 
     *)
