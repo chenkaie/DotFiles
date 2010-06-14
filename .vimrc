@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Sat Jun 12, 2010  11:51PM
+" Last Modified: Mon Jun 14, 2010  04:25PM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -420,8 +420,8 @@ endif
     """"""""""""""""""""""""""""""
     " NeoComplCache
     """"""""""""""""""""""""""""""
-    let g:AutoComplPop_NotEnableAtStartup = 1
     let g:NeoComplCache_EnableAtStartup = 1
+    let g:AutoComplPop_NotEnableAtStartup = 1
     let g:NeoComplCache_DisableAutoComplete = 1
     let g:NeoComplCache_SmartCase = 1
     let g:NeoComplCache_TagsAutoUpdate = 1
@@ -538,6 +538,8 @@ nnoremap <C-x> :Hexmode<CR>
     " VCSCommand
     """"""""""""""""""""""""""""""
     nmap d <Esc>:VCSVimDiff<Enter>
+    " shortcut for git diff
+    nmap g <Esc>:let g:VCSCOMMAND_IDENTIFY_EXACT=-1<Enter>:VCSVimDiff<Enter>
 
     """"""""""""""""""""""""""""""
     " Smooth Scroll
@@ -743,6 +745,17 @@ nnoremap <silent> <Leader>l
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " [ MISC ]                                                                   {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" VIM debug
+function! ToggleVerbose()
+    if !&verbose
+        set verbosefile=~/tmp/vim_verbose.log
+        set verbose=15
+    else
+        set verbose=0
+        set verbosefile=
+    endif
+endfunction
 
 " }}}
 
