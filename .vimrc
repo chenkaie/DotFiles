@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Fri Jun 18, 2010  02:18PM
+" Last Modified: Fri Jun 18, 2010  03:18PM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -430,7 +430,9 @@ endif
     " snippets expand key <c-e>
     imap <silent> <C-e> <Plug>(neocomplcache_snippets_expand)
     smap <silent> <C-e> <Plug>(neocomplcache_snippets_expand)
-            
+
+    map <F4> :NeoComplCacheEnable<CR>
+    map ,<F4> :NeoComplCacheToggle<CR>
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

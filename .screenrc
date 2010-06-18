@@ -145,9 +145,10 @@ bindkey "^[[A" number 1
 #bindkey -k k4 select 3
 #bindkey -k k5 select 4
 #bindkey -k k6 select 5
-# F4 : kill all
-bindkey -k k4 quit # This does not work in v4.01.00devel, wired!
-bindkey "^[[14~" quit
+
+# F4 : kill all (comment this function, <F4> will be used for NeoComplCache in vim) 
+#bindkey -k k4 quit # This does not work in v4.01.00devel, weird!
+#bindkey "^[[14~" quit
 
 # F10 : detach
 bindkey -k k; detach
