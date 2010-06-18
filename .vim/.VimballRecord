@@ -1,5 +1,0 @@
-Decho.vba: call delete('/home/kent/.vim/plugin/Decho.vim')|call delete('/home/kent/.vim/plugin/cecutil.vim')|call delete('/home/kent/.vim/syntax/Decho.vim')|call delete('/home/kent/.vim/doc/Decho.txt')
-DrawIt.vba: call delete('/home/kent/.vim/plugin/DrawItPlugin.vim')|call delete('/home/kent/.vim/plugin/cecutil.vim')|call delete('/home/kent/.vim/autoload/DrawIt.vim')|call delete('/home/kent/.vim/doc/DrawIt.txt')
-hicolors.vba: call delete('/home/kent/.vim/syntax/hicolors.vim')|call delete('/home/kent/.vim/doc/hicolors.txt')|call delete('/home/kent/.vim/ftplugin/hicolors.vim')|call delete('/home/kent/.vim/doc/hicolorshelp.txt')
-Align.vba: call delete('/home/kent/.vim/plugin/AlignPlugin.vim')|call delete('/home/kent/.vim/plugin/AlignMapsPlugin.vim')|call delete('/home/kent/.vim/plugin/cecutil.vim')|call delete('/home/kent/.vim/doc/Align.txt')|call delete('/home/kent/.vim/autoload/Align.vim')|call delete('/home/kent/.vim/autoload/AlignMaps.vim')
-gitdiff.vba: call delete('/home/kent/.vim/plugin/gitdiff.vim')

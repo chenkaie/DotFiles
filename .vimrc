@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Mon Jun 14, 2010  04:25PM
+" Last Modified: Fri Jun 18, 2010  02:18PM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -420,28 +420,17 @@ endif
     """"""""""""""""""""""""""""""
     " NeoComplCache
     """"""""""""""""""""""""""""""
-    let g:NeoComplCache_EnableAtStartup = 1
     let g:AutoComplPop_NotEnableAtStartup = 1
-    let g:NeoComplCache_DisableAutoComplete = 1
+    let g:NeoComplCache_EnableAtStartup = 0
+    let g:NeoComplCache_DisableAutoComplete = 0
     let g:NeoComplCache_SmartCase = 1
-    let g:NeoComplCache_TagsAutoUpdate = 1
-    let g:NeoComplCache_EnableInfo = 1
     let g:NeoComplCache_EnableCamelCaseCompletion = 1
     let g:NeoComplCache_MinSyntaxLength = 3
-    let g:NeoComplCache_EnableSkipCompletion = 1
-    let g:NeoComplCache_SkipInputTime = '0.5'
     let g:NeoComplCache_SnippetsDir = $HOME.'/.vim/snippets'
-    " <TAB> completion.
-    inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
     " snippets expand key <c-e>
     imap <silent> <C-e> <Plug>(neocomplcache_snippets_expand)
     smap <silent> <C-e> <Plug>(neocomplcache_snippets_expand)
-
-    """"""""""""""""""""""""""""""
-    " SuperTab
-    """"""""""""""""""""""""""""""
-    let g:SuperTabDefaultCompletionType = '<C-X><C-U>'
-
+            
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
