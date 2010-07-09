@@ -125,44 +125,13 @@ bind u encoding utf8 utf8
 # C-a $num : Switch to window number 0 - 9, or to the blank window.
 bindkey "^[[A" number 1
 
-# C-b $num : move current window to number $num
-#bind -c move 0 number 0
-#bind -c move 1 number 1
-#bind -c move 2 number 2
-#bind -c move 3 number 3
-#bind -c move 4 number 4
-#bind -c move 5 number 5
-#bind -c move 6 number 6
-#bind -c move 7 number 7
-#bind -c move 8 number 8
-#bind -c move 9 number 9
-#bindkey "^b" command -c move
-
-# make life easier, F1-F10 selects screens 0-9 -- conflicts with the keys to control hTop
-#bindkey -k k1 select 0
-#bindkey -k k2 select 1
-#bindkey -k k3 select 2
-#bindkey -k k4 select 3
-#bindkey -k k5 select 4
-#bindkey -k k6 select 5
-
-# F4 : kill all (comment this function, <F4> will be used for NeoComplCache in vim) 
-#bindkey -k k4 quit # This does not work in v4.01.00devel, weird!
-#bindkey "^[[14~" quit
-
 # F10 : detach
 bindkey -k k; detach
 
-# F11 : fast kill, shit conflict with Vim, replace by F4
-#bindkey "^[[23~" kill
-
-# sets  the  title  (a.k.a.)  for  the  default shell or specified program.
+# set the title for the default shell or specified program.
 screen -t Tab1     1
 screen -t Tab2     2
 screen -t Tab3     3
-#screen -t Dotfiles 7
-#screen -t IRC      8 irssi
-#screen -t Misc     9 telnet -8 140.112.172.11
 screen -t Top      10 htop
 
 # Start at window 1
@@ -201,3 +170,4 @@ hardcopydir ~/.screen
 
 msgwait 10
 setenv DISPLAY ':0'
+
