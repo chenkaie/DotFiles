@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Fri Jun 18, 2010  03:18PM
+" Last Modified: Sun Jul 25, 2010  05:35PM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -234,6 +234,10 @@ hi Folded ctermbg=237
 cnoremap <C-A>		<Home>
 cnoremap <C-E>		<End>
 
+" Command-line completion 
+cnoremap <C-P>		<UP>
+cnoremap <C-N>		<DOWN>
+
 " Specify the behavior when switching between buffers 
 try
   set switchbuf=usetab
@@ -245,6 +249,9 @@ nnoremap <silent> ,<enter> :put =''<cr>
 
 " a LAZY key mapping XD
 imap jj <ESC>
+
+" Maximum number of tab pages
+set tabpagemax=30
 
 " }}}
 
