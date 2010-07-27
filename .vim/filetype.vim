@@ -14,4 +14,6 @@ augroup filetypedetect
     au BufRead *.c,*.h set fdm=syntax
     " set Spell check: ON when svn,git commit
     au BufRead svn-commit.*tmp,COMMIT_EDITMSG :set spell
+    " Syntax file for jQuery
+    au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
 augroup END
