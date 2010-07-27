@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Sun Jul 25, 2010  05:35PM
+" Last Modified: Tue Jul 27, 2010  09:49AM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -36,10 +36,10 @@ endif
 
 set backspace=2
 
-" auto generated file: filename~ 
+" auto generated file: filename~
 set backup
 set backupdir=$HOME/.vim/backup
-syntax on 
+syntax on
 set vb
 set noswapfile
 
@@ -50,7 +50,7 @@ if &term == "xterm-color" || &term == "xterm-16color"
     set t_Co=16
 elseif ! has("gui_running")
     set t_Co=256
-endif 
+endif
 
 " for GVim
 if has("gui_running")
@@ -60,8 +60,8 @@ if has("gui_running")
 else
     "For Colorscheme
     set bg=dark
-    colorscheme peaksea_new 
-    " colorscheme ir_black 
+    colorscheme peaksea_new
+    " colorscheme ir_black
 endif
 
 " Status Line
@@ -73,7 +73,7 @@ set hlsearch
 set showmatch
 set number
 
-set autoindent     " Auto Indent 
+set autoindent     " Auto Indent
 set smartindent    " Smart Indent
 set cindent        " C-style Indent
 
@@ -141,7 +141,7 @@ map ,<F2> <ESC>:cp<CR>
 "compile a c file and execute it.
 nnoremap <F9> <ESC>:w \| !gcc -Wall -ansi -pedantic -Wextra -std=c99 % && ./a.out
 
-"replace 'SHIFT+:' with ';' COOL! 
+"replace 'SHIFT+:' with ';' COOL!
 noremap ; :
 
 "Yahoo Dictionary
@@ -163,8 +163,8 @@ set wildignore+=*.o,*.a,*.so,*.obj,*.exe,*.lib,*.ncb,*.opt,*.plg,.svn,.git
 " for :TOhtml
 "let html_use_css=1
 "let use_xhtml = 1
-let html_number_lines = 1 
-let html_no_pre = 1 
+let html_number_lines = 1
+let html_no_pre = 1
 let html_ignore_folding = 1
 
 set scrolloff=10
@@ -185,7 +185,7 @@ hi SpellBad term=underline cterm=underline ctermfg=red
 map <F5> :set spell!<CR><BAR>:echo "Spell check: " . strpart("OffOn", 3 * &spell, 3)<CR>
 
 "Visualize some special chars
-set listchars=tab:>-,trail:-,eol:$,nbsp:%,extends:>,precedes:< 
+set listchars=tab:>-,trail:-,eol:$,nbsp:%,extends:>,precedes:<
 map <F8> :set list!<bar>set list?<CR>
 
 " Add new keyword in search under cursor (*)
@@ -213,8 +213,8 @@ if has("autocmd")
     \     endif           |
 endif
 
-" this allows all window commands in insert mode and i'm not accidentally deleting words anymore :-) 
-imap <C-w> <C-o><C-w> 
+" this allows all window commands in insert mode and i'm not accidentally deleting words anymore :-)
+imap <C-w> <C-o><C-w>
 
 " useful ab
 cabbrev vds vertical diffsplit
@@ -234,11 +234,11 @@ hi Folded ctermbg=237
 cnoremap <C-A>		<Home>
 cnoremap <C-E>		<End>
 
-" Command-line completion 
+" Command-line completion
 cnoremap <C-P>		<UP>
 cnoremap <C-N>		<DOWN>
 
-" Specify the behavior when switching between buffers 
+" Specify the behavior when switching between buffers
 try
   set switchbuf=usetab
 catch
@@ -255,10 +255,10 @@ set tabpagemax=30
 
 " }}}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " [ Mouse + gVim-Killer Related Setting ]                                    {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" This is AWESOME, INCREDIBLE! Could be used do Tab-Click, window resizing, scrolling... 
+" This is AWESOME, INCREDIBLE! Could be used do Tab-Click, window resizing, scrolling...
 "set mouse=a           " Enable use of the mouse for all modes.
 set ttymouse=xterm2   " To function correctly in Screen
 
@@ -280,7 +280,7 @@ map a <ESC>ggVG
 
 " }}}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " [ Tab Operation Mac-Mapping by Klaymen ]                                   {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " default 1000
@@ -331,7 +331,7 @@ nmap tt :call SwitchLastUsedTab()<CR>
 
 " }}}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " [ Diff related ]                                                           {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -355,7 +355,7 @@ nmap ,d :DiffSaved<CR>
 
 "DirDiff
 let g:DirDiffExcludes = "*.git,*.svn,.*.swp,tags,cscope.*"
-let g:DirDiffWindowSize = 6 
+let g:DirDiffWindowSize = 6
 
 " WinMerge-style (Alt + hjkl) mapping for vimdiff
 nmap j ]c
@@ -379,7 +379,7 @@ if has("autocmd")
        \         nmap <silent> <S-H> :call ToggleHomeActionN()<CR>|
        \         map  <silent> <S-L> $|
        \     endif|
-       \ endif                
+       \ endif
 endif
 
 " }}}
@@ -389,13 +389,13 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     """"""""""""""""""""""""""""""
-    " ctags 
+    " ctags
     """"""""""""""""""""""""""""""
     " Set tags path
     set tags=./tags,./../tags
 
     """"""""""""""""""""""""""""""
-    " cscope 
+    " cscope
     """"""""""""""""""""""""""""""
     " init cscope hotkey
     nnoremap <F11> <ESC>:cs add ../cscope.out ..<CR>:cs add /home/kent/cscope_ctag/Horus/cscope.out /home/kent/Project/Horus/apps<CR>
@@ -408,7 +408,7 @@ endif
     """"""""""""""""""""""""""""""
     " Vi Man
     """"""""""""""""""""""""""""""
-    " color/paged man 
+    " color/paged man
     runtime! ftplugin/man.vim
     nmap K <esc>:Man <cword><cr>
 
@@ -423,7 +423,7 @@ endif
     "if filename is test.c => make test
     "set makeprg=make
     "set errorformat=%f:%l:\ %m
- 
+
     """"""""""""""""""""""""""""""
     " NeoComplCache
     """"""""""""""""""""""""""""""
@@ -528,7 +528,7 @@ nnoremap <C-x> :Hexmode<CR>
     "Grep 'pattern' in the indicate range (need EasyGrep.vim plugin)
     map <F3> <ESC>\vv
     let g:EasyGrepRecursive = 1
-    let g:EasyGrepIgnoreCase= 0 
+    let g:EasyGrepIgnoreCase= 0
     let g:EasyGrepJumpToMatch= 1
     let g:EasyGrepWindow=1         " user 'location list' rather than 'Quickfix'
 
@@ -544,7 +544,7 @@ nnoremap <C-x> :Hexmode<CR>
     """"""""""""""""""""""""""""""
     "Smooth Scroll
     map <PageDown> :call SmoothPageScrollDown()<CR>
-    map <PageUp>   :call SmoothPageScrollUp()<CR> 
+    map <PageUp>   :call SmoothPageScrollUp()<CR>
 
     """"""""""""""""""""""""""""""
     " Trinity related Start
@@ -554,10 +554,10 @@ nnoremap <C-x> :Hexmode<CR>
     " nmap <F12>  :TrinityToggleTagList<CR>
     " nmap <F9>   :TrinityToggleSourceExplorer<CR>
     " nmap <F10>  :TrinityToggleTagList<CR>
-    " nmap <F11>  :TrinityToggleNERDTree<CR> 
-    
+    " nmap <F11>  :TrinityToggleNERDTree<CR>
+
     """"""""""""""""""""""""""""""
-    " Tag List 
+    " Tag List
     """"""""""""""""""""""""""""""
     nmap <F12>   :TlistToggle<CR>
 
@@ -575,14 +575,14 @@ nnoremap <C-x> :Hexmode<CR>
    """"""""""""""""""""""""""""""
    " Minibuffer
    """"""""""""""""""""""""""""""
-   let g:miniBufExplModSelTarget = 1 
+   let g:miniBufExplModSelTarget = 1
    hi MBENormal ctermfg=7
    hi MBEVisibleNormal ctermfg=2
    hi MBEChanged ctermfg=14
    hi MBEVisibleChanged ctermfg=2
 
    """"""""""""""""""""""""""""""
-   " SrcExplorer 
+   " SrcExplorer
    """"""""""""""""""""""""""""""
    "let s:SrcExpl_tagsPath = '/home/kent/cscope_ctag/lsp/'
    "let s:SrcExpl_workPath = '/home/kent/cscope_ctag/lsp/'
@@ -593,7 +593,7 @@ nnoremap <C-x> :Hexmode<CR>
    " vimgdb
    """"""""""""""""""""""""""""""
     let g:vimgdb_debug_file = ""
-    run macros/gdb_mappings.vim 
+    run macros/gdb_mappings.vim
 
 " }}}
 
@@ -641,7 +641,7 @@ function! QFixToggle(forced)
         cclose
         unlet g:qfix_win
     else
-        copen 6 
+        copen 6
         let g:qfix_win = bufnr("$")
     endif
 endfunction
@@ -704,15 +704,15 @@ augroup VimEval
     au filetype vim :vnoremap <silent> e :Eval<CR>
 augroup END
 
-set foldtext=MyFoldText()                                                                                                                                                              
+set foldtext=MyFoldText()
 function! MyFoldText()
     let lines = 1 + v:foldend - v:foldstart
     let ind = indent(v:foldstart)
 
     let spaces = ''
-    let i = 0 
-    while i < ind 
-        let spaces .= ' ' 
+    let i = 0
+    while i < ind
+        let spaces .= ' '
         let i += 1
     endwhile
 
@@ -724,7 +724,7 @@ function! MyFoldText()
     let firstline = getline(v:foldstart)
     let line = firstline[ind : ind+80]
 
-    return spaces . '+' . v:folddashes . ' ' . lines . ' ' . linestxt . ': ' . line . ' ' 
+    return spaces . '+' . v:folddashes . ' ' . lines . ' ' . linestxt . ': ' . line . ' '
 endfunction
 
 " Highlight long lines
@@ -754,6 +754,15 @@ function! ToggleVerbose()
         set verbosefile=
     endif
 endfunction
+
+" Delete all trailing whitespace
+" :%s/\s\+$//
+
+" Delete all trailing whitespace including pesky ^M
+" :%s/[ \t\r]\+$//e
+
+" Delete whitespace at the beginning of each line
+" 1. :%s/^\s\+//    2. :%le
 
 " }}}
 
