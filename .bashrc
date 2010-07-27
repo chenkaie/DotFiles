@@ -139,6 +139,8 @@ alias b='cd -' # back to $OLDPWD
 alias cd..='cd ..'
 
 alias path='echo -e ${PATH//:/\\n}'
+# Generate Windows CIFS path prepend with Network Drive id: "Z:"
+alias pwd-win='pwd | sed '"'"'s/\//\\/g'"'"' | sed '"'"'s/\(.*\)/Z:\1/'"'"''
 
 #Personal Help
 alias l?='cat ~/.bashrc | grep "alias l.*=.ls" | grep ^a' 
