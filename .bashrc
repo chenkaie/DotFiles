@@ -172,6 +172,7 @@ alias mall='mca && m && mi'
 alias agcc='arm-linux-gcc -Wall -g3 -fno-omit-frame-pointer -fno-inline'
 alias gcc='gcc -Wall -g3 -fno-omit-frame-pointer -fno-inline'
 alias objdump='objdump -d -S'
+alias gdb='gdb --command=/home/kent/Repos/DotFiles/.gdbinit-7.3'
 
 #Lint related
 exist jsl  && alias jsl='jsl -conf ~/Tools/jsl.conf -process'
