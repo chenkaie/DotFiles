@@ -1454,3 +1454,47 @@ r
 bt
 backtrace 
 br
+main
+n
+n
+n
+next
+p aTmpBuf
+n
+c
+quit
+n
+main
+n
+n
+n
+n
+n
+quit
+quit
+main
+n
+n
+n
+p $eax
+n
+p print@plt
+p print
+context
+n
+jobs
+jobs
+ls
+context
+n
+lib 
+lib 
+sig
+handle 
+sig
+help user
+stack 
+datawin 
+context
+datawin 
+quit

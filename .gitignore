@@ -13,3 +13,4 @@ tags
 .vim/doc/tags-ja
 .vim/record
 .vim/.VimballRecord
+.cgdb/readline_history.txt
