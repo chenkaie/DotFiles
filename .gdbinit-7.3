@@ -158,6 +158,9 @@
 # set to 1 to enable 64bits target by default (32bit is the default)
 set $64BITS = 1
 
+# set to 1 to enable ARM platform by default (0: x86 is the default, 1: arm)
+set $ARM = 0
+
 set confirm off
 set verbose off
 
@@ -171,7 +174,7 @@ set height 0
 set width 0
 
 # Display instructions in Intel format
-set disassembly-flavor intel
+#set disassembly-flavor intel
 
 set $SHOW_CONTEXT = 1
 set $SHOW_NEST_INSN = 0
@@ -469,181 +472,218 @@ end
 
 
 define reg
- if ($64BITS == 1)
-# 64bits stuff
-    printf "  "
-    echo \033[32m
-    printf "RAX:"
-    echo \033[0m
-    printf " 0x%016lX  ", $rax
-    echo \033[32m
-    printf "RBX:"
-    echo \033[0m
-    printf " 0x%016lX  ", $rbx
-    echo \033[32m
-    printf "RCX:"
-    echo \033[0m
-    printf " 0x%016lX  ", $rcx
-    echo \033[32m
-    printf "RDX:"
-    echo \033[0m
-    printf " 0x%016lX  ", $rdx
-    echo \033[1m\033[4m\033[31m
-    flags
-    echo \033[0m
-    printf "  "
-    echo \033[32m
-    printf "RSI:"
-    echo \033[0m
-    printf " 0x%016lX  ", $rsi
-    echo \033[32m
-    printf "RDI:"
-    echo \033[0m
-    printf " 0x%016lX  ", $rdi
-    echo \033[32m
-    printf "RBP:"
-    echo \033[0m
-    printf " 0x%016lX  ", $rbp
-    echo \033[32m
-    printf "RSP:"
-    echo \033[0m
-    printf " 0x%016lX  ", $rsp
-    echo \033[32m
-    printf "RIP:"
-    echo \033[0m
-    printf " 0x%016lX\n  ", $rip
-    echo \033[32m
-    printf "R8 :"
-    echo \033[0m
-    printf " 0x%016lX  ", $r8
-    echo \033[32m
-    printf "R9 :"
-    echo \033[0m
-    printf " 0x%016lX  ", $r9
-    echo \033[32m
-    printf "R10:"
-    echo \033[0m
-    printf " 0x%016lX  ", $r10
-    echo \033[32m
-    printf "R11:"
-    echo \033[0m
-    printf " 0x%016lX  ", $r11
-    echo \033[32m
-    printf "R12:"
-    echo \033[0m
-    printf " 0x%016lX\n  ", $r12
-    echo \033[32m
-    printf "R13:"
-    echo \033[0m
-    printf " 0x%016lX  ", $r13
-    echo \033[32m
-    printf "R14:"
-    echo \033[0m
-    printf " 0x%016lX  ", $r14
-    echo \033[32m
-    printf "R15:"
-    echo \033[0m
-    printf " 0x%016lX\n  ", $r15
-    echo \033[32m
-    printf "CS:"
-    echo \033[0m
-    printf " %04X  ", $cs
-    echo \033[32m
-    printf "DS:"
-    echo \033[0m
-    printf " %04X  ", $ds
-    echo \033[32m
-    printf "ES:"
-    echo \033[0m
-    printf " %04X  ", $es
-    echo \033[32m
-    printf "FS:"
-    echo \033[0m
-    printf " %04X  ", $fs
-    echo \033[32m
-    printf "GS:"
-    echo \033[0m
-    printf " %04X  ", $gs
-    echo \033[32m
-    printf "SS:"
-    echo \033[0m
-    printf " %04X", $ss
-    echo \033[0m
-# 32bits stuff
+ # arm platform
+ if ($ARM == 1)
+    printf "r0 :"
+    printf " 0x%08X  ", $r0
+    printf "r1 :"
+    printf " 0x%08X  ", $r1
+    printf "r2 :"
+    printf " 0x%08X  ", $r2
+    printf "r3 :"
+    printf " 0x%08X  ", $r3
+    printf "r4 :"
+    printf " 0x%08X\n", $r4
+    printf "r5 :"
+    printf " 0x%08X  ", $r5
+    printf "r6 :"
+    printf " 0x%08X  ", $r6
+    printf "r7 :"
+    printf " 0x%08X  ", $r7
+    printf "r8 :"
+    printf " 0x%08X  ", $r8
+    printf "r9 :"
+    printf " 0x%08X\n", $r9
+    printf "r10:"
+    printf " 0x%08X  ", $r10
+    printf "r11:"
+    printf " 0x%08X  ", $r11
+    printf "r12:"
+    printf " 0x%08X\n", $r12
+    printf "sp :"
+    printf " 0x%08X  ", $sp
+    printf "lr :"
+    printf " 0x%08X  ", $lr
+    printf "pc :"
+    printf " 0x%08X  ", $pc
  else
-    printf "  "
-    echo \033[32m
-    printf "EAX:"
-    echo \033[0m
-    printf " 0x%08X  ", $eax
-    echo \033[32m
-    printf "EBX:"
-    echo \033[0m
-    printf " 0x%08X  ", $ebx
-    echo \033[32m
-    printf "ECX:"
-    echo \033[0m
-    printf " 0x%08X  ", $ecx
-    echo \033[32m
-    printf "EDX:"
-    echo \033[0m
-    printf " 0x%08X  ", $edx
-    echo \033[1m\033[4m\033[31m
-    flags
-    echo \033[0m
-    printf "  "
-    echo \033[32m
-    printf "ESI:"
-    echo \033[0m
-    printf " 0x%08X  ", $esi
-    echo \033[32m
-    printf "EDI:"
-    echo \033[0m
-    printf " 0x%08X  ", $edi
-    echo \033[32m
-    printf "EBP:"
-    echo \033[0m
-    printf " 0x%08X  ", $ebp
-    echo \033[32m
-    printf "ESP:"
-    echo \033[0m
-    printf " 0x%08X  ", $esp
-    echo \033[32m
-    printf "EIP:"
-    echo \033[0m
-    printf " 0x%08X\n  ", $eip
-    echo \033[32m
-    printf "CS:"
-    echo \033[0m
-    printf " %04X  ", $cs
-    echo \033[32m
-    printf "DS:"
-    echo \033[0m
-    printf " %04X  ", $ds
-    echo \033[32m
-    printf "ES:"
-    echo \033[0m
-    printf " %04X  ", $es
-    echo \033[32m
-    printf "FS:"
-    echo \033[0m
-    printf " %04X  ", $fs
-    echo \033[32m
-    printf "GS:"
-    echo \033[0m
-    printf " %04X  ", $gs
-    echo \033[32m
-    printf "SS:"
-    echo \033[0m
-    printf " %04X", $ss
-    echo \033[0m
+    # x86 platform
+    if ($64BITS == 1)
+    # 64bits stuff
+        printf "  "
+        echo \033[32m
+        printf "RAX:"
+        echo \033[0m
+        printf " 0x%016lX  ", $rax
+        echo \033[32m
+        printf "RBX:"
+        echo \033[0m
+        printf " 0x%016lX  ", $rbx
+        echo \033[32m
+        printf "RCX:"
+        echo \033[0m
+        printf " 0x%016lX  ", $rcx
+        echo \033[32m
+        printf "RDX:"
+        echo \033[0m
+        printf " 0x%016lX  ", $rdx
+        echo \033[1m\033[4m\033[31m
+        flags
+        echo \033[0m
+        printf "  "
+        echo \033[32m
+        printf "RSI:"
+        echo \033[0m
+        printf " 0x%016lX  ", $rsi
+        echo \033[32m
+        printf "RDI:"
+        echo \033[0m
+        printf " 0x%016lX  ", $rdi
+        echo \033[32m
+        printf "RBP:"
+        echo \033[0m
+        printf " 0x%016lX  ", $rbp
+        echo \033[32m
+        printf "RSP:"
+        echo \033[0m
+        printf " 0x%016lX  ", $rsp
+        echo \033[32m
+        printf "RIP:"
+        echo \033[0m
+        printf " 0x%016lX\n  ", $rip
+        echo \033[32m
+        printf "R8 :"
+        echo \033[0m
+        printf " 0x%016lX  ", $r8
+        echo \033[32m
+        printf "R9 :"
+        echo \033[0m
+        printf " 0x%016lX  ", $r9
+        echo \033[32m
+        printf "R10:"
+        echo \033[0m
+        printf " 0x%016lX  ", $r10
+        echo \033[32m
+        printf "R11:"
+        echo \033[0m
+        printf " 0x%016lX  ", $r11
+        echo \033[32m
+        printf "R12:"
+        echo \033[0m
+        printf " 0x%016lX\n  ", $r12
+        echo \033[32m
+        printf "R13:"
+        echo \033[0m
+        printf " 0x%016lX  ", $r13
+        echo \033[32m
+        printf "R14:"
+        echo \033[0m
+        printf " 0x%016lX  ", $r14
+        echo \033[32m
+        printf "R15:"
+        echo \033[0m
+        printf " 0x%016lX\n  ", $r15
+        echo \033[32m
+        printf "CS:"
+        echo \033[0m
+        printf " %04X  ", $cs
+        echo \033[32m
+        printf "DS:"
+        echo \033[0m
+        printf " %04X  ", $ds
+        echo \033[32m
+        printf "ES:"
+        echo \033[0m
+        printf " %04X  ", $es
+        echo \033[32m
+        printf "FS:"
+        echo \033[0m
+        printf " %04X  ", $fs
+        echo \033[32m
+        printf "GS:"
+        echo \033[0m
+        printf " %04X  ", $gs
+        echo \033[32m
+        printf "SS:"
+        echo \033[0m
+        printf " %04X", $ss
+        echo \033[0m
+    # 32bits stuff
+    else
+        printf "  "
+        echo \033[32m
+        printf "EAX:"
+        echo \033[0m
+        printf " 0x%08X  ", $eax
+        echo \033[32m
+        printf "EBX:"
+        echo \033[0m
+        printf " 0x%08X  ", $ebx
+        echo \033[32m
+        printf "ECX:"
+        echo \033[0m
+        printf " 0x%08X  ", $ecx
+        echo \033[32m
+        printf "EDX:"
+        echo \033[0m
+        printf " 0x%08X  ", $edx
+        echo \033[1m\033[4m\033[31m
+        flags
+        echo \033[0m
+        printf "  "
+        echo \033[32m
+        printf "ESI:"
+        echo \033[0m
+        printf " 0x%08X  ", $esi
+        echo \033[32m
+        printf "EDI:"
+        echo \033[0m
+        printf " 0x%08X  ", $edi
+        echo \033[32m
+        printf "EBP:"
+        echo \033[0m
+        printf " 0x%08X  ", $ebp
+        echo \033[32m
+        printf "ESP:"
+        echo \033[0m
+        printf " 0x%08X  ", $esp
+        echo \033[32m
+        printf "EIP:"
+        echo \033[0m
+        printf " 0x%08X\n  ", $eip
+        echo \033[32m
+        printf "CS:"
+        echo \033[0m
+        printf " %04X  ", $cs
+        echo \033[32m
+        printf "DS:"
+        echo \033[0m
+        printf " %04X  ", $ds
+        echo \033[32m
+        printf "ES:"
+        echo \033[0m
+        printf " %04X  ", $es
+        echo \033[32m
+        printf "FS:"
+        echo \033[0m
+        printf " %04X  ", $fs
+        echo \033[32m
+        printf "GS:"
+        echo \033[0m
+        printf " %04X  ", $gs
+        echo \033[32m
+        printf "SS:"
+        echo \033[0m
+        printf " %04X", $ss
+        echo \033[0m
+    end
+    # call smallregisters
+        smallregisters
+    # display conditional jump routine
+        if ($64BITS == 1)
+        printf "\t\t\t\t"
+        end
  end
-# call smallregisters
-	smallregisters
-# display conditional jump routine
-	if ($64BITS == 1)
-	 printf "\t\t\t\t"
-	end
     dumpjump
     printf "\n"
 end
@@ -1848,7 +1888,7 @@ define trace_calls
     set listsize 0
   
     set logging overwrite on
-    set logging file ~/gdb_trace_calls.txt
+    set logging file ~/tmp/gdb_trace_calls.txt
     set logging on
     set logging off
     set logging overwrite off
@@ -1865,7 +1905,7 @@ define trace_calls
         end
         # if a call, print it
         if ($INSN_TYPE == 3)
-            set logging file ~/gdb_trace_calls.txt
+            set logging file ~/tmp/gdb_trace_calls.txt
             set logging redirect off
             set logging on
 
@@ -1889,11 +1929,11 @@ define trace_calls
     set $SHOW_CONTEXT = $_saved_ctx
     set $SHOW_NEST_INSN = 0
  
-    printf "Done, check ~/gdb_trace_calls.txt\n"
+    printf "Done, check ~/tmp/gdb_trace_calls.txt\n"
 end
 document trace_calls
 Create a runtime trace of the calls made by target.
-Log overwrites(!) the file ~/gdb_trace_calls.txt.
+Log overwrites(!) the file ~/tmp/gdb_trace_calls.txt.
 end
 
 
@@ -1905,7 +1945,7 @@ define trace_run
     set $SHOW_CONTEXT = 0
     set $SHOW_NEST_INSN = 1
     set logging overwrite on
-    set logging file ~/gdb_trace_run.txt
+    set logging file ~/tmp/gdb_trace_run.txt
     set logging redirect on
     set logging on
     set $_nest = 1
@@ -1933,14 +1973,14 @@ define trace_run
     set logging off
 
     # clean up trace file
-    shell  grep -v ' at ' ~/gdb_trace_run.txt > ~/gdb_trace_run.1
-    shell  grep -v ' in ' ~/gdb_trace_run.1 > ~/gdb_trace_run.txt
-    shell  rm -f ~/gdb_trace_run.1
-    printf "Done, check ~/gdb_trace_run.txt\n"
+    shell  grep -v ' at ' ~/tmp/gdb_trace_run.txt > ~/tmp/gdb_trace_run.1
+    shell  grep -v ' in ' ~/tmp/gdb_trace_run.1 > ~/tmp/gdb_trace_run.txt
+    shell  rm -f ~/tmp/gdb_trace_run.1
+    printf "Done, check ~/tmp/gdb_trace_run.txt\n"
 end
 document trace_run
 Create a runtime trace of target.
-Log overwrites(!) the file ~/gdb_trace_run.txt.
+Log overwrites(!) the file ~/tmp/gdb_trace_run.txt.
 end
 
 
@@ -2242,6 +2282,21 @@ define 64bits
 end
 document 64bits
 Set gdb to work with 64bits binaries
+end
+
+define x86 
+	set $ARM = 0
+end
+document x86
+Set gdb to work with x86 binaries
+end
+
+define arm
+	set $ARM = 1
+	set $64BITS = 0
+end
+document arm 
+Set gdb to work with ARM binaries
 end
 
 #EOF

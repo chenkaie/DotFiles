@@ -1740,7 +1740,7 @@ define trace_calls
     set listsize 0
   
     set logging overwrite on
-    set logging file ~/gdb_trace_calls.txt
+    set logging file ~/tmp/gdb_trace_calls.txt
     set logging on
     set logging off
     set logging overwrite off
@@ -1757,7 +1757,7 @@ define trace_calls
         end
         # if a call, print it
         if ($INSN_TYPE == 3)
-            set logging file ~/gdb_trace_calls.txt
+            set logging file ~/tmp/gdb_trace_calls.txt
             set logging redirect off
             set logging on
 
@@ -1781,11 +1781,11 @@ define trace_calls
     set $SHOW_CONTEXT = $_saved_ctx
     set $SHOW_NEST_INSN = 0
  
-    printf "Done, check ~/gdb_trace_calls.txt\n"
+    printf "Done, check ~/tmp/gdb_trace_calls.txt\n"
 end
 document trace_calls
 Create a runtime trace of the calls made by target.
-Log overwrites(!) the file ~/gdb_trace_calls.txt.
+Log overwrites(!) the file ~/tmp/gdb_trace_calls.txt.
 end
 
 
@@ -1797,7 +1797,7 @@ define trace_run
     set $SHOW_CONTEXT = 0
     set $SHOW_NEST_INSN = 1
     set logging overwrite on
-    set logging file ~/gdb_trace_run.txt
+    set logging file ~/tmp/gdb_trace_run.txt
     set logging redirect on
     set logging on
     set $_nest = 1
@@ -1825,14 +1825,14 @@ define trace_run
     set logging off
 
     # clean up trace file
-    shell  grep -v ' at ' ~/gdb_trace_run.txt > ~/gdb_trace_run.1
-    shell  grep -v ' in ' ~/gdb_trace_run.1 > ~/gdb_trace_run.txt
-    shell  rm -f ~/gdb_trace_run.1
-    printf "Done, check ~/gdb_trace_run.txt\n"
+    shell  grep -v ' at ' ~/tmp/gdb_trace_run.txt > ~/tmp/gdb_trace_run.1
+    shell  grep -v ' in ' ~/tmp/gdb_trace_run.1 > ~/tmp/gdb_trace_run.txt
+    shell  rm -f ~/tmp/gdb_trace_run.1
+    printf "Done, check ~/tmp/gdb_trace_run.txt\n"
 end
 document trace_run
 Create a runtime trace of target.
-Log overwrites(!) the file ~/gdb_trace_run.txt.
+Log overwrites(!) the file ~/tmp/gdb_trace_run.txt.
 end
 
 
