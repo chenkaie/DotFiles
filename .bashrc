@@ -21,7 +21,7 @@ export LINTDIR=/usr/share/pclint
 export MANSECT=8:2:1:3:4:5:6:7:9:0p:1p:3p:tcl:n:l:p:o
 
 # GIT daily repo commit variable (A.K.A GIT Time Machine)
-export GIT_MANAGED_DIRECTORY="$HOME/Project $HOME/ArmTools $HOME/Repos $HOME/practice"
+export GIT_MANAGED_DIRECTORY="$HOME/Project $HOME/ArmTools $HOME/Repos $HOME/practice $HOME/usr"
 
 ###############################
 # Different OS specific stuff #
@@ -270,13 +270,13 @@ export PROMPT_COMMAND='history -a'
 
 #export MANPAGER="most -s"
 # For colourful man pages (CLUG-Wiki style)
-export LESS_TERMCAP_mb=$'\E[01;31m'
-export LESS_TERMCAP_md=$'\E[01;31m'
-export LESS_TERMCAP_me=$'\E[0m'
-export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_so=$'\E[01;44;33m'
-export LESS_TERMCAP_ue=$'\E[0m'
-export LESS_TERMCAP_us=$'\E[01;32m'
+#export LESS_TERMCAP_mb=$'\E[01;31m'
+#export LESS_TERMCAP_md=$'\E[01;31m'
+#export LESS_TERMCAP_me=$'\E[0m'
+#export LESS_TERMCAP_se=$'\E[0m'
+#export LESS_TERMCAP_so=$'\E[01;44;33m'
+#export LESS_TERMCAP_ue=$'\E[0m'
+#export LESS_TERMCAP_us=$'\E[01;32m'
 
 #for X-Win32
 #export DISPLAY="172.16.2.54:0:0"
@@ -321,7 +321,8 @@ exist lesspipe && eval "$(lesspipe)"
 #######################
 
 # Easy extract
-extract () {
+extract () 
+{
   if [ -f $1 ] ; then
       case $1 in
           *.tar.bz2)   tar xvjf $1    ;;
@@ -356,7 +357,8 @@ compress ()
     esac
 }
 
-function sysinfo() # get current host related info
+# get current host related info
+function sysinfo()
 {
     echo -e "\nYou are logged on ${RED}$HOST"
     echo -e "\nAdditionnal information:$NC " ; uname -a
@@ -368,7 +370,8 @@ function sysinfo() # get current host related info
 }
 
 # Get IP (call with myip)
-function myip {
+function myip 
+{
     myip=`elinks -dump http://checkip.dyndns.org:8245/`
     echo "${myip}"
 }
@@ -387,7 +390,8 @@ dirsize ()
 }
 
 # ls when cd, it's useful
-cd () {
+function cd () 
+{
     if [ -n "$1" ]; then
         builtin cd "$@"&& ls
     else
@@ -405,7 +409,7 @@ function swap()
 }
 
 # repeat() -- repeat a given command N times
-function repeat() # repeat n times command
+function repeat()
 {
     local i max
     max=$1; shift;
@@ -417,5 +421,38 @@ function repeat() # repeat n times command
 # Find a file with pattern $1 in name and Execute $2 on it:
 function fe()
 { wcfind . -type f -iname '*'${1:-}'*' -exec ${2:-ls} {} \;  ; }
+
+# lazy gcc, default outfile: filename_prefix.out, eg: hello.c -> hello.out
+function lgcc () 
+{
+    `\which gcc` -Wall -g3 -fno-omit-frame-pointer -fno-inline -o ${1%.*}{.out,.${1##*.}}
+}
+
+# lazy arm-linux-gcc, default outfile: filename_prefix.platform.out, eg: hello.c -> hello.arm.out
+function lagcc () 
+{
+    platform=`\which arm-linux-gcc`
+    case $platform in
+        *vivaldi*)
+            outfilesuffix="vivaldi"
+            ;;
+        *bach*)
+            outfilesuffix="bach"
+            ;;
+        *haydn*)
+            outfilesuffix="haydn"
+            ;;
+        *mozart*)
+            outfilesuffix="mozart"
+            ;;
+        *montavista*)
+            outfilesuffix="dm365"
+            ;;
+        *)
+            outfilesuffix="arm"
+        ;;
+    esac
+    arm-linux-gcc -Wall -g3 -fno-omit-frame-pointer -fno-inline -o ${1%.*}{.${outfilesuffix}.out,.${1##*.}}
+}
 
 # vim: fdm=marker ts=4 sw=4 et:
