@@ -21,7 +21,7 @@ export LINTDIR=/usr/share/pclint
 export MANSECT=8:2:1:3:4:5:6:7:9:0p:1p:3p:tcl:n:l:p:o
 
 # GIT daily repo commit variable (A.K.A GIT Time Machine)
-export GIT_MANAGED_DIRECTORY="$HOME/Project $HOME/ArmTools $HOME/Repos $HOME/practice $HOME/usr"
+export GIT_MANAGED_DIRECTORY="$HOME/Project $HOME/ArmTools $HOME/Repos $HOME/practice $HOME/usr $HOME/makcomm-debug"
 
 ###############################
 # Different OS specific stuff #
@@ -172,7 +172,7 @@ alias mi='m install'
 alias mall='mca && m && mi'
 
 #gcc
-alias agcc='arm-linux-gcc -Wall -g3 -fno-omit-frame-pointer -fno-inline'
+alias agcc='arm-linux-gcc -Wall -g3 -fno-omit-frame-pointer -fno-inline -std=gnu99'
 alias gcc='gcc -Wall -g3 -fno-omit-frame-pointer -fno-inline'
 alias objdump='objdump -d -S'
 alias gdb='gdb --command=/home/kent/Repos/DotFiles/.gdbinit-7.3'
@@ -344,17 +344,21 @@ extract ()
 }
 
 # easy compress - archive wrapper
-# usage: compress <foo.tar.gz> ./foo ./bar
 compress ()
 {
-    FILE=$1
-    case $FILE in
-    *.tar.bz2) shift && tar cjf $FILE $* ;;
-    *.tar.gz) shift && tar czf $FILE $* ;;
-    *.tgz) shift && tar czf $FILE $* ;;
-    *.zip) shift && zip $FILE $* ;;
-    *.rar) shift && rar $FILE $* ;;
-    esac
+    if [ -n "$1" ] ; then
+        FILE=$1
+        case $FILE in
+        *.tar) shift && tar cf $FILE $* ;;
+        *.tar.bz2) shift && tar cjf $FILE $* ;;
+        *.tar.gz) shift && tar czf $FILE $* ;;
+        *.tgz) shift && tar czf $FILE $* ;;
+        *.zip) shift && zip $FILE $* ;;
+        *.rar) shift && rar $FILE $* ;;
+        esac
+    else
+        echo "usage: compress <foo.tar.gz> ./foo ./bar"
+    fi
 }
 
 # get current host related info
@@ -425,7 +429,7 @@ function fe()
 # lazy gcc, default outfile: filename_prefix.out, eg: hello.c -> hello.out
 function lgcc () 
 {
-    `\which gcc` -Wall -g3 -fno-omit-frame-pointer -fno-inline -o ${1%.*}{.out,.${1##*.}}
+    `\which gcc` -Wall -g3 -fno-omit-frame-pointer -fno-inline -std=gnu99 -o ${1%.*}{.out,.${1##*.}}
 }
 
 # lazy arm-linux-gcc, default outfile: filename_prefix.platform.out, eg: hello.c -> hello.arm.out
