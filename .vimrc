@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Fri Jul 30, 2010  12:38PM
+" Last Modified: Fri Aug 20, 2010  12:30AM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -32,6 +32,22 @@ elseif has("unix")
     let OS = "Unix"
 elseif has("win32")
     let OS = "Win32"
+endif
+
+if version >= 703
+    set conceallevel=1
+    set concealcursor=nc
+    set colorcolumn=+1
+    set cinoptions+=L0
+    set undofile
+    set undodir=~/.vim/undofiles
+    if !isdirectory(&undodir)
+        call mkdir(&undodir, "p")
+    endif
+    map  <C-ScrollWheelDown> <ScrollWheelRight>
+    map  <C-ScrollWheelUp>   <ScrollWheelLeft>
+    imap <C-ScrollWheelDown> <ScrollWheelRight>
+    imap <C-ScrollWheelUp>   <ScrollWheelLeft>
 endif
 
 set backspace=2
@@ -398,7 +414,25 @@ endif
     " cscope
     """"""""""""""""""""""""""""""
     " init cscope hotkey
-    nnoremap <F11> <ESC>:cs add ../cscope.out ..<CR>:cs add /home/kent/cscope_ctag/Horus/cscope.out /home/kent/Project/Horus/apps<CR>
+    "nnoremap <F11> <ESC>:cs add ../cscope.out ..<CR>:cs add /home/kent/cscope_ctag/Horus/cscope.out /home/kent/Project/Horus/apps<CR>
+    function! UseAwesomeCscope()
+        try
+            exe "cs add ../cscope.out .."
+            exe "cs add /home/kent/cscope_ctag/Horus/cscope.out /home/kent/Project/Horus/apps"
+        catch /duplicate/
+                silent exe "!tag_rebuild .."
+                silent exe "cs reset"
+                exe "redraw!"
+                echohl Wildmenu | echo "cscope database inuse, update and re-init all connections" | echohl None
+        catch /stat/
+            silent exe "!tag_rebuild .."
+            exe "cs add ../cscope.out .."
+            exe "cs add /home/kent/cscope_ctag/Horus/cscope.out /home/kent/Project/Horus/apps"
+            exe "redraw!"
+            echohl Wildmenu | echo "cscope file not found, exec tag_rebuild" | echohl None
+        endtry
+    endfun
+    nnoremap <F11> <ESC>:call UseAwesomeCscope()<CR>
 
     " To avoid using wrong cscope(/opt/montavista/pro5.0/bin/cscope) once sourcing devel_IP8161_VVTK
     if match(system('ls ~/usr/bin/cscope'), 'cscope') != -1
