@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Fri Aug 20, 2010  12:30AM
+" Last Modified: Tue Aug 31, 2010  05:36PM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -426,10 +426,15 @@ endif
                 echohl Wildmenu | echo "cscope database inuse, update and re-init all connections" | echohl None
         catch /stat/
             silent exe "!tag_rebuild .."
-            exe "cs add ../cscope.out .."
-            exe "cs add /home/kent/cscope_ctag/Horus/cscope.out /home/kent/Project/Horus/apps"
-            exe "redraw!"
-            echohl Wildmenu | echo "cscope file not found, exec tag_rebuild" | echohl None
+            try
+                exe "cs add ../cscope.out .."
+                exe "cs add /home/kent/cscope_ctag/Horus/cscope.out /home/kent/Project/Horus/apps"
+                exe "redraw!"
+                echohl Wildmenu | echo "cscope file not found, exec tag_rebuild" | echohl None
+            catch
+                exe "redraw!"
+                echohl ErrorMsg | echo "You don't have enough privilege XD" | echohl None
+            endtry
         endtry
     endfun
     nnoremap <F11> <ESC>:call UseAwesomeCscope()<CR>
