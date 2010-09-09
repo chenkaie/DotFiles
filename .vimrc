@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Tue Aug 31, 2010  05:36PM
+" Last Modified: Thu Sep 09, 2010  10:34PM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -282,14 +282,21 @@ set ttymouse=xterm2   " To function correctly in Screen
 noremap <C-LeftMouse> <LeftMouse><Esc><C-V>
 noremap <C-LeftDrag> <LeftDrag>
 
-" Copy to System-Clipboard
-if OS == "Darwin"
-    map <C-c> :w! ~/tmp/vimbuffer<CR>:!pbcopy < ~/tmp/vimbuffer<CR><CR>
-else
-    map <C-c> :w! ~/tmp/vimbuffer<CR>:!nc 172.16.2.54 4573 < ~/tmp/vimbuffer<CR><CR>
-endif
 
-map c <C-c>
+    """""""""""""""""""""""""""""""""""""""""""""""""
+    " copy'n'paste data between separate vim sessions
+    """""""""""""""""""""""""""""""""""""""""""""""""
+    " Copy to vimbuff & System-Clipboard
+    if OS == "Darwin"
+        vmap <C-c> :w! ~/tmp/vimbuffer<CR>:!pbcopy < ~/tmp/vimbuffer<CR><CR>
+        nmap <C-c> :.w! ~/tmp/vimbuffer<CR>:!pbcopy < ~/tmp/vimbuffer<CR><CR>
+    else
+        vmap <C-c> :w! ~/tmp/vimbuffer<CR>:!nc 172.16.2.54 4573 < ~/tmp/vimbuffer<CR><CR>
+        nmap <C-c> :.w! ~/tmp/vimbuffer<CR>:!nc 172.16.2.54 4573 < ~/tmp/vimbuffer<CR><CR>
+    endif
+    " Paste from buffer
+    nmap <C-p> :r ~/tmp/vimbuffer<CR>
+    map c <C-c>
 
 " Select all
 map a <ESC>ggVG
@@ -759,6 +766,11 @@ nnoremap <silent> <Leader>l
       \ endif<CR>
 
 " }}}
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" [ FileType ]                                                               {{{
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Ref: ~/.vim/filetype.vim
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " [ MISC ]                                                                   {{{
