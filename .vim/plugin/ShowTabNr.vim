@@ -42,7 +42,8 @@ function! SetTabLine()
             let flag .= '+'
         endif
         if strlen(flag) > 0 || strlen(split) > 0
-            let flag .= ' '
+            "Comment by Kent, replace with next one for hiding split window
+            "let flag .= ' '
         endif
 
         call add(s:tabLineTabs, {'n': tabnr, 'split': split, 'flag': flag, 'filename': filename})
@@ -121,7 +122,9 @@ function! SetTabLine()
             endif
         endif
 
-        let text = ' ' . split . i.flag . i.filename . ' '
+        "Comment by Kent, replace with next one for hiding split window
+        "let text = ' ' . split . i.flag . i.filename . ' '
+        let text = ' ' . i.flag . i.filename . ' '
 
         if i.n == l:tabLineTabs[-1].n
             if match(i.flag, '>\d\+') > -1 || i.n < tabCount
