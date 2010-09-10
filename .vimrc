@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Thu Sep 09, 2010  10:34PM
+" Last Modified: Fri Sep 10, 2010  03:39PM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -771,6 +771,7 @@ nnoremap <silent> <Leader>l
 " [ FileType ]                                                               {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Ref: ~/.vim/filetype.vim
+" }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " [ MISC ]                                                                   {{{
@@ -795,6 +796,9 @@ endfunction
 
 " Delete whitespace at the beginning of each line
 " 1. :%s/^\s\+//    2. :%le
+
+" To change all the existing tab characters to match the current tab settings, use:
+" :retab
 
 " }}}
 
