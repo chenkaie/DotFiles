@@ -256,12 +256,19 @@ TXTRST="\[\033[0m\]"    # Text Reset
 
 # Git shell prompt
 if [ "\$(type -t __git_ps1)" ]; then
-    PS1=$TXTYLW'[\u]'$TXTWHT'@'$TXTPUR'\h'$TXTWHT':'$TXTGRN'\W'$TXTWHT'$(__git_ps1)\$ '
-    [ "$OS" == "Darwin" ] &&  PS1=$TXTYLW'[\u]'$TXTWHT'@'$TXTRED'\h'$TXTWHT':'$TXTGRN'\W'$TXTWHT'$(__git_ps1)\$ '
-else
-    PS1=$TXTYLW'[\u]'$TXTWHT'@'$TXTPUR'\h'$TXTWHT':'$TXTGRN'\W'$TXTWHT'\$ '
-    [ "$OS" == "Darwin" ] &&  PS1=$TXTYLW'[\u]'$TXTWHT'@'$TXTRED'\h'$TXTWHT':'$TXTGRN'\W'$TXTWHT'\$ '
+    PROMPT_GIT='$(__git_ps1 "|%s")'
 fi
+
+case $OS in
+    Darwin|*BSD)
+        PROMPT_HOSTCOLOR=$TXTRED
+        ;;
+    Linux)
+        PROMPT_HOSTCOLOR=$TXTPUR
+        ;;
+esac
+
+PS1=$TXTYLW'\u'$TXTWHT'@'${PROMPT_HOSTCOLOR}'\h'$TXTWHT':'$TXTBLU'\W'$TXTWHT${PROMPT_GIT}$BLDBLK'$(jobcount)'$TXTGRN' >'$BLDGRN'>'$TXTWHT'> '
 
 # add for screen to dynamically update title
 #PROMPT_COMMAND='echo -n -e "\033k\033\134"'
@@ -458,6 +465,14 @@ function lagcc ()
         ;;
     esac
     arm-linux-gcc -Wall -g3 -fno-omit-frame-pointer -fno-inline -o ${1%.*}{.${outfilesuffix}.out,.${1##*.}}
+}
+
+function jobcount ()
+{
+    jobnum="$(jobs | wc -l | tr -d " ")"
+    if [ "${jobnum}" -gt 0 ]; then
+        echo -n " (${jobnum})"
+    fi
 }
 
 # vim: fdm=marker ts=4 sw=4 et:

@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Fri Sep 10, 2010  03:39PM
+" Last Modified: Sun Sep 12, 2010  11:27PM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -268,6 +268,26 @@ imap jj <ESC>
 
 " Maximum number of tab pages
 set tabpagemax=30
+
+" used for saving root-privilege file convenient rather than reopen with root
+cmap w!! %!sudo tee > /dev/null %
+
+" keypad fix, http://vim.wikia.com/wiki/PuTTY_numeric_keypad_mappings
+inoremap <Esc>Oq 1
+inoremap <Esc>Or 2
+inoremap <Esc>Os 3
+inoremap <Esc>Ot 4
+inoremap <Esc>Ou 5
+inoremap <Esc>Ov 6
+inoremap <Esc>Ow 7
+inoremap <Esc>Ox 8
+inoremap <Esc>Oy 9
+inoremap <Esc>Op 0
+inoremap <Esc>On .
+inoremap <Esc>OQ /
+inoremap <Esc>OR *
+inoremap <Esc>Ol +
+inoremap <Esc>OS -
 
 " }}}
 
@@ -765,6 +785,22 @@ nnoremap <silent> <Leader>l
       \   let w:long_line_match = matchadd('ErrorMsg', '\%<81v.\%>77v', -1) <Bar>
       \ endif<CR>
 
+" trigger by :call HtmlEscape()
+function HtmlEscape()
+    silent s/&/\&amp;/eg
+    silent s/</\&lt;/eg
+    silent s/>/\&gt;/eg
+    silent s/"/\&quot;/eg
+endfunction
+
+" trigger by :call HtmlUnEscape()
+function HtmlUnEscape()
+    silent s/&lt;/</eg
+    silent s/&gt;/>/eg
+    silent s/&amp;/\&/eg
+    silent s/&quot;/"/eg
+endfunction
+
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -799,6 +835,17 @@ endfunction
 
 " To change all the existing tab characters to match the current tab settings, use:
 " :retab
+
+" }}}
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" [ After Loading All Plugin ]                                               {{{
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function AfterStart ()
+
+endfunction
+autocmd VimEnter * :call AfterStart()
 
 " }}}
 
