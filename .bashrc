@@ -268,7 +268,7 @@ case $OS in
         ;;
 esac
 
-PS1=$TXTYLW'\u'$TXTWHT'@'${PROMPT_HOSTCOLOR}'\h'$TXTWHT':'$TXTBLU'\W'$TXTWHT${PROMPT_GIT}$BLDBLK'$(jobcount)'$TXTGRN' >'$BLDGRN'>'$TXTWHT'> '
+PS1=$TXTYLW'\u'$TXTWHT'@'${PROMPT_HOSTCOLOR}'\h'$TXTWHT':'$TXTGRN'\W'$TXTWHT${PROMPT_GIT}$BLDBLK'$(jobcount)'$TXTGRN' >'$BLDGRN'>'$TXTWHT'> '
 
 # add for screen to dynamically update title
 #PROMPT_COMMAND='echo -n -e "\033k\033\134"'
