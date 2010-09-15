@@ -22,6 +22,7 @@
 	sh = !git-sh
     clog = log --graph --date=short --pretty=format:\"%C(124)%ad %C(24)%h %C(34)%an %C(252)%s%C(178)%d\" #--encoding="ISO-8859-1"
     llog = log --format=\"%C(94)--------------------------------------------------------------------------------%n%C(24)%h %C(124)%ad %C(34)%an %C(22)<%ae>%C(130)%d%n%C(178)%s%+b\"
+	d = difftool
 
 [branch]
     autosetupmerge = true
@@ -41,3 +42,8 @@
     github = chenkaie 
     into = /home/kent/Repos
 
+[diff]
+	tool = vimdiff
+
+[difftool]
+	prompt = false
