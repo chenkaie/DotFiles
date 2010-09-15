@@ -195,7 +195,7 @@ fi
 
 #history control, ignorespace & ignoredups
 export HISTCONTROL=ignoreboth
-export HISTSIZE=10000
+export HISTSIZE=100000
 export HISTTIMEFORMAT="%Y-%m-%d_%H:%M:%S_%a  "
 export HISTIGNORE="&:bg:fg:ll:h"
 
@@ -268,7 +268,7 @@ case $OS in
         ;;
 esac
 
-PS1=$TXTYLW'\u'$TXTWHT'@'${PROMPT_HOSTCOLOR}'\h'$TXTWHT':'$TXTGRN'\W'$TXTWHT${PROMPT_GIT}$BLDBLK'$(jobcount)'$TXTGRN' >'$BLDGRN'>'$TXTWHT'> '
+PS1=$TXTYLW'\u'$TXTWHT'@'${PROMPT_HOSTCOLOR}'\h'$TXTWHT':'$TXTGRN'\W'$TXTWHT${PROMPT_GIT}$BLDBLK'$(jobcount)'$TXTGRN' >'$BLDGRN'>'$BLDWHT'> '$TXTWHT
 
 # add for screen to dynamically update title
 #PROMPT_COMMAND='echo -n -e "\033k\033\134"'
