@@ -440,6 +440,10 @@ hi TabLineSel	ctermfg=fg	ctermbg=NONE	cterm=NONE
 hi TabLine	cterm=underline  
 hi TabLineFill	cterm=underline
 
+"Kent@20100906, for ShowTabNr.vim
+hi TabLineNr   ctermfg=fg   ctermbg=22   cterm=underline
+hi TabLineNrSel ctermfg=33  ctermbg=NONE cterm=NONE
+
 " Diff related
 hi diffchange ctermbg=236
 hi diffadd ctermbg=4
@@ -450,3 +454,4 @@ hi FoldColumn	ctermfg=254	ctermbg=28	cterm=NONE
 hi Folded		ctermfg=NONE	ctermbg=22	cterm=NONE
 hi SignColumn	ctermfg=254	ctermbg=28	cterm=NONE
 hi Visual		ctermfg=16	ctermbg=153	cterm=NONE
+
