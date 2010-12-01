@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Sun Sep 12, 2010  11:27PM
+" Last Modified: Wed Dec 01, 2010  10:18PM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -94,11 +94,11 @@ set smartindent    " Smart Indent
 set cindent        " C-style Indent
 
 set smarttab       " Smart handling of the tab key
-set expandtab      " Use spaces for tabs
 set shiftround     " Round indent to multiple of shiftwidth
 set shiftwidth=4   " Number of spaces for each indent
 set tabstop=4      " Number of spaces for tab key
 set softtabstop=4  " Number of spaces for tab key while performing editing operations
+"set expandtab     " Use spaces for tabs.
 
 set history=500    " keep 200 lines of command line history
 set ruler          " show the cursor position all the time
