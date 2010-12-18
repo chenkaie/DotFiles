@@ -131,6 +131,7 @@ alias which='type -a'
 alias top='htop'
 alias xmllint='xmllint --noout'
 
+export GREP_OPTIONS="--exclude-dir=\*/.svn/\* --exclude=\*~ --exclude=\*.swp"
 alias grep='grep -i --colour=auto'
 #alias wcgrep='wcgrep -inh --colour=auto' has been defined in wcgrep
 alias mdiff='diff -ruN --exclude=.svn'
@@ -177,7 +178,7 @@ alias mall='mca && m && mi'
 #gcc
 alias agcc='arm-linux-gcc -Wall -g3 -fno-omit-frame-pointer -fno-inline -std=gnu99'
 alias gcc='gcc -Wall -g3 -fno-omit-frame-pointer -fno-inline'
-alias objdump='objdump -d -S'
+alias objdump='objdump -d -S -hrt'
 alias gdb='gdb --command=/home/kent/Repos/DotFiles/.gdbinit-7.3'
 
 #Lint related
