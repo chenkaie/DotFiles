@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Wed Dec 01, 2010  10:18PM
+" Last Modified: Sun Dec 19, 2010  02:33AM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -162,6 +162,7 @@ noremap ; :
 
 "Yahoo Dictionary
 map <C-D> viwy:!clear; ydict <C-R>"<CR>
+vmap <C-D> y:!clear; ydict "<C-R>""<CR>
 
 "tab function hotkey
 nmap tl :tabnext<CR>
@@ -435,7 +436,7 @@ endif
     " ctags
     """"""""""""""""""""""""""""""
     " Set tags path
-    set tags=./tags,./../tags
+    set tags=./tags,./../tags,/home/kent/horus/apps/tags
 
     """"""""""""""""""""""""""""""
     " cscope
@@ -470,6 +471,13 @@ endif
     if match(system('ls ~/usr/bin/cscope'), 'cscope') != -1
         set cscopeprg=~/usr/bin/cscope
     endif
+
+    """"""""""""""""""""""""""""""
+    " For Linux Kernel
+    """"""""""""""""""""""""""""""
+
+    " Generate 'cscope index' and 'tag file' for Linux Kernel : 'make ARCH=arm CROSS_COMPILE=arm-linux- cscope tags'
+    nnoremap ,<F11> <ESC>:cscope add /home/kent/Project/DM36x/linux-2.6.18/cscope.out /home/kent/Project/DM36x/linux-2.6.18 <CR>:set tags=./tags,./../tags,/home/kent/Project/DM36x/linux-2.6.18/tags<CR>
 
     """"""""""""""""""""""""""""""
     " Vi Man
@@ -597,6 +605,7 @@ nnoremap <C-x> :Hexmode<CR>
     let g:EasyGrepIgnoreCase= 0
     let g:EasyGrepJumpToMatch= 1
     let g:EasyGrepWindow=1         " user 'location list' rather than 'Quickfix'
+    let g:EasyGrepCommand=1        " use grep rather vimgrep
 
     """"""""""""""""""""""""""""""
     " VCSCommand
@@ -834,7 +843,7 @@ endfunction
 " 1. :%s/^\s\+//    2. :%le
 
 " To change all the existing tab characters to match the current tab settings, use:
-" :retab
+" :retab  (related with "set expandtab / set noexpandtab)
 
 " }}}
 
