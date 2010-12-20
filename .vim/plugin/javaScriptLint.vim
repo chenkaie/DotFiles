@@ -8,7 +8,7 @@
 "               the quickfix window.  JavaScript Lint must be installed on your system
 "               for this plugin to work properly.  This page should get you started:
 "               http://www.javascriptlint.com/docs/index.htm
-" Last Modified: Tue Sep 08, 2009  01:35PM
+" Last Modified: Mon Dec 20, 2010  01:41PM
 
 
 if !exists("jslint_command")
@@ -26,7 +26,7 @@ endif
 
 " set up auto commands
 autocmd BufWritePost,FileWritePost [^jquery]*.js call JsonLint()
-autocmd BufWinLeave * call s:MaybeClearCursorLineColor()
+"autocmd BufWinLeave * call s:MaybeClearCursorLineColor()
 
 " Runs the current file through javascript lint and 
 " opens a quickfix window with any warnings

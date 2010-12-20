@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Sun Dec 19, 2010  02:33AM
+" Last Modified: Mon Dec 20, 2010  01:36PM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -847,12 +847,12 @@ endfunction
 
 " }}}
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " [ After Loading All Plugin ]                                               {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function AfterStart ()
-
+    " Used to remove my own specific defined behavior for others who use my .vimrc
+    "autocmd! BufWritePost,FileWritePost [^jquery]*.js
 endfunction
 autocmd VimEnter * :call AfterStart()
 
