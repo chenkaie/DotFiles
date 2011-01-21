@@ -210,6 +210,7 @@ Uncomments the selected line(s).
 
     Fit screen: (Ctrl-a, F) used for login at iMac, but the screen size doesn't match that at VVTK
     Move screen to n-th: goto command mode, :number n
+    Change SessionName : Ctrl-a, : -> enter sessionname ooxx
 
 ------------------------------------------------------------------------------
 2. SVN tool
