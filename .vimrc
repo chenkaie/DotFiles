@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Mon Dec 20, 2010  01:36PM
+" Last Modified: Fri Jan 21, 2011  03:48PM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -436,7 +436,7 @@ endif
     " ctags
     """"""""""""""""""""""""""""""
     " Set tags path
-    set tags=./tags,./../tags,/home/kent/horus/apps/tags
+    set tags=./tags,./../tags
 
     """"""""""""""""""""""""""""""
     " cscope
@@ -445,6 +445,7 @@ endif
     "nnoremap <F11> <ESC>:cs add ../cscope.out ..<CR>:cs add /home/kent/cscope_ctag/Horus/cscope.out /home/kent/Project/Horus/apps<CR>
     function! UseAwesomeCscope()
         try
+            set tags+=/home/kent/horus/apps/tags
             exe "cs add ../cscope.out .."
             exe "cs add /home/kent/cscope_ctag/Horus/cscope.out /home/kent/Project/Horus/apps"
         catch /duplicate/
@@ -477,7 +478,7 @@ endif
     """"""""""""""""""""""""""""""
 
     " Generate 'cscope index' and 'tag file' for Linux Kernel : 'make ARCH=arm CROSS_COMPILE=arm-linux- cscope tags'
-    nnoremap ,<F11> <ESC>:cscope add /home/kent/Project/DM36x/linux-2.6.18/cscope.out /home/kent/Project/DM36x/linux-2.6.18 <CR>:set tags=./tags,./../tags,/home/kent/Project/DM36x/linux-2.6.18/tags<CR>
+    nnoremap ,<F11> <ESC>:cscope add /home/kent/Project/DM36x/linux-2.6.18/cscope.out /home/kent/Project/DM36x/linux-2.6.18 <CR>:set tags+=/home/kent/Project/DM36x/linux-2.6.18/tags<CR>
 
     """"""""""""""""""""""""""""""
     " Vi Man
@@ -600,10 +601,10 @@ nnoremap <C-x> :Hexmode<CR>
     " EasyGrep
     """"""""""""""""""""""""
     "Grep 'pattern' in the indicate range (need EasyGrep.vim plugin)
-    map <F3> <ESC>\vv
+    map <F3> <ESC>\vv<ESC>:redraw!<CR>
     let g:EasyGrepRecursive = 1
     let g:EasyGrepIgnoreCase= 0
-    let g:EasyGrepJumpToMatch= 1
+    let g:EasyGrepJumpToMatch= 0
     let g:EasyGrepWindow=1         " user 'location list' rather than 'Quickfix'
     let g:EasyGrepCommand=1        " use grep rather vimgrep
 
