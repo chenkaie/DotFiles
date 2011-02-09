@@ -57,8 +57,12 @@ case $OS in
             eval `dircolors -b`
         fi
 
+        # Note that, Ubuntu have been already done sourcing /etc/bash_completion in /etc/profile,
+        # Source this file twice will cause user fail to login GNOME.
+        # You can check this file ~/.xsession-errors to find out why you login GNOME failed.
+        IsUbuntu=$(lsb_release -a | grep Ubuntu)
         # enable bash completion 
-        if [ -f /etc/bash_completion ]; then
+        if [ -z "$IsUbuntu" ] && [ -f /etc/bash_completion ]; then
             . /etc/bash_completion
         fi
         # PATH
@@ -67,7 +71,7 @@ case $OS in
         export MANPATH=$HOME/usr/man:$HOME/usr/share/man:$HOME/usr/cpan/share/man:$MANPATH
 
         # PERL5
-        source $HOME/perl5/perlbrew/etc/bashrc
+        #source $HOME/perl5/perlbrew/etc/bashrc
         export PERL_CPANM_OPT="-l ~/perl5"
         export PERL5LIB=$HOME/perl5/lib/perl5:$PERL5LIB
         ;;
@@ -316,7 +320,7 @@ echo "Welcome to $HOSTNAME" | cowsay -f default
 
 # source bash related script
 rcfiles="$dotfiles/rcfiles"
-[ "$OS" == "Linux" ] && source $rcfiles/completion/bash_completion || source /opt/local/etc/bash_completion
+#[ "$OS" == "Linux" ] && source $rcfiles/completion/bash_completion || source /opt/local/etc/bash_completion
 source $rcfiles/completion/svn_completion
 source $rcfiles/completion/git-completion
 source $rcfiles/completion/cdargs-bash.sh
