@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Fri Jan 21, 2011  03:48PM
+" Last Modified: Fri Feb 18, 2011  01:35PM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -100,7 +100,7 @@ set tabstop=4      " Number of spaces for tab key
 set softtabstop=4  " Number of spaces for tab key while performing editing operations
 "set expandtab     " Use spaces for tabs.
 
-set history=500    " keep 200 lines of command line history
+set history=1000   " keep 1000 lines of command line history
 set ruler          " show the cursor position all the time
 set showcmd        " display incomplete commands
 set incsearch      " do incremental searching
@@ -468,6 +468,9 @@ endif
     endfun
     nnoremap <F11> <ESC>:call UseAwesomeCscope()<CR>
 
+    " [Web Dev] Gernerate tags file for *.js only!
+    nnoremap <Leader><F11> <ESC>:!tag_rebuild ..<CR><ESC>:redraw!<CR>
+
     " To avoid using wrong cscope(/opt/montavista/pro5.0/bin/cscope) once sourcing devel_IP8161_VVTK
     if match(system('ls ~/usr/bin/cscope'), 'cscope') != -1
         set cscopeprg=~/usr/bin/cscope
@@ -717,7 +720,7 @@ function! QFixToggle(forced)
         cclose
         unlet g:qfix_win
     else
-        copen 6
+        botright copen 10
         let g:qfix_win = bufnr("$")
     endif
 endfunction

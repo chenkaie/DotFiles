@@ -71,7 +71,7 @@ case $OS in
         export MANPATH=$HOME/usr/man:$HOME/usr/share/man:$HOME/usr/cpan/share/man:$MANPATH
 
         # PERL5
-        #source $HOME/perl5/perlbrew/etc/bashrc
+        source $HOME/perl5/perlbrew/etc/bashrc
         export PERL_CPANM_OPT="-l ~/perl5"
         export PERL5LIB=$HOME/perl5/lib/perl5:$PERL5LIB
         ;;
@@ -120,7 +120,7 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
 alias df='df -kTh'
-alias ln='ln -i'
+alias ln='ln -i -n'
 alias psg='ps -ef | grep $1'
 alias h='history | grep $1'
 alias j='jobs'
@@ -320,7 +320,7 @@ echo "Welcome to $HOSTNAME" | cowsay -f default
 
 # source bash related script
 rcfiles="$dotfiles/rcfiles"
-#[ "$OS" == "Linux" ] && source $rcfiles/completion/bash_completion || source /opt/local/etc/bash_completion
+[ "$OS" == "Linux" ] && source $rcfiles/completion/bash_completion || source /opt/local/etc/bash_completion
 source $rcfiles/completion/svn_completion
 source $rcfiles/completion/git-completion
 source $rcfiles/completion/cdargs-bash.sh
