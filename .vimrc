@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Fri Feb 18, 2011  01:35PM
+" Last Modified: Tue Feb 22, 2011  03:20AM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -52,9 +52,11 @@ endif
 
 set backspace=2
 
-" auto generated file: filename~
+" Backups and swapfile
 set backup
-set backupdir=$HOME/.vim/backup
+set backupdir=$HOME/.vim/backup/
+silent execute '!mkdir -p $HOME/.vim/backup'
+
 syntax on
 set vb
 set noswapfile
@@ -289,6 +291,15 @@ inoremap <Esc>OQ /
 inoremap <Esc>OR *
 inoremap <Esc>Ol +
 inoremap <Esc>OS -
+
+
+" search the selected text
+vmap // y/<C-R>"<CR>
+
+" tab goes between delimiters
+nmap <tab> %
+" < and > are considering as a matching pair
+set matchpairs+=<:>
 
 " }}}
 
