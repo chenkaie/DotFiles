@@ -196,6 +196,9 @@ if exist lint ; then
     alias lint-arm-html='lint-arm ~/makcomm/env-html.lnt'
 fi
 
+# ccache & distcc
+alias enjoy-ccache-distcc="source $HOME/Tools/use_distcc_ccache"
+
 #######################
 # Bash SHell opts     # 
 #######################
