@@ -157,9 +157,9 @@ endif
 if !hasmapto('<Plug>HexInsert')
   map <unique> <Leader>hi <Plug>HexInsert
 endif
-if !hasmapto('<Plug>HexGoto')
-  map <unique> <Leader>hg <Plug>HexGoto
-endif
+"if !hasmapto('<Plug>HexGoto')
+  "map <unique> <Leader>hg <Plug>HexGoto
+"endif
 if !hasmapto('<Plug>HexNext')
   map <unique> <Leader>hn <Plug>HexNext
 endif

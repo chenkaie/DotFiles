@@ -130,13 +130,13 @@ alias mkdir='mkdir -p -v'
 alias reload='source ~/.bashrc'
 alias wget='wget -c'
 alias which='type -a'
+alias quota='quota -vs'
 
 # have to check exist()
 alias top='htop'
 alias xmllint='xmllint --noout'
 
 export GREP_OPTIONS="--exclude-dir=\*/.svn/\* --exclude=\*~ --exclude=\*.swp"
-alias grep='grep -i --colour=auto'
 #alias wcgrep='wcgrep -inh --colour=auto' has been defined in wcgrep
 alias mdiff='diff -ruN --exclude=.svn'
 alias diff='colordiff.pl'
@@ -188,10 +188,10 @@ alias gdb='gdb --command=/home/kent/Repos/DotFiles/.gdbinit-7.3'
 #Lint related
 exist jsl  && alias jsl='jsl -conf ~/Tools/jsl.conf -process'
 if exist lint ; then
-    alias lint-gnu='lint +v ~/makcomm/std_gnu_kent.lnt ~/makcomm/env-vim.lnt'
+    alias lint-gnu='lint ~/makcomm/env-vim.lnt'
     alias lint-gnu-xml='lint-gnu ~/makcomm/env-xml.lnt'
     alias lint-gnu-html='lint-gnu ~/makcomm/env-html.lnt'
-    alias lint-arm='lint +v ~/makcomm/std_armgcc_kent.lnt ~/makcomm/env-vim.lnt'
+    alias lint-arm='lint ~/makcomm/env-vim.lnt'
     alias lint-arm-xml='lint-arm ~/makcomm/env-xml.lnt'
     alias lint-arm-html='lint-arm ~/makcomm/env-html.lnt'
 fi
@@ -404,7 +404,7 @@ decrypt () { gpg --no-options "$1"; }
 # finds directory sizes and lists them for the current directory
 dirsize ()
 {
-    du -shx * .[a-zA-Z0-9_]* 2> /dev/null | \
+    du -shx * .[a-zA-Z0-9_]* . 2> /dev/null | \
     egrep '^ *[0-9.]*[MG]' | sort -n > /tmp/list
     egrep '^ *[0-9.]*M' /tmp/list
     egrep '^ *[0-9.]*G' /tmp/list

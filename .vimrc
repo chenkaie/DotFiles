@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Tue Feb 22, 2011  10:21AM
+" Last Modified: Sat Mar 12, 2011  12:25AM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -220,6 +220,7 @@ nmap <C-h> <C-w>h
 nmap <C-l> <C-w>l
 nmap - <C-w>-
 nmap + <C-w>+
+
 " Define different behavior in left/right window
 if has("autocmd")
     autocmd BufEnter,BufLeave *
@@ -292,7 +293,6 @@ inoremap <Esc>OR *
 inoremap <Esc>Ol +
 inoremap <Esc>OS -
 
-
 " search the selected text
 vmap // y/<C-R>"<CR>
 
@@ -300,6 +300,22 @@ vmap // y/<C-R>"<CR>
 nmap <tab> %
 " < and > are considering as a matching pair
 set matchpairs+=<:>
+
+" ',' is more convenient than '\'
+let mapleader = ","
+
+" ':substitute' flag 'g' is default on
+set gdefault
+
+" movement by file line instead of screen line
+nnoremap j gj
+nnoremap k gk
+
+" save on losing focus (GVim Only)
+au FocusLost * :wa
+
+" Working with split windows
+nnoremap <leader>w <C-w>v<C-w>l
 
 " }}}
 
@@ -447,13 +463,12 @@ endif
     " ctags
     """"""""""""""""""""""""""""""
     " Set tags path
-    set tags=./tags,./../tags
+    set tags=tags,../tags,../../tags
 
     """"""""""""""""""""""""""""""
     " cscope
     """"""""""""""""""""""""""""""
     " init cscope hotkey
-    "nnoremap <F11> <ESC>:cs add ../cscope.out ..<CR>:cs add /home/kent/cscope_ctag/Horus/cscope.out /home/kent/Project/Horus/apps<CR>
     function! UseAwesomeCscope()
         try
             set tags+=/home/kent/horus/apps/tags
@@ -480,7 +495,7 @@ endif
     nnoremap <F11> <ESC>:call UseAwesomeCscope()<CR>
 
     " [Web Dev] Gernerate tags file for *.js only!
-    nnoremap <Leader><F11> <ESC>:!tag_rebuild ..<CR><ESC>:redraw!<CR>
+    nnoremap <F11>w <ESC>:!tag_rebuild ..<CR><ESC>:redraw!<CR>
 
     " To avoid using wrong cscope(/opt/montavista/pro5.0/bin/cscope) once sourcing devel_IP8161_VVTK
     if match(system('ls ~/usr/bin/cscope'), 'cscope') != -1
@@ -492,7 +507,7 @@ endif
     """"""""""""""""""""""""""""""
 
     " Generate 'cscope index' and 'tag file' for Linux Kernel : 'make ARCH=arm CROSS_COMPILE=arm-linux- cscope tags'
-    nnoremap ,<F11> <ESC>:cscope add /home/kent/Project/DM36x/linux-2.6.18/cscope.out /home/kent/Project/DM36x/linux-2.6.18 <CR>:set tags+=/home/kent/Project/DM36x/linux-2.6.18/tags<CR>
+    nnoremap <F11>k <ESC>:cscope add /home/kent/Project/DM36x/linux-2.6.18/cscope.out /home/kent/Project/DM36x/linux-2.6.18 <CR>:set tags+=/home/kent/Project/DM36x/linux-2.6.18/tags<CR>
 
     """"""""""""""""""""""""""""""
     " Vi Man
@@ -615,7 +630,7 @@ nnoremap <C-x> :Hexmode<CR>
     " EasyGrep
     """"""""""""""""""""""""
     "Grep 'pattern' in the indicate range (need EasyGrep.vim plugin)
-    map <F3> <ESC>\vv<ESC>:redraw!<CR>
+    map <F3> ,vv<ESC>:redraw!<CR>
     let g:EasyGrepRecursive = 1
     let g:EasyGrepIgnoreCase= 0
     let g:EasyGrepJumpToMatch= 0

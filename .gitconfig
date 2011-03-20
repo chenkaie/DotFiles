@@ -38,10 +38,6 @@
 [merge]
     tool = vimdiff
 
-[sync "github"]
-    github = chenkaie 
-    into = /home/kent/Repos
-
 [diff]
 	tool = vimdiff
 
