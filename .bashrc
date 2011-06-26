@@ -104,7 +104,7 @@ esac
 alias l='ls -FG'
 alias ll='ls -al'                   # long list format
 alias lk='ls -lk'                   # --block-size=1K
-alias lt='ls -ltr'                  # sort by date
+alias lt='ls -ltr'                  # sort by date (mtime)
 alias lc='ls -ltcr'                 # sort by and show change time
 alias la='ls -ltur'                 # sort by and show access time
 alias lx='ls -lXB'                  # sort by extension
@@ -328,6 +328,7 @@ source $rcfiles/completion/svn_completion
 source $rcfiles/completion/git-completion
 source $rcfiles/completion/cdargs-bash.sh
 source $rcfiles/completion/cdots.sh
+source $rcfiles/completion/git-flow-completion.bash
 
 # make less more friendly for non-text input files, see lesspipe(1)
 exist lesspipe && eval "$(lesspipe)"
