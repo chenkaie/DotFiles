@@ -36,6 +36,8 @@ License:
  <EX-mode> 
  :%s/\&\n/\~\r/g
 
+ NOTE: amazing substitue
+ :'<,'>s/<pan>.*\n.*\n.*\n.*\n.*\n.*\n.*\n.*\n.*\n.*\n.*\n.*/<pan>\r<check>\"\%d\"\, \"1\~35200\"<\/check>\r<value\/>\r<\/pan>\r<tilt>\r<check>\"\%\d\"\, \"0\~8800\"<\/check>\r<value\/>\r<\/tilt>\r<zoom>\r<check>\"\%\d\"\, \"0\~16384\"<\/check>\r<value\/>\r<\/zoom>/
 ------------------------------------------------------------------------------
 2. HTML2WIKI *html2wiki*
 Usage:

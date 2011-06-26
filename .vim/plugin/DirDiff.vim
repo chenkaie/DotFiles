@@ -807,6 +807,7 @@ function! <SID>DirDiffSync() range
         endif
     endwhile
     echo syncCount . " diff item(s) synchronized."
+    exe "redraw!"
 endfunction
 
 " Return file "A" or "B" depending on the line given.  If it's a Only line,
