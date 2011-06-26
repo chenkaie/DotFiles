@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Sat Mar 12, 2011  12:25AM
+" Last Modified: Sun Jun 26, 2011  12:42PM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -316,6 +316,9 @@ au FocusLost * :wa
 
 " Working with split windows
 nnoremap <leader>w <C-w>v<C-w>l
+
+" Syntax coloring lines that are too long just slows down the world
+set synmaxcol=256
 
 " }}}
 
