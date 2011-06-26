@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# If not running interactively, don't do anything. 
+# This snippet helps to fix scp, sftp "Received message too long" issue..
+[ -z "$PS1" ] && return
+
 # Source global definitions
 
 [ -f /etc/bashrc ] && . /etc/bashrc
