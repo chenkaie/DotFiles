@@ -325,14 +325,13 @@ esac
 # funny stuff cowsay
 echo "Welcome to $HOSTNAME" | cowsay -f default
 
-# source bash related script
-rcfiles="$dotfiles/rcfiles"
-[ "$OS" == "Linux" ] && source $rcfiles/completion/bash_completion || source /opt/local/etc/bash_completion
-source $rcfiles/completion/svn_completion
-source $rcfiles/completion/git-completion
-source $rcfiles/completion/cdargs-bash.sh
-source $rcfiles/completion/cdots.sh
-source $rcfiles/completion/git-flow-completion.bash
+# Completion support
+source $dotfiles/completion/bash-completion/bash_completion
+source $dotfiles/completion/svn_completion
+source $dotfiles/completion/git-completion
+source $dotfiles/completion/cdargs-bash.sh
+source $dotfiles/completion/cdots.sh
+source $dotfiles/completion/git-flow-completion.bash
 
 # make less more friendly for non-text input files, see lesspipe(1)
 exist lesspipe && eval "$(lesspipe)"
