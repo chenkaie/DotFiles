@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Sun Jun 26, 2011  12:42PM
+" Last Modified: Thu Jul 28, 2011  03:07PM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -307,7 +307,7 @@ let mapleader = ","
 " ':substitute' flag 'g' is default on
 set gdefault
 
-" movement by file line instead of screen line
+" When moving up/down in wrapped lines, move 'screen' lines instead of physical lines
 nnoremap j gj
 nnoremap k gk
 
@@ -319,6 +319,10 @@ nnoremap <leader>w <C-w>v<C-w>l
 
 " Syntax coloring lines that are too long just slows down the world
 set synmaxcol=256
+
+" make search results appear in the middle of the screen
+nmap n nzz
+nmap N Nzz
 
 " }}}
 
