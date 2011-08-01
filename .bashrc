@@ -47,6 +47,17 @@ case $OS in
             fi
         fi
 
+        # Homebrew stuff 
+        if [ -x /usr/local/bin/brew ]; then
+            export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+            export MANPATH=/usr/local/share/man:$MANPATH
+
+            # bash_completion if installed 
+            if [ -f `brew --prefix`/etc/bash_completion ]; then
+                . `brew --prefix`/etc/bash_completion
+            fi
+        fi
+
         # PATH
         export PATH=$HOME/Tools:$HOME/Tools/subversion-scripts:$HOME/Tools/git-scripts:$HOME/usr/bin:$PATH
         # MANPATH
