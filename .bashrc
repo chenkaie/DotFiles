@@ -151,7 +151,7 @@ alias quota='quota -vs'
 alias top='htop'
 alias xmllint='xmllint --noout'
 
-export GREP_OPTIONS="--exclude-dir=\*/.svn/\* --exclude=\*~ --exclude=\*.swp"
+#export GREP_OPTIONS="--exclude-dir=\*/.svn/\* --exclude=\*~ --exclude=\*.swp"
 #alias wcgrep='wcgrep -inh --colour=auto' has been defined in wcgrep
 alias mdiff='diff -ruN --exclude=.svn'
 alias diff='colordiff.pl'
@@ -195,8 +195,8 @@ alias mi='m install'
 alias mall='mca && m && mi'
 
 #gcc
-alias agcc='arm-linux-gcc -Wall -g3 -fno-omit-frame-pointer -fno-inline -std=gnu99'
-alias gcc='gcc -Wall -g3 -fno-omit-frame-pointer -fno-inline'
+alias agcc='arm-linux-gcc -Wall -g3 -fno-omit-frame-pointer -fno-inline -Wcast-align -Wpadded -Wpacked -std=gnu99'
+alias gcc='gcc -Wall -g3 -fno-omit-frame-pointer -fno-inline -Wcast-align -Wpadded -Wpacked -std=gnu99'
 alias objdump='objdump -d -S -hrt'
 alias gdb='gdb --command=/home/kent/Repos/DotFiles/.gdbinit-7.3'
 
@@ -462,13 +462,14 @@ function fe()
 # lazy gcc, default outfile: filename_prefix.out, eg: hello.c -> hello.out
 function lgcc () 
 {
-    `\which gcc` -Wall -g3 -fno-omit-frame-pointer -fno-inline -std=gnu99 -o ${1%.*}{.out,.${1##*.}}
+    gcc -o ${1%.*}{.out,.${1##*.}}
 }
 
 # lazy arm-linux-gcc, default outfile: filename_prefix.platform.out, eg: hello.c -> hello.arm.out
 function lagcc () 
 {
-    platform=`\which arm-linux-gcc`
+    # add '-a' for print all matching executables in PATH, not just the first to resolve ccache caused problem.
+    platform=`\which -a arm-linux-gcc 2> /dev/null`
     case $platform in
         *vivaldi*)
             outfilesuffix="vivaldi"
@@ -485,11 +486,17 @@ function lagcc ()
         *montavista*)
             outfilesuffix="dm365"
             ;;
-        *)
+        *arm*)
             outfilesuffix="arm"
-        ;;
+            ;;
+        "")
+            echo "[Error] arm-linux-gcc not found."
+            return 1
+            ;;
     esac
-    arm-linux-gcc -Wall -g3 -fno-omit-frame-pointer -fno-inline -o ${1%.*}{.${outfilesuffix}.out,.${1##*.}}
+
+    echo "[Info] You are building on ${outfilesuffix} platform."
+    agcc -o ${1%.*}{.${outfilesuffix}.out,.${1##*.}}
 }
 
 function jobcount ()

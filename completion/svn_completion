@@ -1,11 +1,29 @@
-#!/bin/sh
+# ------------------------------------------------------------
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+# ------------------------------------------------------------
+
 # Programmable completion for the Subversion svn command under bash. Source
 # this file (or on some systems add it to ~/.bash_completion and start a new
 # shell) and bash's completion mechanism will know all about svn's options!
-# Provides completion for the svnadmin and svnlook commands as well.  Who wants
-# to read man pages/help text...
+# Provides completion for the svnadmin, svndumpfilter, svnlook and svnsync
+# commands as well.  Who wants to read man pages/help text...
 
-# Known to work with bash 2.05a with programmable completion and extended
+# Known to work with bash 3.* with programmable completion and extended
 # pattern matching enabled (use 'shopt -s extglob progcomp' to enable
 # these if they are not already enabled).
 
@@ -47,7 +65,6 @@ function _svn_grcut()
     local re=$1 line= old_IFS
     # fix IFS, so that leading spaces are not ignored by next read.
     # (there is a leading space in svn status output if only a prop is changed)
-    # outside IFS is not broken because the function is called in a subshell
     old_IFS="$IFS"
     IFS=$'\n'
     while read -r line ; do
@@ -118,10 +135,11 @@ function _svn_lls()
 #      suggested for 'revert', only not svn-managed files for 'add', and so on.
 #      Possible values are:
 #      - username: guess usernames from ~/.subversion/auth/...
+#      - urls: guess urls from ~/.subversion/auth/... or others
 #      - svnstatus: use 'svn status' for completion
 #      - recurse: allow recursion (expensive)
 #      - externals: recurse into externals (very expensive)
-#     Both former options are reasonable, but beware that both later options
+#     Former options are reasonable, but beware that both later options
 #     may be unadvisable if used on large working copies.
 #     None of these costly completions are activated by default.
 #     Argument completion outside a working copy results in an error message.
@@ -133,6 +151,9 @@ function _svn_lls()
 # - obsolete commands could be removed? (e.g. resolved)
 # - completion does not work properly when editing in the middle of the line
 #   status/previous are those at the end of the line, not at the entry position
+# - url completion should select more cases where it is relevant
+# - url completion of http:// schemas could suggest sub directories?
+# - add completion for experimental 'obliterate' feature?
 _svn()
 {
 	local cur cmds cmdOpts pOpts mOpts rOpts qOpts nOpts optsParam opt
@@ -144,9 +165,9 @@ _svn()
 	cmds='add blame annotate praise cat changelist cl checkout co cleanup'
 	cmds="$cmds commit ci copy cp delete remove rm diff export help import"
 	cmds="$cmds info list ls lock log merge mergeinfo mkdir move mv rename"
-	cmds="$cmds propdel pdel propedit pedit propget pget proplist plist"
-	cmds="$cmds propset pset resolve resolved revert status switch unlock"
-	cmds="$cmds update"
+	cmds="$cmds patch propdel pdel propedit pedit propget pget proplist"
+	cmds="$cmds plist propset pset relocate resolve resolved revert status"
+	cmds="$cmds  switch unlock update"
 
 	# help options have a strange command status...
 	local helpOpts='--help -h'
@@ -166,7 +187,9 @@ _svn()
 	# svn:* and other (env SVN_BASH_*_PROPS) properties
 	local svnProps revProps allProps psCmds propCmds
 
-	# svn and user configured file properties
+	# svn and user configured "file" (or directory) properties
+	# the "svn:mergeinfo" prop is not included by default because it is
+	# managed automatically, so there should be no need to edit it by hand.
 	svnProps="svn:keywords svn:executable svn:needs-lock svn:externals
 	          svn:ignore svn:eol-style svn:mime-type $SVN_BASH_FILE_PROPS"
 
@@ -179,6 +202,9 @@ _svn()
 	# subcommands that expect property names
 	psCmds='propset|pset|ps'
 	propCmds="$psCmds|propget|pget|pg|propedit|pedit|pe|propdel|pdel|pd"
+
+	# possible URL schemas to access a subversion server
+	local urlSchemas='file:/// http:// https:// svn:// svn+ssh://'
 
 	# Parse arguments and set various variables about what was found.
 	#
@@ -232,7 +258,7 @@ _svn()
 		continue ;
 	    fi
 
-	    # Argh...  This looks like a bashbug...
+	    # Argh...  This looks like a bash bug...
 	    # Redirections are passed to the completion function
 	    # although it is managed by the shell directly...
 	    # It matters because we want to tell the user when no more
@@ -362,7 +388,46 @@ _svn()
 	    return 0
 	fi
 
-	if [[ $cmd = 'merge' ]]
+	# URL completion
+	if [[ $cmd == @(co|checkout|ls|list) && $stat = 'arg' && \
+			$SVN_BASH_COMPL_EXT == *urls* ]]
+	then
+		# see about COMP_WORDBREAKS workaround in prop completion
+		if [[ $cur == file:* ]]
+		then
+			# file completion for file:// urls
+			local where=${cur/file:/}
+			COMPREPLY=( $(compgen -d -S '/' -X '*/.*' -- $where ) )
+			return
+		elif [[ $cur == *:* ]]
+		then
+			# get known urls
+			local urls= file=
+			for file in ~/.subversion/auth/svn.simple/* ; do
+				if [ -r $file ] ; then
+					local url=$(_svn_read_hashfile svn:realmstring < $file)
+					url=${url/*</}
+					url=${url/>*/}
+					urls="$urls $url"
+				fi
+			done
+
+			# only suggest/show possible suffixes
+			local prefix=${cur%:*} suffix=${cur#*:} c= choices=
+			for c in $urls ; do
+				[[ $c == $prefix:* ]] && choices="$choices ${c#*:}"
+			done
+
+			COMPREPLY=( $(compgen -W "$choices" -- $suffix ) )
+			return
+		else
+			# show schemas
+			COMPREPLY=( $(compgen -W "$urlSchemas" -- $cur) )
+			return
+		fi
+	fi
+
+	if [[ $cmd = 'merge' || $cmd = 'mergeinfo' ]]
 	then
 	  local here=$(_svn_info URL)
 	  # suggest a possible URL for merging
@@ -393,9 +458,12 @@ _svn()
 	if [[ $stat = 'skip' ]]
 	then
 	    local previous=${COMP_WORDS[COMP_CWORD-1]}
-	    local values= dirs= beep=
+	    local values= dirs= beep= exes=
 
 	    [[ $previous = '--config-dir' ]] && dirs=1
+
+	    # external editor, diff, diff3...
+	    [[ $previous = --*-cmd ]] && exes=1
 
 	    [[ $previous = '--native-eol' ]] && values='LF CR CRLF'
 
@@ -413,8 +481,11 @@ _svn()
 		values="--unified --ignore-space-change \
    		        --ignore-all-space --ignore-eol-style"
 
-	    [[ $previous = '--depth' || $previous = '--set-depth' ]] && \
+	    [[ $previous = '--depth' ]] && \
 		values='empty files immediates infinity'
+
+	    [[ $previous = '--set-depth' ]] && \
+		values='empty exclude files immediates infinity'
 
 	    [[ $previous = '--accept' ]] && \
 	    {
@@ -455,6 +526,7 @@ _svn()
 	    # or fallback on ordinary filename expansion
 	    [[ $values ]] && COMPREPLY=( $( compgen -W "$values" -- $cur ) )
 	    [[ $dirs ]] && COMPREPLY=( $( compgen -o dirnames -- $cur ) )
+	    [[ $exes ]] && COMPREPLY=( $( compgen -c -- $cur ) )
 	    [[ $beep ]] &&
 	    {
 		# 'no known completion'. hummm.
@@ -482,6 +554,9 @@ _svn()
 	    # Thus the handling is reprogrammed here...
 	    # The code assumes that property names look like *:*,
 	    # but it also works reasonably well with simple names.
+	    #
+	    # This hack is broken in bash4... not sure what to do about it,
+            # especially while keeping the bash3 compatibility:-(
 	    local choices=
 
 	    if [[ $cur == *:* ]]
@@ -547,7 +622,7 @@ _svn()
 	    case $prop in
 		svn:keywords)
 		    # just a subset?
-		    values="Id Rev URL Date Author \' $SVN_BASH_KEYWORDS"
+		    values="Id Rev URL Date Author Header \' $SVN_BASH_KEYWORDS"
 		    ;;
 		svn:executable|svn:needs-lock)
 		    # hmmm... canonical value * is special to the shell.
@@ -761,7 +836,7 @@ _svn()
 	diff|di)
 		cmdOpts="$rOpts -x --extensions --diff-cmd --no-diff-deleted \
 		         $nOpts $pOpts --force --old --new --notice-ancestry \
-		         -c --change --summarize --changelist --xml"
+		         -c --change --summarize --changelist --xml --svnpatch"
 		;;
 	export)
 		cmdOpts="$rOpts $qOpts $pOpts $nOpts --force --native-eol \
@@ -806,6 +881,9 @@ _svn()
 		cmdOpts="$mOpts $rOpts $qOpts --force --editor-cmd $pOpts \
                          --parents"
 		;;
+	patch)
+		cmdOpts="$qOpts --force"
+		;;
 	propdel|pdel|pd)
 		cmdOpts="$qOpts -R --recursive $rOpts $pOpts --changelist \
                          --depth"
@@ -831,6 +909,9 @@ _svn()
 		[[ $isRevProp || ! $prop ]] && \
 		    cmdOpts="$cmdOpts --revprop $rOpts"
 		[[ $val ]] || cmdOpts="$cmdOpts -F --file"
+		;;
+        relocate)
+		cmdOpts="--ignore-externals"
 		;;
         resolve)
                 cmdOpts="--targets -R --recursive $qOpts $pOpts --accept \
@@ -1042,6 +1123,80 @@ _svnadmin ()
 }
 complete -F _svnadmin -o default svnadmin
 
+_svndumpfilter ()
+{
+	local cur cmds cmdOpts optsParam opt helpCmds optBase i
+
+	COMPREPLY=()
+	cur=${COMP_WORDS[COMP_CWORD]}
+
+	# Possible expansions, without pure-prefix abbreviations such as "h".
+	cmds='exclude help include --version'
+
+	if [[ $COMP_CWORD -eq 1 ]] ; then
+		COMPREPLY=( $( compgen -W "$cmds" -- $cur ) )
+		return 0
+	fi
+
+	# options that require a parameter
+	# note: continued lines must end '|' continuing lines must start '|'
+	optsParam="--targets"
+
+	# if not typing an option, or if the previous option required a
+	# parameter, then fallback on ordinary filename expansion
+	helpCmds='help|--help|h|\?'
+	if [[ ${COMP_WORDS[1]} != @($helpCmds) ]] && \
+	   [[ "$cur" != -* ]] || \
+	   [[ ${COMP_WORDS[COMP_CWORD-1]} == @($optsParam) ]] ; then
+		return 0
+	fi
+
+	cmdOpts=
+	case ${COMP_WORDS[1]} in
+	exclude|include)
+		cmdOpts="--drop-empty-revs --renumber-revs
+		         --skip-missing-merge-sources --targets
+		         --preserve-revprops --quiet"
+		;;
+	help|h|\?)
+		cmdOpts="$cmds"
+		;;
+	*)
+		;;
+	esac
+
+	cmdOpts="$cmdOpts --help -h"
+
+	# take out options already given
+	for (( i=2; i<=$COMP_CWORD-1; ++i )) ; do
+		opt=${COMP_WORDS[$i]}
+
+		case $opt in
+		--*)    optBase=${opt/=*/} ;;
+		-*)     optBase=${opt:0:2} ;;
+		esac
+
+		cmdOpts=" $cmdOpts "
+		cmdOpts=${cmdOpts/ ${optBase} / }
+
+		# take out alternatives
+		case $optBase in
+		-h)              cmdOpts=${cmdOpts/ --help / } ;;
+		--help)          cmdOpts=${cmdOpts/ -h / } ;;
+		esac
+
+		# skip next option if this one requires a parameter
+		if [[ $opt == @($optsParam) ]] ; then
+			((++i))
+		fi
+	done
+
+	COMPREPLY=( $( compgen -W "$cmdOpts" -- $cur ) )
+
+	return 0
+}
+complete -F _svndumpfilter -o default svndumpfilter
+
 _svnlook ()
 {
 	local cur cmds cmdOpts optsParam opt helpCmds optBase i
@@ -1107,10 +1262,10 @@ _svnlook ()
 	log)
 		cmdOpts="-r --revision -t --transaction"
 		;;
-	propget)
+	propget|pget|pg)
 		cmdOpts="-r --revision -t --transaction --revprop"
 		;;
-	proplist)
+	proplist|plist|pl)
 		cmdOpts="-r --revision -t --transaction --revprop -v --verbose --xml"
 		;;
 	tree)
@@ -1170,3 +1325,169 @@ _svnlook ()
 }
 complete -F _svnlook -o default svnlook
 
+_svnsync ()
+{
+	local cur cmds cmdOpts optsParam opt helpCmds optBase i
+
+	COMPREPLY=()
+	cur=${COMP_WORDS[COMP_CWORD]}
+
+	# Possible expansions, without pure-prefix abbreviations such as "h".
+	cmds='copy-revprops help info initialize synchronize --version'
+
+	if [[ $COMP_CWORD -eq 1 ]] ; then
+		COMPREPLY=( $( compgen -W "$cmds" -- $cur ) )
+		return 0
+	fi
+
+	# options that require a parameter
+	# note: continued lines must end '|' continuing lines must start '|'
+	optsParam="--config-dir|--config-option|--source-username|--source-password"
+	optsParam="$optsParam|--sync-username|--sync-password"
+
+	# if not typing an option, or if the previous option required a
+	# parameter, then fallback on ordinary filename expansion
+	helpCmds='help|--help|h|\?'
+	if [[ ${COMP_WORDS[1]} != @($helpCmds) ]] && \
+	   [[ "$cur" != -* ]] || \
+	   [[ ${COMP_WORDS[COMP_CWORD-1]} == @($optsParam) ]] ; then
+		return 0
+	fi
+
+	cmdOpts=
+	case ${COMP_WORDS[1]} in
+	copy-revprops|initialize|init|synchronize|sync)
+		cmdOpts="--non-interactive --no-auth-cache --trust-server-cert \
+		         --source-username --source-password --sync-username \
+		         --sync-password --config-dir --config-option -q --quiet"
+		;;
+	help|h|\?)
+		cmdOpts="$cmds"
+		;;
+	info)
+		cmdOpts="--non-interactive --no-auth-cache --trust-server-cert \
+		         --source-username --source-password --sync-username \
+		         --sync-password --config-dir --config-option"
+		;;
+	*)
+		;;
+	esac
+
+	cmdOpts="$cmdOpts --help -h"
+
+	# take out options already given
+	for (( i=2; i<=$COMP_CWORD-1; ++i )) ; do
+		opt=${COMP_WORDS[$i]}
+
+		case $opt in
+		--*)    optBase=${opt/=*/} ;;
+		-*)     optBase=${opt:0:2} ;;
+		esac
+
+		cmdOpts=" $cmdOpts "
+		cmdOpts=${cmdOpts/ ${optBase} / }
+
+		# take out alternatives
+		case $optBase in
+		-h)              cmdOpts=${cmdOpts/ --help / } ;;
+		--help)          cmdOpts=${cmdOpts/ -h / } ;;
+		-q)              cmdOpts=${cmdOpts/ --quiet / } ;;
+		--quiet)         cmdOpts=${cmdOpts/ -q / } ;;
+		esac
+
+		# skip next option if this one requires a parameter
+		if [[ $opt == @($optsParam) ]] ; then
+			((++i))
+		fi
+	done
+
+	COMPREPLY=( $( compgen -W "$cmdOpts" -- $cur ) )
+
+	return 0
+}
+complete -F _svnsync -o default svnsync
+
+# reasonable completion for 'svnversion'
+_svnversion ()
+{
+	local cmdOpts=" -n --no-newline -c --committed -h --help --version "
+	local cur=${COMP_WORDS[COMP_CWORD]}
+
+	COMPREPLY=()
+
+	# parse current options
+	local options= wcpath= trailurl= last='none' stat= opt= i=-1 isCur=
+	for opt in ${COMP_WORDS[@]}
+	do
+		[[ $i -eq $COMP_CWORD ]] && stat=$last
+		let i++
+
+		# are we processing the current word?
+		isCur=
+		[[ $i -eq $COMP_CWORD ]] && isCur=1
+
+		# skip first command, should be 'svnversion'
+		if [ $last = 'none' ] ; then
+			last='first'
+			continue
+		fi
+
+		# get options
+		if [[ $last != 'arg' && $opt == -* ]]
+		then
+			# if '--' is at the current position, it means that we are looking
+			# for '--*' options, and not the end of option processing.
+			if [[ $opt = '--' && ! $isCur ]]
+			then
+				last='arg'
+			else
+				options="$options $opt "
+				last='opt'
+			fi
+			continue
+		fi
+		# get arguments
+		if [[ $opt != -* ]]
+		then
+			last='arg'
+			if [[ ! $wcpath ]]
+			then
+				wcpath=$opt
+			elif [[ ! $trailurl ]]
+			then
+				trailurl=$opt
+			fi
+		fi
+	done
+	[[ $stat ]] || stat=$last
+
+	# argument part
+	if [[ $cur != -* || $stat = 'arg' ]]
+	then
+		[[ $wcpath && $trailurl ]] && COMPREPLY=( '' )
+		return 0
+	fi
+
+	# suggest options, and  take out already given options
+	for opt in $options
+	do
+		# take out options
+		cmdOpts=${cmdOpts/ $opt / }
+
+		# take out alternatives
+		case $opt in
+			-n)              cmdOpts=${cmdOpts/ --no-newline / } ;;
+			--no-newline)    cmdOpts=${cmdOpts/ -n / } ;;
+			-h)              cmdOpts=${cmdOpts/ --help / } ;;
+			--help)          cmdOpts=${cmdOpts/ -h / } ;;
+			-c)              cmdOpts=${cmdOpts/ --committed / } ;;
+			--committed)     cmdOpts=${cmdOpts/ -c / } ;;
+		esac
+	done
+
+	COMPREPLY=( $( compgen -W "$cmdOpts" -- $cur ) )
+
+	return 0
+}
+# -X option does not seem to work?
+complete -F _svnversion -o dirnames -X '*.svn*' svnversion
