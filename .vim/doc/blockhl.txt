@@ -1,0 +1,68 @@
+*blockhl.txt*	Block Highlighting			Mar 15, 2010
+
+Author:    Charles E. Campbell, Jr.  <NdrOchip@ScampbellPfamily.AbizM>
+           (remove NOSPAM from Campbell's email first)
+Copyright: (c) 2002-2010 by Charles E. Campbell, Jr.	*blockhl-copyright*
+           The VIM LICENSE applies to blockhl.vim, and blockhl.txt
+           (see |copyright|) except use "blockhl" instead of "Vim"
+           NO WARRANTY, EXPRESS OR IMPLIED.  USE AT-YOUR-OWN-RISK.
+
+==============================================================================
+1. Contents					*blockhl-contents* {{{1
+
+	1. Contents.................: |blockhl-contents|
+	2. Manual...................: |blockhl-manual|
+	3. History..................: |blockhl-history|
+
+==============================================================================
+2. Manual				*blockhl* *blockhl-manual*
+
+This plugin modifies the highlighting for C and C++ files, producing various
+colors of gray for leading white space based upon the current indentation
+level.
+>
+ :ToggleBlockHL
+<	This command toggles indentation block highlighting.
+>
+ DrChip.Toggle Block Highlighting
+<	This menu item uses :ToggleBlockHL to toggle indentation block
+	highlighting (gvim only, menus must be enabled)
+>
+ let g:blockhl_enabled= 1
+<	This variable causes block highlighting to be enabled at startup if
+	placed in one's .vimrc
+>
+ let g:DrChipTopLvlMenu= "DrChip."
+<	This variable controls the name of the top-level menu blockhl
+	produces.  The default value is shown.  You may change this by
+	putting a similar line in your .vimrc with your own custom string.
+
+==============================================================================
+3. History						*blockhl-history*
+
+ 6  : Aug 29, 2008: added "default" qualifier to highlighting commands
+      Mar 15, 2010: added -bar to ToggleBlockHL so the Colorscheme autocmd
+                    doesn't complain
+      Mar 15, 2010: if g:blockhl_enabled is 1, then this plugin will begin
+                    enabled (otherwise needs :ToggleBlockHL to be enabled/disabled)
+      Mar 15, 2010: added DrChip menu item
+ 5  : Aug 23, 2004: ToggleBlockHL() function provided which toggles
+                    between block-highlighting and no such highlighting
+      Apr 12, 2005  vim version 700+ now uses the ColorScheme event
+                    instead of CursorHold to restore block-highlighting
+                    when the colorscheme is changed
+ 4  : Jul 01, 2004: optionally supports entire-line rather than just
+                    leading whitespace
+                    uses cursorhold to restore highlighting after a
+                    colorscheme change
+                    bugfix: an ALLBUT in cParen caused cCurly7
+                    to do inside-() highlighting.
+ 3  : Jun 30, 2004: now supports dark and light background settings
+ 2  : Jun 24, 2002: has("menu") now part of test
+ 1  : the epoch   :
+
+
+
+==============================================================================
+Modelines: {{{1
+vim:tw=78:ts=8:ft=help:fdm=marker:
