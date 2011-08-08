@@ -1,1 +1,1 @@
-.gdbinit-7.3-vimgdb
+.gdbinit-kent
