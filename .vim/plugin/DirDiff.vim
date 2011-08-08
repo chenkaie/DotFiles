@@ -1,9 +1,9 @@
 " -*- vim -*-
 " FILE: "/home/wlee/.vim/plugin/DirDiff.vim" {{{
-" LAST MODIFICATION: "Mon, 20 Oct 2008 09:04:59 -0500 (wlee)"
+" LAST MODIFICATION: "Fri, 29 Jul 2011 08:30:07 -0500 (wlee)"
 " HEADER MAINTAINED BY: N/A
-" VERSION: 1.1.2
-" (C) 2001-2006 by William Lee, <wl1012@yahoo.com>
+" VERSION: 1.1.4
+" (C) 2001-2011 by William Lee, <wl1012@yahoo.com>
 " }}}
 
 
@@ -116,7 +116,7 @@
 "   William Lee <wl1012@yahoo.com>
 "
 " LICENSE:
-"   Copyright (c) 2001-2006 William Lee
+"   Copyright (c) 2001-2011 William Lee
 "   All rights reserved.
 "
 "   Redistribution and use in source and binary forms, with or without
@@ -147,9 +147,13 @@
 "
 "   Florian Delizy for the i18n diff patch
 "   Robert Webb for his sorting function
+"   Wu WeiWei for his Chinese diff patch
 "   Salman Halim, Yosuke Kimura, and others for their suggestions
 "
 " HISTORY:
+"  1.1.4  - Fixed split windows problems caused by some .vimrc settings.
+"  1.1.3  - Applied the patch to 1.1.2 by Wu WeiWei in order to make diff
+"           that's localized in Chinese work.
 "  1.1.2  - Applied the patch to 1.1.0 instead of 1.0.2. Please do not use
 "           1.1.1
 "  1.1.1  - Make it work with filename with spaces. (Thanks to Atte Kojo)
@@ -281,6 +285,11 @@ if !exists("g:DirDiffTextOnlyIn")
     let g:DirDiffTextOnlyIn = "Only in "
 endif
 
+" String used for the English equivalent ": ")
+if !exists("g:DirDiffTextOnlyInCenter")
+    let g:DirDiffTextOnlyInCenter = ": "
+endif
+
 " Set some script specific variables:
 "
 let s:DirDiffFirstDiffLine = 6
@@ -378,7 +387,7 @@ function! <SID>DirDiff(srcA, srcB)
     echo "Diffing directories, it may take a while..."
     let error = <SID>DirDiffExec(cmd, 0)
     if (error == 0)
-        echo "There is no diff here."
+        redraw | echom "diff found no differences - directories match."
         return
     endif
     silent exe "edit ".DiffBuffer
@@ -564,6 +573,18 @@ function! <SID>DirDiffWrapmode()
     wincmd j
 endfunction
 
+function! <SID>EscapeFileName(path)
+	if (v:version >= 702)
+		return fnameescape(a:path)
+	else
+		" This is not a complete list of escaped character, so it's
+		" not as sophisicated as the fnameescape, but this should
+		" cover most of the cases and should work for Vim version <
+		" 7.2
+		return escape(a:path, " \t\n*?[{`$\\%#'\"|!<")
+	endif
+endfunction
+
 function! <SID>DirDiffOpen()
     " First dehighlight the last marked
     call <SID>DeHighlightLine()
@@ -576,7 +597,14 @@ function! <SID>DirDiffOpen()
     let dirA = <SID>GetBaseDir("A")
     let dirB = <SID>GetBaseDir("B")
 
+    " Save the number of this window, to which we wish to return
+    " This is required in case there are other windows open
+    let thisWindow = winnr()
+
     call <SID>CloseDiffWindows()
+
+    " Ensure we're in the right window
+    exec thisWindow.'wincmd w'
 
     let line = getline(".")
     " Parse the line and see whether it's a "Only in" or "Files Differ"
@@ -593,7 +621,7 @@ function! <SID>DirDiffOpen()
         endif
         split
         wincmd k
-        silent exec "edit ".fnameescape(fileToOpen)
+        silent exec "edit ". <SID>EscapeFileName(fileToOpen)
         " Fool the window saying that this is diff
         diffthis
         wincmd j
@@ -604,8 +632,15 @@ function! <SID>DirDiffOpen()
         "Open the diff windows
         split
         wincmd k
-        silent exec "edit ".fnameescape(fileB)
-        silent exec "vert diffsplit ".fnameescape(fileA)
+        silent exec "edit ".<SID>EscapeFileName(fileB)
+
+        " To ensure that A is on the left and B on the right, splitright must be off
+        " let saved_splitright = &splitright
+        " set nosplitright
+        " silent exec "vert diffsplit ".<SID>EscapeFileName(fileA)
+        " let &splitright = saved_splitright
+        silent exec "leftabove vert diffsplit ".<SID>EscapeFileName(fileA)
+
         " Go back to the diff window
         wincmd j
         " Resize the window
@@ -839,11 +874,11 @@ endfunction
 
 "Returns the source (A or B) of the "Only" line
 function! <SID>ParseOnlySrc(line)
-    return substitute(a:line, '^.*' . s:DirDiffDiffOnlyLine . '\[\(.\)\].*:.*', '\1', '')
+    return substitute(a:line, '^.*' . s:DirDiffDiffOnlyLine . '\[\(.\)\].*' . s:DirDiffDiffOnlyLineCenter . '.*', '\1', '')
 endfunction
 
 function! <SID>ParseOnlyFile(line)
-    let regex = '^.*' . s:DirDiffDiffOnlyLine . '\[.\]\(.*\): \(.*\)'
+    let regex = '^.*' . s:DirDiffDiffOnlyLine . '\[.\]\(.*\)' . s:DirDiffDiffOnlyLineCenter . '\(.*\)'
     let root = substitute(a:line, regex , '\1', '')
     let file = root . s:sep . substitute(a:line, regex , '\2', '')
     return file
@@ -1067,6 +1102,7 @@ function! <SID>GetDiffStrings()
     " what's set in the global variables
 
     if (g:DirDiffDynamicDiffText == 0)
+        let s:DirDiffDiffOnlyLineCenter = g:DirDiffTextOnlyInCenter
         let s:DirDiffDiffOnlyLine = g:DirDiffTextOnlyIn
         let s:DirDiffDifferLine = g:DirDiffTextFiles
         let s:DirDiffDifferAndLine = g:DirDiffTextAnd
@@ -1093,7 +1129,9 @@ function! <SID>GetDiffStrings()
     "echo "First line: " . getline(1)
     "echo "tmp1: " . tmp1
     "echo "tmp1rx: " . tmp1rx
-	let s:DirDiffDiffOnlyLine = substitute( getline(1), tmp1rx . ".*$", "", '') 
+    let regex = '\(^.*\)' . tmp1rx . '\(.*\)' . "test"
+	let s:DirDiffDiffOnlyLine = substitute( getline(1), regex, '\1', '') 
+	let s:DirDiffDiffOnlyLineCenter = substitute( getline(1), regex, '\2', '') 
     "echo "DirDiff Only: " . s:DirDiffDiffOnlyLine
 	
 	q
@@ -1127,5 +1165,13 @@ function! <SID>GetDiffStrings()
 	call <SID>Delete(tmp1)
 	call <SID>Delete(tmp2)
 	call <SID>Delete(tmpdiff)
+
+	"avoid get diff text again
+	let g:DirDiffTextOnlyInCenter = s:DirDiffDiffOnlyLineCenter
+	let g:DirDiffTextOnlyIn = s:DirDiffDiffOnlyLine
+	let g:DirDiffTextFiles = s:DirDiffDifferLine
+	let g:DirDiffTextAnd = s:DirDiffDifferAndLine
+	let g:DirDiffTextDiffer = s:DirDiffDifferEndLine
+	let g:DirDiffDynamicDiffText = 0
 
 endfunction
