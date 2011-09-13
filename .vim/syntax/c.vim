@@ -14,7 +14,7 @@
 
 " Common ANSI-standard functions
 syn keyword cAnsiFunction	MULU_ DIVU_ MODU_ MUL_ DIV_ MOD_
-syn keyword cAnsiFunction	main typeof
+syn keyword cAnsiFunction	main
 syn keyword cAnsiFunction	open close read write lseek dup dup2
 syn keyword cAnsiFunction	fcntl ioctl
 syn keyword cAnsiFunction	wctrans towctrans towupper

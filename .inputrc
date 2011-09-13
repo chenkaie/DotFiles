@@ -24,7 +24,7 @@ set show-all-if-ambiguous on
 # PageDown
 "\e[6~": history-search-forward 
 
-# Ctrl + w/b : word movement
+# Ctrl + f/b : word movement
 "\C-f": forward-word
 "\C-b": backward-word 
 

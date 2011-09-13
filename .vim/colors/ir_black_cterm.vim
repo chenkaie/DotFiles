@@ -452,6 +452,6 @@ hi difftext ctermbg=3 ctermfg=0
 
 hi FoldColumn	ctermfg=254	ctermbg=28	cterm=NONE
 hi Folded		ctermfg=NONE	ctermbg=22	cterm=NONE
-hi SignColumn	ctermfg=254	ctermbg=28	cterm=NONE
+hi SignColumn	ctermfg=233	ctermbg=0	cterm=NONE
 hi Visual		ctermfg=16	ctermbg=153	cterm=NONE
 

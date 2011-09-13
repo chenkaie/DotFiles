@@ -146,6 +146,7 @@ alias reload='source ~/.bashrc'
 alias wget='wget -c'
 alias which='type -a'
 alias quota='quota -vs'
+alias grep='grep --mmap'
 
 # have to check exist()
 alias top='htop'
@@ -198,7 +199,7 @@ alias mall='mca && m && mi'
 alias agcc='arm-linux-gcc -Wall -g3 -fno-omit-frame-pointer -fno-inline -Wcast-align -Wpadded -Wpacked -std=gnu99'
 alias gcc='gcc -Wall -g3 -fno-omit-frame-pointer -fno-inline -Wcast-align -Wpadded -Wpacked -std=gnu99'
 alias objdump='objdump -d -S -hrt'
-alias gdb='gdb --command=/home/kent/Repos/DotFiles/.gdbinit-7.3'
+alias gdb='gdb --command=$HOME/Repos/DotFiles/.gdbinit-7.3'
 
 #Lint related
 exist jsl  && alias jsl='jsl -conf ~/Tools/jsl.conf -process'
@@ -293,7 +294,7 @@ case $OS in
         ;;
 esac
 
-PS1=$TXTYLW'\u'$TXTWHT'@'${PROMPT_HOSTCOLOR}'\h'$TXTWHT':'$TXTGRN'\W'$TXTWHT${PROMPT_GIT}$BLDBLK'$(jobcount)'$TXTGRN' >'$BLDGRN'>'$BLDWHT'> '$TXTWHT
+PS1=$TXTYLW'\u'$TXTWHT'@'${PROMPT_HOSTCOLOR}'\h'$TXTWHT':'$TXTGRN'\W'$TXTWHT${PROMPT_GIT}$BLDBLK'$(counter)'$TXTGRN' >'$BLDGRN'>'$BLDWHT'> '$TXTWHT
 
 # add for screen to dynamically update title
 #PROMPT_COMMAND='echo -n -e "\033k\033\134"'
@@ -499,11 +500,15 @@ function lagcc ()
     agcc -o ${1%.*}{.${outfilesuffix}.out,.${1##*.}}
 }
 
-function jobcount ()
+function counter()
 {
+    case $1 in *-h*) echo "(jobnum|dirnum)" ;; esac
+
     jobnum="$(jobs | wc -l | tr -d " ")"
-    if [ "${jobnum}" -gt 0 ]; then
-        echo -n " (${jobnum})"
+    dirnum="$(dirs -v | tail -n 1 | awk '{print $1}')"
+
+    if [ `expr $jobnum + $dirnum` -gt 0 ]; then
+        echo -n " (${jobnum}/${dirnum})"
     fi
 }
 
