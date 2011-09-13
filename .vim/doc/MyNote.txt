@@ -170,6 +170,13 @@ Uncomments the selected line(s).
     o m[a,b,c,...,z] => mark this line as mark[a,b,c,...,z]
     o `[a,b,c,...,z] => goto mark [a,b,c,...,z]
     o  :marks => list all marks list 
+    --------------------------------------------------------------------------
+    ShowMarks
+    <Leader>mt   - Toggles ShowMarks on and off.
+    <Leader>mo   - Forces ShowMarks on.
+    <Leader>mh   - Clears the mark at the current line.
+    <Leader>ma   - Clears all marks in the current buffer.
+    <Leader>mm   - Places the next available mark on the current line.
 
 ------------------------------------------------------------------------------
  Go to last/prev edited line

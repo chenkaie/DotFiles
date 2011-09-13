@@ -3,7 +3,7 @@ augroup filetypedetect
     au BufNewFile,BufRead *.j setf objj
     au BufNewFile,BufRead *.objj setf objj
     " filetype for mkd
-    au BufNewFile,BufRead *.mkd,*.markdown      setfiletype mkd
+    au BufNewFile,BufRead *.mkd,*.markdown setfiletype markdown
     " lowlight ^M symbol.
     au BufRead *.c,*.h match Ignore /\r$/ | hi Ignore ctermfg=bg
     " use better colorscheme to edit HTML

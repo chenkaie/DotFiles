@@ -528,7 +528,7 @@ elseif &background=='dark'
     hi DiffChange	ctermfg=NONE	ctermbg=90	cterm=NONE
     hi DiffDelete	ctermfg=69	ctermbg=234	cterm=NONE
     hi DiffText		ctermfg=16	ctermbg=150	cterm=NONE
-    hi SignColumn	ctermfg=254	ctermbg=28	cterm=NONE
+    hi SignColumn	ctermfg=233	ctermbg=0	cterm=NONE
     hi IncSearch	ctermfg=16	ctermbg=252	cterm=NONE
     hi StatusLineNC	ctermfg=16	ctermbg=250	cterm=NONE
     hi VertSplit	ctermfg=16	ctermbg=250	cterm=NONE

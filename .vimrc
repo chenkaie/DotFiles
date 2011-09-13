@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Thu Jul 28, 2011  03:07PM
+" Last Modified: Sat Sep 10, 2011  01:05AM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -79,7 +79,7 @@ else
     "For Colorscheme
     set bg=dark
     colorscheme peaksea_new
-    " colorscheme ir_black
+    "colorscheme ir_black_cterm
 endif
 
 " Status Line
@@ -535,6 +535,9 @@ endif
     "set makeprg=make
     "set errorformat=%f:%l:\ %m
 
+    " Enables detection of some GCC extensions to C
+    let c_gnu=1 
+
     """"""""""""""""""""""""""""""
     " NeoComplCache
     """"""""""""""""""""""""""""""
@@ -671,7 +674,7 @@ nnoremap <C-x> :Hexmode<CR>
     """"""""""""""""""""""""""""""
     " Tag List
     """"""""""""""""""""""""""""""
-    nmap <F12>   :TlistToggle<CR>
+    nmap <F12>   :TagbarToggle<CR>
 
     " Split to the right side of the screen
     let g:Tlist_Use_Right_Window = 1
@@ -684,28 +687,62 @@ nnoremap <C-x> :Hexmode<CR>
     " Always display one file tags
     let g:Tlist_Show_One_File = 1
 
-   """"""""""""""""""""""""""""""
-   " Minibuffer
-   """"""""""""""""""""""""""""""
-   let g:miniBufExplModSelTarget = 1
-   hi MBENormal ctermfg=7
-   hi MBEVisibleNormal ctermfg=2
-   hi MBEChanged ctermfg=14
-   hi MBEVisibleChanged ctermfg=2
+    """"""""""""""""""""""""""""""
+    " Minibuffer
+    """"""""""""""""""""""""""""""
+    let g:miniBufExplModSelTarget = 1
+    hi MBENormal ctermfg=7
+    hi MBEVisibleNormal ctermfg=2
+    hi MBEChanged ctermfg=14
+    hi MBEVisibleChanged ctermfg=2
 
-   """"""""""""""""""""""""""""""
-   " SrcExplorer
-   """"""""""""""""""""""""""""""
-   "let s:SrcExpl_tagsPath = '/home/kent/cscope_ctag/lsp/'
-   "let s:SrcExpl_workPath = '/home/kent/cscope_ctag/lsp/'
-   " Let the Source Explorer update the tags file when opening
-   let g:SrcExpl_updateTags = 0
+    """"""""""""""""""""""""""""""
+    " SrcExplorer
+    """"""""""""""""""""""""""""""
+    "let s:SrcExpl_tagsPath = '/home/kent/cscope_ctag/lsp/'
+    "let s:SrcExpl_workPath = '/home/kent/cscope_ctag/lsp/'
+    " Let the Source Explorer update the tags file when opening
+    let g:SrcExpl_updateTags = 0
 
-   """"""""""""""""""""""""""""""
-   " vimgdb
-   """"""""""""""""""""""""""""""
+    """"""""""""""""""""""""""""""
+    " vimgdb
+    """"""""""""""""""""""""""""""
     let g:vimgdb_debug_file = ""
     run macros/gdb_mappings.vim
+
+    """"""""""""""""""""""""""""""
+    " ShowMarks 
+    """"""""""""""""""""""""""""""
+    let g:showmarks_include='abcdefghijklmnopqrtuvwxyz' . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    let g:showmarks_ignore_type="h"
+    let g:showmarks_textlower="\t"
+    let g:showmarks_textupper="\t"
+    let g:showmarks_textother="\t"
+    let g:showmarks_auto_toggle = 0
+    nnoremap <silent> mt :ShowMarksToggle<CR>
+
+    hi ShowMarksHLl ctermfg=red   ctermbg=black
+    hi ShowMarksHLu ctermfg=green ctermbg=black
+    hi ShowMarksHLo ctermfg=red   ctermbg=black
+    hi ShowMarksHLm ctermfg=red   ctermbg=black
+
+    """"""""""""""""""""""""""""""
+    " wokmarks
+    """"""""""""""""""""""""""""""
+    let g:wokmarks_do_maps = 0
+    let g:wokmarks_pool = "abcdefghijklmnopqrtuvwxyz"
+    map mm <Plug>ToggleMarkWok
+    map mj <Plug>NextMarkWok
+    map mk <Plug>PrevMarkWok
+    autocmd User WokmarksChange :ShowMarksOn
+
+    """"""""""""""""""""""""""""""
+    " EasyMotion
+    """"""""""""""""""""""""""""""
+    noremap [emotion] <Nop>
+    noremap [emotion]<Space> e
+    map e [emotion]
+    let g:EasyMotion_leader_key = '[emotion]'
 
 " }}}
 
