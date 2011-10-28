@@ -181,7 +181,7 @@ syn keyword cAnsiFunction	UINTMAX_C INTMAX_C UINT64_C
 syn keyword cAnsiFunction	UINT32_C UINT16_C UINT8_C
 syn keyword cAnsiFunction	INT64_C INT32_C INT16_C INT8_C
 syn keyword cAnsiFunction	ftok shmget shmat shmdt semop semget
-syn keyword cAnsiFunction	select pselect FD_CLR FD_ZERO FD_SET FD_ISSET
+syn keyword cAnsiFunction	select pselect FD_CLR FD_ZERO FD_SET FD_ISSET poll ppoll
 syn keyword cAnsiFunction	access mkdir
 
 " Common ANSI-standard Names
