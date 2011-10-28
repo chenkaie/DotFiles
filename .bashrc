@@ -189,6 +189,7 @@ alias agcc='arm-linux-gcc -Wall -g3 -fno-omit-frame-pointer -fno-inline -Wcast-a
 alias gcc='gcc -Wall -g3 -fno-omit-frame-pointer -fno-inline -Wcast-align -Wpadded -Wpacked -std=gnu99'
 alias objdump='objdump -d -S -hrt'
 alias gdb='gdb --command=$HOME/Repos/DotFiles/.gdbinit-7.3'
+#alias strace='strace -f -v -x -s 128'
 
 #Lint related
 exist jsl  && alias jsl='jsl -conf ~/Tools/jsl.conf -process'
@@ -203,6 +204,9 @@ fi
 
 # ccache & distcc
 alias enjoy-ccache-distcc="source $HOME/Tools/use_distcc_ccache"
+
+# enjoy proxy
+alias enjoy-proxy="source $HOME/Tools/use_proxy"
 
 #######################
 # Bash SHell opts     # 
