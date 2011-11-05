@@ -73,3 +73,7 @@
 # No http-timeout, so just use the builtin default.
 # No neon-debug-mask, so neon debugging is disabled.
 # ssl-authority-files = /path/to/CAcert.pem;/path/to/CAcert2.pem
+
+http-proxy-exceptions = 172.16.*.*, rd1-1
+http-proxy-host = 172.16.2.54
+http-proxy-port = 8888

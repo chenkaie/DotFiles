@@ -139,14 +139,14 @@ alias ln='ln -i -n'
 alias psg='ps -ef | grep $1'
 alias h='history | grep $1'
 alias j='jobs'
-alias less='less -R'                # colorful 'less'
+alias less='less -R --tabs=4'       # colorful 'less', tab stops = 4
 alias more='less'
 alias mkdir='mkdir -p -v'
 alias reload='source ~/.bashrc'
 alias wget='wget -c'
 alias which='type -a'
 alias quota='quota -vs'
-alias grep='grep --mmap'
+alias grep='grep --mmap --color'
 
 # have to check exist()
 alias top='htop'
@@ -200,6 +200,7 @@ alias agcc='arm-linux-gcc -Wall -g3 -fno-omit-frame-pointer -fno-inline -Wcast-a
 alias gcc='gcc -Wall -g3 -fno-omit-frame-pointer -fno-inline -Wcast-align -Wpadded -Wpacked -std=gnu99'
 alias objdump='objdump -d -S -hrt'
 alias gdb='gdb --command=$HOME/Repos/DotFiles/.gdbinit-7.3'
+#alias strace='strace -f -v -x -s 128'
 
 #Lint related
 exist jsl  && alias jsl='jsl -conf ~/Tools/jsl.conf -process'
@@ -214,6 +215,9 @@ fi
 
 # ccache & distcc
 alias enjoy-ccache-distcc="source $HOME/Tools/use_distcc_ccache"
+
+# enjoy proxy
+alias enjoy-proxy="source $HOME/Tools/use_proxy"
 
 #######################
 # Bash SHell opts     # 

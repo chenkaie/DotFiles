@@ -42,7 +42,7 @@ shell -$SHELL
 # shelltitle '$ |Bash'
 
 # setup 10,000 lines of available scrollback copy/paste
-defscrollback 10000
+defscrollback 100000
 
 # If a window goes unresponsive, don't block the whole session waiting for it.
 nonblock on
