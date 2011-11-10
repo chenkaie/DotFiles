@@ -3,8 +3,8 @@
 LN="ln"
 RCFILE_DIR=`pwd`
 RCFILE_DIR=${RCFILE_DIR//$HOME\//}
-#RCFILES=".bashrc .inputrc .vimrc .cdargs .gitconfig .cdargsresult .bash_logout .gitk .bash_profile .lftp .ssh .subversion .vim"
-RCFILES=".bashrc .inputrc .screenrc .vimrc .cdargs .ctags .htoprc .muttrc .irssi .gitconfig .gitk .subversion .vim .vnc .gitshrc .cgdb .gdbinit .gitignore .zshrc"
+#RCFILES=".bash_logout .lftp .ssh"
+RCFILES=".bashrc .bash_profile .inputrc .screenrc .vim .vimrc .cdargs .ctags .htoprc .muttrc .irssi .gitconfig .gitk .subversion .vnc .gitshrc .cgdb .gdbinit .gitignore .zshrc"
 # test
 for rcfile in $RCFILES; do
     if [ -L $HOME/$rcfile ]; then
