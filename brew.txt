@@ -1,0 +1,19 @@
+brew install gawk
+brew install wget
+brew install binutils
+brew install coreutils --default-names
+brew install findutils --default-names
+brew install grep --default-names
+brew install gnu-sed --default-names
+brew install bash-completion
+brew install ctags
+brew install cscope
+brew install lesspipe
+brew install colordiff
+brew install cowsay
+brew install tig
+brew install htop
+brew install unrar
+brew install git-extras 
+brew install tree
+brew install cgdb
