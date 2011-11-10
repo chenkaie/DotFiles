@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Sat Sep 10, 2011  01:05AM
+" Last Modified: Wed Nov 02, 2011  09:22PM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -318,7 +318,7 @@ au FocusLost * :wa
 nnoremap <leader>w <C-w>v<C-w>l
 
 " Syntax coloring lines that are too long just slows down the world
-set synmaxcol=256
+" set synmaxcol=256
 
 " make search results appear in the middle of the screen
 nmap n nzz
@@ -674,7 +674,7 @@ nnoremap <C-x> :Hexmode<CR>
     """"""""""""""""""""""""""""""
     " Tag List
     """"""""""""""""""""""""""""""
-    nmap <F12>   :TagbarToggle<CR>
+    nmap <F12>   :TlistToggle<CR>
 
     " Split to the right side of the screen
     let g:Tlist_Use_Right_Window = 1
