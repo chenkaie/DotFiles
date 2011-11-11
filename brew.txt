@@ -2,7 +2,9 @@ brew install gawk
 brew install wget
 brew install binutils
 brew install coreutils --default-names
+# This is a must for wcgrep, cause Lion -> find is not GNU find
 brew install findutils --default-names
+# Note Lion -> grep is already GNU grep
 brew install grep --default-names
 brew install gnu-sed --default-names
 brew install bash-completion
