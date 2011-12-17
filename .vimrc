@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Wed Nov 02, 2011  09:22PM
+" Last Modified: Sun Dec 18, 2011  12:11AM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -197,15 +197,17 @@ set cursorline
 set backspace=indent,eol,start  " Allow backspacing over these
 
 " Determining the highlight group that the word under the cursor belongs to
-nmap <silent> ,c :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+nmap <silent> ,h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 " Spell Check
 hi SpellBad term=underline cterm=underline ctermfg=red
 map <F5> :set spell!<CR><BAR>:echo "Spell check: " . strpart("OffOn", 3 * &spell, 3)<CR>
 
 "Visualize some special chars
-set listchars=tab:>-,trail:-,eol:$,nbsp:%,extends:>,precedes:<
-map <F8> :set list!<bar>set list?<CR>
+set listchars=tab:»\ ,trail:·,eol:$,nbsp:%,extends:>,precedes:<
+"map <F8> :set list!<bar>set list?<CR>
+" A powerful one than above line
+map <F8> :call ToggleSpecialChar()<CR>
 
 " Add new keyword in search under cursor (*)
 map a* :exec "/\\(".getreg('/')."\\)\\\\|".expand("<cword>")<CR>
@@ -323,6 +325,12 @@ nnoremap <leader>w <C-w>v<C-w>l
 " make search results appear in the middle of the screen
 nmap n nzz
 nmap N Nzz
+
+" STOP using the arrow keys, Dude!
+" map <up> <nop>
+" map <down> <nop>
+" map <left> <nop>
+" map <right> <nop>
 
 " }}}
 
@@ -882,6 +890,20 @@ function HtmlUnEscape()
     silent s/&gt;/>/eg
     silent s/&amp;/\&/eg
     silent s/&quot;/"/eg
+endfunction
+
+" http://vim.wikia.com/wiki/Highlight_unwanted_spaces
+function! ToggleSpecialChar()
+    highlight ExtraWhitespace ctermbg=red guibg=red
+    if !&list
+        set list
+        " Show leading whitespace, trailing whitespace and spaces before a TAB
+        match ExtraWhitespace /^\s* \s*\|[ \t\r]\+$\| \+\ze\t/
+    else
+        set nolist
+        match
+        match Ignore /\r$/ | hi Ignore ctermfg=bg
+    endif
 endfunction
 
 " }}}
