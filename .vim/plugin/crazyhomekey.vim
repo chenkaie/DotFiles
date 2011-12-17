@@ -3,7 +3,7 @@
 " Description:   Finetune Home key operation for Programmer
 " Maintainer:    Kent Chen <chenkaie at gmail dot com>
 " Version:       1.0
-" Last Modified: Thu Mar 25, 2010  01:01AM
+" Last Modified: Sat Dec 17, 2011  11:52PM
 " License:       This program is free software. It comes without any warranty,
 "                to the extent permitted by applicable law. You can redistribute
 "                it and/or modify it under the terms of the Do What The Fuck You
@@ -49,12 +49,12 @@ function! GetPrevChar()
 endfunction
 
 function! ToggleHomeActionN()
-    if (GetPrevChar() == " " || GetPrevChar() == "\t") 
+    if (GetPrevChar() == " " || GetPrevChar() == "\t")
         "call feedkeys("0", 'n')
         normal 0
         " This works too!
         " call setpos('.', [0, line('.'), 1])
-    else   
+    else
         "call feedkeys("^", 'n')
         normal ^
     endif
@@ -62,19 +62,19 @@ function! ToggleHomeActionN()
 endfunction
 
 function! ToggleHomeActionI()
-    if (GetPrevChar() == " " || GetPrevChar() == "\t") 
+    if (GetPrevChar() == " " || GetPrevChar() == "\t")
         " call setpos('.', [0, line('.'), 1])
         " call feedkeys("\<Home>i")
         normal 0
-    else   
+    else
         "call feedkeys("\<Esc>^i")
         normal ^
     endif
     return ""
 endfunction
 
-nmap <silent> <home>    :call ToggleHomeActionN()<CR>
-imap <silent> <home>    <C-r>=ToggleHomeActionI()<CR>
+nmap <silent> <home>   :call ToggleHomeActionN()<CR>
+imap <silent> <home>   <C-r>=ToggleHomeActionI()<CR>
 nmap <silent> [1~    :call ToggleHomeActionN()<CR>
 imap <silent> [1~    <C-r>=ToggleHomeActionI()<CR>
 
