@@ -467,7 +467,7 @@ function fe()
 # lazy gcc, default outfile: filename_prefix.out, eg: hello.c -> hello.out
 function lgcc () 
 {
-    gcc -o ${1%.*}{.out,.${1##*.}}
+    gcc -o ${1%.*}{.out,.${1##*.}} $2 $3 $4 $5
 }
 
 # lazy arm-linux-gcc, default outfile: filename_prefix.platform.out, eg: hello.c -> hello.arm.out
@@ -501,7 +501,7 @@ function lagcc ()
     esac
 
     echo "[Info] You are building on ${outfilesuffix} platform."
-    agcc -o ${1%.*}{.${outfilesuffix}.out,.${1##*.}}
+    agcc -o ${1%.*}{.${outfilesuffix}.out,.${1##*.}} $2 $3 $4 $5
 }
 
 function counter()
