@@ -9,7 +9,7 @@ augroup filetypedetect
     " use better colorscheme to edit HTML
     au BufRead *.htm*,*.css,*.js colorscheme ir_black_cterm
     " increase the maximum nesting of folds for HTML
-    au BufRead *.htm* set foldnestmax=10 
+    au BufRead *.htm* set foldnestmax=10
     " Set default fdm for *.c,*.h file
     au BufRead *.c,*.h set fdm=syntax
     " set Spell check: ON when svn,git commit
