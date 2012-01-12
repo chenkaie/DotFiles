@@ -44,7 +44,7 @@ syn keyword cAnsiFunction	vswscanf vswprintf vfwscanf
 syn keyword cAnsiFunction	vfwprintf swscanf swprintf
 syn keyword cAnsiFunction	fwscanf fwprintf zonetime
 syn keyword cAnsiFunction	strfxtime strftime localtime
-syn keyword cAnsiFunction	gmtime ctime asctime
+syn keyword cAnsiFunction	gmtime ctime asctime gettimeofday
 syn keyword cAnsiFunction	time mkxtime mktime
 syn keyword cAnsiFunction	difftime clock strlen
 syn keyword cAnsiFunction	strerror memset strtok
@@ -183,6 +183,8 @@ syn keyword cAnsiFunction	INT64_C INT32_C INT16_C INT8_C
 syn keyword cAnsiFunction	ftok shmget shmat shmdt semop semget
 syn keyword cAnsiFunction	select pselect FD_CLR FD_ZERO FD_SET FD_ISSET poll ppoll
 syn keyword cAnsiFunction	access mkdir
+syn keyword cAnsiFunction	rindex
+syn keyword cAnsiFunction	sleep usleep
 
 " Common ANSI-standard Names
 syn keyword	cAnsiName	PRId8 PRIi16 PRIo32 PRIu64

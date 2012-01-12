@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# If not running interactively, don't do anything. 
+# If not running interactively, don't do anything.
 # This snippet helps to fix scp, sftp "Received message too long" issue..
 [ -z "$PS1" ] && return
 
@@ -18,7 +18,7 @@ export dotfiles="$HOME/Repos/DotFiles"
 
 exist () { type "$1" &> /dev/null; }
 #######################
-# JOB Related         # 
+# JOB Related         #
 #######################
 
 #export MAKEINC=/home/project/makcomm
@@ -36,23 +36,23 @@ OS=$(uname)             # for resolving pesky os differing switches
 
 case $OS in
     Darwin|*BSD)
-        # MacPorts stuff 
+        # MacPorts stuff
         if [ -x /opt/local/bin/port ]; then
             export PATH=/opt/local/bin:/opt/local/sbin:$PATH
             export MANPATH=/opt/local/share/man:$MANPATH
 
-            # bash_completion if installed 
+            # bash_completion if installed
             if [ -x /opt/local/etc/bash_completion ]; then
                 . /opt/local/etc/bash_completion
             fi
         fi
 
-        # Homebrew stuff 
+        # Homebrew stuff
         if [ -x /usr/local/bin/brew ]; then
             export PATH=/usr/local/bin:/usr/local/sbin:$PATH
             export MANPATH=/usr/local/share/man:$MANPATH
 
-            # bash_completion if installed 
+            # bash_completion if installed
             if [ -f `brew --prefix`/etc/bash_completion ]; then
                 . `brew --prefix`/etc/bash_completion
             fi
@@ -76,7 +76,7 @@ case $OS in
         # Source this file twice will cause user fail to login GNOME.
         # You can check this file ~/.xsession-errors to find out why you login GNOME failed.
         IsUbuntu=$(lsb_release -a | grep Ubuntu)
-        # enable bash completion 
+        # enable bash completion
         if [ -z "$IsUbuntu" ] && [ -f /etc/bash_completion ]; then
             . /etc/bash_completion
         fi
@@ -99,10 +99,10 @@ case $OS in
 esac
 
 #######################
-# Alias               # 
+# Alias               #
 #######################
 
-# enable color for LS 
+# enable color for LS
 case $OS in
     Darwin|*BSD)
         export CLICOLOR=1
@@ -123,7 +123,7 @@ alias lt='ls -ltr'                  # sort by date (mtime)
 alias lc='ls -ltcr'                 # sort by and show change time
 alias la='ls -ltur'                 # sort by and show access time
 alias lx='ls -lXB'                  # sort by extension
-alias lz='ls -lSr'                  # sort by size 
+alias lz='ls -lSr'                  # sort by size
 alias ld='ls -d */'                 # es only Dirs
 alias l.='ls -dAFh .[^.]*'          # ls only Dotfiles
 alias lst='ls -hFtal | grep $(date +%Y-%m-%d)' #ls Today
@@ -158,7 +158,7 @@ alias mdiff='diff -ruN --exclude=.svn'
 alias diff='colordiff.pl'
 
 # Moving around & all that jazz
-#alias cd='pushd > /dev/null' 
+#alias cd='pushd > /dev/null'
 #alias back='popd > /dev/null'
 alias b='cd -' # back to $OLDPWD
 alias cd..='cd ..'
@@ -170,11 +170,11 @@ alias pwd-win='pwd | sed '"'"'s/\//\\/g'"'"' | sed '"'"'s/\(.*\)/Z:\1/'"'"''
 alias hfs='python -m SimpleHTTPServer 8080'
 
 #Personal Help
-alias l?='cat ~/.bashrc | grep "alias l.*=.ls" | grep ^a' 
+alias l?='cat ~/.bashrc | grep "alias l.*=.ls" | grep ^a'
 alias a?='alias'
 alias f?='cat $dotfiles/.function.help'
 alias dn='OPTIONS=$(\ls -F | grep /$); select s in $OPTIONS; do cd $PWD/$s; break;done'
-#alias help='OPTIONS=$(\ls $dotfiles/.tips -F);select s in $OPTIONS; do less $dotfiles/.tips/$s; break;done' 
+#alias help='OPTIONS=$(\ls $dotfiles/.tips -F);select s in $OPTIONS; do less $dotfiles/.tips/$s; break;done'
 
 #delete
 alias del='mv --target-directory=$HOME/.Trash/'
@@ -220,7 +220,7 @@ alias enjoy-ccache-distcc="source $HOME/Tools/use_distcc_ccache"
 alias enjoy-proxy="source $HOME/Tools/use_proxy"
 
 #######################
-# Bash SHell opts     # 
+# Bash SHell opts     #
 #######################
 
 #history control, ignorespace & ignoredups
@@ -232,7 +232,7 @@ export HISTIGNORE="&:bg:fg:ll:h"
 #Specify that it (Ctrl+D) must pressed twice to exit Bash
 export IGNOREEOF=1
 
-set -o noclobber 
+set -o noclobber
 set -o notify
 #set -o xtrace          # Useful for debuging.
 
@@ -245,7 +245,7 @@ shopt -s cdspell
 shopt -s checkhash
 
 #######################
-# Default             # 
+# Default             #
 #######################
 
 # Define Colors {{{
@@ -355,11 +355,11 @@ exist lesspipe && eval "$(lesspipe)"
 #export LESS='-i -N -w  -z-4 -g -e -M -X -F -R -P%t?f%f :stdin .?pb%pb\%:?lbLine %lb:?bbByte %bb:-...'
 
 #######################
-# Functions           # 
+# Functions           #
 #######################
 
 # Easy extract
-extract () 
+extract ()
 {
   if [ -f $1 ] ; then
       case $1 in
@@ -412,7 +412,7 @@ function sysinfo()
 }
 
 # Get IP (call with myip)
-function myip 
+function myip
 {
     myip=`elinks -dump http://checkip.dyndns.org:8245/`
     echo "${myip}"
@@ -432,7 +432,7 @@ dirsize ()
 }
 
 # ls when cd, it's useful
-function cd () 
+function cd ()
 {
     if [ -n "$1" ]; then
         builtin cd "$@"&& ls
@@ -465,13 +465,13 @@ function fe()
 { wcfind . -type f -iname '*'${1:-}'*' -exec ${2:-ls} {} \;  ; }
 
 # lazy gcc, default outfile: filename_prefix.out, eg: hello.c -> hello.out
-function lgcc () 
+function lgcc ()
 {
     gcc -o ${1%.*}{.out,.${1##*.}} $2 $3 $4 $5
 }
 
 # lazy arm-linux-gcc, default outfile: filename_prefix.platform.out, eg: hello.c -> hello.arm.out
-function lagcc () 
+function lagcc ()
 {
     # add '-a' for print all matching executables in PATH, not just the first to resolve ccache caused problem.
     platform=`\which -a arm-linux-gcc 2> /dev/null`

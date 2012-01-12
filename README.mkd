@@ -1,7 +1,7 @@
 ABOUT
 =====
 
-My dotfiles / rcfiles used on Unix, mainly on Linux & Mac OS X
+My dotfiles / rcfiles used on Unix OS, mainly on Linux & Mac OS X
 
 Usage
 =====
