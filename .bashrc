@@ -516,4 +516,10 @@ function counter()
     fi
 }
 
+complete -c command see
+function see()
+{
+    $EDITOR `\which $1`
+}
+
 # vim: fdm=marker ts=4 sw=4 et:
