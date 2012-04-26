@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Sun Dec 18, 2011  12:11AM
+" Last Modified: Sun Apr 22, 2012  12:27AM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -613,7 +613,9 @@ function ToggleHex()
         let b:oldft=&ft
         let b:oldbin=&bin
         " set new options
-        setlocal binary " make sure it overrides any textwidth, etc.
+        "setlocal binary " make sure it overrides any textwidth, etc.
+                         " Kent : mark above line to distinguish between 
+                         " dos(CRLF) and unix(LF) format.
         let &ft="xxd"
         " set status
         let b:editHex=1
@@ -636,7 +638,7 @@ function ToggleHex()
     let &modifiable=l:oldmodifiable
 endfunction
 
-nnoremap <C-x> :Hexmode<CR>
+nnoremap <leader>x :Hexmode<CR>
 
 " }}}
 
@@ -749,7 +751,7 @@ nnoremap <C-x> :Hexmode<CR>
     """"""""""""""""""""""""""""""
     noremap [emotion] <Nop>
     noremap [emotion]<Space> e
-    map e [emotion]
+    map <leader>e [emotion]
     let g:EasyMotion_leader_key = '[emotion]'
 
 " }}}

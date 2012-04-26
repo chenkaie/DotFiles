@@ -681,6 +681,24 @@ document pwstring
 	pwstring s - Prints content, size/length, capacity and ref-count of wstring s
 end 
 
+
+#
+# Redirect stderr and stdout to what you want
+#
+
+def  redirect 
+	call (void)close(1) 
+	call (void)close(2) 
+	call (int)open($arg0, 2) 
+	call (int)open($arg0, 2) 
+end
+
+
+document redirect 
+	redirect("argument"), this is used to switch stderr and stdout to gdb window.
+	The argument is the name of gdb window.
+end
+
 #
 # C++ related beautifiers (optional)
 #

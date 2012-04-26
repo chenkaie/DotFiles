@@ -235,6 +235,7 @@ export IGNOREEOF=1
 set -o noclobber
 set -o notify
 #set -o xtrace          # Useful for debuging.
+#set +o OOXX            # Turn off OOXX
 
 # Enable options:
 # check the window size after each command and, if necessary, update the values of LINES and COLUMNS.
@@ -353,6 +354,13 @@ source $dotfiles/completion/git-flow-completion.bash
 exist lesspipe && eval "$(lesspipe)"
 
 #export LESS='-i -N -w  -z-4 -g -e -M -X -F -R -P%t?f%f :stdin .?pb%pb\%:?lbLine %lb:?bbByte %bb:-...'
+
+#######################
+# Terminal info       #
+#######################
+# Related CMD: tput, resize, reset, stty -a
+COLUMNS=$(tput cols)
+LINES=$(tput lines)
 
 #######################
 # Functions           #
