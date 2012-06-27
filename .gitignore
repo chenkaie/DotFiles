@@ -4,12 +4,6 @@
 .ssh
 .subversion/auth/
 .svn
-.vim/backup
-.vim/doc/tags-ja
-.vim/record
-.vim/sessions
-.vim/view
-.vim/.VimballRecord
 *.[oa]
 *.out
 *~
