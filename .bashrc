@@ -168,6 +168,8 @@ alias path='echo -e ${PATH//:/\\n}'
 alias pwd-win='pwd | sed '"'"'s/\//\\/g'"'"' | sed '"'"'s/\(.*\)/Z:\1/'"'"''
 # A simple python http file server
 alias hfs='python -m SimpleHTTPServer 8080'
+#
+alias python='PYTHONSTARTUP=~/Tools/inpy python'
 
 #Personal Help
 alias l?='cat ~/.bashrc | grep "alias l.*=.ls" | grep ^a'
