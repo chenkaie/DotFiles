@@ -20,9 +20,9 @@ function! s:IndentGuidesDisable()
 endfunction
 
 " Commands
-command! IndentGuidesToggle  call s:IndentGuidesToggle()
-command! IndentGuidesEnable  call s:IndentGuidesEnable()
-command! IndentGuidesDisable call s:IndentGuidesDisable()
+command! -bar IndentGuidesToggle  call s:IndentGuidesToggle()
+command! -bar IndentGuidesEnable  call s:IndentGuidesEnable()
+command! -bar IndentGuidesDisable call s:IndentGuidesDisable()
 
 "
 " Initializes a given variable to a given value. The variable is only
@@ -30,7 +30,7 @@ command! IndentGuidesDisable call s:IndentGuidesDisable()
 "
 function s:InitVariable(var, value)
   if !exists(a:var)
-    if type(a:var) == type("")
+    if type(a:value) == type("")
       exec 'let ' . a:var . ' = ' . "'" . a:value . "'"
     else
       exec 'let ' . a:var . ' = ' .  a:value
@@ -45,19 +45,32 @@ let g:indent_guides_color_hex_guibg_pattern  = 'guibg=\zs' . g:indent_guides_col
 let g:indent_guides_color_name_guibg_pattern = "guibg='\\?\\zs[0-9A-Za-z ]\\+\\ze'\\?"
 
 " Configurable global variables
-call s:InitVariable('g:indent_guides_indent_levels',        30)
-call s:InitVariable('g:indent_guides_auto_colors',          1 )
-call s:InitVariable('g:indent_guides_color_change_percent', 5 ) " ie. 5%
-call s:InitVariable('g:indent_guides_guide_size',           0 )
-call s:InitVariable('g:indent_guides_start_level',          1 )
-call s:InitVariable('g:indent_guides_debug',                0 )
+call s:InitVariable('g:indent_guides_indent_levels',         30)
+call s:InitVariable('g:indent_guides_auto_colors',           1 )
+call s:InitVariable('g:indent_guides_color_change_percent',  10) " ie. 10%
+call s:InitVariable('g:indent_guides_guide_size',            0 )
+call s:InitVariable('g:indent_guides_start_level',           1 )
+call s:InitVariable('g:indent_guides_enable_on_vim_startup', 0 )
+call s:InitVariable('g:indent_guides_debug',                 0 )
+call s:InitVariable('g:indent_guides_space_guides',          1 )
 
 " Default mapping
-nmap <Leader>ig :IndentGuidesToggle<CR>
+if !hasmapto('<Plug>IndentGuidesToggle', 'n') && maparg('<Leader>ig', 'n') == ''
+  nmap <silent><unique> <Leader>ig <Plug>IndentGuidesToggle
+endif
+
+" Plug mappings
+nnoremap <unique><script> <Plug>IndentGuidesToggle  :IndentGuidesToggle<CR>
+nnoremap <unique><script> <Plug>IndentGuidesEnable  :IndentGuidesEnable<CR>
+nnoremap <unique><script> <Plug>IndentGuidesDisable :IndentGuidesDisable<CR>
 
 " Auto commands
 augroup indent_guides
   autocmd!
+
+  if g:indent_guides_enable_on_vim_startup
+    autocmd VimEnter * :IndentGuidesEnable
+  endif
+
   autocmd BufEnter,WinEnter * call indent_guides#process_autocmds()
 augroup END
-

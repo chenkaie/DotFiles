@@ -40,13 +40,16 @@ function! indent_guides#enable()
   " loop through each indent level and define a highlight pattern
   " will automagically figure out whether to use tabs or spaces
   for l:level in range(s:start_level, s:indent_levels)
-    let l:group      = 'IndentGuides' . ((l:level % 2 == 0) ? 'Even' : 'Odd')
-    let l:pattern    = '^\s\{' . (l:level * s:indent_size - s:indent_size) . '\}\zs'
-    let l:pattern   .= '\s\{' . s:guide_size . '\}'
-    let l:pattern   .= '\ze'
+    let l:group = 'IndentGuides' . ((l:level % 2 == 0) ? 'Even' : 'Odd')
+    let l:column_start = (l:level - 1) * s:indent_size + 1
+    let l:soft_pattern = indent_guides#indent_highlight_pattern('\s', l:column_start, s:guide_size)
+    let l:hard_pattern = indent_guides#indent_highlight_pattern('\t', l:column_start, s:indent_size)
 
-    " define the higlight pattern and add to list
-    call add(w:indent_guides_matches, matchadd(l:group, l:pattern))
+    " define the higlight patterns and add to matches list
+    if g:indent_guides_space_guides
+      call add(w:indent_guides_matches, matchadd(l:group, l:soft_pattern))
+    end
+    call add(w:indent_guides_matches, matchadd(l:group, l:hard_pattern))
   endfor
 endfunction
 
@@ -67,7 +70,11 @@ function! indent_guides#clear_matches()
   if !empty(w:indent_guides_matches)
     let l:index = 0
     for l:match_id in w:indent_guides_matches
-      call matchdelete(l:match_id)
+      try
+        call matchdelete(l:match_id)
+      catch /E803:/
+        " Do nothing
+      endtry
       call remove(w:indent_guides_matches, l:index)
       let l:index += l:index
     endfor
@@ -82,22 +89,21 @@ function! indent_guides#highlight_colors()
     if has('gui_running')
       call indent_guides#gui_highlight_colors()
     else
-      call indent_guides#cterm_highlight_colors()
+      call indent_guides#basic_highlight_colors()
     endif
   endif
 endfunction
 
 "
-" Defines the indent highlight colors for terminal vim.
+" Defines some basic indent highlight colors that work for Terminal Vim and
+" gVim when colors can't be automatically calculated.
 "
-" NOTE: This function contains no magic at the moment, it will simply use some
-" light or dark preset colors depending on the `set background=` value.
-"
-function! indent_guides#cterm_highlight_colors()
-  let l:colors = (&g:background == 'dark') ? ['darkgrey', 'black'] : ['lightgrey', 'white']
+function! indent_guides#basic_highlight_colors()
+  let l:cterm_colors = (&g:background == 'dark') ? ['darkgrey', 'black'] : ['lightgrey', 'white']
+  let l:gui_colors   = (&g:background == 'dark') ? ['grey15', 'grey30']  : ['grey70', 'grey85']
 
-  exe 'hi IndentGuidesEven ctermbg=' . l:colors[0]
-  exe 'hi IndentGuidesOdd  ctermbg=' . l:colors[1]
+  exe 'hi IndentGuidesEven guibg=' . l:gui_colors[0] . ' ctermbg=' . l:cterm_colors[0]
+  exe 'hi IndentGuidesOdd  guibg=' . l:gui_colors[1] . ' ctermbg=' . l:cterm_colors[1]
 endfunction
 
 "
@@ -116,6 +122,10 @@ function! indent_guides#gui_highlight_colors()
     " color name is being used, eg. 'white'
     let l:color_name = matchstr(s:hi_normal, s:color_name_bg_pat)
     let l:hi_normal_guibg = color_helper#color_name_to_hex(l:color_name)
+
+  else
+    " background color could not be detected, default to basic colors
+    call indent_guides#basic_highlight_colors()
   endif
 
   if l:hi_normal_guibg =~ s:color_hex_pat
@@ -149,8 +159,8 @@ endfunction
 " Define default highlights.
 "
 function! indent_guides#define_default_highlights()
-  exe 'hi IndentGuidesOdd  guibg=NONE ctermbg=NONE'
-  exe 'hi IndentGuidesEven guibg=NONE ctermbg=NONE'
+  hi default clear IndentGuidesOdd
+  hi default clear IndentGuidesEven
 endfunction
 
 "
@@ -165,19 +175,28 @@ endfunction
 " plugin is enabled.
 "
 function! indent_guides#init_script_vars()
-  let s:indent_size = indent_guides#get_indent_size()
+  let s:indent_size = &l:shiftwidth
   let s:guide_size  = indent_guides#calculate_guide_size()
   let s:hi_normal   = indent_guides#capture_highlight('Normal')
+
+  " remove 'font=<value>' from the s:hi_normal string (only seems to happen on Vim startup in Windows)
+  let s:hi_normal = substitute(s:hi_normal, ' font=[A-Za-z0-9:]\+', "", "")
 
   " shortcuts to the global variables - this makes the code easier to read
   let s:debug             = g:indent_guides_debug
   let s:indent_levels     = g:indent_guides_indent_levels
   let s:auto_colors       = g:indent_guides_auto_colors
-  let s:change_percent    = g:indent_guides_color_change_percent / 100.0
   let s:color_hex_pat     = g:indent_guides_color_hex_pattern
   let s:color_hex_bg_pat  = g:indent_guides_color_hex_guibg_pattern
   let s:color_name_bg_pat = g:indent_guides_color_name_guibg_pattern
   let s:start_level       = g:indent_guides_start_level
+
+  " str2float not available in vim versions <= 7.1
+  if has('float')
+    let s:change_percent = g:indent_guides_color_change_percent / str2float('100.0')
+  else
+    let s:change_percent = g:indent_guides_color_change_percent / 100.0
+  endif
 
   if s:debug
     echo 's:indent_size = '       . s:indent_size
@@ -200,24 +219,13 @@ endfunction
 " NOTE: Currently, this only works when soft-tabs are being used.
 "
 function! indent_guides#calculate_guide_size()
-  let l:guide_size  = g:indent_guides_guide_size
-  let l:indent_size = indent_guides#get_indent_size()
+  let l:guide_size = g:indent_guides_guide_size
 
-  if l:indent_size > 1 && l:guide_size >= 1
-    let l:guide_size = (l:guide_size > s:indent_size) ? s:indent_size : l:guide_size
-  else
+  if l:guide_size == 0 || l:guide_size > s:indent_size
     let l:guide_size = s:indent_size
   endif
 
   return l:guide_size
-endfunction
-
-"
-" Gets the indent size, which depends on whether soft-tabs or hard-tabs are
-" being used.
-"
-function! indent_guides#get_indent_size()
-  return (&l:expandtab == 1) ? &l:shiftwidth : 1
 endfunction
 
 "
@@ -235,3 +243,21 @@ function! indent_guides#capture_highlight(group_name)
   return l:output
 endfunction
 
+"
+" Returns a regex pattern for highlighting an indent level.
+"
+" Example: indent_guides#indent_highlight_pattern(' ', 1, 4)
+" Returns: /^ *\%1v\zs *\%5v\ze/
+"
+" Example: indent_guides#indent_highlight_pattern('\s', 5, 2)
+" Returns: /^\s*\%5v\zs\s*\%7v\ze/
+"
+" Example: indent_guides#indent_highlight_pattern('\t', 9, 2)
+" Returns: /^\t*\%9v\zs\t*\%11v\ze/
+"
+function! indent_guides#indent_highlight_pattern(indent_pattern, column_start, indent_size)
+  let l:pattern  = '^' . a:indent_pattern . '*\%' . a:column_start . 'v\zs'
+  let l:pattern .= a:indent_pattern . '*\%' . (a:column_start + a:indent_size) . 'v'
+  let l:pattern .= '\ze'
+  return l:pattern
+endfunction

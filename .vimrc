@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Sun Apr 22, 2012  12:27AM
+" Last Modified: Wed Jun 27, 2012  04:50PM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -753,6 +753,15 @@ nnoremap <leader>x :Hexmode<CR>
     noremap [emotion]<Space> e
     map <leader>e [emotion]
     let g:EasyMotion_leader_key = '[emotion]'
+
+    """"""""""""""""""""""""""""""
+    " Indent Guides
+    """"""""""""""""""""""""""""""
+    let g:indent_guides_start_level=2
+    hi IndentGuidesOdd  ctermbg=237
+    hi IndentGuidesEven ctermbg=darkgrey
+    let g:indent_guides_guide_size=1
+    nnoremap <leader>i :IndentGuidesToggle<CR>
 
 " }}}
 
