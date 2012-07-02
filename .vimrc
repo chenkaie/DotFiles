@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Wed Jun 27, 2012  04:50PM
+" Last Modified: Tue Jul 03, 2012  01:45AM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -544,7 +544,7 @@ endif
     "set errorformat=%f:%l:\ %m
 
     " Enables detection of some GCC extensions to C
-    let c_gnu=1 
+    let c_gnu=1
 
     """"""""""""""""""""""""""""""
     " NeoComplCache
@@ -614,7 +614,7 @@ function ToggleHex()
         let b:oldbin=&bin
         " set new options
         "setlocal binary " make sure it overrides any textwidth, etc.
-                         " Kent : mark above line to distinguish between 
+                         " Kent : mark above line to distinguish between
                          " dos(CRLF) and unix(LF) format.
         let &ft="xxd"
         " set status
@@ -721,7 +721,7 @@ nnoremap <leader>x :Hexmode<CR>
     run macros/gdb_mappings.vim
 
     """"""""""""""""""""""""""""""
-    " ShowMarks 
+    " ShowMarks
     """"""""""""""""""""""""""""""
     let g:showmarks_include='abcdefghijklmnopqrtuvwxyz' . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     let g:showmarks_ignore_type="h"
@@ -763,6 +763,11 @@ nnoremap <leader>x :Hexmode<CR>
     let g:indent_guides_guide_size=1
     nnoremap <leader>i :IndentGuidesToggle<CR>
 
+    """"""""""""""""""""""""""""""
+    " Powerline
+    """"""""""""""""""""""""""""""
+    let g:Powerline_symbols='fancy'
+    call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
