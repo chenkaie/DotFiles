@@ -18,7 +18,7 @@ let g:Pl#Parser#Symbols = {
 		\ },
 	\ },
 	\ 'fancy': {
-		\   'dividers': [ [0x2b80], [0x2b81], [0x2b82], [0x2b83] ]
+		\   'dividers': [ [0x2b80], [0x003e], [0x2b82], [0x003c] ]
 		\ , 'symbols' : {
 			\   'BRANCH': [0x2b60]
 			\ , 'RO'    : [0x2b64]

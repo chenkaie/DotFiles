@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Tue Jul 03, 2012  02:06AM
+" Last Modified: Wed Jul 04, 2012  11:20PM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -203,12 +203,17 @@ nmap <silent> ,h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '
 hi SpellBad term=underline cterm=underline ctermfg=red
 map <F5> :set spell!<CR><BAR>:echo "Spell check: " . strpart("OffOn", 3 * &spell, 3)<CR>
 
-"Visualize some special chars
-"set listchars=tab:»\ ,trail:·,eol:$,nbsp:%,extends:>,precedes:<
-" Use custom fillchars/listchars/showbreak icons
-set fillchars=vert:│,fold:┄,diff:╱
-set listchars=tab:⋮\ ,trail:⌴,eol:$,precedes:◂,extends:▸
-set showbreak=↪
+if OS == "Darwin"
+    " Use custom fillchars/listchars/showbreak icons
+    set fillchars=vert:│,fold:┄,diff:╱
+    set listchars=tab:⋮\ ,trail:⌴,eol:·,precedes:◂,extends:▸
+    set showbreak=↪
+else
+    "Visualize some special chars
+    set fillchars=vert:│,fold:-,diff:╱
+    set listchars=tab:»\ ,trail:·,eol:$,nbsp:%,extends:>,precedes:<
+endif
+
 "map <F8> :set list!<bar>set list?<CR>
 " A powerful one than above line
 map <F8> :call ToggleSpecialChar()<CR>
@@ -772,6 +777,12 @@ nnoremap <leader>x :Hexmode<CR>
     """"""""""""""""""""""""""""""
     let g:Powerline_symbols='fancy'
     call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
+
+    """"""""""""""""""""""""""""""
+    " CtrlP
+    """"""""""""""""""""""""""""""
+    let g:ctrlp_map = 'p'  "Alt+P
+
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
