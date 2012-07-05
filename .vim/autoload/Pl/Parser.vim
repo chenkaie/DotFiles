@@ -1,6 +1,6 @@
 let g:Pl#Parser#Symbols = {
 	\ 'compatible': {
-		\   'dividers': [ '', [0x2502], '', [0x2502] ]
+		\   'dividers': [ '', [0x003e], '', [0x003c] ]
 		\ , 'symbols' : {
 			\   'BRANCH': 'BR:'
 			\ , 'RO'    : 'RO'

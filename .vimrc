@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Wed Jul 04, 2012  11:20PM
+" Last Modified: Thu Jul 05, 2012  02:18PM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -775,7 +775,11 @@ nnoremap <leader>x :Hexmode<CR>
     """"""""""""""""""""""""""""""
     " Powerline
     """"""""""""""""""""""""""""""
-    let g:Powerline_symbols='fancy'
+    if OS == "Darwin"
+        let g:Powerline_symbols='fancy'
+    else
+        let g:Powerline_symbols='compatible'
+    endif
     call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
 
     """"""""""""""""""""""""""""""
