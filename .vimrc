@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Thu Jul 05, 2012  02:18PM
+" Last Modified: Fri Jul 06, 2012  02:01AM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -27,27 +27,27 @@ set nocompatible
 
 "has("mac") & has("macunix") just work for MacVim
 if match(system('uname'),'Darwin') == 0
-    let OS = "Darwin"
+	let OS = "Darwin"
 elseif has("unix")
-    let OS = "Unix"
+	let OS = "Unix"
 elseif has("win32")
-    let OS = "Win32"
+	let OS = "Win32"
 endif
 
 if version >= 703
-    set conceallevel=1
-    set concealcursor=nc
-    set colorcolumn=+1
-    set cinoptions+=L0
-    set undofile
-    set undodir=~/.vim/undofiles
-    if !isdirectory(&undodir)
-        call mkdir(&undodir, "p")
-    endif
-    map  <C-ScrollWheelDown> <ScrollWheelRight>
-    map  <C-ScrollWheelUp>   <ScrollWheelLeft>
-    imap <C-ScrollWheelDown> <ScrollWheelRight>
-    imap <C-ScrollWheelUp>   <ScrollWheelLeft>
+	set conceallevel=1
+	set concealcursor=nc
+	set colorcolumn=+1
+	set cinoptions+=L0
+	set undofile
+	set undodir=~/.vim/undofiles
+	if !isdirectory(&undodir)
+		call mkdir(&undodir, "p")
+	endif
+	map  <C-ScrollWheelDown> <ScrollWheelRight>
+	map  <C-ScrollWheelUp>   <ScrollWheelLeft>
+	imap <C-ScrollWheelDown> <ScrollWheelRight>
+	imap <C-ScrollWheelUp>   <ScrollWheelLeft>
 endif
 
 set backspace=2
@@ -65,21 +65,21 @@ set noswapfile
 set runtimepath+=~kent/.vim
 
 if &term == "xterm-color" || &term == "xterm-16color"
-    set t_Co=16
+	set t_Co=16
 elseif ! has("gui_running")
-    set t_Co=256
+	set t_Co=256
 endif
 
 " for GVim
 if has("gui_running")
-    set guioptions-=T
-    colorscheme wombat
-    set gfn=Consolas:h14
+	set guioptions-=T
+	colorscheme wombat
+	set gfn=Consolas:h14
 else
-    "For Colorscheme
-    set bg=dark
-    colorscheme peaksea_new
-    "colorscheme ir_black_cterm
+	"For Colorscheme
+	set bg=dark
+	colorscheme peaksea_new
+	"colorscheme ir_black_cterm
 endif
 
 " Status Line
@@ -204,14 +204,16 @@ hi SpellBad term=underline cterm=underline ctermfg=red
 map <F5> :set spell!<CR><BAR>:echo "Spell check: " . strpart("OffOn", 3 * &spell, 3)<CR>
 
 if OS == "Darwin"
-    " Use custom fillchars/listchars/showbreak icons
-    set fillchars=vert:│,fold:┄,diff:╱
-    set listchars=tab:⋮\ ,trail:⌴,eol:·,precedes:◂,extends:▸
-    set showbreak=↪
+	" Use custom fillchars/listchars/showbreak icons
+	set fillchars=vert:│,fold:┄,diff:╱
+	set listchars=tab:⋮\ ,trail:⌴,eol:·,precedes:◂,extends:▸
+	set showbreak=↪
 else
-    "Visualize some special chars
-    set fillchars=vert:│,fold:-,diff:╱
-    set listchars=tab:»\ ,trail:·,eol:$,nbsp:%,extends:>,precedes:<
+	"Visualize some special chars
+	set fillchars=vert:│,fold:-,diff:╱
+	set listchars=tab:⋮\ ,trail:⌴,eol:·,precedes:◂,extends:▸
+    " Use below line if you don't have font patched.
+	"set listchars=tab:»\ ,trail:·,eol:$,nbsp:%,extends:>,precedes:<
 endif
 
 "map <F8> :set list!<bar>set list?<CR>
@@ -234,14 +236,14 @@ nmap + <C-w>+
 
 " Define different behavior in left/right window
 if has("autocmd")
-    autocmd BufEnter,BufLeave *
-    \     if winnr() == 1 |
-    \        nmap < <C-w><|
-    \        nmap > <C-w>>|
-    \     else            |
-    \        nmap < <C-w>>|
-    \        nmap > <C-w><|
-    \     endif           |
+	autocmd BufEnter,BufLeave *
+	\     if winnr() == 1 |
+	\        nmap < <C-w><|
+	\        nmap > <C-w>>|
+	\     else            |
+	\        nmap < <C-w>>|
+	\        nmap > <C-w><|
+	\     endif           |
 endif
 
 " this allows all window commands in insert mode and i'm not accidentally deleting words anymore :-)
@@ -271,7 +273,7 @@ cnoremap <C-N>		<DOWN>
 
 " Specify the behavior when switching between buffers
 try
-  set switchbuf=usetab
+	set switchbuf=usetab
 catch
 endtry
 
@@ -355,20 +357,20 @@ noremap <C-LeftMouse> <LeftMouse><Esc><C-V>
 noremap <C-LeftDrag> <LeftDrag>
 
 
-    """""""""""""""""""""""""""""""""""""""""""""""""
-    " copy'n'paste data between separate vim sessions
-    """""""""""""""""""""""""""""""""""""""""""""""""
-    " Copy to vimbuff & System-Clipboard
-    if OS == "Darwin"
-        vmap <C-c> :w! ~/tmp/vimbuffer<CR>:!pbcopy < ~/tmp/vimbuffer<CR><CR>
-        nmap <C-c> :.w! ~/tmp/vimbuffer<CR>:!pbcopy < ~/tmp/vimbuffer<CR><CR>
-    else
-        vmap <C-c> :w! ~/tmp/vimbuffer<CR>:!nc 172.16.2.54 4573 < ~/tmp/vimbuffer<CR><CR>
-        nmap <C-c> :.w! ~/tmp/vimbuffer<CR>:!nc 172.16.2.54 4573 < ~/tmp/vimbuffer<CR><CR>
-    endif
-    " Paste from buffer
-    nmap <C-p> :r ~/tmp/vimbuffer<CR>
-    map c <C-c>
+	"""""""""""""""""""""""""""""""""""""""""""""""""
+	" copy'n'paste data between separate vim sessions
+	"""""""""""""""""""""""""""""""""""""""""""""""""
+	" Copy to vimbuff & System-Clipboard
+	if OS == "Darwin"
+		vmap <C-c> :w! ~/tmp/vimbuffer<CR>:!pbcopy < ~/tmp/vimbuffer<CR><CR>
+		nmap <C-c> :.w! ~/tmp/vimbuffer<CR>:!pbcopy < ~/tmp/vimbuffer<CR><CR>
+	else
+		vmap <C-c> :w! ~/tmp/vimbuffer<CR>:!nc 172.16.2.54 4573 < ~/tmp/vimbuffer<CR><CR>
+		nmap <C-c> :.w! ~/tmp/vimbuffer<CR>:!nc 172.16.2.54 4573 < ~/tmp/vimbuffer<CR><CR>
+	endif
+	" Paste from buffer
+	nmap <C-p> :r ~/tmp/vimbuffer<CR>
+	map c <C-c>
 
 " Select all
 map a <ESC>ggVG
@@ -418,9 +420,9 @@ hi Title       ctermfg=219  ctermbg=NONE cterm=NONE
 
 autocmd TabLeave * let g:LastUsedTabPage = tabpagenr()
 function! SwitchLastUsedTab()
-    if exists("g:LastUsedTabPage")
-        execute "tabnext " g:LastUsedTabPage
-    endif
+	if exists("g:LastUsedTabPage")
+		execute "tabnext " g:LastUsedTabPage
+	endif
 endfunction
 nmap tt :call SwitchLastUsedTab()<CR>
 
@@ -439,11 +441,11 @@ hi DiffDelete ctermfg=69 ctermbg=234
 hi difftext ctermbg=3 ctermfg=0
 
 function! s:DiffWithSaved()
-  let filetype=&ft
-  diffthis
-  vnew | r # | normal! 1Gdd
-  diffthis
-  exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+	let filetype=&ft
+	diffthis
+	vnew | r # | normal! 1Gdd
+	diffthis
+	exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
 endfunction
 com! DiffSaved call s:DiffWithSaved()
 nmap ,d :DiffSaved<CR>
@@ -460,21 +462,21 @@ nmap k [c
 "     Diff mode: Used to do diffput and diffget
 " Switch key mapping in Left/Right window under DiffMode
 if has("autocmd")
-    autocmd BufEnter,BufLeave *
-       \ if &diff                                                 |
-       \     if winnr() == 1                                      |
-       \        nmap h do                                       |
-       \        nmap l dp                                       |
-       \     else                                                 |
-       \        nmap h dp                                       |
-       \        nmap l do                                       |
-       \     endif                                                |
-       \ else                                                     |
-       \     if (g:vimgdb_debug_file == "")                       |
-       \         nmap <silent> <S-H> :call ToggleHomeActionN()<CR>|
-       \         map  <silent> <S-L> $|
-       \     endif|
-       \ endif
+	autocmd BufEnter,BufLeave *
+		\ if &diff                                                 |
+		\     if winnr() == 1                                      |
+		\        nmap h do                                       |
+		\        nmap l dp                                       |
+		\     else                                                 |
+		\        nmap h dp                                       |
+		\        nmap l do                                       |
+		\     endif                                                |
+		\ else                                                     |
+		\     if (g:vimgdb_debug_file == "")                       |
+		\         nmap <silent> <S-H> :call ToggleHomeActionN()<CR>|
+		\         map  <silent> <S-L> $|
+		\     endif|
+		\ endif
 endif
 
 " }}}
@@ -483,94 +485,94 @@ endif
 " [ Programming Language ]                                                   {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    """"""""""""""""""""""""""""""
-    " ctags
-    """"""""""""""""""""""""""""""
-    " Set tags path
-    set tags=tags,../tags,../../tags
+	""""""""""""""""""""""""""""""
+	" ctags
+	""""""""""""""""""""""""""""""
+	" Set tags path
+	set tags=tags,../tags,../../tags
 
-    """"""""""""""""""""""""""""""
-    " cscope
-    """"""""""""""""""""""""""""""
-    " init cscope hotkey
-    function! UseAwesomeCscope()
-        try
-            set tags+=/home/kent/horus/apps/tags
-            exe "cs add ../cscope.out .."
-            exe "cs add /home/kent/cscope_ctag/Horus/cscope.out /home/kent/Project/Horus/apps"
-        catch /duplicate/
-                silent exe "!tag_rebuild .."
-                silent exe "cs reset"
-                exe "redraw!"
-                echohl Wildmenu | echo "cscope database inuse, update and re-init all connections" | echohl None
-        catch /stat/
-            silent exe "!tag_rebuild .."
-            try
-                exe "cs add ../cscope.out .."
-                exe "cs add /home/kent/cscope_ctag/Horus/cscope.out /home/kent/Project/Horus/apps"
-                exe "redraw!"
-                echohl Wildmenu | echo "cscope file not found, exec tag_rebuild" | echohl None
-            catch
-                exe "redraw!"
-                echohl ErrorMsg | echo "You don't have enough privilege XD" | echohl None
-            endtry
-        endtry
-    endfun
-    nnoremap <F11> <ESC>:call UseAwesomeCscope()<CR>
+	""""""""""""""""""""""""""""""
+	" cscope
+	""""""""""""""""""""""""""""""
+	" init cscope hotkey
+	function! UseAwesomeCscope()
+		try
+			set tags+=/home/kent/horus/apps/tags
+			exe "cs add ../cscope.out .."
+			exe "cs add /home/kent/cscope_ctag/Horus/cscope.out /home/kent/Project/Horus/apps"
+		catch /duplicate/
+			silent exe "!tag_rebuild .."
+			silent exe "cs reset"
+			exe "redraw!"
+			echohl Wildmenu | echo "cscope database inuse, update and re-init all connections" | echohl None
+		catch /stat/
+			silent exe "!tag_rebuild .."
+			try
+				exe "cs add ../cscope.out .."
+				exe "cs add /home/kent/cscope_ctag/Horus/cscope.out /home/kent/Project/Horus/apps"
+				exe "redraw!"
+				echohl Wildmenu | echo "cscope file not found, exec tag_rebuild" | echohl None
+			catch
+				exe "redraw!"
+				echohl ErrorMsg | echo "You don't have enough privilege XD" | echohl None
+			endtry
+		endtry
+	endfun
+	nnoremap <F11> <ESC>:call UseAwesomeCscope()<CR>
 
-    " [Web Dev] Gernerate tags file for *.js only!
-    nnoremap <F11>w <ESC>:!tag_rebuild ..<CR><ESC>:redraw!<CR>
+	" [Web Dev] Gernerate tags file for *.js only!
+	nnoremap <F11>w <ESC>:!tag_rebuild ..<CR><ESC>:redraw!<CR>
 
-    " To avoid using wrong cscope(/opt/montavista/pro5.0/bin/cscope) once sourcing devel_IP8161_VVTK
-    if match(system('ls ~/usr/bin/cscope'), 'cscope') != -1
-        set cscopeprg=~/usr/bin/cscope
-    endif
+	" To avoid using wrong cscope(/opt/montavista/pro5.0/bin/cscope) once sourcing devel_IP8161_VVTK
+	if match(system('ls ~/usr/bin/cscope'), 'cscope') != -1
+		set cscopeprg=~/usr/bin/cscope
+	endif
 
-    """"""""""""""""""""""""""""""
-    " For Linux Kernel
-    """"""""""""""""""""""""""""""
+	""""""""""""""""""""""""""""""
+	" For Linux Kernel
+	""""""""""""""""""""""""""""""
 
-    " Generate 'cscope index' and 'tag file' for Linux Kernel : 'make ARCH=arm CROSS_COMPILE=arm-linux- cscope tags'
-    nnoremap <F11>k <ESC>:cscope add /home/kent/Project/DM36x/linux-2.6.18/cscope.out /home/kent/Project/DM36x/linux-2.6.18 <CR>:set tags+=/home/kent/Project/DM36x/linux-2.6.18/tags<CR>
+	" Generate 'cscope index' and 'tag file' for Linux Kernel : 'make ARCH=arm CROSS_COMPILE=arm-linux- cscope tags'
+	nnoremap <F11>k <ESC>:cscope add /home/kent/Project/DM36x/linux-2.6.18/cscope.out /home/kent/Project/DM36x/linux-2.6.18 <CR>:set tags+=/home/kent/Project/DM36x/linux-2.6.18/tags<CR>
 
-    """"""""""""""""""""""""""""""
-    " Vi Man
-    """"""""""""""""""""""""""""""
-    " color/paged man
-    runtime! ftplugin/man.vim
-    nmap K <esc>:Man <cword><cr>
+	""""""""""""""""""""""""""""""
+	" Vi Man
+	""""""""""""""""""""""""""""""
+	" color/paged man
+	runtime! ftplugin/man.vim
+	nmap K <esc>:Man <cword><cr>
 
-    """"""""""""""""""""""""""""""
-    " Javascript
-    """"""""""""""""""""""""""""""
-    autocmd FileType javascript set dictionary=~/.vim/dict/javascript.dict
+	""""""""""""""""""""""""""""""
+	" Javascript
+	""""""""""""""""""""""""""""""
+	autocmd FileType javascript set dictionary=~/.vim/dict/javascript.dict
 
-    """"""""""""""""""""""""""""""
-    " C/C++
-    """"""""""""""""""""""""""""""
-    "if filename is test.c => make test
-    "set makeprg=make
-    "set errorformat=%f:%l:\ %m
+	""""""""""""""""""""""""""""""
+	" C/C++
+	""""""""""""""""""""""""""""""
+	"if filename is test.c => make test
+	"set makeprg=make
+	"set errorformat=%f:%l:\ %m
 
-    " Enables detection of some GCC extensions to C
-    let c_gnu=1
+	" Enables detection of some GCC extensions to C
+	let c_gnu=1
 
-    """"""""""""""""""""""""""""""
-    " NeoComplCache
-    """"""""""""""""""""""""""""""
-    let g:AutoComplPop_NotEnableAtStartup = 1
-    let g:NeoComplCache_EnableAtStartup = 0
-    let g:NeoComplCache_DisableAutoComplete = 0
-    let g:NeoComplCache_SmartCase = 1
-    let g:NeoComplCache_EnableCamelCaseCompletion = 1
-    let g:NeoComplCache_MinSyntaxLength = 3
-    let g:NeoComplCache_SnippetsDir = $HOME.'/.vim/snippets'
-    " snippets expand key <c-e>
-    imap <silent> <C-e> <Plug>(neocomplcache_snippets_expand)
-    smap <silent> <C-e> <Plug>(neocomplcache_snippets_expand)
+	""""""""""""""""""""""""""""""
+	" NeoComplCache
+	""""""""""""""""""""""""""""""
+	let g:AutoComplPop_NotEnableAtStartup = 1
+	let g:NeoComplCache_EnableAtStartup = 0
+	let g:NeoComplCache_DisableAutoComplete = 0
+	let g:NeoComplCache_SmartCase = 1
+	let g:NeoComplCache_EnableCamelCaseCompletion = 1
+	let g:NeoComplCache_MinSyntaxLength = 3
+	let g:NeoComplCache_SnippetsDir = $HOME.'/.vim/snippets'
+	" snippets expand key <c-e>
+	imap <silent> <C-e> <Plug>(neocomplcache_snippets_expand)
+	smap <silent> <C-e> <Plug>(neocomplcache_snippets_expand)
 
-    map <F4> :NeoComplCacheEnable<CR>
-    map ,<F4> :NeoComplCacheToggle<CR>
+	map <F4> :NeoComplCacheEnable<CR>
+	map ,<F4> :NeoComplCacheToggle<CR>
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -579,72 +581,71 @@ endif
 
 " autocmds to automatically enter hex mode and handle file writes properly
 if has("autocmd")
-  " vim -b : edit binary using xxd-format!
-  augroup Binary
-    au!
-    au BufReadPre *.bin,*.hex,*.pkg,*.img,*.out setlocal binary
-    au BufReadPost *
-          \ if &binary | Hexmode | endif
-    au BufWritePre *
-          \ if exists("b:editHex") && b:editHex && &binary |
-          \  let oldro=&ro | let &ro=0 |
-          \  let oldma=&ma | let &ma=1 |
-          \  exe "%!xxd -r" |
-          \  let &ma=oldma | let &ro=oldro |
-          \  unlet oldma | unlet oldro |
-          \ endif
-    au BufWritePost *
-          \ if exists("b:editHex") && b:editHex && &binary |
-          \  let oldro=&ro | let &ro=0 |
-          \  let oldma=&ma | let &ma=1 |
-          \  exe "%!xxd" |
-          \  exe "set nomod" |
-          \  let &ma=oldma | let &ro=oldro |
-          \  unlet oldma | unlet oldro |
-          \ endif
-  augroup END
+	" vim -b : edit binary using xxd-format!
+	augroup Binary
+		au!
+		au BufReadPre *.bin,*.hex,*.pkg,*.img,*.out setlocal binary
+		au BufReadPost *
+					\ if &binary | Hexmode | endif
+		au BufWritePre *
+					\ if exists("b:editHex") && b:editHex && &binary |
+					\  let oldro=&ro | let &ro=0 |
+					\  let oldma=&ma | let &ma=1 |
+					\  exe "%!xxd -r" |
+					\  let &ma=oldma | let &ro=oldro |
+					\  unlet oldma | unlet oldro |
+					\ endif
+		au BufWritePost *
+					\ if exists("b:editHex") && b:editHex && &binary |
+					\  let oldro=&ro | let &ro=0 |
+					\  let oldma=&ma | let &ma=1 |
+					\  exe "%!xxd" |
+					\  exe "set nomod" |
+					\  let &ma=oldma | let &ro=oldro |
+					\  unlet oldma | unlet oldro |
+					\ endif
+	augroup END
 endif
 
 " ex command for toggling hex mode - define mapping if desired
 command -bar Hexmode call ToggleHex()
 " helper function to toggle hex mode
 function ToggleHex()
-    " hex mode should be considered a read-only operation
-    " save values for modified and read-only for restoration later,
-    " and clear the read-only flag for now
-    let l:modified=&mod
-    let l:oldreadonly=&readonly
-    let &readonly=0
-    let l:oldmodifiable=&modifiable
-    let &modifiable=1
-    if !exists("b:editHex") || !b:editHex
-        " save old options
-        let b:oldft=&ft
-        let b:oldbin=&bin
-        " set new options
-        "setlocal binary " make sure it overrides any textwidth, etc.
-                         " Kent : mark above line to distinguish between
-                         " dos(CRLF) and unix(LF) format.
-        let &ft="xxd"
-        " set status
-        let b:editHex=1
-        " switch to hex editor
-        %!xxd
-    else
-        " restore old options
-        let &ft=b:oldft
-        if !b:oldbin
-            setlocal nobinary
-        endif
-        " set status
-        let b:editHex=0
-        " return to normal editing
-        %!xxd -r
-    endif
-    " restore values for modified and read only state
-    let &mod=l:modified
-    let &readonly=l:oldreadonly
-    let &modifiable=l:oldmodifiable
+	" hex mode should be considered a read-only operation
+	" save values for modified and read-only for restoration later,
+	" and clear the read-only flag for now
+	let l:modified=&mod
+	let l:oldreadonly=&readonly
+	let &readonly=0
+	let l:oldmodifiable=&modifiable
+	let &modifiable=1
+	if !exists("b:editHex") || !b:editHex
+		" save old options
+		let b:oldft=&ft
+		let b:oldbin=&bin
+		" set new options
+		"setlocal binary " make sure it overrides any textwidth, etc.
+		" Kent : mark above line to distinguish between dos(CRLF) and unix(LF) format.
+		let &ft="xxd"
+		" set status
+		let b:editHex=1
+		" switch to hex editor
+		%!xxd
+	else
+		" restore old options
+		let &ft=b:oldft
+		if !b:oldbin
+			setlocal nobinary
+		endif
+		" set status
+		let b:editHex=0
+		" return to normal editing
+		%!xxd -r
+	endif
+	" restore values for modified and read only state
+	let &mod=l:modified
+	let &readonly=l:oldreadonly
+	let &modifiable=l:oldmodifiable
 endfunction
 
 nnoremap <leader>x :Hexmode<CR>
@@ -655,137 +656,137 @@ nnoremap <leader>x :Hexmode<CR>
 " [ Plugin configuration ]                                                   {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    """"""""""""""""""""""""
-    " EasyGrep
-    """"""""""""""""""""""""
-    "Grep 'pattern' in the indicate range (need EasyGrep.vim plugin)
-    map <F3> ,vv<ESC>:redraw!<CR>
-    let g:EasyGrepRecursive = 1
-    let g:EasyGrepIgnoreCase= 0
-    let g:EasyGrepJumpToMatch= 0
-    let g:EasyGrepWindow=1         " user 'location list' rather than 'Quickfix'
-    let g:EasyGrepCommand=1        " use grep rather vimgrep
+	""""""""""""""""""""""""
+	" EasyGrep
+	""""""""""""""""""""""""
+	"Grep 'pattern' in the indicate range (need EasyGrep.vim plugin)
+	map <F3> ,vv<ESC>:redraw!<CR>
+	let g:EasyGrepRecursive = 1
+	let g:EasyGrepIgnoreCase= 0
+	let g:EasyGrepJumpToMatch= 0
+	let g:EasyGrepWindow=1         " user 'location list' rather than 'Quickfix'
+	let g:EasyGrepCommand=1        " use grep rather vimgrep
 
-    """"""""""""""""""""""""""""""
-    " VCSCommand
-    """"""""""""""""""""""""""""""
-    nmap d <Esc>:VCSVimDiff<Enter>
-    " shortcut for git diff
-    nmap g <Esc>:let g:VCSCOMMAND_IDENTIFY_EXACT=-1<Enter>:VCSVimDiff<Enter>
+	""""""""""""""""""""""""""""""
+	" VCSCommand
+	""""""""""""""""""""""""""""""
+	nmap d <Esc>:VCSVimDiff<Enter>
+	" shortcut for git diff
+	nmap g <Esc>:let g:VCSCOMMAND_IDENTIFY_EXACT=-1<Enter>:VCSVimDiff<Enter>
 
-    """"""""""""""""""""""""""""""
-    " Smooth Scroll
-    """"""""""""""""""""""""""""""
-    "Smooth Scroll
-    map <PageDown> :call SmoothPageScrollDown()<CR>
-    map <PageUp>   :call SmoothPageScrollUp()<CR>
+	""""""""""""""""""""""""""""""
+	" Smooth Scroll
+	""""""""""""""""""""""""""""""
+	"Smooth Scroll
+	map <PageDown> :call SmoothPageScrollDown()<CR>
+	map <PageUp>   :call SmoothPageScrollUp()<CR>
 
-    """"""""""""""""""""""""""""""
-    " Trinity related Start
-    """"""""""""""""""""""""""""""
-    " Smooth Scroll
-    " Open and close all the three plugins on the same time ,wired toggle Trinity,  will caue hlsearch to no effect, add set hlsearch again manually
-    " nmap <F12>  :TrinityToggleTagList<CR>
-    " nmap <F9>   :TrinityToggleSourceExplorer<CR>
-    " nmap <F10>  :TrinityToggleTagList<CR>
-    " nmap <F11>  :TrinityToggleNERDTree<CR>
+	""""""""""""""""""""""""""""""
+	" Trinity related Start
+	""""""""""""""""""""""""""""""
+	" Smooth Scroll
+	" Open and close all the three plugins on the same time ,wired toggle Trinity,  will caue hlsearch to no effect, add set hlsearch again manually
+	" nmap <F12>  :TrinityToggleTagList<CR>
+	" nmap <F9>   :TrinityToggleSourceExplorer<CR>
+	" nmap <F10>  :TrinityToggleTagList<CR>
+	" nmap <F11>  :TrinityToggleNERDTree<CR>
 
-    """"""""""""""""""""""""""""""
-    " Tag List
-    """"""""""""""""""""""""""""""
-    nmap <F12>   :TlistToggle<CR>
+	""""""""""""""""""""""""""""""
+	" Tag List
+	""""""""""""""""""""""""""""""
+	nmap <F12>   :TlistToggle<CR>
 
-    " Split to the right side of the screen
-    let g:Tlist_Use_Right_Window = 1
-    " Sort by the order
-    let g:Tlist_Sort_Type = "order"
-    " If you are the last, kill yourself
-    let g:Tlist_Exit_OnlyWindow = 1
-    " Do not show folding tree
-    let g:Tlist_Enable_Fold_Column = 0
-    " Always display one file tags
-    let g:Tlist_Show_One_File = 1
+	" Split to the right side of the screen
+	let g:Tlist_Use_Right_Window = 1
+	" Sort by the order
+	let g:Tlist_Sort_Type = "order"
+	" If you are the last, kill yourself
+	let g:Tlist_Exit_OnlyWindow = 1
+	" Do not show folding tree
+	let g:Tlist_Enable_Fold_Column = 0
+	" Always display one file tags
+	let g:Tlist_Show_One_File = 1
 
-    """"""""""""""""""""""""""""""
-    " Minibuffer
-    """"""""""""""""""""""""""""""
-    let g:miniBufExplModSelTarget = 1
-    hi MBENormal ctermfg=7
-    hi MBEVisibleNormal ctermfg=2
-    hi MBEChanged ctermfg=14
-    hi MBEVisibleChanged ctermfg=2
+	""""""""""""""""""""""""""""""
+	" Minibuffer
+	""""""""""""""""""""""""""""""
+	let g:miniBufExplModSelTarget = 1
+	hi MBENormal ctermfg=7
+	hi MBEVisibleNormal ctermfg=2
+	hi MBEChanged ctermfg=14
+	hi MBEVisibleChanged ctermfg=2
 
-    """"""""""""""""""""""""""""""
-    " SrcExplorer
-    """"""""""""""""""""""""""""""
-    "let s:SrcExpl_tagsPath = '/home/kent/cscope_ctag/lsp/'
-    "let s:SrcExpl_workPath = '/home/kent/cscope_ctag/lsp/'
-    " Let the Source Explorer update the tags file when opening
-    let g:SrcExpl_updateTags = 0
+	""""""""""""""""""""""""""""""
+	" SrcExplorer
+	""""""""""""""""""""""""""""""
+	"let s:SrcExpl_tagsPath = '/home/kent/cscope_ctag/lsp/'
+	"let s:SrcExpl_workPath = '/home/kent/cscope_ctag/lsp/'
+	" Let the Source Explorer update the tags file when opening
+	let g:SrcExpl_updateTags = 0
 
-    """"""""""""""""""""""""""""""
-    " vimgdb
-    """"""""""""""""""""""""""""""
-    let g:vimgdb_debug_file = ""
-    run macros/gdb_mappings.vim
+	""""""""""""""""""""""""""""""
+	" vimgdb
+	""""""""""""""""""""""""""""""
+	let g:vimgdb_debug_file = ""
+	run macros/gdb_mappings.vim
 
-    """"""""""""""""""""""""""""""
-    " ShowMarks
-    """"""""""""""""""""""""""""""
-    let g:showmarks_include='abcdefghijklmnopqrtuvwxyz' . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    let g:showmarks_ignore_type="h"
-    let g:showmarks_textlower="\t"
-    let g:showmarks_textupper="\t"
-    let g:showmarks_textother="\t"
-    let g:showmarks_auto_toggle = 0
-    nnoremap <silent> mt :ShowMarksToggle<CR>
+	""""""""""""""""""""""""""""""
+	" ShowMarks
+	""""""""""""""""""""""""""""""
+	let g:showmarks_include='abcdefghijklmnopqrtuvwxyz' . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+	let g:showmarks_ignore_type="h"
+	let g:showmarks_textlower="\t"
+	let g:showmarks_textupper="\t"
+	let g:showmarks_textother="\t"
+	let g:showmarks_auto_toggle = 0
+	nnoremap <silent> mt :ShowMarksToggle<CR>
 
-    hi ShowMarksHLl ctermfg=red   ctermbg=black
-    hi ShowMarksHLu ctermfg=green ctermbg=black
-    hi ShowMarksHLo ctermfg=red   ctermbg=black
-    hi ShowMarksHLm ctermfg=red   ctermbg=black
+	hi ShowMarksHLl ctermfg=red   ctermbg=black
+	hi ShowMarksHLu ctermfg=green ctermbg=black
+	hi ShowMarksHLo ctermfg=red   ctermbg=black
+	hi ShowMarksHLm ctermfg=red   ctermbg=black
 
-    """"""""""""""""""""""""""""""
-    " wokmarks
-    """"""""""""""""""""""""""""""
-    let g:wokmarks_do_maps = 0
-    let g:wokmarks_pool = "abcdefghijklmnopqrtuvwxyz"
-    map mm <Plug>ToggleMarkWok
-    map mj <Plug>NextMarkWok
-    map mk <Plug>PrevMarkWok
-    autocmd User WokmarksChange :ShowMarksOn
+	""""""""""""""""""""""""""""""
+	" wokmarks
+	""""""""""""""""""""""""""""""
+	let g:wokmarks_do_maps = 0
+	let g:wokmarks_pool = "abcdefghijklmnopqrtuvwxyz"
+	map mm <Plug>ToggleMarkWok
+	map mj <Plug>NextMarkWok
+	map mk <Plug>PrevMarkWok
+	autocmd User WokmarksChange :ShowMarksOn
 
-    """"""""""""""""""""""""""""""
-    " EasyMotion
-    """"""""""""""""""""""""""""""
-    noremap [emotion] <Nop>
-    noremap [emotion]<Space> e
-    map <leader>e [emotion]
-    let g:EasyMotion_leader_key = '[emotion]'
+	""""""""""""""""""""""""""""""
+	" EasyMotion
+	""""""""""""""""""""""""""""""
+	noremap [emotion] <Nop>
+	noremap [emotion]<Space> e
+	map <leader>e [emotion]
+	let g:EasyMotion_leader_key = '[emotion]'
 
-    """"""""""""""""""""""""""""""
-    " Indent Guides
-    """"""""""""""""""""""""""""""
-    let g:indent_guides_start_level=2
-    hi IndentGuidesOdd  ctermbg=237
-    hi IndentGuidesEven ctermbg=darkgrey
-    let g:indent_guides_guide_size=1
-    nnoremap <leader>i :IndentGuidesToggle<CR>
+	""""""""""""""""""""""""""""""
+	" Indent Guides
+	""""""""""""""""""""""""""""""
+	let g:indent_guides_start_level=2
+	hi IndentGuidesOdd  ctermbg=237
+	hi IndentGuidesEven ctermbg=darkgrey
+	let g:indent_guides_guide_size=1
+	nnoremap <leader>i :IndentGuidesToggle<CR>
 
-    """"""""""""""""""""""""""""""
-    " Powerline
-    """"""""""""""""""""""""""""""
-    if OS == "Darwin"
-        let g:Powerline_symbols='fancy'
-    else
-        let g:Powerline_symbols='compatible'
-    endif
-    call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
+	""""""""""""""""""""""""""""""
+	" Powerline
+	""""""""""""""""""""""""""""""
+	if OS == "Darwin"
+		let g:Powerline_symbols='fancy'
+	else
+		let g:Powerline_symbols='fancy'
+	endif
+	call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
 
-    """"""""""""""""""""""""""""""
-    " CtrlP
-    """"""""""""""""""""""""""""""
-    let g:ctrlp_map = 'p'  "Alt+P
+	""""""""""""""""""""""""""""""
+	" CtrlP
+	""""""""""""""""""""""""""""""
+	let g:ctrlp_map = 'p'  "Alt+P
 
 " }}}
 
@@ -794,30 +795,30 @@ nnoremap <leader>x :Hexmode<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " set vim to chdir for each file
 if exists('+autochdir')
-    set autochdir
+	set autochdir
 else
-    autocmd BufEnter * silent! lcd %:p:h:gs/ /\\ /
+	autocmd BufEnter * silent! lcd %:p:h:gs/ /\\ /
 endif
 " Automatically update 'Last Modified' field
 " If buffer modified, update any 'Last modified: ' in the first 20 lines.
 function! LastModified()
-  if &modified
-    normal ms
-    let n = min([20, line("$")])
-    exe '1,' . n . 's#^\(.\{,10}Last Modified: \).*#\1' .
-          \ strftime('%a %b %d, %Y  %I:%M%p') . '#e'
-    normal `s
-  endif
+	if &modified
+		normal ms
+		let n = min([20, line("$")])
+		exe '1,' . n . 's#^\(.\{,10}Last Modified: \).*#\1' .
+					\ strftime('%a %b %d, %Y  %I:%M%p') . '#e'
+		normal `s
+	endif
 endfun
 autocmd BufWritePre * call LastModified()
 
 " Remember the line number been edited last time
 "if has("autocmd")
-    "autocmd BufRead *.txt set tw=78
-    "autocmd BufReadPost *
-       "\ if line("'\"") > 0 && line ("'\"") <= line("$") |
-       "\   exe "normal g'\"" |
-       "\ endif
+	"autocmd BufRead *.txt set tw=78
+	"autocmd BufReadPost *
+		"\ if line("'\"") > 0 && line ("'\"") <= line("$") |
+		"\   exe "normal g'\"" |
+		"\ endif
 "endif
 
 "autocmd BufWinLeave * if expand("%") != "" | mkview | endif
@@ -829,13 +830,13 @@ autocmd BufReadPost * if line ("'\"") > 0 && line ("'\"") <= line("$") | exe "no
 " QUICKFIX WINDOW for :make
 command -bang -nargs=? QFix call QFixToggle(<bang>0)
 function! QFixToggle(forced)
-    if exists("g:qfix_win") && a:forced == 0
-        cclose
-        unlet g:qfix_win
-    else
-        botright copen 10
-        let g:qfix_win = bufnr("$")
-    endif
+	if exists("g:qfix_win") && a:forced == 0
+		cclose
+		unlet g:qfix_win
+	else
+		botright copen 10
+		let g:qfix_win = bufnr("$")
+	endif
 endfunction
 nnoremap <leader>q :QFix<CR>
 
@@ -861,84 +862,84 @@ nnoremap <leader>q :QFix<CR>
 
 " Vim Eval snippet by c9s
 fun! EvalVimScriptRegion(s,e)
-    let lines = getline(a:s,a:e)
-    let file = tempname()
-    cal writefile(lines,file)
-    silent exec ':source '.file
-    redraw
-    cal delete(file)
-    echo "Region evaluated."
-    sleep 500m
-    "normal gv
+	let lines = getline(a:s,a:e)
+	let file = tempname()
+	cal writefile(lines,file)
+	silent exec ':source '.file
+	redraw
+	cal delete(file)
+	echo "Region evaluated."
+	sleep 500m
+	"normal gv
 endf
 augroup VimEval
-    au!
-    au filetype vim :command! -range Eval :cal EvalVimScriptRegion(<line1>,<line2>)
-    au filetype vim :vnoremap <silent> e :Eval<CR>
+	au!
+	au filetype vim :command! -range Eval :cal EvalVimScriptRegion(<line1>,<line2>)
+	au filetype vim :vnoremap <silent> e :Eval<CR>
 augroup END
 
 set foldtext=MyFoldText()
 function! MyFoldText()
-    let lines = 1 + v:foldend - v:foldstart
-    let ind = indent(v:foldstart)
+	let lines = 1 + v:foldend - v:foldstart
+	let ind = indent(v:foldstart)
 
-    let spaces = ''
-    let i = 0
-    while i < ind
-        let spaces .= ' '
-        let i += 1
-    endwhile
+	let spaces = ''
+	let i = 0
+	while i < ind
+		let spaces .= ' '
+		let i += 1
+	endwhile
 
-    let linestxt = 'lines'
-    if lines == 1
-        linestxt = 'line'
-    endif
+	let linestxt = 'lines'
+	if lines == 1
+		linestxt = 'line'
+	endif
 
-    let firstline = getline(v:foldstart)
-    let line = firstline[ind : ind+80]
+	let firstline = getline(v:foldstart)
+	let line = firstline[ind : ind+80]
 
-    return spaces . '+' . v:folddashes . ' ' . lines . ' ' . linestxt . ': ' . line . ' '
+	return spaces . '+' . v:folddashes . ' ' . lines . ' ' . linestxt . ': ' . line . ' '
 endfunction
 
 " Highlight long lines
 nnoremap <silent> <Leader>l
-      \ :if exists('w:long_line_match') <Bar>
-      \   silent! call matchdelete(w:long_line_match) <Bar>
-      \   unlet w:long_line_match <Bar>
-      \ elseif &textwidth > 0 <Bar>
-      \   let w:long_line_match = matchadd('ErrorMsg', '\%>'.&tw.'v.\+', -1) <Bar>
-      \ else <Bar>
-      \   let w:long_line_match = matchadd('ErrorMsg', '\%<81v.\%>77v', -1) <Bar>
-      \ endif<CR>
+	\ :if exists('w:long_line_match') <Bar>
+	\   silent! call matchdelete(w:long_line_match) <Bar>
+	\   unlet w:long_line_match <Bar>
+	\ elseif &textwidth > 0 <Bar>
+	\   let w:long_line_match = matchadd('ErrorMsg', '\%>'.&tw.'v.\+', -1) <Bar>
+	\ else <Bar>
+	\   let w:long_line_match = matchadd('ErrorMsg', '\%<81v.\%>77v', -1) <Bar>
+	\ endif<CR>
 
 " trigger by :call HtmlEscape()
 function HtmlEscape()
-    silent s/&/\&amp;/eg
-    silent s/</\&lt;/eg
-    silent s/>/\&gt;/eg
-    silent s/"/\&quot;/eg
+	silent s/&/\&amp;/eg
+	silent s/</\&lt;/eg
+	silent s/>/\&gt;/eg
+	silent s/"/\&quot;/eg
 endfunction
 
 " trigger by :call HtmlUnEscape()
 function HtmlUnEscape()
-    silent s/&lt;/</eg
-    silent s/&gt;/>/eg
-    silent s/&amp;/\&/eg
-    silent s/&quot;/"/eg
+	silent s/&lt;/</eg
+	silent s/&gt;/>/eg
+	silent s/&amp;/\&/eg
+	silent s/&quot;/"/eg
 endfunction
 
 " http://vim.wikia.com/wiki/Highlight_unwanted_spaces
 function! ToggleSpecialChar()
-    highlight ExtraWhitespace ctermbg=red guibg=red
-    if !&list
-        set list
-        " Show leading whitespace, trailing whitespace and spaces before a TAB
-        match ExtraWhitespace /^\s* \s*\|[ \t\r]\+$\| \+\ze\t/
-    else
-        set nolist
-        match
-        match Ignore /\r$/ | hi Ignore ctermfg=bg
-    endif
+	highlight ExtraWhitespace ctermbg=red guibg=red
+	if !&list
+		set list
+		" Show leading whitespace, trailing whitespace and spaces before a TAB
+		match ExtraWhitespace /^\s* \s*\|[ \t\r]\+$\| \+\ze\t/
+	else
+		set nolist
+		match
+		match Ignore /\r$/ | hi Ignore ctermfg=bg
+	endif
 endfunction
 
 " }}}
@@ -955,13 +956,13 @@ endfunction
 
 " VIM debug
 function! ToggleVerbose()
-    if !&verbose
-        set verbosefile=~/tmp/vim_verbose.log
-        set verbose=15
-    else
-        set verbose=0
-        set verbosefile=
-    endif
+	if !&verbose
+		set verbosefile=~/tmp/vim_verbose.log
+		set verbose=15
+	else
+		set verbose=0
+		set verbosefile=
+	endif
 endfunction
 
 " Delete all trailing whitespace
@@ -982,8 +983,8 @@ endfunction
 " [ After Loading All Plugin ]                                               {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function AfterStart ()
-    " Used to remove my own specific defined behavior for others who use my .vimrc
-    "autocmd! BufWritePost,FileWritePost [^jquery]*.js
+	" Used to remove my own specific defined behavior for others who use my .vimrc
+	"autocmd! BufWritePost,FileWritePost [^jquery]*.js
 endfunction
 autocmd VimEnter * :call AfterStart()
 
