@@ -448,10 +448,10 @@ function cd ()
     # replace "builtin cd" with cd_func() to enable "cd with history"
 	if [ -n "$1" ]; then
 		# builtin cd "$@"&& ls
-		cd_func "$@"&& ls
+		cd_func "$@" && [ "$1" != "--" ] && ls
 	else
 		# builtin cd ~&& ls
-		cd_func ~&& ls
+		cd_func ~ && ls
 	fi
 }
 
