@@ -1,32 +1,35 @@
 #!/bin/sh  $HOME/.inputrc
 # 1. List current readline function names and bindings
-#  $ bind -p 
+#  $ bind -p
 # 2. re-read-init-file, reload .inputrc
 #  "\C-x\C-r"
+# 3. bind -x keyseq:shell-comman
+#  e.g. use "Alt+W" to exec `who`
+#  $ bind -x '"\eW":"who"'
 
-set meta-flag on 
-set input-meta on 
-set output-meta on 
-set convert-meta off 
+set meta-flag on
+set input-meta on
+set output-meta on
+set convert-meta off
 set show-all-if-ambiguous on
 
 # Home
-"\e[1~": beginning-of-line 
-"\C-g":  beginning-of-line 
-# Insert 
-"\e[2~": yank-nth-arg 
-# Delete 
-"\e[3~": delete-char 
-# End 
-"\e[4~": end-of-line 
+"\e[1~": beginning-of-line
+"\C-g":  beginning-of-line
+# Insert
+"\e[2~": yank-nth-arg
+# Delete
+"\e[3~": delete-char
+# End
+"\e[4~": end-of-line
 # PageUp
-"\e[5~": history-search-backward 
+"\e[5~": history-search-backward
 # PageDown
-"\e[6~": history-search-forward 
+"\e[6~": history-search-forward
 
 # Ctrl + f/b : word movement
 "\C-f": forward-word
-"\C-b": backward-word 
+"\C-b": backward-word
 
 # Ctrl+ <-/-> word movement
 "\e[5C": forward-word
@@ -35,5 +38,5 @@ set show-all-if-ambiguous on
 "\e\e[D": backward-word
 
 # Ctrl + p/n : history search
-"\C-p": history-search-backward 
+"\C-p": history-search-backward
 "\C-n": history-search-forward
