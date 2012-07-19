@@ -81,11 +81,7 @@ endif
 if !exists('g:tagbar_iconchars')
     if has('multi_byte') && has('unix') && &encoding == 'utf-8' &&
      \ (empty(&termencoding) || &termencoding == 'utf-8')
-        if match(system('uname'),'Darwin') == 0
-            let g:tagbar_iconchars = ['▶', '▼']
-        else
-            let g:tagbar_iconchars = ['►', '▼']
-        endif
+        let g:tagbar_iconchars = ['▶', '▼']
     else
         let g:tagbar_iconchars = ['+', '-']
     endif
