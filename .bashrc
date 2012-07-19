@@ -351,6 +351,7 @@ source $dotfiles/completion/git-completion
 source $dotfiles/completion/cdargs-bash.sh
 source $dotfiles/completion/cdots.sh
 source $dotfiles/completion/git-flow-completion.bash
+source $dotfiles/completion/acd_func.sh
 
 # make less more friendly for non-text input files, see lesspipe(1)
 exist lesspipe && eval "$(lesspipe)"
@@ -444,10 +445,13 @@ dirsize ()
 # ls when cd, it's useful
 function cd ()
 {
+    # replace "builtin cd" with cd_func() to enable "cd with history"
 	if [ -n "$1" ]; then
-		builtin cd "$@"&& ls
+		# builtin cd "$@"&& ls
+		cd_func "$@"&& ls
 	else
-		builtin cd ~&& ls
+		# builtin cd ~&& ls
+		cd_func ~&& ls
 	fi
 }
 
