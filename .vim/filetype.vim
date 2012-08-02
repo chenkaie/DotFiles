@@ -7,7 +7,7 @@ augroup filetypedetect
     " lowlight ^M symbol.
     au BufRead *.c,*.h match Ignore /\r$/ | hi Ignore ctermfg=bg
     " use better colorscheme to edit HTML
-    au BufRead *.htm*,*.css,*.js colorscheme ir_black_cterm
+	au BufRead *.htm*,*.css,*.js colorscheme ir_black_cterm | call Pl#Load()
     " increase the maximum nesting of folds for HTML
     au BufRead *.htm* set foldnestmax=10
     " Set default fdm for *.c,*.h file
