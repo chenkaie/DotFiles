@@ -23,6 +23,7 @@
 	clog = log --graph --date=short --pretty=format:\"%C(124)%ad %C(24)%h %C(34)%an %C(252)%s%C(178)%d\" #--encoding="ISO-8859-1"
 	d = difftool
 	pull = pull --rebase
+	zip = !git archive --format tar.gz -o $(git log --date=short --pretty=format:"%ad" -1).tar.gz HEAD
 
 [branch]
 	autosetupmerge = true
