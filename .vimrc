@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Sat Aug 04, 2012  02:17AM
+" Last Modified: Sat Aug 04, 2012  02:36AM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -662,8 +662,6 @@ nnoremap <leader>x :Hexmode<CR>
     set runtimepath+=~/.vim/vundle/
     call vundle#rc()
 
-    " let Vundle manage Vundle, required! 
-    Bundle 'gmarik/vundle'
     Bundle 'gregsexton/gitv'
 
 	""""""""""""""""""""""""
