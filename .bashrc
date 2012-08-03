@@ -289,7 +289,23 @@ TXTRST="\[\033[0m\]"    # Text Reset
 
 # Git shell prompt
 if [ "\$(type -t __git_ps1)" ]; then
-	PROMPT_GIT='$(__git_ps1 "|%s")'
+	PROMPT_GIT='$(__git_ps1 "|\[\033[1;36m\]git\[\033[0;37m\]:%s")'
+fi
+
+# SVN shell prompt
+# Ref: https://github.com/l0b0/tilde/blob/master/scripts/__svn_ps1.sh
+__svn_ps1 ()
+{
+    local result=$(
+        svn info 2>/dev/null | \
+        perl -ne 'print if s;^URL: .*?/((trunk)|(branches|tags)/([^/]*)).*;\2\4 ;')
+    test -n "$result" || return
+	local revision=$(svn info | grep Revision | awk '{print $2}')
+    printf "${1:- (%s:%s)}" $result $revision
+}
+
+if [ "\$(type -t __svn_ps1)" ]; then
+	PROMPT_SVN='$(__svn_ps1 "|\[\033[1;36m\]svn\[\033[0;37m\]:%s-r%s")'
 fi
 
 case $OS in
@@ -301,7 +317,7 @@ case $OS in
 		;;
 esac
 
-PS1=$TXTYLW'\u'$TXTWHT'@'${PROMPT_HOSTCOLOR}'\h'$TXTWHT':'$TXTGRN'\W'$TXTWHT${PROMPT_GIT}$BLDBLK'$(counter)'$TXTGRN' >'$BLDGRN'>'$BLDWHT'> '$TXTWHT
+PS1=$TXTYLW'\u'$TXTWHT'@'${PROMPT_HOSTCOLOR}'\h'$TXTWHT':'$TXTGRN'\W'$TXTWHT${PROMPT_GIT}${PROMPT_SVN}$BLDBLK'$(counter)'$TXTGRN' >'$BLDGRN'>'$BLDWHT'> '$TXTWHT
 
 # add for screen to dynamically update title
 #PROMPT_COMMAND='echo -n -e "\033k\033\134"'
