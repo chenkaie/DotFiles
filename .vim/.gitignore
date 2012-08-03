@@ -5,3 +5,5 @@ sessions/
 view/
 .VimballRecord
 undofiles/
+Powerline*.cache
+bundle
