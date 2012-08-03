@@ -1,6 +1,3 @@
-[submodule "rcfiles"]
-	path = rcfiles
-	url = git://github.com/klaymenr/rcfiles.git
 [submodule ".vim/vundle"]
 	path = .vim/vundle
 	url = git://github.com/gmarik/vundle.git
