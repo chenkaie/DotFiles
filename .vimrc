@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Fri Jul 06, 2012  02:01AM
+" Last Modified: Sat Aug 04, 2012  02:17AM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -655,6 +655,16 @@ nnoremap <leader>x :Hexmode<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " [ Plugin configuration ]                                                   {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+    """"""""""""""""""""""""
+    " AWESOME Vundle
+    """"""""""""""""""""""""
+    set runtimepath+=~/.vim/vundle/
+    call vundle#rc()
+
+    " let Vundle manage Vundle, required! 
+    Bundle 'gmarik/vundle'
+    Bundle 'gregsexton/gitv'
 
 	""""""""""""""""""""""""
 	" EasyGrep
