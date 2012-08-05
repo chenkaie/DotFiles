@@ -6,9 +6,13 @@ My dotfiles / rcfiles used on Unix OS, mainly on Linux & Mac OS X
 Usage
 =====
 
-1. git clone this repo 
+1. Check out from github
 
-2. Simply execute below script to deploy these links! Once they are detecting exist, remove them first, but 'be careful' !
+        git clone git://github.com/chenkaie/DotFiles.git ~/DotFiles
+        cd ~/DotFiles
+        git submodule update --init
+
+2. Simply executing below script to deploy these links! Once they are detected exist, remove them first, but 'be careful'!
 
         ./deploy-links
 
