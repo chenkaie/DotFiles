@@ -1,16 +1,23 @@
 #
-echo -ne "\e]1;[zsh] `hostname`\a"
-echo -ne "\e]2;[zsh] `hostname`\a"
-export PATH=$PATH:$HOME/bin
+
+source ~/.profile
+
+echo -ne "\e]1;[zsh] `hostname`\a" # tab title
+echo -ne "\e]2;[zsh] `hostname`\a" # window title
 
 setopt prompt_subst
 
-git_prompt_info() {
-    ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-    print "|%{\e[38;5;197m%}${ref#refs/heads/}%{\e[0m%}"
-}
+autoload -Uz vcs_info && vcs_info
+zstyle ':vcs_info:*' formats "$(print '%{\e[1;37m%}|')\
+$(print '%{\e[38;5;45m%}%s%{\e[1;37m%}:%{\e[38;5;2m%}%b%{\e[0m%}')"
+zstyle ':vcs_info:*' actionformats "$(print '%{\e[1;37m%}|')\
+$(print '%{\e[38;5;45m%}%s%{\e[1;37m%}:%{\e[38;5;2m%}%b%')\
+$(print '%{\e[1;37m%}:%{\e[38;5;46m%}%b%{\e[0m%}')"
+precmd () { vcs_info }
 
-export PROMPT="$(print '%{\e[1;37m%}[%/$(git_prompt_info)] -%n- ')\
+export PROMPT="$(print '%{\e[1;37m%}[%{\e[38;5;192m%}%/')\
+$(print '${vcs_info_msg_0_}%{\e[1;37m%}] ')\
+$(print '%{\e[0m%}-%{\e[1;37m%}%n%{\e[0m%}- ')\
 $(print '%1(j.%{\e[38;5;185m%}|%j|%{\e[1;37m%}.)')\
 $(print '%{\e[38;5;22m%}>')\
 $(print '%{\e[38;5;34m%}>')\
@@ -20,12 +27,14 @@ $(print '%{\e[0m%}') "
 #$(print '%{\e[38;5;28m%}>')\
 #$(print '%{\e[38;5;40m%}>')\
 
-export PROMPT2="$(print '%{\e[1;37m%}[%/$(git_prompt_info)] -%n- ')\
-$(print '%1(j.%{\e[38;5;185m%}|%j|%{\e[1;37m%}.)')\
+export PROMPT2="$(print '%{\e[1;37m%}[%{\e[38;5;192m%}%/')\
+$(print '${vcs_info_msg_0_}%{\e[1;37m%}] ')\
+$(print '%{\e[0m%}-%{\e[1;37m%}%n%{\e[0m%}- ')\
+$(print '%1(j.%{\e[38;5;192m%}|%j|%{\e[1;37m%}.)')\
 $(print '%{\e[38;5;22m%}>')\
 $(print '%{\e[38;5;28m%}>')\
 $(print '%{\e[38;5;34m%}>')\
-$(print '%{\e[0m%}') %_ \
+$(print '%{\e[38;5;33m%}') %_ \
 $(print '%{\e[38;5;34m%}>')\
 $(print '%{\e[38;5;40m%}>')\
 $(print '%{\e[38;5;46m%}>')\
@@ -39,17 +48,16 @@ export LC_ALL=zh_TW.UTF-8
 export LANG=$LC_ALL
 export EDITOR="vim"
 export GREP_OPTIONS='--color=auto'
-export LSCOLORS=ExFxCxdxBxegedabagacad
-
 export HISTSIZE=1000
 export SAVEHIST=1000
 export HISTFILE=~/.history
+export JS_CMD="js"
 
 #export LSCOLORS=ExFxCxdxBxegedabagacad
 LS_COLORS=''
 LS_COLORS=$LS_COLORS:'no=0'           # Normal text       = Default foreground  
 LS_COLORS=$LS_COLORS:'fi=0'           # Regular file      = Default foreground
-LS_COLORS=$LS_COLORS:'di=01;34'       # Directory         = Bold, Blue
+LS_COLORS=$LS_COLORS:'di=38;5;27'       # Directory         = Bold, Blue
 LS_COLORS=$LS_COLORS:'ln=01;36'       # Symbolic link     = Bold, Cyan
 LS_COLORS=$LS_COLORS:'pi=33'          # Named pipe        = Yellow
 LS_COLORS=$LS_COLORS:'so=01;35'       # Socket            = Bold, Magenta
@@ -82,22 +90,34 @@ LS_COLORS=$LS_COLORS:'*.ppm=1;32'     # Images            = Bold, Green
 LS_COLORS=$LS_COLORS:'*.pgm=1;32'     # Images            = Bold, Green
 LS_COLORS=$LS_COLORS:'*.pbm=1;32'     # Images            = Bold, Green
 LS_COLORS=$LS_COLORS:'*.tar=31'       # Archive           = Red
-LS_COLORS=$LS_COLORS:'*.tgz=31'       # Archive           = Red
-LS_COLORS=$LS_COLORS:'*.gz=31'        # Archive           = Red
+LS_COLORS=$LS_COLORS:'*.tgz=1;31'       # Archive           = Red
+LS_COLORS=$LS_COLORS:'*.gz=1;31'        # Archive           = Red
+LS_COLORS=$LS_COLORS:'*.xz=1;31'        # Archive           = Red
 LS_COLORS=$LS_COLORS:'*.zip=31'       # Archive           = Red
 LS_COLORS=$LS_COLORS:'*.sit=31'       # Archive           = Red
 LS_COLORS=$LS_COLORS:'*.lha=31'       # Archive           = Red
 LS_COLORS=$LS_COLORS:'*.lzh=31'       # Archive           = Red
 LS_COLORS=$LS_COLORS:'*.arj=31'       # Archive           = Red
-LS_COLORS=$LS_COLORS:'*.bz2=31'       # Archive           = Red
+LS_COLORS=$LS_COLORS:'*.bz2=1;31'       # Archive           = Red
 LS_COLORS=$LS_COLORS:'*.html=36'      # HTML              = Cyan
 LS_COLORS=$LS_COLORS:'*.htm=1;34'     # HTML              = Bold, Blue
 LS_COLORS=$LS_COLORS:'*.php=1;45'     # PHP               = White, Cyan
 LS_COLORS=$LS_COLORS:'*.doc=1;34'     # MS-Word *lol*     = Bold, Blue
-LS_COLORS=$LS_COLORS:'*.txt=1;34'     # Plain/Text        = Bold, Blue
+LS_COLORS=$LS_COLORS:'*.txt=0'        # Plain/Text        = Default Foreground
 LS_COLORS=$LS_COLORS:'*.o=1;36'       # Object-Files      = Bold, Cyan
 LS_COLORS=$LS_COLORS:'*.a=1;36'       # Shared-libs       = Bold, Cyan
 export LS_COLORS
+
+# colorful man page
+#export PAGER="`which less` -s"
+#export BROWSER="$PAGER"
+#export LESS_TERMCAP_mb=$'\E[38;5;167m'
+#export LESS_TERMCAP_md=$'\E[38;5;39m'
+#export LESS_TERMCAP_me=$'\E[38;5;231m'
+#export LESS_TERMCAP_se=$'\E[38;5;231m'
+#export LESS_TERMCAP_so=$'\E[38;5;167m'
+#export LESS_TERMCAP_ue=$'\E[38;5;231m'
+#export LESS_TERMCAP_us=$'\E[38;5;167m'
 
 #setopt correctall
 setopt append_history
@@ -106,6 +126,8 @@ setopt hist_find_no_dups
 setopt hist_ignore_all_dups
 setopt no_hist_beep
 setopt hist_save_no_dups
+setopt noflowcontrol                  #no flow control enable keybind for ^Q
+#setopt menu_complete
 
 autoload -U compinit
 compinit
@@ -113,41 +135,7 @@ compinit
 zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
 zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
 zstyle ':completion:*' list-colors $LS_COLORS
-
-zle_highlight=(region:bg=magenta special:bold isearch:underline)
-
-bindkey "\e[1~" beginning-of-line        # Home
-bindkey "\e[7~" beginning-of-line        # Home rxvt
-bindkey "\e[2~" overwrite-mode           # Ins
-bindkey "\e[3~" delete-char              # Delete
-bindkey "\e[4~" end-of-line              # End
-bindkey "\e[8~" end-of-line              # End rxvt
-bindkey "\e[5~" history-search-backward  # PageUp
-bindkey "\e[6~" history-search-forward   # PageDown
-bindkey "^Q" push-line
-bindkey "^G" get-line
-bindkey "^Z" undo
-#bindkey "^Y" vi-undo-change
-bindkey "^Xc" copy-region-as-kill
-bindkey "^Xx" kill-region
-
-alias vi="vim"
-alias vim="vim -p"
-alias ls="ls -G"
-alias ll="ls -al"
-alias cls="clear"
-alias g='grep'
-alias :q='exit'
-alias :Q='exit'
-alias ~="cd ~"
-alias ..="cd .."
-alias -g ...='../..'
-alias -g ....='../../..'
-alias -g .....='../../../../..'
-alias -g ......='../../../../../..'
-alias -g .......='../../../../../../..'
-
-completion:*' special-dirs ..
+#zstyle ':completion:*' special-dirs ..
 
 # git flow
 # http://github.com/nvie/git-flow-completion
@@ -264,3 +252,4 @@ function check_compression {
 }
 
 [[ -s "/Users/othree/.rvm/scripts/rvm" ]] && source "/Users/othree/.rvm/scripts/rvm"
+
