@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Sat Aug 04, 2012  02:36AM
+" Last Modified: Mon Aug 06, 2012  01:34AM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -60,9 +60,6 @@ silent execute '!mkdir -p $HOME/.vim/backup'
 syntax on
 set vb
 set noswapfile
-
-"add runtimepath to make 'vim -u ~kent/.vimrc" work properly
-set runtimepath+=~kent/.vim
 
 if &term == "xterm-color" || &term == "xterm-16color"
 	set t_Co=16
