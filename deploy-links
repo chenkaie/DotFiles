@@ -1,8 +1,10 @@
 #!/bin/sh
 
 LN="ln"
-RCFILE_DIR=`pwd`
-RCFILE_DIR=${RCFILE_DIR//$HOME\//}
+DOTFILES_DIR=`pwd`
+DOTFILES_DIR=${DOTFILES_DIR//$HOME\//}
+# Configure correct $dotfiles path in .bashrc
+sed -i "s@^dotfiles=\(.*\)@dotfiles=\"\$HOME/$DOTFILES_DIR\"@" .bashrc
 #RCFILES=".bash_logout .lftp .ssh"
 RCFILES=".bashrc .bash_profile .inputrc .screenrc .vim .vimrc .cdargs .ctags .htoprc .muttrc .irssi .gitconfig .gitk .subversion .vnc .gitshrc .cgdb .gdbinit .gitignore .zshrc"
 # test
@@ -14,8 +16,8 @@ for rcfile in $RCFILES; do
     elif [ -f $HOME/$rcfile ] || [ -d $HOME/$rcfile ]; then
         echo "[File or Dirs ] : $HOME/$rcfile exists, skip.";
     else
-        $LN -sf $RCFILE_DIR/$rcfile $HOME/
-        echo "[Successfully!] : build symbolic link: $RCFILE_DIR/$rcfile";
+        $LN -sf $DOTFILES_DIR/$rcfile $HOME/
+        echo "[Successfully!] : build symbolic link: $DOTFILES_DIR/$rcfile";
     fi
 done
 
