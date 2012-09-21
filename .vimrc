@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Mon Aug 06, 2012  01:34AM
+" Last Modified: Thu Sep 20, 2012  08:12PM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -340,6 +340,9 @@ nmap N Nzz
 " map <left> <nop>
 " map <right> <nop>
 
+" Use `R` to Remove/delete linewise text without overwriting last yank
+nmap R "_dd
+vmap R "_d
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -493,19 +496,20 @@ endif
 	""""""""""""""""""""""""""""""
 	" init cscope hotkey
 	function! UseAwesomeCscope()
+		let l:srcdir=(isdirectory("../src") ? '../' : './')
 		try
 			set tags+=/home/kent/horus/apps/tags
-			exe "cs add ../cscope.out .."
+			exe "cs add " . l:srcdir . "cscope.out " . l:srcdir
 			exe "cs add /home/kent/cscope_ctag/Horus/cscope.out /home/kent/Project/Horus/apps"
 		catch /duplicate/
-			silent exe "!tag_rebuild .."
+			silent exe "!tag_rebuild " . l:srcdir
 			silent exe "cs reset"
 			exe "redraw!"
 			echohl Wildmenu | echo "cscope database inuse, update and re-init all connections" | echohl None
 		catch /stat/
-			silent exe "!tag_rebuild .."
+			silent exe "!tag_rebuild " . l:srcdir
 			try
-				exe "cs add ../cscope.out .."
+				exe "cs add " . l:srcdir . "cscope.out " . l:srcdir
 				exe "cs add /home/kent/cscope_ctag/Horus/cscope.out /home/kent/Project/Horus/apps"
 				exe "redraw!"
 				echohl Wildmenu | echo "cscope file not found, exec tag_rebuild" | echohl None
@@ -653,13 +657,14 @@ nnoremap <leader>x :Hexmode<CR>
 " [ Plugin configuration ]                                                   {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    """"""""""""""""""""""""
-    " AWESOME Vundle
-    """"""""""""""""""""""""
-    set runtimepath+=~/.vim/vundle/
-    call vundle#rc()
+	""""""""""""""""""""""""
+	" AWESOME Vundle
+	""""""""""""""""""""""""
+	set runtimepath+=~/.vim/vundle/
+	call vundle#rc()
 
-    Bundle 'gregsexton/gitv'
+	Bundle 'gregsexton/gitv'
+	Bundle 'majutsushi/tagbar'
 
 	""""""""""""""""""""""""
 	" EasyGrep
@@ -699,7 +704,7 @@ nnoremap <leader>x :Hexmode<CR>
 	""""""""""""""""""""""""""""""
 	" Tag List
 	""""""""""""""""""""""""""""""
-	nmap <F12>   :TlistToggle<CR>
+	" nmap <F12>   :TlistToggle<CR>
 
 	" Split to the right side of the screen
 	let g:Tlist_Use_Right_Window = 1
@@ -711,6 +716,11 @@ nnoremap <leader>x :Hexmode<CR>
 	let g:Tlist_Enable_Fold_Column = 0
 	" Always display one file tags
 	let g:Tlist_Show_One_File = 1
+
+	""""""""""""""""""""""""""""""
+	" TagBar
+	""""""""""""""""""""""""""""""
+	nmap <F12>   :TagbarToggle<CR>
 
 	""""""""""""""""""""""""""""""
 	" Minibuffer
