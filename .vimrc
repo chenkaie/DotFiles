@@ -666,6 +666,7 @@ nnoremap <leader>x :Hexmode<CR>
 	Bundle 'gregsexton/gitv'
 	Bundle 'majutsushi/tagbar'
 	Bundle 'OmniCppComplete'
+	Bundle 'Shougo/neocomplcache'
 
 	""""""""""""""""""""""""
 	" EasyGrep
