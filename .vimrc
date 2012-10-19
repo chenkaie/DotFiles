@@ -39,7 +39,7 @@ if version >= 703
 	set concealcursor=nc
 	set colorcolumn=+1
 	set cinoptions+=L0
-	set undofile
+	"set undofile
 	set undodir=~/.vim/undofiles
 	if !isdirectory(&undodir)
 		call mkdir(&undodir, "p")
