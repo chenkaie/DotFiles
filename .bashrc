@@ -326,14 +326,14 @@ PS1=$TXTYLW'\u'$TXTWHT'@'${PROMPT_HOSTCOLOR}'\h'$TXTWHT':'$TXTGRN'\W'$TXTWHT${PR
 export PROMPT_COMMAND='history -a'
 
 #export MANPAGER="most -s"
-# For colourful man pages (CLUG-Wiki style)
-#export LESS_TERMCAP_mb=$'\E[01;31m'
-#export LESS_TERMCAP_md=$'\E[01;31m'
-#export LESS_TERMCAP_me=$'\E[0m'
-#export LESS_TERMCAP_se=$'\E[0m'
-#export LESS_TERMCAP_so=$'\E[01;44;33m'
-#export LESS_TERMCAP_ue=$'\E[0m'
-#export LESS_TERMCAP_us=$'\E[01;32m'
+# Less Colors for Man Pages
+export LESS_TERMCAP_mb=$'\E[01;31m'       # begin blinking
+export LESS_TERMCAP_md=$'\E[01;38;5;74m'  # begin bold
+export LESS_TERMCAP_me=$'\E[0m'           # end mode
+export LESS_TERMCAP_se=$'\E[0m'           # end standout-mode
+export LESS_TERMCAP_so=$'\E[01;44;33m'    # begin standout-mode - info box
+export LESS_TERMCAP_ue=$'\E[0m'           # end underline
+export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 
 #for X-Win32
 #export DISPLAY="172.16.2.54:0:0"
@@ -357,8 +357,11 @@ case $OS in
 		;;
 esac
 
+# cool CMatrix
+exist cmatrix && cmatrix -ab
+
 # funny stuff cowsay
-echo "Welcome to $HOSTNAME" | cowsay -f default
+exist cowsay && echo "Welcome to $HOSTNAME" | cowsay -f default
 
 # Completion support
 source $dotfiles/completion/bash-completion/bash_completion
