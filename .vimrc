@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Thu Sep 20, 2012  08:12PM
+" Last Modified: Sun Oct 21, 2012  07:41PM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -515,7 +515,8 @@ endif
 				echohl Wildmenu | echo "cscope file not found, exec tag_rebuild" | echohl None
 			catch
 				exe "redraw!"
-				echohl ErrorMsg | echo "You don't have enough privilege XD" | echohl None
+				echohl ErrorMsg | echo "You don't have enough privilege XD, just add Horus db." | echohl None
+				exe "cs add /home/kent/cscope_ctag/Horus/cscope.out /home/kent/Project/Horus/apps"
 			endtry
 		endtry
 	endfun
@@ -574,6 +575,18 @@ endif
 
 	map <F4> :NeoComplCacheEnable<CR>
 	map ,<F4> :NeoComplCacheToggle<CR>
+
+	""""""""""""""""""""""""""""""
+	" Clang-Completion
+	""""""""""""""""""""""""""""""
+	let g:clang_complete_auto=0
+	let g:clang_use_library=1
+	let g:clang_library_path=$HOME."/usr/lib"
+	let g:clang_snippets=1
+	let g:clang_conceal_snippets=1
+	let g:clang_periodic_quickfix=1
+	let g:clang_hl_errors=1
+
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -667,6 +680,8 @@ nnoremap <leader>x :Hexmode<CR>
 	Bundle 'majutsushi/tagbar'
 	Bundle 'OmniCppComplete'
 	Bundle 'Shougo/neocomplcache'
+	"Bundle 'clang-complete'
+	Bundle 'matrix.vim--Yang'
 
 	""""""""""""""""""""""""
 	" EasyGrep
@@ -798,7 +813,7 @@ nnoremap <leader>x :Hexmode<CR>
 	else
 		let g:Powerline_symbols='fancy'
 	endif
-	call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
+	"call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
 
 	""""""""""""""""""""""""""""""
 	" CtrlP
