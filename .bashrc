@@ -49,12 +49,17 @@ case $OS in
 
 		# Homebrew stuff
 		if [ -x /usr/local/bin/brew ]; then
-			export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+			export PATH=$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:/usr/local/sbin:$PATH
 			export MANPATH=/usr/local/share/man:$MANPATH
 
 			# bash_completion if installed
 			if [ -f `brew --prefix`/etc/bash_completion ]; then
 				. `brew --prefix`/etc/bash_completion
+			fi
+
+			# brew_bash_completion.sh
+			if [ -f `brew --prefix`/Library/Contributions/brew_bash_completion.sh ]; then
+				. `brew --prefix`/Library/Contributions/brew_bash_completion.sh
 			fi
 		fi
 
