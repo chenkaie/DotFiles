@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Sun Oct 21, 2012  07:41PM
+" Last Modified: Sun Oct 21, 2012  09:26PM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -453,6 +453,7 @@ nmap ,d :DiffSaved<CR>
 "DirDiff
 let g:DirDiffExcludes = "*.git,*.svn,.*.swp,tags,cscope.*"
 let g:DirDiffWindowSize = 6
+let g:DirDiffAddArgs = "-w" 
 
 " WinMerge-style (Alt + hjkl) mapping for vimdiff
 nmap j ]c
@@ -682,6 +683,7 @@ nnoremap <leader>x :Hexmode<CR>
 	Bundle 'Shougo/neocomplcache'
 	"Bundle 'clang-complete'
 	Bundle 'matrix.vim--Yang'
+	Bundle 'chenkaie/DirDiff.vim'
 
 	""""""""""""""""""""""""
 	" EasyGrep
