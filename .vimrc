@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Sun Oct 21, 2012  10:15PM
+" Last Modified: Sun Oct 21, 2012  11:42PM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -812,6 +812,7 @@ nnoremap <leader>x :Hexmode<CR>
 	""""""""""""""""""""""""""""""
 	" Powerline
 	""""""""""""""""""""""""""""""
+	let g:Powerline_dividers_override = [ [0x2b80], [0x003e], [0x2b82], [0x003c] ]
 	if OS == "Darwin"
 		let g:Powerline_symbols='fancy'
 	else
