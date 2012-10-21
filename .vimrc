@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Sun Oct 21, 2012  09:47PM
+" Last Modified: Sun Oct 21, 2012  10:15PM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -685,6 +685,7 @@ nnoremap <leader>x :Hexmode<CR>
 	Bundle 'matrix.vim--Yang'
 	Bundle 'chenkaie/DirDiff.vim'
 	Bundle 'chenkaie/smarthomekey.vim'
+    Bundle 'Lokaltog/vim-powerline'
 
 	""""""""""""""""""""""""
 	" EasyGrep
