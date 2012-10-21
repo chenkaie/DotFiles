@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Sun Oct 21, 2012  11:42PM
+" Last Modified: Mon Oct 22, 2012  01:46AM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -685,7 +685,27 @@ nnoremap <leader>x :Hexmode<CR>
 	Bundle 'matrix.vim--Yang'
 	Bundle 'chenkaie/DirDiff.vim'
 	Bundle 'chenkaie/smarthomekey.vim'
-    Bundle 'Lokaltog/vim-powerline'
+	Bundle 'Lokaltog/vim-powerline'
+	Bundle 'EasyMotion'
+	Bundle 'Tabular'
+	Bundle 'CSApprox'
+	Bundle 'ctrlp.vim'
+	Bundle 'Decho'
+	Bundle 'tpope/vim-fugitive'
+	Bundle 'Indent-Guides'
+	Bundle 'vim-indent-object'
+	Bundle 'LargeFile'
+	Bundle 'matchit.zip'
+	Bundle 'scrooloose/nerdtree'
+	Bundle 'scrooloose/nerdcommenter'
+	Bundle 'msanders/snipmate.vim'
+	Bundle 'tpope/vim-surround'
+	Bundle 'ervandew/supertab'
+	Bundle 'vcscommand.vim'
+	Bundle 'wokmarks.vim'
+	Bundle 'ShowMarks7'
+	Bundle 'smoothPageScroll.vim'
+	Bundle 'sessionman.vim'
 
 	""""""""""""""""""""""""
 	" EasyGrep
@@ -711,16 +731,6 @@ nnoremap <leader>x :Hexmode<CR>
 	"Smooth Scroll
 	map <PageDown> :call SmoothPageScrollDown()<CR>
 	map <PageUp>   :call SmoothPageScrollUp()<CR>
-
-	""""""""""""""""""""""""""""""
-	" Trinity related Start
-	""""""""""""""""""""""""""""""
-	" Smooth Scroll
-	" Open and close all the three plugins on the same time ,wired toggle Trinity,  will caue hlsearch to no effect, add set hlsearch again manually
-	" nmap <F12>  :TrinityToggleTagList<CR>
-	" nmap <F9>   :TrinityToggleSourceExplorer<CR>
-	" nmap <F10>  :TrinityToggleTagList<CR>
-	" nmap <F11>  :TrinityToggleNERDTree<CR>
 
 	""""""""""""""""""""""""""""""
 	" Tag List
