@@ -1,4 +1,4 @@
-#!/bin/sh  $HOME/.inputrc
+# .inputrc
 # 1. List current readline function names and bindings
 #  $ bind -p
 # 2. re-read-init-file, reload .inputrc

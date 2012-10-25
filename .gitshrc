@@ -1,5 +1,4 @@
-#!/bin/bash
-# Example ~/.gitshrc file.
+# ~/.gitshrc
 
 # git commit
 gitalias commit='git commit --verbose'

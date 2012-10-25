@@ -1,6 +1,6 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ==============================================================================
 " CSCOPE settings for vim           
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ==============================================================================
 "
 " This file contains some boilerplate settings for vim's cscope interface,
 " plus some keyboard mappings that I've found useful.
@@ -21,7 +21,7 @@
 " Happy cscoping,
 "
 " Jason Duell       jduell@alumni.princeton.edu     2002/3/7
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ==============================================================================
 
 
 " This tests to see if vim was configured with the '--enable-cscope' option
@@ -39,18 +39,14 @@ if has("cscope")
 
     " add any cscope database in current directory
     if filereadable("cscope.out")
-    " cs add cscope.out  "By Kent, cause VIM7 automatically do this line
+        cs add cscope.out  
     " else add the database pointed to by environment variable 
-    elseif $CSCOPE_DB != ''
+    elseif $CSCOPE_DB != ""
         cs add $CSCOPE_DB
     else "add by kent 2001110
         " show msg when any other cscope db added
         set nocscopeverbose  
-        "cs add /home/kent/cscope_ctag/lsp/cscope.out /opt/Vivotek/lsp/buildroot-2.0.0.0/build_arm_nofpu/uClibc
     endif
-
-    " add by Kent, no matter what, add this cscope.out file
-    " cs add /home/kent/cscope_ctag/Horus/cscope.out /home/kent/Project/Horus
 
     " show msg when any other cscope db added
     set cscopeverbose  
@@ -96,7 +92,7 @@ if has("cscope")
     "
 
     nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR>
+    nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
     nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>	
     nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>	
     nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>	

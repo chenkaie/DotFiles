@@ -1,4 +1,4 @@
-#!/bin/bash
+# .bashrc
 
 # If not running interactively, don't do anything.
 # This snippet helps to fix scp, sftp "Received message too long" issue..
