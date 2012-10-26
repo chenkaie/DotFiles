@@ -21,7 +21,10 @@ AUTHOR
 
 Kent Chen (chenkaie) <chenkaie@gmail.com>
 
-* [@chenkaie](https://twitter.com/#!/chenkaie) on Twitter
+* [@chenkaie](https://twitter.com/chenkaie) on Twitter
+* [@chenkaie](https://github.com/chenkaie) on GitHub
+* [@chenkaie](http://www.slideshare.net/chenkaie) on SlideShare
+* [@chenkaie](http://www.linkedin.com/in/chenkaie) on LinkedIn
 * [@chenkaie](http://www.plurk.com/chenkaie) on Plurk 
 * <http://chenkaie.blogspot.com>
 
