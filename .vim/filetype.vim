@@ -12,7 +12,7 @@ augroup filetypedetect
     au BufRead *.htm* set foldnestmax=10
     " Set default fdm for *.c,*.h file
     " WTF! Resource consuming monster when starting omni-completion in a larger file
-    au BufRead *.c,*.h set fdm=syntax
+    " au BufRead *.c,*.h set fdm=syntax
     " set Spell check: ON when svn,git commit
     au BufRead svn-commit.*tmp,COMMIT_EDITMSG :set spell
     " Syntax file for jQuery
