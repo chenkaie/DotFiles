@@ -301,12 +301,12 @@ fi
 # Ref: https://github.com/l0b0/tilde/blob/master/scripts/__svn_ps1.sh
 __svn_ps1 ()
 {
-    local result=$(
-        svn info 2>/dev/null | \
-        perl -ne 'print if s;^URL: .*?/((trunk)|(branches|tags)/([^/]*)).*;\2\4 ;')
-    test -n "$result" || return
+	local result=$(
+		svn info 2>/dev/null | \
+		perl -ne 'print if s;^URL: .*?/((trunk)|(branches|tags)/([^/]*)).*;\2\4 ;')
+	test -n "$result" || return
 	local revision=$(svn info | grep Revision | awk '{print $2}')
-    printf "${1:- (%s:%s)}" $result $revision
+	printf "${1:- (%s:%s)}" $result $revision
 }
 
 if [ "\$(type -t __svn_ps1)" ]; then
@@ -366,7 +366,15 @@ esac
 exist cmatrix && cmatrix -ab
 
 # funny stuff cowsay
-exist cowsay && echo "Welcome to $HOSTNAME" | cowsay -f default
+# exist cowsay && echo "Welcome to $HOSTNAME" | cowsay -f default
+
+# icat (Image cat) generated 256-color ascii images
+if [ -d "$dotfiles/ascii-photo" ]; then
+	filepath=($dotfiles/ascii-photo/*)
+	nfile=${#filepath[@]}
+	asciiwp="${filepath[RANDOM % nfile]}"
+	cat $asciiwp
+fi
 
 # Completion support
 source $dotfiles/completion/bash-completion/bash_completion
@@ -469,7 +477,7 @@ dirsize ()
 # ls when cd, it's useful
 function cd ()
 {
-    # replace "builtin cd" with cd_func() to enable "cd with history"
+	# replace "builtin cd" with cd_func() to enable "cd with history"
 	if [ -n "$1" ]; then
 		# builtin cd "$@"&& ls
 		cd_func "$@" && [ "$1" != "--" ] && ls
@@ -560,4 +568,4 @@ function see()
 	$EDITOR `\which $1`
 }
 
-# vim: fdm=marker ts=4 sw=4 et:
+# vim: fdm=marker ts=4 sw=4:
