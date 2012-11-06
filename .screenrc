@@ -86,9 +86,11 @@ bindkey "^[[C" next
 bindkey "^[[1;5D" prev
 bindkey "^[[1;5C" next
 
-# Vim-style
-#bindkey "^h" prev
-#bindkey "^l" next
+# Vim HJKL-style
+# Alt + H : prev
+# Alt + L : next
+bindkey "^[H" prev
+bindkey "^[L" next
 
 # /*Need to hack putty*/
 # (Mac - iTerm) just add key mapping! Cool iTerm
