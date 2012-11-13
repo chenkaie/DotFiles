@@ -313,16 +313,52 @@ if [ "\$(type -t __svn_ps1)" ]; then
 	PROMPT_SVN='$(__svn_ps1 "|\[\033[1;36m\]svn\[\033[0;37m\]:%s-r%s")'
 fi
 
+ps1_set()
+{
+	local prompt_char="$" separator="\n" prompt_time=""
+
+	# root privilege
+	[ $UID -eq 0 ] && prompt_charclr=$TXTRED || prompt_charclr=$TXTWHT
+
+	while [ $# -gt 0 ]; do
+		local token="$1"; shift
+
+		case "$token" in
+		-x|--trace)
+			export PS4="+ \${BASH_SOURCE} : \${FUNCNAME[0]:+\${FUNCNAME[0]}()} \${LINENO} > "
+			[ "$1" == "off" ] && set +o xtrace || set -o xtrace
+			shift
+			;;
+		-p|--prompt)
+			prompt_char="$1"
+			shift
+			;;
+		-s|--separator)
+			separator="$1"
+			shift
+			;;
+		-t|--time)
+			prompt_time="$1"
+			shift
+			;;
+		*)
+			true # Ignore everything else.
+			;;
+		esac
+	done
+	PS1=$BLDBLK'['$prompt_time$TXTYLW'\u@''\h'$TXTWHT':'$TXTWHT'pts/\l'$TXTWHT${PROMPT_GIT}${PROMPT_SVN}$BLDBLK'$(ps1_counter)''] '$BLDWHT'\w'${separator}${prompt_charclr}${prompt_char}$TXTWHT
+}
+
+#PS1=$TXTYLW'\u'$TXTWHT'@'${PROMPT_HOSTCOLOR}'\h'$TXTWHT':'$TXTGRN'\W'$TXTWHT${PROMPT_GIT}${PROMPT_SVN}$BLDBLK'$(ps1_counter)'$TXTGRN' >'$BLDGRN'>'$BLDWHT'> '$TXTWHT
+
 case $OS in
 	Darwin|*BSD)
-		PROMPT_HOSTCOLOR=$TXTRED
+		ps1_set -p "$TXTGRN>$BLDGRN>$BLDWHT>$TXTWHT " -t "\D{%H:%M:%S} "
 		;;
 	Linux)
-		PROMPT_HOSTCOLOR=$TXTPUR
+		ps1_set --prompt "$BLDBLKʕ•ᴥ•ʔ "
 		;;
 esac
-
-PS1=$TXTYLW'\u'$TXTWHT'@'${PROMPT_HOSTCOLOR}'\h'$TXTWHT':'$TXTGRN'\W'$TXTWHT${PROMPT_GIT}${PROMPT_SVN}$BLDBLK'$(counter)'$TXTGRN' >'$BLDGRN'>'$BLDWHT'> '$TXTWHT
 
 # add for screen to dynamically update title
 #PROMPT_COMMAND='echo -n -e "\033k\033\134"'
@@ -550,7 +586,7 @@ function lagcc ()
 	agcc -o ${1%.*}{.${outfilesuffix}.out,.${1##*.}} $2 $3 $4 $5
 }
 
-function counter()
+function ps1_counter()
 {
 	case $1 in *-h*) echo "(jobnum|dirnum)" ;; esac
 
