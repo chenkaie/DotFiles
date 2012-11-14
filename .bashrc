@@ -315,7 +315,7 @@ fi
 
 ps1_set()
 {
-	local prompt_char="$" separator="\n" prompt_time=""
+	local prompt_char="$" separator="\n" prompt_time="" workding_dir="\w"
 
 	# root privilege
 	[ $UID -eq 0 ] && prompt_charclr=$TXTRED || prompt_charclr=$TXTWHT
@@ -341,12 +341,16 @@ ps1_set()
 			prompt_time="$1"
 			shift
 			;;
+		-w|--workingdir)
+			workding_dir="$1"
+			shift
+			;;
 		*)
 			true # Ignore everything else.
 			;;
 		esac
 	done
-	PS1=$BLDBLK'['$prompt_time$TXTYLW'\u@''\h'$TXTWHT':'$TXTWHT'pts/\l'$TXTWHT${PROMPT_GIT}${PROMPT_SVN}$BLDBLK'$(ps1_counter)''] '$BLDWHT'\w'${separator}${prompt_charclr}${prompt_char}$TXTWHT
+	PS1=$BLDBLK'['$prompt_time$TXTYLW'\u@''\h'$TXTWHT':'$TXTWHT'pts/\l'$TXTWHT${PROMPT_GIT}${PROMPT_SVN}$BLDBLK'$(ps1_counter)''] '$BLDWHT${workding_dir}${separator}${prompt_charclr}${prompt_char}$TXTWHT
 }
 
 #PS1=$TXTYLW'\u'$TXTWHT'@'${PROMPT_HOSTCOLOR}'\h'$TXTWHT':'$TXTGRN'\W'$TXTWHT${PROMPT_GIT}${PROMPT_SVN}$BLDBLK'$(ps1_counter)'$TXTGRN' >'$BLDGRN'>'$BLDWHT'> '$TXTWHT
