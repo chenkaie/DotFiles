@@ -1,32 +1,4 @@
 servers = (
-  { address = "eu.irc6.net"; chatnet = "IRCnet"; port = "6667"; },
-  { 
-    address = "irc.open-ircnet.net";
-    chatnet = "IRCnet";
-    port = "6667";
-  },
-  { address = "irc.efnet.org"; chatnet = "EFNet"; port = "6667"; },
-  { 
-    address = "irc.undernet.org";
-    chatnet = "Undernet";
-    port = "6667";
-  },
-  { address = "irc.dal.net"; chatnet = "DALnet"; port = "6667"; },
-  { 
-    address = "irc.quakenet.org";
-    chatnet = "QuakeNet";
-    port = "6667";
-  },
-  { address = "irc.oftc.net"; chatnet = "OFTC"; port = "6667"; },
-  {
-    address = "irc.gamesurge.net";
-    chatnet = "GameSurge";
-    port = "6667";
-  },
-  { address = "irc.webchat.org"; chatnet = "WebChat"; port = "6667"; },
-  { address = "irc.rizon.net"; chatnet = "Rizon"; port = "6667"; },
-  { address = "irc.link-net.org"; chatnet = "LinkNet"; port = "6667"; },
-  { address = "silc.silcnet.org"; chatnet = "SILC"; port = "706"; },
   {
     address = "irc.seed.net.tw";
     chatnet = "IRCnet";
@@ -36,7 +8,7 @@ servers = (
     autoconnect = "yes";
   },
   {
-    address = "asimov.freenode.net";
+    address = "irc.freenode.net";
     chatnet = "freenode";
     port = "6667";
     use_ssl = "no";
@@ -63,61 +35,6 @@ chatnets = {
     max_modes = "4";
     max_whois = "1";
   };
-  EFNet = { 
-    type = "IRC";
-    max_kicks = "4";
-    max_msgs = "3";
-    max_whois = "1";
-  };
-  Undernet = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "3";
-    max_whois = "30";
-  };
-  DALnet = {
-    type = "IRC";
-    max_kicks = "4";
-    max_msgs = "3";
-    max_whois = "30";
-  };
-  QuakeNet = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "3";
-    max_whois = "30";
-  };
-  OFTC = { 
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "3";
-    max_whois = "30";
-  };
-  GameSurge = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "3";
-    max_whois = "30";
-  };
-  WebChat = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "3";
-    max_whois = "30";
-  };
-  Rizon = { 
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "3";
-    max_whois = "30";
-  };
-  LinkNet = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "3";
-    max_whois = "30";
-  };
-  SILC = { type = "SILC"; };
   freenode = {
     type = "IRC";
     max_kicks = "4";
@@ -130,12 +47,14 @@ chatnets = {
 
 channels = (
   { name = "#irssi"; chatnet = "ircnet"; autojoin = "No"; },
-  { name = "silc"; chatnet = "silc"; autojoin = "No"; },
   { name = "#coscup"; chatnet = "ircnet"; autojoin = "yes"; },
   { name = "#osdc.tw"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#bsdchat"; chatnet = "ircnet"; autojoin = "yes"; },
   { name = "#git"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#svn"; chatnet = "freenode"; autojoin = "yes"; }
+  { name = "#svn"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#ubuntu-tw"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#tossug"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#kalug"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#python.tw"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "#vim-tw"; chatnet = "freenode"; autojoin = "yes"; }
 );
 
@@ -298,6 +217,7 @@ statusbar = {
     };
   };
 };
+
 settings = {
   core = {
     real_name = "Kent Chen";
@@ -313,7 +233,7 @@ settings = {
     theme = "revolutionaryv3";
   };
 };
-conversions = { "#bsdchat" = "UTF-8"; user = "Big5"; "#osdc.tw" = "UTF-8"; };
+
 logs = {
   "~/tmp/irssi-logs/irc-coscup-%Y%m%d" = {
     auto_open = "yes";
