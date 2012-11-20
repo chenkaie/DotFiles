@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Thu Oct 25, 2012  05:31PM
+" Last Modified: Tue Nov 20, 2012  11:16PM
 " ==============================================================================
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -209,7 +209,7 @@ else
 	"Visualize some special chars
 	set fillchars=vert:│,fold:-,diff:╱
 	set listchars=tab:⋮\ ,trail:⌴,eol:·,precedes:◂,extends:▸
-    " Use below line if you don't have font patched.
+	" Use below line if you don't have font patched.
 	"set listchars=tab:»\ ,trail:·,eol:$,nbsp:%,extends:>,precedes:<
 endif
 
@@ -387,18 +387,17 @@ nmap Q <Esc>:qall!<Enter>
 nmap w <Esc>:close<Enter>
 nmap W <Esc>:close!<Enter>
 nmap s <Esc>:write<Enter>
+nmap t <Esc>:tabnew<Enter>
+
 nmap , <Esc>:tabprev<Enter>
-" Vim-Style alt+h, used for diff
-"nmap h <Esc>:tabprev<Enter>
 "ALT+ <-
 nmap OD <Esc>:tabprev<Enter>
+nmap [1;9C <Esc>:tabprev<Enter>
 
 nmap . <Esc>:tabnext<Enter>
-"Vim-Style alt+l, used for diff
-"nmap l <Esc>:tabnext<Enter>
 "ALT+ ->
 nmap OC <Esc>:tabnext<Enter>
-nmap t <Esc>:tabnew<Enter>
+nmap [1;9D <Esc>:tabnext<Enter>
 
 nmap 1 <Esc>:tabn 1<Enter>
 nmap 2 <Esc>:tabn 2<Enter>
@@ -563,13 +562,10 @@ endif
 	""""""""""""""""""""""""""""""
 	" NeoComplCache
 	""""""""""""""""""""""""""""""
-	let g:AutoComplPop_NotEnableAtStartup = 1
-	let g:NeoComplCache_EnableAtStartup = 0
-	let g:NeoComplCache_DisableAutoComplete = 0
-	let g:NeoComplCache_SmartCase = 1
-	let g:NeoComplCache_EnableCamelCaseCompletion = 1
-	let g:NeoComplCache_MinSyntaxLength = 3
-	let g:NeoComplCache_SnippetsDir = $HOME.'/.vim/snippets'
+	let g:neocomplcache_enable_at_startup = 0
+	let g:neocomplcache_enable_smart_case = 1
+	let g:neocomplcache_enable_camel_case_completion = 1
+
 	" snippets expand key <c-e>
 	imap <silent> <C-e> <Plug>(neocomplcache_snippets_expand)
 	smap <silent> <C-e> <Plug>(neocomplcache_snippets_expand)
@@ -580,13 +576,16 @@ endif
 	""""""""""""""""""""""""""""""
 	" Clang-Completion
 	""""""""""""""""""""""""""""""
-	let g:clang_complete_auto=0
+	let g:clang_complete_auto=1
+	let g:clang_auto_select = 1
 	let g:clang_use_library=1
 	let g:clang_library_path=$HOME."/usr/lib"
 	let g:clang_snippets=1
 	let g:clang_conceal_snippets=1
 	let g:clang_periodic_quickfix=1
 	let g:clang_hl_errors=1
+	let g:clang_snippets_engine='snipmate'
+	"let g:clang_complete_copen=1
 
 " }}}
 
@@ -1038,4 +1037,4 @@ autocmd VimEnter * :call AfterStart()
 
 " }}}
 
-" vim:fdm=marker:et:fdl=0:
+" vim:fdm=marker:fdl=0:
