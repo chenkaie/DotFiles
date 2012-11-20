@@ -419,7 +419,8 @@ fi
 # Completion support
 source $dotfiles/completion/bash-completion/bash_completion
 source $dotfiles/completion/svn_completion
-source $dotfiles/completion/git-completion
+source $dotfiles/completion/git-completion.bash
+source $dotfiles/completion/git-prompt.sh
 source $dotfiles/completion/cdargs-bash.sh
 source $dotfiles/completion/cdots.sh
 source $dotfiles/completion/git-flow-completion.bash
