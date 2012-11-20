@@ -294,24 +294,24 @@ TXTRST="\[\033[0m\]"    # Text Reset
 
 # Git shell prompt
 if [ "\$(type -t __git_ps1)" ]; then
-	PROMPT_GIT='$(__git_ps1 "|\[\033[1;36m\]git\[\033[0;37m\]:%s")'
+	PROMPT_GIT='$(__git_ps1 "|'$BLDCYN'git'$TXTRST':%s")'
 fi
 
 # SVN shell prompt
 # Ref: https://github.com/l0b0/tilde/blob/master/scripts/__svn_ps1.sh
 __svn_ps1 ()
 {
+	svn info > /dev/null 2>&1 || return
 	local result=$(
 		svn info 2>/dev/null | \
 		perl -ne 'print if s;^URL: .*?/((trunk)|(branches|tags)/([^/]*)).*;\2\4 ;')
-	test -n "$result" || return
+
+	test -n "$result" || result="rev"
 	local revision=$(svn info | grep Revision | awk '{print $2}')
 	printf "${1:- (%s:%s)}" $result $revision
 }
 
-if [ "\$(type -t __svn_ps1)" ]; then
-	PROMPT_SVN='$(__svn_ps1 "|\[\033[1;36m\]svn\[\033[0;37m\]:%s-r%s")'
-fi
+PROMPT_SVN='$(__svn_ps1 "|'$TXTCYN'svn'$TXTRST':%s-r%s")'
 
 ps1_set()
 {
@@ -360,7 +360,7 @@ case $OS in
 		ps1_set -p "$TXTGRN>$BLDGRN>$BLDWHT>$TXTWHT " -t "\D{%H:%M:%S} "
 		;;
 	Linux)
-		ps1_set --prompt "$BLDBLKʕ•ᴥ•ʔ "
+		ps1_set -p "$TXTGRNʕ•ᴥ•ʔ " -s " " -w "\W"
 		;;
 esac
 
