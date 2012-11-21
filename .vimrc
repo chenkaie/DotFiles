@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Tue Nov 20, 2012  11:57PM
+" Last Modified: Thu Nov 22, 2012  02:11AM
 " ==============================================================================
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -706,6 +706,7 @@ nnoremap <leader>x :Hexmode<CR>
 	Bundle 'ShowMarks7'
 	Bundle 'smoothPageScroll.vim'
 	Bundle 'sessionman.vim'
+	Bundle 'nelstrom/vim-visual-star-search'
 
 	""""""""""""""""""""""""
 	" EasyGrep
