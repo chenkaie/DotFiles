@@ -113,7 +113,7 @@ case $OS in
 		export CLICOLOR=1
 		export LSCOLORS=ExFxCxDxBxegedabagacad
 		alias ls='ls -FG'
-		# By installing Macports: GNU coreutils, alias as Linux-way
+		# By installing homebrew: GNU coreutils, alias as Linux-way
 		alias ls='ls -FN --color=auto --time-style=long-iso'
 		;;
 	Linux)
@@ -360,7 +360,8 @@ case $OS in
 		ps1_set -p "$TXTGRN>$BLDGRN>$BLDWHT>$TXTWHT " -t "\D{%H:%M:%S} "
 		;;
 	Linux)
-		ps1_set -p "$TXTGRNʕ•ᴥ•ʔ " -s " " -w "\W"
+		ps1_set -p "$TXTGRN>$BLDGRN>$BLDWHT>$TXTWHT " -s " " -w "\W"
+		#ps1_set -p "$TXTGRNʕ•ᴥ•ʔ " -s " " -w "\W"
 		;;
 esac
 
@@ -403,7 +404,7 @@ case $OS in
 esac
 
 # cool CMatrix
-exist cmatrix && cmatrix -ab
+# exist cmatrix && cmatrix -ab
 
 # funny stuff cowsay
 # exist cowsay && echo "Welcome to $HOSTNAME" | cowsay -f default
