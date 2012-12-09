@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Thu Nov 22, 2012  02:11AM
+" Last Modified: Mon Dec 10, 2012  12:23AM
 " ==============================================================================
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -302,9 +302,6 @@ inoremap <Esc>OQ /
 inoremap <Esc>OR *
 inoremap <Esc>Ol +
 inoremap <Esc>OS -
-
-" search the selected text
-vmap // y/<C-R>"<CR>
 
 " tab goes between delimiters
 nmap <tab> %
