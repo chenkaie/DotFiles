@@ -154,7 +154,7 @@ alias quota='quota -vs'
 alias grep='grep --mmap --color'
 
 # have to check exist()
-alias top='htop'
+exist htop && alias top='htop'
 alias xmllint='xmllint --noout'
 
 #export GREP_OPTIONS="--exclude-dir=\*/.svn/\* --exclude=\*~ --exclude=\*.swp"
@@ -205,7 +205,7 @@ alias mall='mca && m && mi'
 #gcc
 alias agcc='arm-linux-gcc -Wall -g3 -fno-omit-frame-pointer -fno-inline -Wcast-align -Wpadded -Wpacked -std=gnu99'
 alias gcc='gcc -Wall -g3 -fno-omit-frame-pointer -fno-inline -Wcast-align -Wpadded -Wpacked -std=gnu99'
-alias objdump='objdump -d -S -hrt'
+alias objdump='objdump -d -S -l -shrt'
 alias gdb='gdb --command=$HOME/Repos/DotFiles/.gdbinit-7.3'
 #alias strace='strace -f -v -x -s 128'
 
