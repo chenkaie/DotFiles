@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Tue Feb 26, 2013  05:59PM
+" Last Modified: Tue Jun 18, 2013  11:44AM
 " ==============================================================================
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -495,9 +495,9 @@ endif
 	function! UseAwesomeCscope()
 		let l:srcdir=(isdirectory("../src") ? '../' : './')
 		try
-			set tags+=/home/kent/horus/apps/tags
+			set tags+=$HOME/horus/apps/tags
 			exe "cs add " . l:srcdir . "cscope.out " . l:srcdir
-			exe "cs add /home/kent/cscope_ctag/Horus/cscope.out /home/kent/Project/Horus/apps"
+			exe "cs add $HOME/cscope_ctag/Horus/cscope.out $HOME/Project/Horus/apps"
 		catch /duplicate/
 			silent exe "!tag_rebuild " . l:srcdir
 			silent exe "cs reset"
@@ -507,13 +507,13 @@ endif
 			silent exe "!tag_rebuild " . l:srcdir
 			try
 				exe "cs add " . l:srcdir . "cscope.out " . l:srcdir
-				exe "cs add /home/kent/cscope_ctag/Horus/cscope.out /home/kent/Project/Horus/apps"
+				exe "cs add $HOME/cscope_ctag/Horus/cscope.out $HOME/Project/Horus/apps"
 				exe "redraw!"
 				echohl Wildmenu | echo "cscope file not found, exec tag_rebuild" | echohl None
 			catch
 				exe "redraw!"
 				echohl ErrorMsg | echo "You don't have enough privilege XD, just add Horus db." | echohl None
-				exe "cs add /home/kent/cscope_ctag/Horus/cscope.out /home/kent/Project/Horus/apps"
+				exe "cs add $HOME/cscope_ctag/Horus/cscope.out $HOME/Project/Horus/apps"
 			endtry
 		endtry
 	endfun
@@ -532,7 +532,7 @@ endif
 	""""""""""""""""""""""""""""""
 
 	" Generate 'cscope index' and 'tag file' for Linux Kernel : 'make ARCH=arm CROSS_COMPILE=arm-linux- cscope tags'
-	nnoremap <F11>k <ESC>:cscope add /home/kent/Project/DM36x/linux-2.6.18/cscope.out /home/kent/Project/DM36x/linux-2.6.18 <CR>:set tags+=/home/kent/Project/DM36x/linux-2.6.18/tags<CR>
+	nnoremap <F11>k <ESC>:cscope add $HOME/Project/DM36x/linux-2.6.18/cscope.out $HOME/Project/DM36x/linux-2.6.18 <CR>:set tags+=$HOME/Project/DM36x/linux-2.6.18/tags<CR>
 
 	""""""""""""""""""""""""""""""
 	" Vi Man
