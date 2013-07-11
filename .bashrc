@@ -28,6 +28,9 @@ export MANSECT=8:2:1:3:4:5:6:7:9:0p:1p:3p:tcl:n:l:p:o
 # GIT daily repo commit variable (A.K.A GIT Time Machine)
 export GIT_MANAGED_DIRECTORY="$HOME/Project $HOME/ArmTools $HOME/Repos $HOME/practice $HOME/usr $HOME/makcomm-debug"
 
+# Add new pkg search path by specifying below environment variable. (man pkg-config)
+export PKG_CONFIG_PATH="$HOME/usr/lib/pkgconfig/"
+
 ###############################
 # Different OS specific stuff #
 ###############################
