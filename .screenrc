@@ -43,7 +43,7 @@ shell -$SHELL
 
 # setup 10,000 lines of available scrollback copy/paste
 # NOTE: memory eating monster...
-defscrollback 100000
+defscrollback 50000
 
 # If a window goes unresponsive, don't block the whole session waiting for it.
 nonblock on
@@ -174,3 +174,5 @@ hardcopydir ~/.screen
 msgwait 10
 setenv DISPLAY ':0'
 
+# mouse tracking allows to switch region focus by clicking
+# mousetrack on
