@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Mon Aug 05, 2013  11:45AM
+" Last Modified: Mon Aug 05, 2013  05:12PM
 " ==============================================================================
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -707,6 +707,7 @@ nnoremap <leader>x :Hexmode<CR>
 	Bundle 'nelstrom/vim-markdown-folding'
 	Bundle 'Valloric/MatchTagAlways'
 	Bundle 'bad-whitespace'
+	Bundle 'airblade/vim-gitgutter'
 
 	""""""""""""""""""""""""
 	" EasyGrep
@@ -780,7 +781,7 @@ nnoremap <leader>x :Hexmode<CR>
 	""""""""""""""""""""""""""""""
 	" ShowMarks
 	""""""""""""""""""""""""""""""
-	let g:showmarks_include='abcdefghijklmnopqrtuvwxyz' . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+	let g:showmarks_include='abcdefghijklmnopqrtuvwxyz'
 	let g:showmarks_ignore_type="h"
 	let g:showmarks_textlower="\t"
 	let g:showmarks_textupper="\t"
