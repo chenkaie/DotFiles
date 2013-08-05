@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Tue Jun 18, 2013  11:44AM
+" Last Modified: Mon Aug 05, 2013  11:45AM
 " ==============================================================================
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -449,7 +449,7 @@ nmap ,d :DiffSaved<CR>
 "DirDiff
 let g:DirDiffExcludes = "*.git,*.svn,.*.swp,tags,cscope.*"
 let g:DirDiffWindowSize = 6
-let g:DirDiffAddArgs = "-w" 
+let g:DirDiffAddArgs = "-w"
 
 " WinMerge-style (Alt + hjkl) mapping for vimdiff
 nmap j ]c
@@ -706,6 +706,7 @@ nnoremap <leader>x :Hexmode<CR>
 	Bundle 'nelstrom/vim-visual-star-search'
 	Bundle 'nelstrom/vim-markdown-folding'
 	Bundle 'Valloric/MatchTagAlways'
+	Bundle 'bad-whitespace'
 
 	""""""""""""""""""""""""
 	" EasyGrep
@@ -975,17 +976,14 @@ function HtmlUnEscape()
 	silent s/&quot;/"/eg
 endfunction
 
-" http://vim.wikia.com/wiki/Highlight_unwanted_spaces
+" Erase the bad whitespace with the command |EraseBadWhitespace|
 function! ToggleSpecialChar()
-	highlight ExtraWhitespace ctermbg=red guibg=red
 	if !&list
 		set list
-		" Show leading whitespace, trailing whitespace and spaces before a TAB
-		match ExtraWhitespace /^\s* \s*\|[ \t\r]\+$\| \+\ze\t/
+		ShowBadWhitespace
 	else
 		set nolist
-		match
-		match Ignore /\r$/ | hi Ignore ctermfg=bg
+		HideBadWhitespace
 	endif
 endfunction
 
