@@ -72,6 +72,9 @@ case $OS in
 		export MANPATH=$HOME/usr/man:$HOME/usr/share/man:$MANPATH
 		# PERL5LIB
 		export PERL5LIB=$HOME/usr/lib/perl5/site_perl/5.10.1:$HOME/usr/lib/perl5/5.10.1:$PERL5LIB
+
+		# Simple Ruby version management
+		exist rbenv && eval "$(rbenv init -)"
 		;;
 
 	Linux)
@@ -154,7 +157,7 @@ alias reload='source ~/.bashrc'
 alias wget='wget -c'
 alias which='type -a'
 alias quota='quota -vs'
-alias grep='grep --mmap --color'
+alias grep='grep --color'
 
 # have to check exist()
 exist htop && alias top='htop'
