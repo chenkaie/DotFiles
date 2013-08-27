@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Mon Aug 05, 2013  05:12PM
+" Last Modified: Tue Aug 27, 2013  01:26PM
 " ==============================================================================
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -683,7 +683,6 @@ nnoremap <leader>x :Hexmode<CR>
 	Bundle 'chenkaie/smarthomekey.vim'
 	Bundle 'Lokaltog/vim-powerline'
 	Bundle 'EasyMotion'
-	Bundle 'EasyGrep'
 	Bundle 'Tabular'
 	Bundle 'CSApprox'
 	Bundle 'ctrlp.vim'
@@ -708,17 +707,7 @@ nnoremap <leader>x :Hexmode<CR>
 	Bundle 'Valloric/MatchTagAlways'
 	Bundle 'bad-whitespace'
 	Bundle 'airblade/vim-gitgutter'
-
-	""""""""""""""""""""""""
-	" EasyGrep
-	""""""""""""""""""""""""
-	"Grep 'pattern' in the indicate range (need EasyGrep.vim plugin)
-	map <F3> ,vv<ESC>:redraw!<CR>
-	let g:EasyGrepRecursive = 1
-	let g:EasyGrepIgnoreCase= 0
-	let g:EasyGrepJumpToMatch= 0
-	let g:EasyGrepWindow=1         " user 'location list' rather than 'Quickfix'
-	let g:EasyGrepCommand=1        " use grep rather vimgrep
+	Bundle 'rking/ag.vim'
 
 	""""""""""""""""""""""""""""""
 	" VCSCommand
@@ -836,6 +825,11 @@ nnoremap <leader>x :Hexmode<CR>
 	" CtrlP
 	""""""""""""""""""""""""""""""
 	let g:ctrlp_map = 'p'  "Alt+P
+
+	""""""""""""""""""""""""
+	" ag.vim
+	""""""""""""""""""""""""
+	map <F3> <esc>:Ag <cword><cr>
 
 " }}}
 
