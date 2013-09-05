@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Tue Aug 27, 2013  01:26PM
+" Last Modified: Wed Sep 04, 2013  06:27PM
 " ==============================================================================
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -707,7 +707,7 @@ nnoremap <leader>x :Hexmode<CR>
 	Bundle 'matchit.zip'
 	Bundle 'scrooloose/nerdtree'
 	Bundle 'scrooloose/nerdcommenter'
-	Bundle 'msanders/snipmate.vim'
+	Bundle 'ervandew/snipmate.vim'
 	Bundle 'tpope/vim-surround'
 	Bundle 'ervandew/supertab'
 	Bundle 'vcscommand.vim'
