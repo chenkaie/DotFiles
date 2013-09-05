@@ -40,3 +40,7 @@ set show-all-if-ambiguous on
 # Ctrl + p/n : history search
 "\C-p": history-search-backward
 "\C-n": history-search-forward
+
+# Include system wide settings which are ignored
+# by default if one has their own .inputrc
+$include /etc/inputrc
