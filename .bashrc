@@ -100,6 +100,9 @@ case $OS in
 		source $HOME/perl5/perlbrew/etc/bashrc
 		export PERL_CPANM_OPT="-l ~/perl5"
 		export PERL5LIB=$HOME/perl5/lib/perl5:$PERL5LIB
+
+		# Python
+        [ -s "$HOME/.pythonbrew/etc/bashrc" ] && source "$HOME/.pythonbrew/etc/bashrc"
 		;;
 
 	*)
@@ -158,6 +161,9 @@ alias wget='wget -c'
 alias which='type -a'
 alias quota='quota -vs'
 alias grep='grep --color'
+alias head='head -n $((${LINES:-12}-2))'      # As many as possible without scrolling
+alias tail='tail -n $((${LINES:-12}-2)) -s.1' # Likewise, also more responsive -f
+alias g='git'
 
 # have to check exist()
 exist htop && alias top='htop'
@@ -175,6 +181,7 @@ alias b='cd -' # back to $OLDPWD
 alias cd..='cd ..'
 
 alias path='echo -e ${PATH//:/\\n}'
+alias perlpath='perl -le "print foreach @INC"'
 # Generate Windows CIFS path prepend with Network Drive id: "Z:"
 alias pwd-win='pwd | sed '"'"'s/\//\\/g'"'"' | sed '"'"'s/\(.*\)/Z:\1/'"'"''
 # A simple python http file server
@@ -437,6 +444,17 @@ source $dotfiles/completion/acd_func.sh
 exist lesspipe && eval "$(lesspipe)"
 
 #export LESS='-i -N -w  -z-4 -g -e -M -X -F -R -P%t?f%f :stdin .?pb%pb\%:?lbLine %lb:?bbByte %bb:-...'
+export LESS='-FRXM --tabs=4 -i'
+
+#######################
+# Developer stuff     #
+#######################
+
+# Enable gcc colours, available since gcc 4.8.0
+export GCC_COLORS=1
+
+# print the corresponding error message
+strerror() { python -c "import os,locale as l; l.setlocale(l.LC_ALL, ''); print os.strerror($1)"; }
 
 #######################
 # Terminal info       #
@@ -615,5 +633,11 @@ function see()
 {
 	$EDITOR `\which $1`
 }
+
+# Returns the ASCII value of the first character of a string
+ord() { printf "0x%x\n" "'$1"; }
+
+# Returns a character from a specified ASCII value
+chr() { printf $(printf '\\%03o\\n' "$1"); }
 
 # vim: fdm=marker ts=4 sw=4:
