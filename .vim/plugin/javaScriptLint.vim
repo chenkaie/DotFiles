@@ -8,12 +8,12 @@
 "               the quickfix window.  JavaScript Lint must be installed on your system
 "               for this plugin to work properly.  This page should get you started:
 "               http://www.javascriptlint.com/docs/index.htm
-" Last Modified: Mon Dec 20, 2010  01:41PM
+" Last Modified: Wed Jul 17, 2013  07:31PM
 
 
 if !exists("jslint_command")
   "let jslint_command = 'jsl'
-  let jslint_command = '/home/kent/Tools/jsl -conf /home/kent/Tools/jsl.conf'
+  let jslint_command = '$HOME/Tools/jsl -conf $HOME/Tools/jsl.conf'
 endif
 
 if !exists("jslint_command_options")
