@@ -340,6 +340,19 @@ nmap N Nzz
 " Use `R` to Remove/delete linewise text without overwriting last yank
 nmap R "_dd
 vmap R "_d
+
+" Don't move the cursor after pasting (by jumping to back start of previously changed text)
+noremap p p`[
+noremap P P`[
+
+" Allow deleting selection without updating the clipboard (yank buffer)
+noremap x "_x
+noremap X "_X
+
+" Reselect after indent so it can easily be repeated
+vnoremap < <gv
+vnoremap > >gv
+
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
