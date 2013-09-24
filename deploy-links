@@ -8,7 +8,7 @@ DOTFILES_DIR=${DOTFILES_DIR//$HOME\//}
 sed -i "s@^dotfiles=\(.*\)@dotfiles=\"\$HOME/$DOTFILES_DIR\"@" .bashrc
 
 #RCFILES=".bash_logout .lftp .ssh"
-RCFILES=".bashrc .bash_profile .inputrc .screenrc .vim .vimrc .cdargs .ctags .htoprc .muttrc .irssi .gitconfig .gitk .subversion .vnc .gitshrc .cgdb .gdbinit .gitignore .zshrc .agignore"
+RCFILES=".bashrc .bash_profile .inputrc .screenrc .vim .vimrc .cdargs .ctags .htoprc .muttrc .irssi .gitconfig .gitk .subversion .vnc .gitshrc .cgdb .gdbinit .gitignore .zshrc .agignore .config"
 
 for rcfile in $RCFILES; do
     if [ -L $HOME/$rcfile ]; then
