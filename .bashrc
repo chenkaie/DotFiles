@@ -164,6 +164,7 @@ alias grep='grep --color'
 alias head='head -n $((${LINES:-12}-2))'      # As many as possible without scrolling
 alias tail='tail -n $((${LINES:-12}-2)) -s.1' # Likewise, also more responsive -f
 alias g='git'
+exist hub && eval "$(hub alias -s)"
 
 # have to check exist()
 exist htop && alias top='htop'
@@ -439,6 +440,7 @@ source $dotfiles/completion/cdargs-bash.sh
 source $dotfiles/completion/cdots.sh
 source $dotfiles/completion/git-flow-completion.bash
 source $dotfiles/completion/acd_func.sh
+source $dotfiles/completion/hub.bash_completion.sh
 
 # make less more friendly for non-text input files, see lesspipe(1)
 exist lesspipe && eval "$(lesspipe)"
