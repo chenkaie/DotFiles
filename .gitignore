@@ -12,3 +12,4 @@
 cscope.*out
 tags
 *.pyc
+.vnc
