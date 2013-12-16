@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Fri Dec 13, 2013  11:43AM
+" Last Modified: Mon Dec 16, 2013  06:25PM
 " ==============================================================================
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -357,6 +357,9 @@ noremap X "_X
 " Reselect after indent so it can easily be repeated
 vnoremap < <gv
 vnoremap > >gv
+
+" Use Q key to perform a calculation on formula like: (a + b) / 2 =
+nnoremap Q 0yt=A<C-r>=<C-r>"<CR><Esc>
 
 " }}}
 
