@@ -9,7 +9,7 @@
 [ -f /etc/bashrc ] && . /etc/bashrc
 [ -f /etc/profile ] && . /etc/profile
 
-export TERM=xterm-256color
+[ -n "$TMUX" ] && export TERM=screen-256color || export TERM=xterm-256color
 export EDITOR=vim
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -441,6 +441,8 @@ source $dotfiles/completion/cdots.sh
 source $dotfiles/completion/git-flow-completion.bash
 source $dotfiles/completion/acd_func.sh
 source $dotfiles/completion/hub.bash_completion.sh
+source $dotfiles/completion/bash_completion_tmux.sh
+
 
 # make less more friendly for non-text input files, see lesspipe(1)
 exist lesspipe && eval "$(lesspipe)"

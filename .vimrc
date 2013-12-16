@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Wed Sep 04, 2013  06:27PM
+" Last Modified: Fri Dec 13, 2013  11:43AM
 " ==============================================================================
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -65,6 +65,11 @@ if &term == "xterm-color" || &term == "xterm-16color"
 	set t_Co=16
 elseif ! has("gui_running")
 	set t_Co=256
+
+	" disable Background Color Erase (BCE) so that color schemes
+	" render properly when inside 256-color tmux and GNU screen.
+	" see also http://snk.tuxfamily.org/log/vim-256color-bce.html
+	set t_ut=
 endif
 
 " for GVim
