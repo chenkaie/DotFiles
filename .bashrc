@@ -97,9 +97,9 @@ case $OS in
 		export MANPATH=$HOME/usr/man:$HOME/usr/share/man:$HOME/usr/cpan/share/man:$MANPATH
 
 		# PERL5
-		source $HOME/perl5/perlbrew/etc/bashrc
-		export PERL_CPANM_OPT="-l ~/perl5"
-		export PERL5LIB=$HOME/perl5/lib/perl5:$PERL5LIB
+        [ -s "$HOME/.perlbrew/etc/bashrc" ] && source "$HOME/.perlbrew/etc/bashrc"
+		export PERL_CPANM_OPT="-l ~/usr"
+		export PERL5LIB=$HOME/usr/lib/perl5:$HOME/perl5/lib/perl5:$PERL5LIB
 
 		# Python
         [ -s "$HOME/.pythonbrew/etc/bashrc" ] && source "$HOME/.pythonbrew/etc/bashrc"
