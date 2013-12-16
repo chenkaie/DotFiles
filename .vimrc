@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Mon Dec 16, 2013  06:25PM
+" Last Modified: Mon Dec 16, 2013  06:28PM
 " ==============================================================================
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -351,8 +351,8 @@ noremap p p`[
 noremap P P`[
 
 " Allow deleting selection without updating the clipboard (yank buffer)
-noremap x "_x
-noremap X "_X
+vnoremap x "_x
+vnoremap X "_X
 
 " Reselect after indent so it can easily be repeated
 vnoremap < <gv

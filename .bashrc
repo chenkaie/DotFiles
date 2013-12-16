@@ -9,7 +9,9 @@
 [ -f /etc/bashrc ] && . /etc/bashrc
 [ -f /etc/profile ] && . /etc/profile
 
-[ -n "$TMUX" ] && export TERM=screen-256color || export TERM=xterm-256color
+infocmp screen-256color > /dev/null 2>&1
+[ $? -eq 0 -a -n "$TMUX" ] && export TERM=screen-256color || export TERM=xterm-256color
+
 export EDITOR=vim
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
