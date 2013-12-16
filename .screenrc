@@ -43,7 +43,7 @@ shell -$SHELL
 
 # setup 10,000 lines of available scrollback copy/paste
 # NOTE: memory eating monster...
-defscrollback 50000
+defscrollback 10000
 
 # If a window goes unresponsive, don't block the whole session waiting for it.
 nonblock on
@@ -54,7 +54,7 @@ termcapinfo xterm* ti@:te@
 
 # turn-off log
 #log off
-logfile $HOME/screen-%Y%m%d-%n.log
+logfile $HOME/tmp/screen-%Y%m%d-%n.log
 #deflog on
 
 # caption style
