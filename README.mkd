@@ -1,4 +1,4 @@
-ABOUT
+About
 =====
 
 My dotfiles / rcfiles used on Unix OS, mainly on Linux & Mac OS X
@@ -15,8 +15,13 @@ Usage
 2. Simply executing below script to deploy these links! Once they are detected exist, remove them first, but 'be careful'!
 
         ./deploy-links
+        
+Screenshots
+===========
+* tmux (tmux-powerline like) + vim (vim-powerline)
+![Vim+Tmux+Powerline.png](http://farm6.staticflickr.com/5508/11351632583_54c3fa5c70_o.png)
 
-AUTHOR
+Author
 ======
 
 Kent Chen (chenkaie) <chenkaie@gmail.com>
