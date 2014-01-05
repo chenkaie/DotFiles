@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Mon Dec 16, 2013  06:28PM
+" Last Modified: Fri Dec 27, 2013  12:51PM
 " ==============================================================================
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -349,6 +349,9 @@ vmap R "_d
 " Don't move the cursor after pasting (by jumping to back start of previously changed text)
 noremap p p`[
 noremap P P`[
+
+" Paste without yanking selection content to unnamed register
+vnoremap p "_dP
 
 " Allow deleting selection without updating the clipboard (yank buffer)
 vnoremap x "_x
