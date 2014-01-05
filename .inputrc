@@ -41,6 +41,10 @@ set show-all-if-ambiguous on
 "\C-p": history-search-backward
 "\C-n": history-search-forward
 
+$if mode=vi
+"\C-l": clear-screen
+$endif
+
 # Include system wide settings which are ignored
 # by default if one has their own .inputrc
 $include /etc/inputrc
