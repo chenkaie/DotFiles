@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Fri Dec 27, 2013  12:51PM
+" Last Modified: Fri Jan 03, 2014  03:30PM
 " ==============================================================================
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -718,7 +718,6 @@ nnoremap <leader>x :Hexmode<CR>
 	Bundle 'matchit.zip'
 	Bundle 'scrooloose/nerdtree'
 	Bundle 'scrooloose/nerdcommenter'
-	Bundle 'ervandew/snipmate.vim'
 	Bundle 'tpope/vim-surround'
 	Bundle 'ervandew/supertab'
 	Bundle 'vcscommand.vim'
@@ -732,6 +731,10 @@ nnoremap <leader>x :Hexmode<CR>
 	Bundle 'bad-whitespace'
 	Bundle 'airblade/vim-gitgutter'
 	Bundle 'rking/ag.vim'
+	Bundle "MarcWeber/vim-addon-mw-utils"
+	Bundle "tomtom/tlib_vim"
+	Bundle 'garbas/vim-snipmate'
+	Bundle 'honza/vim-snippets'
 
 	""""""""""""""""""""""""""""""
 	" VCSCommand
