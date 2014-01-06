@@ -735,6 +735,7 @@ nnoremap <leader>x :Hexmode<CR>
 	Bundle "tomtom/tlib_vim"
 	Bundle 'garbas/vim-snipmate'
 	Bundle 'honza/vim-snippets'
+	Bundle 'othree/javascript-libraries-syntax.vim'
 
 	""""""""""""""""""""""""""""""
 	" VCSCommand
@@ -857,6 +858,13 @@ nnoremap <leader>x :Hexmode<CR>
 	" ag.vim
 	""""""""""""""""""""""""
 	map <F3> <esc>:Ag <cword><cr>
+
+	""""""""""""""""""""""""""""""
+	" vim-snipmate
+	""""""""""""""""""""""""""""""
+	let g:snipMate = {}
+	let g:snipMate.scope_aliases = {}
+	let g:snipMate.scope_aliases['javascript'] = 'javascript,javascript-jquery'
 
 " }}}
 
