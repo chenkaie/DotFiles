@@ -16,7 +16,7 @@ export EDITOR=vim
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-dotfiles="$HOME/Repos/DotFiles"
+dotfiles="$HOME/Repos/github-chenkaie/DotFiles"
 
 exist () { type "$1" &> /dev/null; }
 #######################
