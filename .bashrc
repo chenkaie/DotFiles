@@ -258,6 +258,7 @@ export IGNOREEOF=1
 set -o noclobber
 set -o notify
 #Use a vi-style command line editing interface, enter by <Esc> or <C-[>
+#Note that some emacs mode "C-x" prefix key binding are gone. $ bind -p | grep "C-x"
 set -o vi
 
 #set -o xtrace          # Useful for debuging.

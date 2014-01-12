@@ -43,6 +43,7 @@ set show-all-if-ambiguous on
 
 $if mode=vi
 "\C-l": clear-screen
+"\C-e": end-of-line
 $endif
 
 # Include system wide settings which are ignored
