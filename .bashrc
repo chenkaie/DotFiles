@@ -377,10 +377,12 @@ ps1_set()
 
 case $OS in
 	Darwin|*BSD)
-		ps1_set -p "$TXTGRN>$BLDGRN>$BLDWHT>$TXTWHT " -t "\D{%H:%M:%S} "
+		[ -n "$TMUX" ] && ps1_set -p "$TXTGRN>$BLDGRN>$BLDWHT>$TXTWHT " \
+					   || ps1_set -p "$TXTGRN>$BLDGRN>$BLDWHT>$TXTWHT " -t "\D{%H:%M:%S} "
 		;;
 	Linux)
-		ps1_set -p "$TXTGRN>$BLDGRN>$BLDWHT>$TXTWHT " -s " " -w "\W"
+		[ -n "$TMUX" ] && ps1_set -p "$TXTGRN>$BLDGRN>$BLDWHT>$TXTWHT " \
+					   || ps1_set -p "$TXTGRN>$BLDGRN>$BLDWHT>$TXTWHT " -s " " -w "\W"
 		#ps1_set -p "$TXTGRNʕ•ᴥ•ʔ " -s " " -w "\W"
 		;;
 esac
