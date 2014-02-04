@@ -409,10 +409,10 @@ export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 # For all SSH (Reverse) Tunnel
 case $OS in
 	Darwin|*BSD)
-		alias dd-wrt='ssh 192.168.1.1 -p2222 -lroot'
-		#alias dd-wrt_rd1-2='ssh -L 7322:127.0.0.1:7322 192.168.1.1 -lroot -p2222'
-		alias rd1-2='ssh 192.168.1.1 -p 7322'
-		alias rd1-2-proxy='ssh -D 8080 192.168.1.1 -p7322'
+		alias dd-wrt='ssh dd-wrt -p2222 -lroot'
+		#alias dd-wrt_rd1-2='ssh -L 7322:127.0.0.1:7322 dd-wrt -lroot -p2222'
+		alias rd1-2='ssh dd-wrt -p 7322'
+		alias rd1-2-proxy='ssh -D 8080 dd-wrt -p7322'
 		;;
 
 	Linux)
