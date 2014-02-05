@@ -335,7 +335,7 @@ PROMPT_SVN='$(__svn_ps1 "|'$TXTCYN'svn'$TXTRST':%s-r%s")'
 
 ps1_set()
 {
-	local prompt_char="$" separator="\n" prompt_time="" workding_dir="\w"
+	local prompt_char="$" separator="\n" prompt_time="" workding_dir="\w" prompt_verbose=$TXTYLW'\u@''\h'$TXTWHT':'
 
 	# root privilege
 	[ $UID -eq 0 ] && prompt_charclr=$TXTRED || prompt_charclr=$TXTWHT
@@ -365,23 +365,27 @@ ps1_set()
 			workding_dir="$1"
 			shift
 			;;
+		-v|--verbose)
+			prompt_verbose="$1"
+			shift
+			;;
 		*)
 			true # Ignore everything else.
 			;;
 		esac
 	done
-	PS1=$BLDBLK'['$prompt_time$TXTYLW'\u@''\h'$TXTWHT':'$TXTWHT'pts/\l'$TXTWHT${PROMPT_GIT}${PROMPT_SVN}$BLDBLK'$(ps1_counter)''] '$BLDWHT${workding_dir}${separator}${prompt_charclr}${prompt_char}$TXTWHT
+	PS1=$BLDBLK'['${prompt_time}${prompt_verbose}$TXTWHT'pts/\l'$TXTWHT${PROMPT_GIT}${PROMPT_SVN}$BLDBLK'$(ps1_counter)''] '$BLDWHT${workding_dir}${separator}${prompt_charclr}${prompt_char}$TXTWHT
 }
 
 #PS1=$TXTYLW'\u'$TXTWHT'@'${PROMPT_HOSTCOLOR}'\h'$TXTWHT':'$TXTGRN'\W'$TXTWHT${PROMPT_GIT}${PROMPT_SVN}$BLDBLK'$(ps1_counter)'$TXTGRN' >'$BLDGRN'>'$BLDWHT'> '$TXTWHT
 
 case $OS in
 	Darwin|*BSD)
-		[ -n "$TMUX" ] && ps1_set -p "$TXTGRN>$BLDGRN>$BLDWHT>$TXTWHT " \
+		[ -n "$TMUX" ] && ps1_set -p "$TXTGRN>$BLDGRN>$BLDWHT>$TXTWHT " -v "" \
 					   || ps1_set -p "$TXTGRN>$BLDGRN>$BLDWHT>$TXTWHT " -t "\D{%H:%M:%S} "
 		;;
 	Linux)
-		[ -n "$TMUX" ] && ps1_set -p "$TXTGRN>$BLDGRN>$BLDWHT>$TXTWHT " \
+		[ -n "$TMUX" ] && ps1_set -p "$TXTGRN>$BLDGRN>$BLDWHT>$TXTWHT " -v "" \
 					   || ps1_set -p "$TXTGRN>$BLDGRN>$BLDWHT>$TXTWHT " -s " " -w "\W"
 		#ps1_set -p "$TXTGRNʕ•ᴥ•ʔ " -s " " -w "\W"
 		;;
