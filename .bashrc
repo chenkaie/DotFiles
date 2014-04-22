@@ -17,6 +17,7 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 dotfiles="$HOME/Repos/github-chenkaie/DotFiles"
+tools="$HOME/Repos/github-chenkaie/Tools"
 
 exist () { type "$1" &> /dev/null; }
 #######################
@@ -69,7 +70,7 @@ case $OS in
 		fi
 
 		# PATH
-		export PATH=$HOME/Tools:$HOME/Tools/subversion-scripts:$HOME/Tools/git-scripts:$HOME/usr/bin:$PATH
+		export PATH=$tools:$tools/subversion-scripts:$tools/git-scripts:$HOME/usr/bin:$PATH
 		# MANPATH
 		export MANPATH=$HOME/usr/man:$HOME/usr/share/man:$MANPATH
 		# PERL5LIB
@@ -94,7 +95,7 @@ case $OS in
 			. /etc/bash_completion
 		fi
 		# PATH
-		export PATH=$HOME/hr:$HOME/perl5/bin:$HOME/Tools:$HOME/Tools/subversion-scripts:$HOME/Tools/git-scripts:$HOME/usr/bin:$HOME/usr/sbin:$PATH
+		export PATH=$HOME/hr:$HOME/perl5/bin:$tools:$tools/subversion-scripts:$tools/git-scripts:$HOME/usr/bin:$HOME/usr/sbin:$PATH
 		# MANPATH
 		export MANPATH=$HOME/usr/man:$HOME/usr/share/man:$HOME/usr/cpan/share/man:$MANPATH
 
@@ -190,7 +191,7 @@ alias pwd-win='pwd | sed '"'"'s/\//\\/g'"'"' | sed '"'"'s/\(.*\)/Z:\1/'"'"''
 # A simple python http file server
 alias hfs='python -m SimpleHTTPServer 8080'
 #
-alias python='PYTHONSTARTUP=~/Tools/inpy python'
+alias python="PYTHONSTARTUP=$tools/inpy python"
 
 #Personal Help
 alias l?='cat ~/.bashrc | grep "alias l.*=.ls" | grep ^a'
@@ -226,7 +227,7 @@ alias gdb='gdb --command=$HOME/Repos/DotFiles/.gdbinit-7.3'
 #alias strace='strace -f -v -x -s 128'
 
 #Lint related
-exist jsl  && alias jsl='jsl -conf ~/Tools/jsl.conf -process'
+exist jsl  && alias jsl="jsl -conf $tools/jsl.conf -process"
 if exist lint ; then
 	alias lint-gnu='lint ~/makcomm/env-vim.lnt'
 	alias lint-gnu-xml='lint-gnu ~/makcomm/env-xml.lnt'
@@ -237,10 +238,10 @@ if exist lint ; then
 fi
 
 # ccache & distcc
-alias enjoy-ccache-distcc="source $HOME/Tools/use_distcc_ccache"
+alias enjoy-ccache-distcc="source $tools/use_distcc_ccache"
 
 # enjoy proxy
-alias enjoy-proxy="source $HOME/Tools/use_proxy"
+alias enjoy-proxy="source $tools/use_proxy"
 
 #######################
 # Bash SHell opts     #

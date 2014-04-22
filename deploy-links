@@ -3,9 +3,12 @@
 LN="ln"
 DOTFILES_DIR=`pwd`
 DOTFILES_DIR=${DOTFILES_DIR//$HOME\//}
+TOOLS_DIR=`readlink -f ../Tools`
+TOOLS_DIR=${TOOLS_DIR//$HOME\//}
 
 # Configure correct $dotfiles path in .bashrc
 sed -i "s@^dotfiles=\(.*\)@dotfiles=\"\$HOME/$DOTFILES_DIR\"@" .bashrc
+sed -i "s@^tools=\(.*\)@tools=\"\$HOME/$TOOLS_DIR\"@" .bashrc
 
 #RCFILES=".bash_logout .lftp .ssh"
 RCFILES=".bashrc .bash_profile .inputrc .screenrc .vim .vimrc .cdargs .ctags .htoprc .muttrc .irssi .gitconfig .gitk .subversion .vnc .gitshrc .cgdb .gdbinit .gitignore .zshrc .agignore .config .tmux.conf .tigrc"
