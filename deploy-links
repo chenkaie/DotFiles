@@ -23,5 +23,8 @@ for rcfile in $RCFILES; do
     fi
 done
 
+# Checkout Vim plugin manger "Vundle"
+git submodule update --init
+
 test -L ~/.vimrc && test -L ~/.vim && vim +BundleInstall +qall
 
