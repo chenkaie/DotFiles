@@ -587,9 +587,8 @@ endif
 	let g:neocomplcache_enable_smart_case = 1
 	let g:neocomplcache_enable_camel_case_completion = 1
 
-	" snippets expand key <c-e>
-	imap <silent> <C-e> <Plug>(neocomplcache_snippets_expand)
-	smap <silent> <C-e> <Plug>(neocomplcache_snippets_expand)
+	" snippets expand trigger with ,,
+	imap ,, <esc>a<Plug>snipMateTrigger
 
 	map <F4> :NeoComplCacheEnable<CR>
 	map ,<F4> :NeoComplCacheToggle<CR>
@@ -1045,6 +1044,24 @@ function! SummarizeTabs()
 		echohl None
 	endtry
 endfunction
+
+" Merge a tab into a split in the previous window
+function! MergeTabs()
+	if tabpagenr() == 1
+		return
+	endif
+	let bufferName = bufname("%")
+	if tabpagenr("$") == tabpagenr()
+		close!
+	else
+		close!
+		tabprev
+	endif
+	vsplit
+	execute "buffer " . bufferName
+endfunction
+
+nmap <leader>m :call MergeTabs()<CR>
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
