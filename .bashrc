@@ -167,6 +167,7 @@ alias grep='grep --color'
 alias head='head -n $((${LINES:-12}-2))'      # As many as possible without scrolling
 alias tail='tail -n $((${LINES:-12}-2)) -s.1' # Likewise, also more responsive -f
 alias g='git'
+alias netstat='netstat -np'
 exist hub && eval "$(hub alias -s)"
 
 # have to check exist()
