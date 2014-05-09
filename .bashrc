@@ -456,6 +456,7 @@ source $dotfiles/completion/git-flow-completion.bash
 source $dotfiles/completion/acd_func.sh
 source $dotfiles/completion/hub.bash_completion.sh
 source $dotfiles/completion/bash_completion_tmux.sh
+source $dotfiles/completion/godir-completion.sh
 
 
 # make less more friendly for non-text input files, see lesspipe(1)
