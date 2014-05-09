@@ -33,4 +33,4 @@ _godir()
 	return 0
 }
 
-complete -F _godir godir
+complete -F _godir godir gofile

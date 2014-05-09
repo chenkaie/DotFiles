@@ -678,7 +678,7 @@ function godir ()
 		echo ""
 	fi
 	local lines
-	[[ "$2" != "e" ]] && lines=($(\grep "$1" $PRODUCTDIR/.filelist | sed -e 's/\/[^/]*$//' | sort | uniq)) || lines=($(\grep "$1" $PRODUCTDIR/.filelist | sort | uniq))
+	[[ "$2" != "e" ]] && lines=($(\grep "$1" $PRODUCTDIR/.filelist | sed -e 's/\/[^/]*$//' | sort | uniq)) || lines=($(\grep -F "$1" $PRODUCTDIR/.filelist | sort | uniq))
 	if [[ ${#lines[@]} = 0 ]]; then
 		echo "Not found"
 		return
@@ -714,6 +714,8 @@ function godir ()
 
 	[[ "$2" != "e" ]] && \cd $PRODUCTDIR/$pathname || (cd $PRODUCTDIR; $EDITOR -p $pathname)
 }
+
+function gofile () { godir "$1" e; }
 
 # vim: fdm=marker ts=4 sw=4:
 
