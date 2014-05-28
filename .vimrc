@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Fri Jan 03, 2014  03:30PM
+" Last Modified: Wed May 28, 2014  02:22PM
 " ==============================================================================
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -81,6 +81,7 @@ else
 	"For Colorscheme
 	set bg=dark
 	colorscheme peaksea_new
+	"colorscheme jellybeans
 	"colorscheme ir_black_cterm
 endif
 
@@ -386,8 +387,8 @@ noremap <C-LeftDrag> <LeftDrag>
 		vmap <C-c> :w! ~/tmp/vimbuffer<CR>:!pbcopy < ~/tmp/vimbuffer<CR><CR>
 		nmap <C-c> :.w! ~/tmp/vimbuffer<CR>:!pbcopy < ~/tmp/vimbuffer<CR><CR>
 	else
-		vmap <C-c> :w! ~/tmp/vimbuffer<CR>:!nc 172.16.2.54 4573 < ~/tmp/vimbuffer<CR><CR>
-		nmap <C-c> :.w! ~/tmp/vimbuffer<CR>:!nc 172.16.2.54 4573 < ~/tmp/vimbuffer<CR><CR>
+		vmap <C-c> :w! ~/tmp/vimbuffer<CR>:!pbcopy-nc < ~/tmp/vimbuffer<CR><CR>
+		nmap <C-c> :.w! ~/tmp/vimbuffer<CR>:!pbcopy-nc < ~/tmp/vimbuffer<CR><CR>
 	endif
 	" Paste from buffer
 	nmap <C-p> :r ~/tmp/vimbuffer<CR>
@@ -556,7 +557,7 @@ endif
 	""""""""""""""""""""""""""""""
 
 	" Generate 'cscope index' and 'tag file' for Linux Kernel : 'make ARCH=arm CROSS_COMPILE=arm-linux- cscope tags'
-	nnoremap <F11>k <ESC>:cscope add $HOME/Project/DM36x/linux-2.6.18/cscope.out $HOME/Project/DM36x/linux-2.6.18 <CR>:set tags+=$HOME/Project/DM36x/linux-2.6.18/tags<CR>
+	nnoremap <F11>k <ESC>:cscope add $HOME/Project/PlatDM36x/linux-2.6.18/cscope.out $HOME/Project/PlatDM36x/linux-2.6.18 <CR>:set tags+=$HOME/Project/PlatDM36x/linux-2.6.18/tags<CR>
 
 	""""""""""""""""""""""""""""""
 	" Vi Man
