@@ -51,6 +51,9 @@
 [tig]
 	show-rev-graph = yes # Show revision graph?
 
+[push]
+	default = matching
+
 [http]
 	sslVerify = false
 	;proxy = http://172.16.2.54:8888/
