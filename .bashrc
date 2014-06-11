@@ -70,7 +70,7 @@ case $OS in
 		fi
 
 		# PATH
-		export PATH=$tools:$tools/subversion-scripts:$tools/git-scripts:$HOME/usr/bin:$PATH
+		export PATH=$tools:$tools/subversion-scripts:$tools/git-scripts:$tools/tmux-scripts:$HOME/usr/bin:$PATH
 		# MANPATH
 		export MANPATH=$HOME/usr/man:$HOME/usr/share/man:$MANPATH
 		# PERL5LIB
@@ -95,7 +95,7 @@ case $OS in
 			. /etc/bash_completion
 		fi
 		# PATH
-		export PATH=$HOME/hr:$HOME/perl5/bin:$tools:$tools/subversion-scripts:$tools/git-scripts:$HOME/usr/bin:$HOME/usr/sbin:$PATH
+		export PATH=$HOME/hr:$HOME/perl5/bin:$tools:$tools/subversion-scripts:$tools/git-scripts:$tools/tmux-scripts:$HOME/usr/bin:$HOME/usr/sbin:$PATH
 		# MANPATH
 		export MANPATH=$HOME/usr/man:$HOME/usr/share/man:$HOME/usr/cpan/share/man:$MANPATH
 
