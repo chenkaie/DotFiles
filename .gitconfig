@@ -48,9 +48,6 @@
 [difftool]
 	prompt = false
 
-[tig]
-	show-rev-graph = yes # Show revision graph?
-
 [push]
 	default = matching
 

@@ -1,4 +1,16 @@
-# vim: set expandtab sw=4 tabstop=4:
+# .tigrc
+
+######################################################
+# Bind Setting                                       #
+######################################################
+bind   generic    <Ctrl-f>      scroll-page-down
+bind   generic    <Ctrl-b>      scroll-page-up
+bind   generic    g             move-first-line
+bind   generic    G             move-last-line
+
+######################################################
+# Color Setting                                      #
+######################################################
 # *color* 'area' 'fgcolor' 'bgcolor' '[attributes]'
 
 # general
@@ -81,6 +93,9 @@ color   reviewed                221     default
 # tree
 color   tree-dir                221     default
 
+# help
+color   help-group              207     default
+
 # LINE(PALETTE_0, "", COLOR_MAGENTA, COLOR_DEFAULT, 0), \
 #   LINE(PALETTE_1, "", COLOR_YELLOW, COLOR_DEFAULT, 0), \
 #   LINE(PALETTE_2, "", COLOR_CYAN, COLOR_DEFAULT, 0), \
@@ -88,3 +103,5 @@ color   tree-dir                221     default
 #   LINE(PALETTE_4, "", COLOR_DEFAULT, COLOR_DEFAULT, 0), \
 #   LINE(PALETTE_5, "", COLOR_WHITE, COLOR_DEFAULT, 0), \
 #   LINE(PALETTE_6, "", COLOR_RED, )
+
+# vim: set expandtab sw=4 tabstop=4:
