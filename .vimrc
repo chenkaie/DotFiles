@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Sun Aug 03, 2014  01:32AM
+" Last Modified: Sun Aug 03, 2014  02:12AM
 " ==============================================================================
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -697,47 +697,49 @@ nnoremap <leader>x :Hexmode<CR>
 	" AWESOME Vundle
 	""""""""""""""""""""""""
 	set runtimepath+=~/.vim/vundle/
-	call vundle#rc()
+	call vundle#begin()
 
-	Bundle 'gregsexton/gitv'
-	Bundle 'majutsushi/tagbar'
-	Bundle 'OmniCppComplete'
-	Bundle 'Shougo/neocomplcache'
-	"Bundle 'clang-complete'
-	Bundle 'matrix.vim--Yang'
-	Bundle 'chenkaie/DirDiff.vim'
-	Bundle 'chenkaie/smarthomekey.vim'
-	Bundle 'Lokaltog/vim-powerline'
-	Bundle 'EasyMotion'
-	Bundle 'Tabular'
-	Bundle 'CSApprox'
-	Bundle 'ctrlp.vim'
-	Bundle 'Decho'
-	Bundle 'tpope/vim-fugitive'
-	Bundle 'Indent-Guides'
-	Bundle 'vim-indent-object'
-	Bundle 'LargeFile'
-	Bundle 'matchit.zip'
-	Bundle 'scrooloose/nerdtree'
-	Bundle 'scrooloose/nerdcommenter'
-	Bundle 'tpope/vim-surround'
-	Bundle 'ervandew/supertab'
-	Bundle 'vcscommand.vim'
-	Bundle 'wokmarks.vim'
-	Bundle 'ShowMarks7'
-	Bundle 'smoothPageScroll.vim'
-	Bundle 'sessionman.vim'
-	Bundle 'nelstrom/vim-visual-star-search'
-	Bundle 'nelstrom/vim-markdown-folding'
-	Bundle 'Valloric/MatchTagAlways'
-	Bundle 'bad-whitespace'
-	Bundle 'rking/ag.vim'
-	Bundle "MarcWeber/vim-addon-mw-utils"
-	Bundle "tomtom/tlib_vim"
-	Bundle 'garbas/vim-snipmate'
-	Bundle 'honza/vim-snippets'
-	Bundle 'othree/javascript-libraries-syntax.vim'
-	Bundle 'mhinz/vim-signify'
+	Plugin 'gregsexton/gitv'
+	Plugin 'majutsushi/tagbar'
+	Plugin 'OmniCppComplete'
+	Plugin 'Shougo/neocomplcache'
+	"Plugin 'clang-complete'
+	Plugin 'matrix.vim--Yang'
+	Plugin 'chenkaie/DirDiff.vim'
+	Plugin 'chenkaie/smarthomekey.vim'
+	Plugin 'Lokaltog/vim-powerline'
+	Plugin 'EasyMotion'
+	Plugin 'Tabular'
+	Plugin 'CSApprox'
+	Plugin 'ctrlp.vim'
+	Plugin 'Decho'
+	Plugin 'tpope/vim-fugitive'
+	Plugin 'Indent-Guides'
+	Plugin 'vim-indent-object'
+	Plugin 'LargeFile'
+	Plugin 'matchit.zip'
+	Plugin 'scrooloose/nerdtree'
+	Plugin 'scrooloose/nerdcommenter'
+	Plugin 'tpope/vim-surround'
+	Plugin 'ervandew/supertab'
+	Plugin 'vcscommand.vim'
+	Plugin 'wokmarks.vim'
+	Plugin 'ShowMarks7'
+	Plugin 'smoothPageScroll.vim'
+	Plugin 'sessionman.vim'
+	Plugin 'nelstrom/vim-visual-star-search'
+	Plugin 'nelstrom/vim-markdown-folding'
+	Plugin 'Valloric/MatchTagAlways'
+	Plugin 'bad-whitespace'
+	Plugin 'rking/ag.vim'
+	Plugin 'MarcWeber/vim-addon-mw-utils'
+	Plugin 'tomtom/tlib_vim'
+	Plugin 'garbas/vim-snipmate'
+	Plugin 'honza/vim-snippets'
+	Plugin 'othree/javascript-libraries-syntax.vim'
+	Plugin 'mhinz/vim-signify'
+
+	call vundle#end()
 
 	""""""""""""""""""""""""""""""
 	" VCSCommand
