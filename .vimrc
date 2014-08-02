@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Wed May 28, 2014  02:22PM
+" Last Modified: Sun Aug 03, 2014  01:32AM
 " ==============================================================================
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -161,6 +161,8 @@ map ,<F2> <ESC>:cp<CR>
 "nnoremap <F8> <ESC>:w \| !make test && ./a.out
 "compile a c file and execute it.
 nnoremap <F9> <ESC>:w \| !gcc -Wall -ansi -pedantic -Wextra -std=c99 % && ./a.out
+
+nnoremap <F10> <ESC>:NERDTreeToggle<CR>
 
 "replace 'SHIFT+:' with ';' COOL!
 noremap ; :
@@ -729,13 +731,13 @@ nnoremap <leader>x :Hexmode<CR>
 	Bundle 'nelstrom/vim-markdown-folding'
 	Bundle 'Valloric/MatchTagAlways'
 	Bundle 'bad-whitespace'
-	Bundle 'airblade/vim-gitgutter'
 	Bundle 'rking/ag.vim'
 	Bundle "MarcWeber/vim-addon-mw-utils"
 	Bundle "tomtom/tlib_vim"
 	Bundle 'garbas/vim-snipmate'
 	Bundle 'honza/vim-snippets'
 	Bundle 'othree/javascript-libraries-syntax.vim'
+	Bundle 'mhinz/vim-signify'
 
 	""""""""""""""""""""""""""""""
 	" VCSCommand
@@ -865,6 +867,11 @@ nnoremap <leader>x :Hexmode<CR>
 	let g:snipMate = {}
 	let g:snipMate.scope_aliases = {}
 	let g:snipMate.scope_aliases['javascript'] = 'javascript,javascript-jquery'
+
+	""""""""""""""""""""""""""""""
+	" vim-signify
+	""""""""""""""""""""""""""""""
+	let g:signify_vcs_list = [ 'git', 'svn' ]
 
 " }}}
 
