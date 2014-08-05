@@ -1,3 +1,13 @@
+# exact filename
 tags
-cscope.*out
+cscope.out
+
+# filename with RE
+# Should be workaround in this way?!
 .*.sw?
+*.pdf
+*/*.pdf
+*/*/*.pdf
+*/*/*/*.pdf
+*/*/*/*/*.pdf
+*/*/*/*/*/*.pdf
