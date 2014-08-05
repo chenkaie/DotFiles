@@ -1,9 +1,13 @@
-set arrowstyle=highlight
+### Set ###
+set arrowstyle=long
 set autosourcereload
-set shortcut
 set tabstop=4
+set ignorecase
 #set winsplit=top_big
+
+### Syntax highlight ###
 hi Statement cterm=bold ctermfg=6
 hi PreProc cterm=bold ctermfg=4
 hi IncSearch ctermfg=2
 hi LineHighlight cterm=bold ctermfg=3 ctermbg=4
+hi SelectedLineNr ctermfg=5
