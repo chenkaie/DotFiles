@@ -396,8 +396,8 @@ esac
 # add for screen to dynamically update title
 #PROMPT_COMMAND='echo -n -e "\033k\033\134"'
 
-
-export PROMPT_COMMAND='history -a'
+# enable commands in one terminal to be instantly be available in another
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 #export MANPAGER="most -s"
 # Less Colors for Man Pages
