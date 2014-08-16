@@ -386,14 +386,14 @@ noremap <C-LeftDrag> <LeftDrag>
 	"""""""""""""""""""""""""""""""""""""""""""""""""
 	" Copy to vimbuff & System-Clipboard
 	if OS == "Darwin"
-		vmap <C-c> :w! ~/tmp/vimbuffer<CR>:!pbcopy < ~/tmp/vimbuffer<CR><CR>
-		nmap <C-c> :.w! ~/tmp/vimbuffer<CR>:!pbcopy < ~/tmp/vimbuffer<CR><CR>
+		vmap <C-c> y:new ~/.vimbuf<CR>VGp:x<CR>:!pbcopy < ~/.vimbuf<CR><CR>
+		nmap <C-c> :.w! ~/.vimbuf<CR>:!pbcopy < ~/.vimbuf<CR><CR>
 	else
-		vmap <C-c> :w! ~/tmp/vimbuffer<CR>:!pbcopy-nc < ~/tmp/vimbuffer<CR><CR>
-		nmap <C-c> :.w! ~/tmp/vimbuffer<CR>:!pbcopy-nc < ~/tmp/vimbuffer<CR><CR>
+		vmap <C-c> y:new ~/.vimbuf<CR>VGp:x<CR>:!pbcopy-nc < ~/.vimbuf<CR><CR>
+		nmap <C-c> :.w! ~/.vimbuf<CR>:!pbcopy-nc < ~/.vimbuf<CR><CR>
 	endif
 	" Paste from buffer
-	nmap <C-p> :r ~/tmp/vimbuffer<CR>
+	nmap <C-p> :r ~/.vimbuf<CR>
 	map c <C-c>
 
 " Select all
