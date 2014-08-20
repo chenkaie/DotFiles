@@ -397,7 +397,9 @@ esac
 #PROMPT_COMMAND='echo -n -e "\033k\033\134"'
 
 # enable commands in one terminal to be instantly be available in another
-export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+#export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
+export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
 #export MANPAGER="most -s"
 # Less Colors for Man Pages
