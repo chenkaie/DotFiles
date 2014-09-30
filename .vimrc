@@ -228,8 +228,8 @@ map <F8> :call ToggleSpecialChar()<CR>
 " Add new keyword in search under cursor (*)
 map a* :exec "/\\(".getreg('/')."\\)\\\\|".expand("<cword>")<CR>
 
-map * g*
-map # g#
+"map * g*
+"map # g#
 
 " Use Ctrl+hjkl to switch between Window
 nmap <C-j> <C-w>j
