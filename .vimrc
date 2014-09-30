@@ -81,6 +81,9 @@ else
 	"For Colorscheme
 	set bg=dark
 	colorscheme peaksea_new
+
+	"colorscheme darkspectrum
+	"colorscheme lucius
 	"colorscheme jellybeans
 	"colorscheme ir_black_cterm
 endif
@@ -739,6 +742,7 @@ nnoremap <leader>x :Hexmode<CR>
 	Plugin 'othree/javascript-libraries-syntax.vim'
 	Plugin 'mhinz/vim-signify'
 	Plugin 'gavinbeatty/dragvisuals.vim'
+	Plugin 'altercation/vim-colors-solarized'
 
 	call vundle#end()
 
@@ -1101,6 +1105,14 @@ function! s:rotate_colors()
 	echo name
 endfunction
 nnoremap <F2> :call <SID>rotate_colors()<cr>
+
+function! MBPR()
+	"set bg=light
+	let g:solarized_termcolors=256
+	"colorscheme solarized
+	hi Normal ctermbg=238 ctermfg=255
+endfunction
+nmap <leader>M :call MBPR()<CR>
 
 " }}}
 
