@@ -738,6 +738,7 @@ nnoremap <leader>x :Hexmode<CR>
 	Plugin 'honza/vim-snippets'
 	Plugin 'othree/javascript-libraries-syntax.vim'
 	Plugin 'mhinz/vim-signify'
+	Plugin 'gavinbeatty/dragvisuals.vim'
 
 	call vundle#end()
 
@@ -874,6 +875,15 @@ nnoremap <leader>x :Hexmode<CR>
 	" vim-signify
 	""""""""""""""""""""""""""""""
 	let g:signify_vcs_list = [ 'git', 'svn' ]
+
+	""""""""""""""""""""""""""""""
+	" dragvisuals.vim
+	""""""""""""""""""""""""""""""
+	vmap  <expr>  <LEFT>   DVB_Drag('left')
+	vmap  <expr>  <RIGHT>  DVB_Drag('right')
+	vmap  <expr>  <DOWN>   DVB_Drag('down')
+	vmap  <expr>  <UP>     DVB_Drag('up')
+	vmap  <expr>  D        DVB_Duplicate()
 
 " }}}
 
