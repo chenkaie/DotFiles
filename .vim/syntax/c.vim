@@ -267,4 +267,6 @@ hi def link cAnsiFunction Function
 hi def link cAnsiName Identifier
 hi def link cBoolean Boolean
 
-
+" Extended Types
+syn keyword	cType		UCHAR ULONG USHORT UINT CHAR BTYE SHORT WORD DWORD LONG BOOL BOOLEAN FLOAT
+syn keyword	cType		SCODE TRUE FALSE S_OK S_FAIL HANDLE SOCKET
