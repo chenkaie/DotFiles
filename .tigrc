@@ -9,6 +9,11 @@ bind   generic    g             move-first-line
 bind   generic    G             move-last-line
 
 ######################################################
+# Mouse Support                                      #
+######################################################
+set mouse = false
+
+######################################################
 # Color Setting                                      #
 ######################################################
 # *color* 'area' 'fgcolor' 'bgcolor' '[attributes]'
