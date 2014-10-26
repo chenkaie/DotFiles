@@ -168,6 +168,7 @@ alias head='head -n $((${LINES:-12}-2))'      # As many as possible without scro
 alias tail='tail -n $((${LINES:-12}-2)) -s.1' # Likewise, also more responsive -f
 alias g='git'
 alias netstat='netstat -np'
+alias strings='strings -a'
 exist hub && eval "$(hub alias -s)"
 
 # have to check exist()
