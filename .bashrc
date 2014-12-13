@@ -626,6 +626,9 @@ function lagcc ()
 		*montavista*)
 			outfilesuffix="dm365"
 			;;
+		*dm8127*)
+			outfilesuffix="dm385"
+			;;
 		*arm*)
 			outfilesuffix="arm"
 			;;
