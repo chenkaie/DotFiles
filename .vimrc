@@ -188,7 +188,7 @@ set wildmode=list:longest
 set wildignore+=*.o,*.a,*.so,*.obj,*.exe,*.lib,*.ncb,*.opt,*.plg,.svn,.git
 
 " for :TOhtml
-"let html_use_css=1
+let html_use_css=0
 "let use_xhtml = 1
 let html_number_lines = 1
 let html_no_pre = 1
