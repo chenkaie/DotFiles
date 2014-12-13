@@ -48,7 +48,7 @@ syn keyword cAnsiFunction	gmtime ctime asctime gettimeofday
 syn keyword cAnsiFunction	time mkxtime mktime
 syn keyword cAnsiFunction	difftime clock strlen
 syn keyword cAnsiFunction	strerror memset strtok
-syn keyword cAnsiFunction	strstr strspn strrchr memmem
+syn keyword cAnsiFunction	strstr strspn strrchr memmem strcasestr
 syn keyword cAnsiFunction	strpbrk strcspn strchr
 syn keyword cAnsiFunction	memchr strxfrm strncmp
 syn keyword cAnsiFunction	strcoll strcmp memcmp
