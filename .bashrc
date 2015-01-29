@@ -105,7 +105,9 @@ case $OS in
 		export PERL5LIB=$HOME/usr/lib/perl5:$HOME/perl5/lib/perl5:$PERL5LIB
 
 		# Python
-        [ -s "$HOME/.pythonbrew/etc/bashrc" ] && source "$HOME/.pythonbrew/etc/bashrc"
+		[ -s "$HOME/.pythonbrew/etc/bashrc" ] && source "$HOME/.pythonbrew/etc/bashrc"
+
+		exist colorgcc && export CC="colorgcc"
 		;;
 
 	*)
@@ -214,7 +216,7 @@ alias pd='echo ${PRODUCTDIR}'
 alias rmrd='[ -n "$PRODUCTDIR" ] && cd ${PRODUCTDIR}/release; rm -rf app_cluster_Build/ flashfs/ rootfs/; cd -'
 
 #make for fun
-alias make='cmake'
+alias make='colormake'
 alias m='make'
 alias mc='m clean'
 alias mca='m cleanall'
@@ -222,8 +224,9 @@ alias mi='m install'
 alias mall='mca && m && mi'
 
 #gcc
+exist colorgcc && _GCC=colorgcc || _GCC=gcc
 alias agcc='arm-linux-gcc -Wall -g3 -fno-omit-frame-pointer -fno-inline -Wcast-align -Wpadded -Wpacked -std=gnu99'
-alias gcc='gcc -Wall -g3 -fno-omit-frame-pointer -fno-inline -Wcast-align -Wpadded -Wpacked -std=gnu99'
+alias gcc="$_GCC -Wall -g3 -fno-omit-frame-pointer -fno-inline -Wcast-align -Wpadded -Wpacked -std=gnu99"
 alias objdump='objdump -d -S -l -shrt'
 alias gdb='gdb --command=$HOME/Repos/DotFiles/.gdbinit-7.3'
 #alias strace='strace -f -v -x -s 128'
@@ -606,7 +609,7 @@ function fe()
 # lazy gcc, default outfile: filename_prefix.out, eg: hello.c -> hello.out
 function lgcc ()
 {
-	gcc -o ${1%.*}{.out,.${1##*.}} $2 $3 $4 $5
+	$_GCC -o ${1%.*}{.out,.${1##*.}} $2 $3 $4 $5
 }
 
 # lazy arm-linux-gcc, default outfile: filename_prefix.platform.out, eg: hello.c -> hello.arm.out
