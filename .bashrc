@@ -245,6 +245,9 @@ alias enjoy-ccache-distcc="source $tools/use_distcc_ccache"
 # enjoy proxy
 alias enjoy-proxy="source $tools/use_proxy"
 
+#mkid
+alias mkid='mkid -m $dotfiles/id-lang.map'
+
 #######################
 # Bash SHell opts     #
 #######################
