@@ -486,7 +486,7 @@ elseif &background=='dark'
     endif
   elseif &t_Co==256
     " 256color dark terminal support here
-    hi Normal		ctermfg=252	ctermbg=234	cterm=NONE
+    hi Normal		ctermfg=252	ctermbg=235	cterm=NONE
     " Comment/Uncomment the following line to disable/enable transparency
     "hi Normal		ctermfg=252	ctermbg=NONE	cterm=NONE
     hi Comment		ctermfg=186	ctermbg=NONE	cterm=NONE

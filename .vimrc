@@ -462,7 +462,7 @@ nmap tt :call SwitchLastUsedTab()<CR>
 set diffopt+=iwhite
 " highlight diff color
 hi diffchange ctermbg=236
-hi diffadd ctermbg=4
+hi diffadd ctermbg=18
 hi DiffDelete ctermfg=69 ctermbg=234
 hi difftext ctermbg=3 ctermfg=0
 
