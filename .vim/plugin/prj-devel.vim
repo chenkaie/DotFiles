@@ -2,6 +2,9 @@
 " http://learnvimscriptthehardway.stevelosh.com/
 
 if has("cscope")
+	""""""""
+	" VVTK "
+	""""""""
 	let s:dm38x_modules =
 	\ ['/home/kent.chen/Project/DM385/SD8161/apps/app_cluster/media',
 	\  '/opt/Vivotek/lsp/DM8127/SDK/IPNCRDK_V3.8.0/syslink_2_21_02_10/packages/ti',
@@ -31,6 +34,38 @@ if has("cscope")
 		endwhile
 		exe "redraw!"
 	endfunction
+
+	""""""""
+	" UBNT "
+	""""""""
+	let s:gen2_modules =
+	\ ['$HOME/Project/AIRCAM-GM-CSCOPE-GEN2',
+	\  '$HOME/Project/AIRCAM-GM-CSCOPE-GEN2/openwrt/build_dir/toolchain/linux']
+	command! -nargs=* GEN2 call GEN2()
+	function! GEN2()
+		echohl Wildmenu | echo "<<<<< Use GEN2 related cscope/tags >>>>>" | echohl None
+		let i = 0
+		while i < len(s:gen2_modules)
+			exe "cs add " . s:gen2_modules[i] . "/cscope.out " . resolve(expand(s:gen2_modules[i]))
+			exe "set tags +=" . resolve(expand(s:gen2_modules[i])) . "/tags"
+			let i += 1
+		endwhile
+	endfunction
+
+	let s:gen3_modules =
+	\ ['$HOME/Project/AIRCAM-GM-CSCOPE-GEN3',
+	\  '$HOME/Project/AIRCAM-GM-CSCOPE-GEN3/openwrt/build_dir/toolchain/linux']
+	command! -nargs=* GEN3 call GEN3()
+	function! GEN3()
+		echohl Wildmenu | echo "<<<<< Use GEN3 related cscope/tags >>>>>" | echohl None
+		let i = 0
+		while i < len(s:gen3_modules)
+			exe "cs add " . s:gen3_modules[i] . "/cscope.out " . resolve(expand(s:gen3_modules[i]))
+			exe "set tags +=" . resolve(expand(s:gen3_modules[i])) . "/tags"
+			let i += 1
+		endwhile
+	endfunction
+
 endif
 
 

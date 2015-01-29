@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Sun Aug 03, 2014  02:12AM
+" Last Modified: Wed Jan 28, 2015  11:40PM
 " ==============================================================================
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -522,12 +522,13 @@ endif
 	" cscope
 	""""""""""""""""""""""""""""""
 	" init cscope hotkey
+	let s:CscopeTagsDB = "$HOME/Project/AIRCAM-GM-CSCOPE-GEN3"
 	function! UseAwesomeCscope()
 		let l:srcdir=(isdirectory("../src") ? '../' : './')
 		try
-			set tags+=$HOME/horus/apps/tags
+			exe "set tags+=". s:CscopeTagsDB . "/tags"
 			exe "cs add " . l:srcdir . "cscope.out " . l:srcdir
-			exe "cs add $HOME/cscope_ctag/Horus/cscope.out $HOME/Project/Horus/apps"
+			exe "cs add " . s:CscopeTagsDB . "/cscope.out " . resolve(expand(s:CscopeTagsDB))
 		catch /duplicate/
 			silent exe "!tag_rebuild " . l:srcdir
 			silent exe "cs reset"
@@ -537,13 +538,13 @@ endif
 			silent exe "!tag_rebuild " . l:srcdir
 			try
 				exe "cs add " . l:srcdir . "cscope.out " . l:srcdir
-				exe "cs add $HOME/cscope_ctag/Horus/cscope.out $HOME/Project/Horus/apps"
+				exe "cs add " . s:CscopeTagsDB . "/cscope.out " . resolve(expand(s:CscopeTagsDB))
 				exe "redraw!"
 				echohl Wildmenu | echo "cscope file not found, exec tag_rebuild" | echohl None
 			catch
 				exe "redraw!"
 				echohl ErrorMsg | echo "You don't have enough privilege XD, just add Horus db." | echohl None
-				exe "cs add $HOME/cscope_ctag/Horus/cscope.out $HOME/Project/Horus/apps"
+				exe "cs add " . s:CscopeTagsDB . "/cscope.out " . resolve(expand(s:CscopeTagsDB))
 			endtry
 		endtry
 	endfun
