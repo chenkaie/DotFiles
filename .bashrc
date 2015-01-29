@@ -452,7 +452,7 @@ if [ -d "$dotfiles/ascii-photo" ]; then
 fi
 
 # Completion support
-source $dotfiles/completion/bash-completion/bash_completion
+[ -z "$BASH_COMPLETION_COMPAT_DIR" ] && source $dotfiles/completion/bash-completion/bash_completion
 source $dotfiles/completion/svn_completion
 source $dotfiles/completion/git-completion.bash
 source $dotfiles/completion/git-prompt.sh
@@ -463,6 +463,7 @@ source $dotfiles/completion/acd_func.sh
 source $dotfiles/completion/hub.bash_completion.sh
 source $dotfiles/completion/bash_completion_tmux.sh
 source $dotfiles/completion/godir-completion.sh
+source $dotfiles/completion/repo.bash_completion
 
 
 # make less more friendly for non-text input files, see lesspipe(1)
