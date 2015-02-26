@@ -171,7 +171,7 @@ alias tail='tail -n $((${LINES:-12}-2)) -s.1' # Likewise, also more responsive -
 alias g='git'
 alias netstat='netstat -np'
 alias strings='strings -a'
-exist hub && eval "$(hub alias -s)"
+#exist hub && eval "$(hub alias -s)"
 
 # have to check exist()
 exist htop && alias top='htop'
@@ -192,6 +192,7 @@ alias path='echo -e ${PATH//:/\\n}'
 alias perlpath='perl -le "print foreach @INC"'
 # Generate Windows CIFS path prepend with Network Drive id: "Z:"
 alias pwd-win='pwd | sed '"'"'s/\//\\/g'"'"' | sed '"'"'s/\(.*\)/Z:\1/'"'"''
+alias pwd-mac='pwd | sed "s/^\/home/\/Volumes/"'
 # A simple python http file server
 alias hfs='python -m SimpleHTTPServer 8080'
 #
