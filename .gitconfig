@@ -20,18 +20,21 @@
 	br = branch
 	co = checkout
 	lg = log --stat --decorate
+	lo = log --oneline
 	sh = !git-sh
 	;clog = log --graph --date=short --pretty=format:\"%C(124)%ad %C(24)%h %C(34)%an %C(252)%s%C(178)%d\" #--encoding="ISO-8859-1"
 	clog = log --graph --date=short --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --abbrev-commit
-	d = difftool
+	d = difftool --dir-diff -x=dirdiff
 	dc = diff --cached
 	pull = pull --rebase
 	zip = !git archive --format tar.gz -o $(git log --date=short --pretty=format:"%ad" -1).tar.gz HEAD
-	sync = "!git stash; git pull --rebase; git push; git stash pop"
-	syncall = "!git stash; git pull --rebase --all; git push --all; git stash pop"
+	sync = "!git stash; git pull --rebase --all; git push --all; git stash pop"
+	sync-r = "!git stash; git pull --rebase --all; git stash pop"
 	oldest-ancestor = !bash -c 'diff --old-line-format='' --new-line-format='' <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | head -1' -
 	branchdiff = !bash -c \"git diff `git oldest-ancestor`..\"
 	branchlog = !bash -c \"git log `git oldest-ancestor`..\"
+	files = "!f() { git diff --name-status $1^ $1; }; f"
+	meld = !git-meld.pl
 
 [branch]
 	autosetupmerge = true
