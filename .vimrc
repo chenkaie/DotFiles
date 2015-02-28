@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Wed Jan 28, 2015  11:40PM
+" Last Modified: Sat Feb 28, 2015  03:12PM
 " ==============================================================================
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -522,7 +522,7 @@ endif
 	" cscope
 	""""""""""""""""""""""""""""""
 	" init cscope hotkey
-	let s:CscopeTagsDB = "$HOME/Project/AIRCAM-GM-CSCOPE-GEN3"
+	let s:CscopeTagsDB = "$HOME/Project/AIRCAM-GM-GEN3"
 	function! UseAwesomeCscope()
 		let l:srcdir=(isdirectory("../src") ? '../' : './')
 		try
@@ -593,9 +593,6 @@ endif
 	let g:neocomplcache_enable_at_startup = 0
 	let g:neocomplcache_enable_smart_case = 1
 	let g:neocomplcache_enable_camel_case_completion = 1
-
-	" snippets expand trigger with ,,
-	imap ,, <esc>a<Plug>snipMateTrigger
 
 	map <F4> :NeoComplCacheEnable<CR>
 	map ,<F4> :NeoComplCacheToggle<CR>
@@ -744,6 +741,7 @@ nnoremap <leader>x :Hexmode<CR>
 	Plugin 'mhinz/vim-signify'
 	Plugin 'gavinbeatty/dragvisuals.vim'
 	Plugin 'altercation/vim-colors-solarized'
+	Plugin 'Valloric/YouCompleteMe'
 
 	call vundle#end()
 
@@ -876,6 +874,9 @@ nnoremap <leader>x :Hexmode<CR>
 	let g:snipMate.scope_aliases = {}
 	let g:snipMate.scope_aliases['javascript'] = 'javascript,javascript-jquery'
 
+	" snippets expand trigger with ,, (Workaround due to <Tab> was stolen by YCM)
+	imap <leader>, <esc>a<Plug>snipMateNextOrTrigger
+
 	""""""""""""""""""""""""""""""
 	" vim-signify
 	""""""""""""""""""""""""""""""
@@ -889,6 +890,15 @@ nnoremap <leader>x :Hexmode<CR>
 	vmap  <expr>  <DOWN>   DVB_Drag('down')
 	vmap  <expr>  <UP>     DVB_Drag('up')
 	vmap  <expr>  D        DVB_Duplicate()
+
+	""""""""""""""""""""""""""""""
+	" YouCompleteMe
+	""""""""""""""""""""""""""""""
+	"let g:ycm_global_ycm_extra_conf = $HOME."/.ycm_extra_conf.py"
+	let g:ycm_confirm_extra_conf = 0
+	let g:ycm_min_num_of_chars_for_completion = 3
+	let g:ycm_key_invoke_completion = '<C-y>'
+	nnoremap <C-G> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " }}}
 
