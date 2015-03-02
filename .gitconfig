@@ -13,29 +13,40 @@
 	whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
 	autocrlf = false
 	excludesfile = ~/.gitignore
+
 [alias]
-	st = status
-	s = status --short
-	ci = commit --verbose
 	br = branch
-	co = checkout
-	lg = log --stat --decorate
-	lo = log --oneline
-	sh = !git-sh
-	clog = log --graph --date=short --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --abbrev-commit
-	dt = difftool
-	dirdiff = difftool --dir-diff -x=dirdiff
-	dc = diff --cached
-	pull = pull --rebase
-	zip = !git archive --format tar.gz -o $(git log --date=short --pretty=format:"%ad" -1).tar.gz HEAD
-	sync = "!git stash; git pull --rebase --all; git push --all; git stash pop"
-	sync-r = "!git stash; git pull --rebase --all; git stash pop"
-	oldest-ancestor = !bash -c 'diff --old-line-format='' --new-line-format='' <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | head -1' -
 	branchdiff = !bash -c \"git diff `git oldest-ancestor`..\"
 	branchlog = !bash -c \"git log `git oldest-ancestor`..\"
-	files = "!f() { git diff --name-status $1^ $1; }; f"
+	oldest-ancestor = !bash -c 'diff --old-line-format='' --new-line-format='' <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | head -1' -
+
+	ci = commit --verbose
+	co = checkout
+	dc = diff --cached
+
+	dirdiff = difftool --dir-diff -x=dirdiff
+	dt = difftool
 	meld = !git-meld.pl
+
+	files = "!f() { git diff --name-status $1^ $1; }; f"
+
+	clog = log --graph --date=short --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --abbrev-commit
+	lg = log --stat --decorate
+	lo = log --oneline
+
+	pull = pull --rebase
+
+	root = rev-parse --show-toplevel
+
+	s = status --short
+	st = status
+
 	show-vim = "!f() { git difftool $1^ $1; }; f"
+
+	sync = "!git stash; git pull --rebase --all; git push --all; git stash pop"
+	sync-r = "!git stash; git pull --rebase --all; git stash pop"
+
+	zip = !git archive --format tar.gz -o $(git log --date=short --pretty=format:"%ad" -1).tar.gz HEAD
 
 [branch]
 	autosetupmerge = true
@@ -44,6 +55,7 @@
 [github]
 	user = chenkaie
 	token = bffcf6bc66d10d4fbb3bb9d334fe4b07
+
 [color "sh"]
 	branch = yellow ul
 	workdir = blue bold
