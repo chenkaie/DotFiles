@@ -7,6 +7,8 @@ bind   generic    <Ctrl-f>      scroll-page-down
 bind   generic    <Ctrl-b>      scroll-page-up
 bind   generic    g             move-first-line
 bind   generic    G             move-last-line
+#bind  generic    c             @sh -c "tmux set-buffer 'git show-vim %(commit)'"
+bind   generic    c             @sh -c "printf 'git show-vim %.7s' %(commit) | pbcopy-nc"
 
 ######################################################
 # Mouse Support                                      #
