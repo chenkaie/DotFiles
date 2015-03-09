@@ -76,3 +76,7 @@
 [http]
 	sslVerify = false
 	;proxy = http://172.16.2.54:8888/
+
+[init]
+	# custom git hooks
+	templatedir = ~/.git_template

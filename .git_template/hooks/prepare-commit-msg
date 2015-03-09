@@ -1,0 +1,52 @@
+#!/bin/bash
+#
+# When you do git commit under branch like: "feature/PRJNAME-0001-by-jira-create-branch"
+# This hook will output well prepared commit msg like below:
+# You can modify the prepard message content as you like
+# ------------------------------------------------------------------------
+# PRJNAME-0001 Capitalized, short (50 chars or less) summary
+#
+# More detailed explanatory text, if necessary.  Wrap it to about 72
+# characters or so.
+#
+# Further paragraphs come after blank lines.
+#
+# - Bullet points are okay, too
+# * Asterisk points are okay, too
+#
+# PS: IF YOU WANT TO ABORT COMMIT, PLEASE EMPTY COMMIT MESSAGE.
+# ------------------------------------------------------------------------
+
+# if message specified explicitly (-m <message>), exit
+if [ "$2" ]
+then
+	exit
+fi
+
+branchPath=$(git rev-parse --abbrev-ref HEAD)     # Somthing like refs/heads/myBranchName
+branchName=${branchPath##*/}                      # Get text behind the last / of the branch path
+projectName=$(echo $branchName | cut -d '-' -f 1)
+ticketNumber=$(echo $branchName | cut -d '-' -f 2)
+
+isNumRE='^[0-9]+$'
+if [[ $ticketNumber =~ $isNumRE ]]; then
+	# is numeric -> match PRJNAME-#### format
+	prependHeader="$projectName-$ticketNumber "
+else
+	prependHeader=""
+fi
+
+FILE=`cat "$1"`
+echo -e "${prependHeader}Capitalized, short (50 chars or less) summary\n \
+
+More detailed explanatory text, if necessary.  Wrap it to about 72
+characters or so.
+
+Further paragraphs come after blank lines.
+
+- Bullet points are okay, too
+* Asterisk points are okay, too
+
+PS: IF YOU WANT TO ABORT COMMIT, PLEASE EMPTY COMMIT MESSAGE.
+$FILE" > "$1"
+
