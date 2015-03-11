@@ -5,7 +5,9 @@
 ######################################################
 bind   generic    <Ctrl-f>      scroll-page-down
 bind   generic    <Ctrl-b>      scroll-page-up
-bind   generic    g             move-first-line
+bind   generic    g             none            # Clear old 'g' binding to allow for 'gg' etc.
+bind   generic    gg            move-first-line
+bind   main       G             none            # Clear commit graph toggling
 bind   generic    G             move-last-line
 #bind  generic    c             @sh -c "tmux set-buffer 'git show-vim %(commit)'"
 bind   generic    c             @sh -c "printf 'git show-vim %.7s' %(commit) | pbcopy-nc"
