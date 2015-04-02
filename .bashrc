@@ -225,9 +225,11 @@ alias mi='m install'
 alias mall='mca && m && mi'
 
 #gcc
-exist colorgcc && _GCC=colorgcc || _GCC=gcc
-alias agcc='arm-linux-gcc -Wall -g3 -fno-omit-frame-pointer -fno-inline -Wcast-align -Wpadded -Wpacked -std=gnu99'
-alias gcc="$_GCC -Wall -g3 -fno-omit-frame-pointer -fno-inline -Wcast-align -Wpadded -Wpacked -std=gnu99"
+exist colorgcc && MY_GCC=colorgcc || MY_GCC=gcc
+MY_CC_FLAGS='-Wall -ggdb3 -fno-omit-frame-pointer -fno-inline -Wcast-align -Wpadded -Wpacked -std=gnu99'
+
+alias agcc='arm-linux-gcc ${MY_CC_FLAGS}'
+alias gcc='$MY_GCC ${MY_CC_FLAGS}'
 alias objdump='objdump -d -S -l -shrt'
 alias gdb='gdb --command=$HOME/Repos/DotFiles/.gdbinit-7.3'
 #alias strace='strace -f -v -x -s 128'
@@ -610,7 +612,7 @@ function fe()
 # lazy gcc, default outfile: filename_prefix.out, eg: hello.c -> hello.out
 function lgcc ()
 {
-	$_GCC -o ${1%.*}{.out,.${1##*.}} $2 $3 $4 $5
+	gcc -o ${1%.*}{.out,.${1##*.}} $2 $3 $4 $5
 }
 
 # lazy arm-linux-gcc, default outfile: filename_prefix.platform.out, eg: hello.c -> hello.arm.out
