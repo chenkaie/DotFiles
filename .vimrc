@@ -461,10 +461,10 @@ nmap tt :call SwitchLastUsedTab()<CR>
 "force vim diff to ignore whitespace
 set diffopt+=iwhite
 " highlight diff color
-hi diffchange ctermbg=236
+hi diffchange ctermbg=237
 hi diffadd ctermbg=18
-hi DiffDelete ctermfg=69 ctermbg=234
-hi difftext ctermbg=3 ctermfg=0
+hi DiffDelete ctermbg=234
+hi difftext ctermbg=9
 
 function! s:DiffWithSaved()
 	let filetype=&ft
