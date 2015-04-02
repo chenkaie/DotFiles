@@ -1125,6 +1125,14 @@ function! MBPR()
 endfunction
 nmap <leader>M :call MBPR()<CR>
 
+" Ref: https://github.com/vivien/vim-addon-linux-coding-style
+function s:LinuxHighlighting()
+    highlight default link LinuxError ErrorMsg
+    syn match LinuxError / \+\ze\t/     " spaces before tab
+    syn match LinuxError /\s\+$/        " trailing whitespaces
+    "syn match LinuxError /\%81v.\+/     " virtual column 81 and more
+endfunction
+
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1168,6 +1176,7 @@ endfunction
 function AfterStart ()
 	" Used to remove my own specific defined behavior for others who use my .vimrc
 	"autocmd! BufWritePost,FileWritePost [^jquery]*.js
+	call s:LinuxHighlighting()
 endfunction
 autocmd VimEnter * :call AfterStart()
 
