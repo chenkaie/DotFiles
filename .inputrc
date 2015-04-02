@@ -11,7 +11,19 @@ set meta-flag on
 set input-meta on
 set output-meta on
 set convert-meta off
-set show-all-if-ambiguous on
+
+# This alters the default behavior of the completion functions. If set to 'on', words which have more than one possible completion cause the matches to be listed immediately instead of ringing the bell.
+# For single press Tab results for when a partial or no completion is possible
+#set show-all-if-ambiguous on
+
+# A character denoting a file's type is appended to the filename when listing possible completions.
+set visible-stats on
+
+# Completed names which are symbolic links to directories have a slash appended (subject to the value of mark-directories).
+set mark-symlinked-directories on
+
+# When set to a value greater than zero, common prefixes longer than this value are replaced with an ellipsis when displaying possible completions.
+set completion-prefix-display-length 2
 
 # Home
 "\e[1~": beginning-of-line
