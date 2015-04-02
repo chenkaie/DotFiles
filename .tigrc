@@ -13,9 +13,11 @@ bind   generic    G             move-last-line
 bind   generic    c             @sh -c "printf 'git show-vim %.7s' %(commit) | pbcopy-nc"
 
 ######################################################
-# Mouse Support                                      #
+# View Setting
 ######################################################
+set main-view-id = true
 set mouse = false
+#set line-graphics = utf-8
 
 ######################################################
 # Color Setting                                      #
