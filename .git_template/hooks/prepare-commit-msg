@@ -37,7 +37,7 @@ else
 fi
 
 FILE=`cat "$1"`
-echo -e "${prependHeader}Capitalized, short (50 chars or less) summary\n \
+echo -e "${prependHeader}Capitalized, short (50 chars or less) summary
 
 More detailed explanatory text, if necessary.  Wrap it to about 72
 characters or so.
