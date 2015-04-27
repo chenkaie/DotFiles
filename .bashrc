@@ -226,7 +226,7 @@ alias mall='mca && m && mi'
 
 #gcc
 exist colorgcc && MY_GCC=colorgcc || MY_GCC=gcc
-MY_CC_FLAGS='-Wall -ggdb3 -fno-omit-frame-pointer -fno-inline -Wcast-align -Wpadded -Wpacked -std=gnu99'
+MY_CC_FLAGS='-Wall -Wextra -Wconversion -ggdb3 -fno-omit-frame-pointer -fno-inline -Wcast-align -Wpadded -Wpacked -std=gnu99'
 
 alias agcc='arm-linux-gcc ${MY_CC_FLAGS}'
 alias gcc='$MY_GCC ${MY_CC_FLAGS}'
