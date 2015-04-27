@@ -609,6 +609,10 @@ function repeat()
 function fe()
 { wcfind . -type f -iname '*'${1:-}'*' -exec ${2:-ls} {} \;  ; }
 
+# Find with pattern $1 in name
+function fnd()
+{ wcfind . -iname '*'${1:-}'*' ; }
+
 # lazy gcc, default outfile: filename_prefix.out, eg: hello.c -> hello.out
 function lgcc ()
 {
