@@ -185,7 +185,8 @@ alias diff='colordiff.pl'
 # Moving around & all that jazz
 #alias cd='pushd > /dev/null'
 #alias back='popd > /dev/null'
-alias b='cd -' # back to $OLDPWD
+alias b='cd -'                      # back to $OLDPWD
+alias up='builtin cd -P ..`'        # go 1 level up on the basis of physical (avoid symlinks)
 alias cd..='cd ..'
 
 alias path='echo -e ${PATH//:/\\n}'
