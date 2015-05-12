@@ -20,6 +20,10 @@ dotfiles="$HOME/Repos/github-chenkaie/DotFiles"
 tools="$HOME/Repos/github-chenkaie/Tools"
 
 exist () { type "$1" &> /dev/null; }
+
+# Disable CTRL-S and CTRL-Q
+[[ $- =~ i ]] && stty -ixoff -ixon
+
 #######################
 # JOB Related         #
 #######################

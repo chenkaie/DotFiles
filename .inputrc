@@ -53,6 +53,10 @@ set completion-prefix-display-length 2
 "\C-p": history-search-backward
 "\C-n": history-search-forward
 
+# Disable CTRL-S and CTRL-Q
+"\C-s": self-insert
+"\C-q": self-insert
+
 $if mode=vi
 "\C-l": clear-screen
 "\C-e": end-of-line
