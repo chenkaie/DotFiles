@@ -1,9 +1,9 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 LN="ln"
-DOTFILES_DIR=`pwd`
+DOTFILES_DIR=$(pwd)
 DOTFILES_DIR=${DOTFILES_DIR//$HOME\//}
-TOOLS_DIR=`readlink -f ../Tools`
+TOOLS_DIR=$(readlink -f ../Tools)
 TOOLS_DIR=${TOOLS_DIR//$HOME\//}
 
 # Configure correct $dotfiles path in .bashrc
@@ -14,14 +14,14 @@ sed -i "s@^tools=\(.*\)@tools=\"\$HOME/$TOOLS_DIR\"@" .bashrc
 RCFILES=".agignore .bash_profile .bashrc .cdargs .cgdb .config .ctags .gdbinit .git_template .gitconfig .gitignore .gitk .gitshrc .htoprc .inputrc .irssi .muttrc .screenrc .subversion .tigrc .tmux.conf .vim .vimrc .vnc .wgetrc .zshrc "
 
 for rcfile in $RCFILES; do
-    if [ -L $HOME/$rcfile ]; then
-        echo "[Symbolic Link] : $HOME/$rcfile exists, skip.";
+    if [ -L "$HOME/$rcfile" ]; then
+        echo "[Symbolic Link] : \"$HOME/$rcfile\" exists, skip.";
         # uncomment below line to to remove all exist symbolic links
         # rm $HOME/$rcfile
-    elif [ -f $HOME/$rcfile ] || [ -d $HOME/$rcfile ]; then
+    elif [ -f "$HOME/$rcfile" ] || [ -d "$HOME/$rcfile" ]; then
         echo "[File or Dirs ] : $HOME/$rcfile exists, skip.";
     else
-        $LN -sf $DOTFILES_DIR/$rcfile $HOME/
+        $LN -sf "$DOTFILES_DIR/$rcfile" "$HOME/"
         echo "[Successfully!] : build symbolic link: $DOTFILES_DIR/$rcfile";
     fi
 done
