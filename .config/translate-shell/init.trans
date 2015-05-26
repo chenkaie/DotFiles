@@ -1,0 +1,9 @@
+{
+ :translate-shell "0.9.0"
+ :verbose         true
+ :show-original   true
+ :indent          4
+ :hl              "en"
+ :tl              "zh-TW"
+ :theme           "default"
+}
