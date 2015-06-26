@@ -599,6 +599,10 @@ hi link		MyTagListTagScope	Constant
 "Add by Kent for Vim7.3
 hi ColorColumn ctermbg=235
 
+"Add by Kent for listchar |hl-NonText| |hl-SpecialKey|
+hi SpecialKey ctermfg=238
+hi NonText ctermfg=68 ctermbg=234
+
 " COLOR LINKS DEFINE END
 
 " vim:et:nosta:sw=2:ts=8:
