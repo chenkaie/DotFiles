@@ -17,6 +17,7 @@
 [alias]
 	br = branch
 	branchdiff = !bash -c \"git diff `git oldest-ancestor`.. $@\"
+	branchdirdiff = !bash -c \"git dirdiff `git oldest-ancestor`.. $@\"
 	branchlog = !bash -c \"git log `git oldest-ancestor`.. $@\"
 	oldest-ancestor = !bash -c 'diff --old-line-format='' --new-line-format='' <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | head -1' -
 
