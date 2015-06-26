@@ -39,8 +39,10 @@ if has("cscope")
 	" UBNT "
 	""""""""
 	let s:gen2_modules =
-	\ ['$HOME/Project/AIRCAM-GM-CSCOPE-GEN2',
-	\  '$HOME/Project/AIRCAM-GM-CSCOPE-GEN2/openwrt/build_dir/toolchain/linux']
+	\ ['$HOME/project/aircam-gm-gen2/sources',
+	\  '$HOME/project/aircam-gm-gen2/packages-other',
+	\  '$HOME/project/uClibc',
+	\  '$HOME/project/linux-2.6.38.8']
 	command! -nargs=* GEN2 call GEN2()
 	function! GEN2()
 		echohl Wildmenu | echo "<<<<< Use GEN2 related cscope/tags >>>>>" | echohl None
@@ -53,8 +55,10 @@ if has("cscope")
 	endfunction
 
 	let s:gen3_modules =
-	\ ['$HOME/Project/AIRCAM-GM-CSCOPE-GEN3',
-	\  '$HOME/Project/AIRCAM-GM-CSCOPE-GEN3/openwrt/build_dir/toolchain/linux']
+	\ ['$HOME/project/aircam-gm-gen3/sources',
+	\  '$HOME/project/aircam-gm-gen3/packages-other',
+	\  '$HOME/project/uClibc',
+	\  '$HOME/project/linux-3.10']
 	command! -nargs=* GEN3 call GEN3()
 	function! GEN3()
 		echohl Wildmenu | echo "<<<<< Use GEN3 related cscope/tags >>>>>" | echohl None

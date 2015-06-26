@@ -112,6 +112,14 @@ case $OS in
 		[ -s "$HOME/.pythonbrew/etc/bashrc" ] && source "$HOME/.pythonbrew/etc/bashrc"
 
 		exist colorgcc && export CC="colorgcc"
+
+		# UBNT
+		#export UBNT_SECURITY=off
+		export DLDIR=$HOME/dl
+		export UBNT_CACHE_DIR=$HOME/ubnt_cache_dir
+		export PATH=/usr/lib/ccache:$PATH
+		export CCACHE_DIR=$UBNT_CACHE_DIR/ccache
+		ccache --max-size=10G -s > /dev/null 2>&1
 		;;
 
 	*)
