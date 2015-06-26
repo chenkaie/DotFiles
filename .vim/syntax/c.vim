@@ -186,6 +186,10 @@ syn keyword cAnsiFunction	access mkdir
 syn keyword cAnsiFunction	rindex
 syn keyword cAnsiFunction	sleep usleep
 
+" Common syscall added by Kent
+syn keyword cAnsiFunction	pipe fork execve waitpid
+syn keyword cAnsiFunction	popen pclose writev
+
 " Common ANSI-standard Names
 syn keyword	cAnsiName	PRId8 PRIi16 PRIo32 PRIu64
 syn keyword	cAnsiName	PRId16 PRIi32 PRIo64 PRIuLEAST8
