@@ -16,7 +16,8 @@ bind   generic    c             @sh -c "printf 'git show-vim %.7s' %(commit) | p
 # View Setting
 ######################################################
 set main-view-id = true
-set mouse = false
+set mouse        = false
+set tab-size     = 4         # Number of spaces to use when expanding tabs
 #set line-graphics = utf-8
 
 ######################################################
