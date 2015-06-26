@@ -566,11 +566,10 @@ endif
 	nnoremap <F11>k <ESC>:cscope add $HOME/Project/PlatDM36x/linux-2.6.18/cscope.out $HOME/Project/PlatDM36x/linux-2.6.18 <CR>:set tags+=$HOME/Project/PlatDM36x/linux-2.6.18/tags<CR>
 
 	""""""""""""""""""""""""""""""
-	" Vi Man
+	" vim-man
 	""""""""""""""""""""""""""""""
 	" color/paged man
-	runtime! ftplugin/man.vim
-	nmap K <esc>:Man <cword><cr>
+	nmap M <Plug>(Vman)
 
 	""""""""""""""""""""""""""""""
 	" Javascript
@@ -742,6 +741,7 @@ nnoremap <leader>x :Hexmode<CR>
 	Plugin 'gavinbeatty/dragvisuals.vim'
 	Plugin 'altercation/vim-colors-solarized'
 	Plugin 'Valloric/YouCompleteMe'
+	Plugin 'bruno-/vim-man'
 
 	call vundle#end()
 
