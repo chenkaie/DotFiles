@@ -171,8 +171,11 @@ nnoremap <F10> <ESC>:NERDTreeToggle<CR>
 noremap ; :
 
 "Yahoo Dictionary
-map <C-D> viwy:!clear; ydict <C-R>"<CR>
-vmap <C-D> y:!clear; ydict "<C-R>""<CR>
+map <C-D> viwy:!clear; LC_ALL=en_US.UTF-8 ydict <C-R>"<CR>
+vmap <C-D> y:!clear; LC_ALL=en_US.UTF-8 ydict "<C-R>""<CR>
+
+" translate-shell (in Google translate)
+set keywordprg=trans\ :zh-TW
 
 "tab function hotkey
 nmap tl :tabnext<CR>
