@@ -48,18 +48,14 @@ flags = [
 '-DUSE_CLANG_COMPLETER',
 #Kent separate into flags_c[] & flags_cpp[]
 #Kent added begin (Ubuntu 14.10 -> $CC -v -E -x c /dev/null 2>&1)
-'-I',
-'.',
-'-isystem',
-'/usr/lib/gcc/x86_64-linux-gnu/4.9/include',
-'-isystem',
-'/usr/local/include',
-'-isystem',
-'/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed',
-'-isystem',
-'/usr/include/x86_64-linux-gnu',
-'-isystem',
-'/usr/include',
+'-I', '.',
+'-isystem', '/usr/lib/gcc/x86_64-linux-gnu/4.9/include',
+'-isystem', '/usr/local/include',
+'-isystem', '/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed',
+'-isystem', '/usr/include/x86_64-linux-gnu',
+'-isystem', '/usr/include',
+'-isystem', '/usr/include/c++/4.9',
+'-isystem', '/usr/include/x86_64-linux-gnu/c++/4.9',
 #Kent added End
 ]
 
