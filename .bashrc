@@ -786,6 +786,34 @@ function ansicolors() {
 	echo "# Sedika Signing off for now ;->"
 }
 
+# Copy w/ progress (by paulirish)
+cp_p () {
+	rsync -WavP --human-readable --progress $1 $2
+}
+
+# Start an HTTP server from a directory, optionally specifying the port (by paulirish)
+function server () {
+	local port="${1:-8000}"
+	exist open && open "http://localhost:${port}/"
+	# Set the default Content-Type to `text/plain` instead of `application/octet-stream`
+	# And serve everything as UTF-8 (although not technically correct, this doesn’t break anything for binary files)
+	python -c $'import SimpleHTTPServer;\nmap = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;\nmap[""] = "text/plain";\nfor key, value in map.items():\n\tmap[key] = value + ";charset=UTF-8";\nSimpleHTTPServer.test();' "$port"
+}
+
+# whois a domain or a URL (by paulirish)
+function whois () {
+	local domain=$(echo "$1" | awk -F/ '{print $3}') # get domain from URL
+	if [ -z $domain ] ; then
+		domain=$1
+	fi
+	echo "Getting whois record for: $domain …"
+
+	# avoid recursion
+                    # this is the best whois server
+                                                   # strip extra fluff
+    /usr/bin/whois -h whois.internic.net $domain | sed '/NOTICE:/q'
+}
+
 # Automatically add completion for all aliases to commands having completion functions
 function alias_completion {
     local namespace="alias_completion"
