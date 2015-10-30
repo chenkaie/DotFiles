@@ -1,6 +1,7 @@
 # exact filename
 tags
 cscope.out
+cscope.files
 
 # filename with RE
 # Should be workaround in this way?!
