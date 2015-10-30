@@ -115,6 +115,7 @@ case $OS in
 
 		# UBNT
 		#export UBNT_SECURITY=off
+		export UBNT_MIDDLEWARE_LOCAL=on
 		export DLDIR=$HOME/dl
 		export UBNT_CACHE_DIR=$HOME/ubnt_cache_dir
 		export PATH=/usr/lib/ccache:$PATH
@@ -693,6 +694,7 @@ ord() { printf "0x%x\n" "'$1"; }
 # Returns a character from a specified ASCII value
 chr() { printf $(printf '\\%03o\\n' "$1"); }
 
+export GODIR_IGNORE=".*~$\|\./\..*\|.*/\(.git\|.hg\|.svn\|openwrt-gen.*\)\(/\|$\)"
 # Steal from AOSP
 function godir ()
 {
@@ -707,7 +709,7 @@ function godir ()
 	fi
 	if [[ ! -f $PRODUCTDIR/.filelist ]]; then
 		echo -n "Creating index..."
-		(\cd $PRODUCTDIR; find . -wholename ./release -prune -o -wholename ./.svn -prune -o -wholename *.git -prune -o -type f -print -o -type d -printf "%p/\n" > .filelist)
+		(\cd $PRODUCTDIR; find -P . -regex $GODIR_IGNORE -prune -o -type f -print -o -type d -printf "%p/\n" > .filelist)
 		echo " Done"
 		echo ""
 	fi
