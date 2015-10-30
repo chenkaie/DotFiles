@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Sat Feb 28, 2015  03:12PM
+" Last Modified: Sun Sep 20, 2015  11:38PM
 " ==============================================================================
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -227,6 +227,9 @@ else
 	"set listchars=tab:»\ ,trail:·,eol:$,nbsp:%,extends:>,precedes:<
 endif
 
+" Enable list mode by default
+set list
+
 "map <F8> :set list!<bar>set list?<CR>
 " A powerful one than above line
 map <F8> :call ToggleSpecialChar()<CR>
@@ -270,8 +273,10 @@ cabbrev h vertical help
 "cabbrev split vsplit
 "cabbrev new vnew
 
+cabbrev map verbose map
+
 " Remove 'recording' key mapping
-nmap q <Cr>
+nmap q <space>
 hi Folded ctermbg=237
 
 " Bash like keys for the command line
@@ -465,9 +470,9 @@ nmap tt :call SwitchLastUsedTab()<CR>
 set diffopt+=iwhite
 " highlight diff color
 hi diffchange ctermbg=237
-hi diffadd ctermbg=18
+hi diffadd ctermbg=20
 hi DiffDelete ctermbg=234
-hi difftext ctermbg=9
+hi difftext ctermbg=8 ctermfg=none
 
 function! s:DiffWithSaved()
 	let filetype=&ft
@@ -743,8 +748,15 @@ nnoremap <leader>x :Hexmode<CR>
 	Plugin 'mhinz/vim-signify'
 	Plugin 'gavinbeatty/dragvisuals.vim'
 	Plugin 'altercation/vim-colors-solarized'
+	Plugin 'int3/vim-extradite'
+	Plugin 'w0ng/vim-hybrid'
 	Plugin 'Valloric/YouCompleteMe'
 	Plugin 'bruno-/vim-man'
+	"Plugin 'Mizuchi/STL-Syntax'
+	Plugin 'terryma/vim-expand-region'
+	Plugin 'junkblocker/patchreview-vim'
+	Plugin 'codegram/vim-codereview'
+	Plugin 'aceofall/gtags.vim'
 
 	call vundle#end()
 
@@ -902,6 +914,20 @@ nnoremap <leader>x :Hexmode<CR>
 	let g:ycm_min_num_of_chars_for_completion = 3
 	let g:ycm_key_invoke_completion = '<C-y>'
 	nnoremap <C-G> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+	""""""""""""""""""""""""""""""
+	" vim-expand-region
+	""""""""""""""""""""""""""""""
+	map ,<enter> <Plug>(expand_region_expand)
+	"map ,<enter> <Plug>(expand_region_shrink)
+
+	""""""""""""""""""""""""""""""
+	" gtags.vim
+	""""""""""""""""""""""""""""""
+	au BufRead *.cpp :GtagsCscope
+	"let GtagsCscope_Auto_Load = 1
+	let GtagsCscope_Quiet = 1
+	let Gtags_Auto_Update = 1
 
 " }}}
 
@@ -1178,8 +1204,11 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function AfterStart ()
 	" Used to remove my own specific defined behavior for others who use my .vimrc
-	"autocmd! BufWritePost,FileWritePost [^jquery]*.js
+	" autocmd! BufWritePost,FileWritePost [^jquery]*.js
 	call s:LinuxHighlighting()
+	" Jumps are remembered in a jump list.  With the CTRL-O and CTRL-I command you
+	" can go to cursor positions before older jumps, and back again.
+	"unmap <C-I>
 endfunction
 autocmd VimEnter * :call AfterStart()
 
