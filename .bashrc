@@ -119,7 +119,6 @@ case $OS in
 		# UBNT
 		#export UBNT_SECURITY=off
 		export UBNT_MIDDLEWARE_LOCAL=on
-		export PKG_JOBS=$(grep processor /proc/cpuinfo | wc -l)
 		export DLDIR=$HOME/dl
 		export UBNT_CACHE_DIR=$HOME/ubnt_cache_dir
 		export PATH=/usr/lib/ccache:$PATH
