@@ -9,6 +9,9 @@
 [ -f /etc/bashrc ] && . /etc/bashrc
 [ -f /etc/profile ] && . /etc/profile
 
+# Automatically attach tmux session if exist
+tmux attach-session > /dev/null 2>&1
+
 infocmp screen-256color > /dev/null 2>&1
 [ $? -eq 0 -a -n "$TMUX" ] && export TERM=screen-256color || export TERM=xterm-256color
 
@@ -116,6 +119,7 @@ case $OS in
 		# UBNT
 		#export UBNT_SECURITY=off
 		export UBNT_MIDDLEWARE_LOCAL=on
+		export PKG_JOBS=$(grep processor /proc/cpuinfo | wc -l)
 		export DLDIR=$HOME/dl
 		export UBNT_CACHE_DIR=$HOME/ubnt_cache_dir
 		export PATH=/usr/lib/ccache:$PATH
