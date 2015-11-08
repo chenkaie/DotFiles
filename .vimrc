@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Sun Sep 20, 2015  11:38PM
+" Last Modified: Sun Nov 08, 2015  01:41PM
 " ==============================================================================
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -754,8 +754,6 @@ nnoremap <leader>x :Hexmode<CR>
 	Plugin 'bruno-/vim-man'
 	"Plugin 'Mizuchi/STL-Syntax'
 	Plugin 'terryma/vim-expand-region'
-	Plugin 'junkblocker/patchreview-vim'
-	Plugin 'codegram/vim-codereview'
 	Plugin 'aceofall/gtags.vim'
 
 	call vundle#end()
