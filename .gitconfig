@@ -7,7 +7,7 @@
 
 [user]
 	name = Kent Chen
-	email = chenkaie@gmail.com
+	email = kent.chen@ubnt.com
 
 [core]
 	whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
@@ -16,9 +16,9 @@
 
 [alias]
 	br = branch
-	branchdiff = !bash -c \"git diff `git oldest-ancestor`.. $@\"
-	branchdirdiff = !bash -c \"git dirdiff `git oldest-ancestor`.. $@\"
-	branchlog = !bash -c \"git log `git oldest-ancestor`.. $@\"
+	branchdiff = !bash -c \"git diff `git oldest-ancestor`...$@\"
+	branchdirdiff = !bash -c \"git dirdiff `git oldest-ancestor`...$@\"
+	branchlog = !bash -c \"git log `git oldest-ancestor`..$@\"
 	oldest-ancestor = !bash -c 'diff --old-line-format='' --new-line-format='' <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | head -1' -
 
 	ci = commit --verbose
@@ -35,7 +35,12 @@
 	lg = log --stat --decorate
 	lo = log --oneline
 
-	pull = pull --rebase
+	;pull = pull --rebase
+
+	; For PR review
+	prdiff = !git diff master...
+	prdirdiff = !git dirdiff master...
+	prlog = !git log master..
 
 	root = rev-parse --show-toplevel
 
@@ -44,8 +49,8 @@
 
 	show-vim = "!f() { git dirdiff $1^ $1; }; f"
 
-	sync = "!git stash; git pull --rebase --all; git push --all; git stash pop"
-	sync-r = "!git stash; git pull --rebase --all; git stash pop"
+	;sync = "!git stash; git pull --rebase --all; git push --all; git stash pop"
+	sync-r = "!git stash; git pull --all; git stash pop"
 
 	zip = !git archive --format tar.gz -o $(git log --date=short --pretty=format:"%ad" -1).tar.gz HEAD
 
@@ -79,5 +84,5 @@
 	;proxy = http://172.16.2.54:8888/
 
 [init]
-	# custom git hooks
+	; custom git hooks
 	templatedir = ~/.git_template
