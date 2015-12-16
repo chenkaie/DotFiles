@@ -28,6 +28,7 @@ set completion-prefix-display-length 2
 # Home
 "\e[1~": beginning-of-line
 "\C-g":  beginning-of-line
+"\C-a":  beginning-of-line
 # Insert
 "\e[2~": yank-nth-arg
 # Delete
