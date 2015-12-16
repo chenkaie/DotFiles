@@ -19,8 +19,8 @@ export EDITOR=vim
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-dotfiles="$HOME/Repos/github-chenkaie/DotFiles"
-tools="$HOME/Repos/github-chenkaie/Tools"
+dotfiles="$HOME/Repos/unix-env-deploy/DotFiles"
+tools="$HOME/Repos/unix-env-deploy/Tools"
 
 exist () { type "$1" &> /dev/null; }
 
@@ -230,6 +230,7 @@ alias pcd='cd ${PRODUCTDIR}'
 alias icd='cd ${IMAGEDIR}'
 alias scd='cd ${PRODUCTDIR}/build/scripts'
 alias rcd='cd ${PRODUCTDIR}/release;pwd'
+alias mcd='cd ${MWDIR}'
 alias pd='echo ${PRODUCTDIR}'
 alias rmrd='[ -n "$PRODUCTDIR" ] && cd ${PRODUCTDIR}/release; rm -rf app_cluster_Build/ flashfs/ rootfs/; cd -'
 
@@ -248,7 +249,7 @@ MY_CC_FLAGS='-Wall -Wextra -Wconversion -ggdb3 -fno-omit-frame-pointer -fno-inli
 alias agcc='arm-linux-gcc ${MY_CC_FLAGS}'
 alias gcc='$MY_GCC ${MY_CC_FLAGS}'
 alias objdump='objdump -d -S -l -shrt'
-alias gdb='gdb --command=$HOME/Repos/DotFiles/.gdbinit-7.3'
+#alias gdb='gdb --command=$HOME/Repos/DotFiles/.gdbinit-7.3'
 #alias strace='strace -f -v -x -s 128'
 
 #Lint related
@@ -487,6 +488,8 @@ source $dotfiles/completion/hub.bash_completion.sh
 source $dotfiles/completion/bash_completion_tmux.sh
 source $dotfiles/completion/godir-completion.sh
 source $dotfiles/completion/repo.bash_completion
+# aws cli completion
+complete -C aws_completer aws
 
 
 # make less more friendly for non-text input files, see lesspipe(1)
