@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Sun Nov 08, 2015  01:41PM
+" Last Modified: Wed Dec 16, 2015  02:09AM
 " ==============================================================================
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -467,7 +467,7 @@ nmap tt :call SwitchLastUsedTab()<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "force vim diff to ignore whitespace
-set diffopt+=iwhite
+"set diffopt+=iwhite
 " highlight diff color
 hi diffchange ctermbg=237
 hi diffadd ctermbg=20
@@ -487,7 +487,7 @@ nmap ,d :DiffSaved<CR>
 "DirDiff
 let g:DirDiffExcludes = "*.git,*.svn,.*.swp,tags,cscope.*"
 let g:DirDiffWindowSize = 6
-let g:DirDiffAddArgs = "-w"
+"let g:DirDiffAddArgs = "-w"
 
 " WinMerge-style (Alt + hjkl) mapping for vimdiff
 nmap j ]c
@@ -755,6 +755,7 @@ nnoremap <leader>x :Hexmode<CR>
 	"Plugin 'Mizuchi/STL-Syntax'
 	Plugin 'terryma/vim-expand-region'
 	Plugin 'aceofall/gtags.vim'
+	Plugin 'chrisbra/vim-diff-enhanced'
 
 	call vundle#end()
 
@@ -926,6 +927,8 @@ nnoremap <leader>x :Hexmode<CR>
 	"let GtagsCscope_Auto_Load = 1
 	let GtagsCscope_Quiet = 1
 	let Gtags_Auto_Update = 1
+	" Set this on when "set autochdir"
+	let GtagsCscope_Absolute_Path = 1
 
 " }}}
 
