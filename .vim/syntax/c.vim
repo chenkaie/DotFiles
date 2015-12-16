@@ -46,7 +46,7 @@ syn keyword cAnsiFunction	fwscanf fwprintf zonetime
 syn keyword cAnsiFunction	strfxtime strftime localtime
 syn keyword cAnsiFunction	gmtime ctime asctime gettimeofday
 syn keyword cAnsiFunction	time mkxtime mktime
-syn keyword cAnsiFunction	difftime clock strlen
+syn keyword cAnsiFunction	difftime clock strlen strnlen
 syn keyword cAnsiFunction	strerror memset strtok
 syn keyword cAnsiFunction	strstr strspn strrchr memmem strcasestr
 syn keyword cAnsiFunction	strpbrk strcspn strchr
@@ -189,6 +189,7 @@ syn keyword cAnsiFunction	sleep usleep
 " Common syscall added by Kent
 syn keyword cAnsiFunction	pipe fork execve waitpid
 syn keyword cAnsiFunction	popen pclose writev
+syn keyword cAnsiFunction	mmap munmap
 
 " Common ANSI-standard Names
 syn keyword	cAnsiName	PRId8 PRIi16 PRIo32 PRIu64
