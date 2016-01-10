@@ -246,7 +246,7 @@ alias pd='echo ${PRODUCTDIR}'
 alias rmrd='[ -n "$PRODUCTDIR" ] && cd ${PRODUCTDIR}/release; rm -rf app_cluster_Build/ flashfs/ rootfs/; cd -'
 
 #make for fun
-alias make='colormake'
+#alias make='colormake'
 alias m='make'
 alias mc='m clean'
 alias mca='m cleanall'
