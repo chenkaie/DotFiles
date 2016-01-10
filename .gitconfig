@@ -41,6 +41,7 @@
 	prdiff = !git diff master...
 	prdirdiff = !git dirdiff master...
 	prlog = !git log master..
+	prtig = !tig master..
 
 	root = rev-parse --show-toplevel
 
@@ -50,7 +51,7 @@
 	show-vim = "!f() { git dirdiff $1^ $1; }; f"
 
 	;sync = "!git stash; git pull --rebase --all; git push --all; git stash pop"
-	sync-r = "!git stash; git pull --all; git stash pop"
+	sync-r = "!git stash; git pull --no-rebase --all; git stash pop"
 
 	zip = !git archive --format tar.gz -o $(git log --date=short --pretty=format:"%ad" -1).tar.gz HEAD
 
