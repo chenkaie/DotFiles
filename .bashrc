@@ -101,6 +101,17 @@ case $OS in
 		if [ -z "$IsUbuntu" ] && [ -f /etc/bash_completion ]; then
 			. /etc/bash_completion
 		fi
+
+		# Linuxbrew
+		if [ -x $HOME/.linuxbrew/bin/brew ]; then
+			export PATH="$HOME/.linuxbrew/bin:$PATH"
+			export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
+			export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
+
+			# brew_bash_completion.sh
+			source $(brew --repository)/Library/Contributions/brew_bash_completion.sh
+		fi
+
 		# PATH
 		export PATH=$HOME/hr:$HOME/perl5/bin:$tools:$tools/subversion-scripts:$tools/git-scripts:$tools/tmux-scripts:$HOME/usr/bin:$HOME/usr/sbin:$PATH
 		# MANPATH
