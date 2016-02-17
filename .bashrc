@@ -420,17 +420,28 @@ ps1_set()
 
 #PS1=$TXTYLW'\u'$TXTWHT'@'${PROMPT_HOSTCOLOR}'\h'$TXTWHT':'$TXTGRN'\W'$TXTWHT${PROMPT_GIT}${PROMPT_SVN}$BLDBLK'$(ps1_counter)'$TXTGRN' >'$BLDGRN'>'$BLDWHT'> '$TXTWHT
 
-case $OS in
-	Darwin|*BSD)
-		[ -n "$TMUX" ] && ps1_set -p "$TXTGRN>$BLDGRN>$BLDWHT>$TXTWHT " -v "" \
-					   || ps1_set -p "$TXTGRN>$BLDGRN>$BLDWHT>$TXTWHT " -t "\D{%H:%M:%S} "
-		;;
-	Linux)
-		[ -n "$TMUX" ] && ps1_set -p "$TXTGRN>$BLDGRN>$BLDWHT>$TXTWHT " -v "" \
-					   || ps1_set -p "$TXTGRN>$BLDGRN>$BLDWHT>$TXTWHT " -s " " -w "\W"
-		#ps1_set -p "$TXTGRNʕ•ᴥ•ʔ " -s " " -w "\W"
-		;;
-esac
+ps1_set_ox()
+{
+	[ "$1" = "X" ] && TXT_EXIT=$BLDRED || TXT_EXIT=$BLDWHT
+	case $OS in
+		Darwin|*BSD)
+			[ -n "$TMUX" ] && ps1_set -p "$TXTGRN>$BLDGRN>$TXT_EXIT>$TXTWHT " -v "" \
+						   || ps1_set -p "$TXTGRN>$BLDGRN>$TXT_EXIT>$TXTWHT " -t "\D{%H:%M:%S} "
+			;;
+		Linux)
+			[ -n "$TMUX" ] && ps1_set -p "$TXTGRN>$BLDGRN>$TXT_EXIT>$TXTWHT " -v "" \
+						   || ps1_set -p "$TXTGRN>$BLDGRN>$TXT_EXIT>$TXTWHT " -s " " -w "\W"
+			#ps1_set -p "$TXTGRNʕ•ᴥ•ʔ " -s " " -w "\W"
+			;;
+	esac
+}
+
+ps1_chk_exitcode()
+{
+	[ $? -eq 0 ] && ps1_set_ox "O" || ps1_set_ox "X"
+}
+
+ps1_set_ox
 
 # add for screen to dynamically update title
 #PROMPT_COMMAND='echo -n -e "\033k\033\134"'
@@ -438,7 +449,7 @@ esac
 # enable commands in one terminal to be instantly be available in another
 #export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
-export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+export PROMPT_COMMAND="ps1_chk_exitcode; history -a; $PROMPT_COMMAND"
 
 #export MANPAGER="most -s"
 # Less Colors for Man Pages
@@ -711,7 +722,7 @@ ord() { printf "0x%x\n" "'$1"; }
 # Returns a character from a specified ASCII value
 chr() { printf $(printf '\\%03o\\n' "$1"); }
 
-export GODIR_IGNORE=".*~$\|\./\..*\|.*/\(.git\|.hg\|.svn\|openwrt-gen.*\)\(/\|$\)"
+export GODIR_IGNORE=".*~$\|\./\..*\|.*/\(.git\|.hg\|.svn\|openwrt-gen.*\|builders\)\(/\|$\)"
 # Steal from AOSP
 function godir ()
 {
