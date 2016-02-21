@@ -19,10 +19,11 @@ export EDITOR=vim
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-dotfiles="$HOME/Repos/unix-env-deploy/DotFiles"
-tools="$HOME/Repos/unix-env-deploy/Tools"
+dotfiles="$HOME/Repos/DotFiles"
+tools="$HOME/Repos/Tools"
 
 exist () { type "$1" &> /dev/null; }
+support () { eval "$1" > /dev/null 2>&1; }
 
 # Disable CTRL-S and CTRL-Q
 [[ $- =~ i ]] && stty -ixoff -ixon
@@ -148,19 +149,16 @@ esac
 # Alias               #
 #######################
 
-# enable color for LS
-case $OS in
-	Darwin|*BSD)
-		export CLICOLOR=1
-		export LSCOLORS=ExFxCxDxBxegedabagacad
-		alias ls='ls -FG'
-		# By installing homebrew: GNU coreutils, alias as Linux-way
-		alias ls='ls -FN --color=auto --time-style=long-iso'
-		;;
-	Linux)
-		alias ls='ls -FN --color=auto --time-style=long-iso'
-		;;
-esac
+# enable color for `ls` by auto detection
+if support "ls --color"; then
+    # GNU
+    alias ls='ls -FN --color=auto --time-style=long-iso'
+else
+    # OS X / BSD
+    export CLICOLOR=1
+    export LSCOLORS=ExFxCxDxBxegedabagacad
+    alias ls='ls -FG'
+fi
 
 alias l='ls -FG'
 alias ll='ls -al'                   # long list format
@@ -194,11 +192,12 @@ alias which='type -a'
 alias quota='quota -vs'
 alias grep='grep --color'
 alias head='head -n $((${LINES:-12}-2))'      # As many as possible without scrolling
-alias tail='tail -n $((${LINES:-12}-2)) -s.1' # Likewise, also more responsive -f
 alias g='git'
 alias netstat='netstat -np'
 alias strings='strings -a'
 #exist hub && eval "$(hub alias -s)"
+
+support "tail -s" && alias tail='tail -n $((${LINES:-12}-2)) -s.1' # Likewise, also more responsive -f
 
 # have to check exist()
 exist htop && alias top='htop'
@@ -513,6 +512,7 @@ source $dotfiles/completion/repo.bash_completion
 # aws cli completion
 complete -C aws_completer aws
 
+source ~/.iterm2_shell_integration.bash
 
 # make less more friendly for non-text input files, see lesspipe(1)
 exist lesspipe && eval "$(lesspipe)"
@@ -592,14 +592,29 @@ function sysinfo()
 	echo -e "\n${RED}Current date :$NC " ; date
 	echo -e "\n${RED}Machine stats :$NC " ; uptime
 	echo -e "\n${RED}Memory stats :$NC " ; free
-	echo -e "\n${RED}Local IP Address :$NC" ; myip
+	echo -e "\n${RED}Public IP Address :$NC" ; myip
+	echo -e "\n${RED}Local IP Address :$NC" ; ips
 }
 
-# Get IP (call with myip)
-function myip
+# get public IP
+function myip ()
 {
-	myip=`elinks -dump http://checkip.dyndns.org:8245/`
-	echo "${myip}"
+	echo "$(dig +short myip.opendns.com @resolver1.opendns.com)"
+}
+
+# get all IPs
+function ips ()
+{
+	case $OS in
+	Darwin|*BSD)
+		local ip=$(ifconfig  | grep -E 'inet.[0-9]' | grep -v '127.0.0.1' | awk '{ print $2}')
+		;;
+	Linux)
+		local ip=$(ifconfig | grep 'inet addr:'| grep -v '127.0.0.1' | cut -d: -f2 | awk '{ print $1}')
+		;;
+	esac
+
+	echo "${ip}"
 }
 
 encrypt () { gpg -ac --no-options "$1"; }
