@@ -19,8 +19,8 @@ export EDITOR=vim
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-dotfiles="$HOME/Repos/DotFiles"
-tools="$HOME/Repos/Tools"
+dotfiles="$HOME/Repos/unix-env-deploy/DotFiles"
+tools="$HOME/Repos/unix-env-deploy/Tools"
 
 exist () { type "$1" &> /dev/null; }
 support () { eval "$1" > /dev/null 2>&1; }
@@ -511,8 +511,6 @@ source $dotfiles/completion/godir-completion.sh
 source $dotfiles/completion/repo.bash_completion
 # aws cli completion
 complete -C aws_completer aws
-
-source ~/.iterm2_shell_integration.bash
 
 # make less more friendly for non-text input files, see lesspipe(1)
 exist lesspipe && eval "$(lesspipe)"
