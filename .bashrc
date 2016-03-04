@@ -86,6 +86,11 @@ case $OS in
 
 		# Simple Ruby version management
 		exist rbenv && eval "$(rbenv init -)"
+
+		# cd into whatever is the forefront Finder window. (GH:paulirish/dotfiles)
+		cdf() {  # short for cdfinder
+			cd "`osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)'`"
+		}
 		;;
 
 	Linux)
@@ -145,6 +150,9 @@ case $OS in
 		;;
 esac
 
+# golang
+export GOPATH=$HOME/usr/gocode
+
 #######################
 # Alias               #
 #######################
@@ -161,29 +169,29 @@ else
 fi
 
 alias l='ls -FG'
-alias ll='ls -al'                   # long list format
-alias lk='ls -lk'                   # --block-size=1K
-alias lt='ls -ltr'                  # sort by date (mtime)
-alias lc='ls -ltcr'                 # sort by and show change time
-alias la='ls -ltur'                 # sort by and show access time
-alias lx='ls -lXB'                  # sort by extension
-alias lz='ls -lSr'                  # sort by size
-alias ld='ls -d */'                 # es only Dirs
-alias l.='ls -dAFh .[^.]*'          # ls only Dotfiles
-alias lst='ls -hFtal | grep $(date +%Y-%m-%d)' #ls Today
+alias ll='ls -al'                               # long list format
+alias lk='ls -lk'                               # --block-size=1K
+alias lt='ls -ltr'                              # sort by date (mtime)
+alias lc='ls -ltcr'                             # sort by and show change time
+alias la='ls -ltur'                             # sort by and show access time
+alias lx='ls -lXB'                              # sort by extension
+alias lz='ls -lSr'                              # sort by size
+alias ld='ls -d */'                             # es only Dirs
+alias l.='ls -dAFh .[^.]*'                      # ls only Dotfiles
+alias lst='ls -hFtal | grep $(date +%Y-%m-%d)'  # ls Today
+alias lsd='ls --group-directories-first'        # cool... but break the autocompletion when no "dirs" pattern matching, so not default it to ls
 
-#alias tree='tree -Cs'              # nice alternative to 'ls'
 alias vim='vim -X -p'
 alias vi='vim'
-alias cp='cp -i'
-alias mv='mv -i'
-alias rm='rm -i'
-alias df='df -kTh'
+alias cp='cp -i -v'
+alias mv='mv -i -v'
+alias rm='rm -i -v'
+alias df='df -kTH'
 alias ln='ln -i -n'
 alias psg='ps -ef | grep $1'
 alias h='history | grep $1'
 alias j='jobs'
-alias less='less -R --tabs=4'       # colorful 'less', tab stops = 4
+alias less='less -R --tabs=4'                   # colorful 'less', tab stops = 4
 alias more='less'
 alias mkdir='mkdir -p -v'
 alias reload='source ~/.bashrc'
@@ -191,17 +199,22 @@ alias wget='wget -c'
 alias which='type -a'
 alias quota='quota -vs'
 alias grep='grep --color'
-alias head='head -n $((${LINES:-12}-2))'      # As many as possible without scrolling
+alias head='head -n $((${LINES:-12}-2))'        # As many as possible without scrolling
 alias g='git'
 alias netstat='netstat -np'
 alias strings='strings -a'
-#exist hub && eval "$(hub alias -s)"
+alias dig="dig +nocmd any +multiline +noall +answer"
+alias xmllint='xmllint --noout'
 
-support "tail -s" && alias tail='tail -n $((${LINES:-12}-2)) -s.1' # Likewise, also more responsive -f
+# more responsive -f
+support "tail -s.1 /dev/null" && alias tail='tail -n $((${LINES:-12}-2)) -s.1'
 
 # have to check exist()
 exist htop && alias top='htop'
-alias xmllint='xmllint --noout'
+
+# `cat` with beautiful colors. (GH:paulirish/dotfiles)
+alias c='pygmentize -O style=monokai -f console256 -g'
+alias brew_update="brew -v update; brew -v upgrade --all; brew cleanup; brew cask cleanup; brew prune; brew doctor"
 
 #export GREP_OPTIONS="--exclude-dir=\*/.svn/\* --exclude=\*~ --exclude=\*.swp"
 #alias wcgrep='wcgrep -inh --colour=auto' has been defined in wcgrep
