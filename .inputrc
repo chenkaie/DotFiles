@@ -12,7 +12,8 @@ set input-meta on
 set output-meta on
 set convert-meta off
 
-# This alters the default behavior of the completion functions. If set to 'on', words which have more than one possible completion cause the matches to be listed immediately instead of ringing the bell.
+# This alters the default behavior of the completion functions.
+# If set to 'on', words which have more than one possible completion cause the matches to be listed immediately instead of ringing the bell.
 # For single press Tab results for when a partial or no completion is possible
 #set show-all-if-ambiguous on
 
@@ -24,6 +25,19 @@ set mark-symlinked-directories on
 
 # When set to a value greater than zero, common prefixes longer than this value are replaced with an ellipsis when displaying possible completions.
 set completion-prefix-display-length 2
+
+# Make Tab autocomplete regardless of filename case
+set completion-ignore-case on
+
+# If there are more than 200 possible completions for a word, ask to show them all
+set completion-query-items 200
+
+# Be more intelligent when autocompleting by also looking at the text after
+# the cursor. For example, when the current line is "cd ~/src/mozil", and
+# the cursor is on the "z", pressing Tab will not autocomplete it to "cd
+# ~/src/mozillail", but to "cd ~/src/mozilla". (This is supported by the
+# Readline used by Bash 4.)
+set skip-completed-text on
 
 # Home
 "\e[1~": beginning-of-line
