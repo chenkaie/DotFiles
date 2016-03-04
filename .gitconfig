@@ -43,6 +43,9 @@
 	prlog = !git log master..
 	prtig = !tig master..
 
+	; git-flow: What else PRs to be merged between this branch and master
+	pr2merge = "!f() { git log --merges --pretty=format:\"%ai '%h' %s <%an>\" ..master | grep \"Merge pull request\" | sort; }; f"
+
 	root = rev-parse --show-toplevel
 
 	s = status --short
@@ -52,6 +55,9 @@
 
 	;sync = "!git stash; git pull --rebase --all; git push --all; git stash pop"
 	sync-r = "!git stash; git pull --no-rebase --all; git stash pop"
+
+	; Undo a `git push`
+	undopush = push -f origin HEAD^:master
 
 	zip = !git archive --format tar.gz -o $(git log --date=short --pretty=format:"%ad" -1).tar.gz HEAD
 
@@ -87,3 +93,7 @@
 [init]
 	; custom git hooks
 	templatedir = ~/.git_template
+
+[pager]
+	diff = diff-so-fancy | less --tabs=4 -RFX
+	show = diff-so-fancy | less --tabs=4 -RFX
