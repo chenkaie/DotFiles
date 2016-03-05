@@ -476,25 +476,6 @@ export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 #for X-Win32
 #export DISPLAY="172.16.2.54:0:0"
 
-# For all SSH (Reverse) Tunnel
-case $OS in
-	Darwin|*BSD)
-		alias dd-wrt='ssh dd-wrt -p2222 -lroot'
-		#alias dd-wrt_rd1-2='ssh -L 7322:127.0.0.1:7322 dd-wrt -lroot -p2222'
-		alias rd1-2='ssh dd-wrt -p 7322'
-		alias rd1-2-proxy='ssh -D 8080 dd-wrt -p7322'
-		;;
-
-	Linux)
-		alias tunnel-mac='ssh -R 7322:rd1-2:22 chenkaie.no-ip.org'
-		alias tunnel-ap='ssh -R 7322:rd1-2:22 chenkaie.no-ip.org -lroot -p2222'
-		alias rd1wiki='ssh -R 8080:rd1-1:80 chenkaie.no-ip.org'
-		alias dd-wrt='ssh chenkaie.no-ip.org -p2222 -lroot'
-		#alias syncToRD1-3='rsync -r -a -v -e "ssh -l kent" --delete ~/Tools rd1-3:Tools'
-		#alias syncToMac='rsync -r -a -v -e "ssh -l kent" --delete ~/Tools chenkaie.no-ip.org:RD1-2/Tools'
-		;;
-esac
-
 # cool CMatrix
 # exist cmatrix && cmatrix -ab
 
