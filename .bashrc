@@ -398,7 +398,6 @@ ps1_set()
 
 		case "$token" in
 		-x|--trace)
-			export PS4="+ \${BASH_SOURCE} : \${FUNCNAME[0]:+\${FUNCNAME[0]}()} \${LINENO} > "
 			[ "$1" == "off" ] && set +o xtrace || set -o xtrace
 			shift
 			;;
@@ -454,6 +453,9 @@ ps1_chk_exitcode()
 }
 
 ps1_set_ox
+
+# When debugging a shell script via `set -x` this tricked-out prompt is used.
+export PS4='+ \011\e[1;30m\t\011\e[1;34m${BASH_SOURCE}\e[0m:\e[1;36m${LINENO}\e[0m \011 ${FUNCNAME[0]:+\e[0;35m${FUNCNAME[0]}\e[1;30m()\e[0m:\011\011 }'
 
 # add for screen to dynamically update title
 #PROMPT_COMMAND='echo -n -e "\033k\033\134"'
