@@ -14,8 +14,8 @@ tmux attach-session > /dev/null 2>&1
 # Source extra local definitions, ~/.extra can be used for settings you don't want to commit
 [ -r ~/.extra ] && . ~/.extra
 
-dotfiles="${dotfiles:-$HOME/Repos/unix-env-deploy/DotFiles}"
-tools="${tools:-$HOME/Repos/unix-env-deploy/Tools}"
+DOTFILES="${DOTFILES:-$HOME/Repos/unix-env-deploy/DotFiles}"
+TOOLS="${TOOLS:-$HOME/Repos/unix-env-deploy/Tools}"
 
 infocmp screen-256color > /dev/null 2>&1
 [ $? -eq 0 -a -n "$TMUX" ] && export TERM=screen-256color || export TERM=xterm-256color
@@ -81,7 +81,7 @@ case $OS in
 		fi
 
 		# PATH
-		export PATH=$tools:$tools/subversion-scripts:$tools/git-scripts:$tools/tmux-scripts:$HOME/usr/bin:$PATH
+		export PATH=$TOOLS:$TOOLS/subversion-scripts:$TOOLS/git-scripts:$TOOLS/tmux-scripts:$HOME/usr/bin:$PATH
 		# MANPATH
 		export MANPATH=$HOME/usr/man:$HOME/usr/share/man:$MANPATH
 		# PERL5LIB
@@ -122,7 +122,7 @@ case $OS in
 		fi
 
 		# PATH
-		export PATH=$HOME/hr:$HOME/perl5/bin:$tools:$tools/subversion-scripts:$tools/git-scripts:$tools/tmux-scripts:$HOME/usr/bin:$HOME/usr/sbin:$PATH
+		export PATH=$HOME/hr:$HOME/perl5/bin:$TOOLS:$TOOLS/subversion-scripts:$TOOLS/git-scripts:$TOOLS/tmux-scripts:$HOME/usr/bin:$HOME/usr/sbin:$PATH
 		# MANPATH
 		export MANPATH=$HOME/usr/man:$HOME/usr/share/man:$HOME/usr/cpan/share/man:$MANPATH
 
@@ -239,14 +239,14 @@ alias pwd-mac='pwd | sed "s/^\/home/\/Volumes/"'
 # A simple python http file server
 alias hfs='python -m SimpleHTTPServer 8080'
 #
-alias python="PYTHONSTARTUP=$tools/inpy python"
+alias python="PYTHONSTARTUP=$TOOLS/inpy python"
 
 #Personal Help
 alias l?='cat ~/.bashrc | grep "alias l.*=.ls" | grep ^a'
 alias a?='alias'
-alias f?='cat $dotfiles/.function.help'
+alias f?='cat $DOTFILES/.function.help'
 alias dn='OPTIONS=$(\ls -F | grep /$); select s in $OPTIONS; do cd $PWD/$s; break;done'
-#alias help='OPTIONS=$(\ls $dotfiles/.tips -F);select s in $OPTIONS; do less $dotfiles/.tips/$s; break;done'
+#alias help='OPTIONS=$(\ls $DOTFILES/.tips -F);select s in $OPTIONS; do less $DOTFILES/.tips/$s; break;done'
 
 #delete
 alias del='mv --target-directory=$HOME/.Trash/'
@@ -279,7 +279,7 @@ alias objdump='objdump -d -S -l -shrt'
 #alias strace='strace -f -v -x -s 128'
 
 #Lint related
-exist jsl  && alias jsl="jsl -conf $tools/jsl.conf -process"
+exist jsl  && alias jsl="jsl -conf $TOOLS/jsl.conf -process"
 if exist lint ; then
 	alias lint-gnu='lint ~/makcomm/env-vim.lnt'
 	alias lint-gnu-xml='lint-gnu ~/makcomm/env-xml.lnt'
@@ -290,13 +290,13 @@ if exist lint ; then
 fi
 
 # ccache & distcc
-alias enjoy-ccache-distcc="source $tools/use_distcc_ccache"
+alias enjoy-ccache-distcc="source $TOOLS/use_distcc_ccache"
 
 # enjoy proxy
-alias enjoy-proxy="source $tools/use_proxy"
+alias enjoy-proxy="source $TOOLS/use_proxy"
 
 #mkid
-alias mkid='mkid -m $dotfiles/id-lang.map'
+alias mkid='mkid -m $DOTFILES/id-lang.map'
 
 #######################
 # Bash SHell opts     #
@@ -488,26 +488,26 @@ export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 # exist cowsay && echo "Welcome to $HOSTNAME" | cowsay -f default
 
 # icat (Image cat) generated 256-color ascii images
-if [ -d "$dotfiles/ascii-photo" ]; then
-	filepath=($dotfiles/ascii-photo/*)
+if [ -d "$DOTFILES/ascii-photo" ]; then
+	filepath=($DOTFILES/ascii-photo/*)
 	nfile=${#filepath[@]}
 	asciiwp="${filepath[RANDOM % nfile]}"
 	cat $asciiwp
 fi
 
 # Completion support
-[ -z "$BASH_COMPLETION_COMPAT_DIR" ] && source $dotfiles/completion/bash-completion/bash_completion
-source $dotfiles/completion/svn_completion
-source $dotfiles/completion/git-completion.bash
-source $dotfiles/completion/git-prompt.sh
-source $dotfiles/completion/cdargs-bash.sh
-source $dotfiles/completion/cdots.sh
-source $dotfiles/completion/git-flow-completion.bash
-source $dotfiles/completion/acd_func.sh
-source $dotfiles/completion/hub.bash_completion.sh
-source $dotfiles/completion/bash_completion_tmux.sh
-source $dotfiles/completion/godir-completion.sh
-source $dotfiles/completion/repo.bash_completion
+[ -z "$BASH_COMPLETION_COMPAT_DIR" ] && source $DOTFILES/completion/bash-completion/bash_completion
+source $DOTFILES/completion/svn_completion
+source $DOTFILES/completion/git-completion.bash
+source $DOTFILES/completion/git-prompt.sh
+source $DOTFILES/completion/cdargs-bash.sh
+source $DOTFILES/completion/cdots.sh
+source $DOTFILES/completion/git-flow-completion.bash
+source $DOTFILES/completion/acd_func.sh
+source $DOTFILES/completion/hub.bash_completion.sh
+source $DOTFILES/completion/bash_completion_tmux.sh
+source $DOTFILES/completion/godir-completion.sh
+source $DOTFILES/completion/repo.bash_completion
 # aws cli completion
 complete -C aws_completer aws
 
