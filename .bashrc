@@ -17,7 +17,7 @@ infocmp screen-256color > /dev/null 2>&1
 
 export EDITOR=vim
 export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
+export LANG=en_US
 
 dotfiles="$HOME/Repos/unix-env-deploy/DotFiles"
 tools="$HOME/Repos/unix-env-deploy/Tools"
