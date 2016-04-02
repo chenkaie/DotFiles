@@ -60,22 +60,22 @@ color   diff-index              81      default
 color   diff-chunk              213     default
 color   diff_oldmode            221     default
 color   diff_newmode            221     default
-color   "deleted file mode "    221     default
-color   "copy from "            223     default
-color   "copy to "              221     default
-color   "rename from "          221     default
-color   "rename to "            221     default
-color   "similarity "           221     default
-color   "dissimilarity "        221     default
-color   "diff-tree "            81      default
+color   'deleted file mode'     221     default
+color   'copy from'             223     default
+color   'copy to'               221     default
+color   'rename from'           221     default
+color   'rename to'             221     default
+color   diff_similarity         221     default
+color   'dissimilarity'         221     default
+color   'diff_tree'             81      default
 color   diff-stat               81      default
-color   "Reported-by: "         156     default
+color   "Reported-by:"          156     default
 
-color   "Author: "              156     default
-color   "Commit: "              213     default
-color   "AuthorDate: "          221     default
-color   "CommitDate: "          221     default
-color   "Date: "                81      default
+color   'Author:'               156     default
+color   'Commit:'               213     default
+color   'AuthorDate:'           221     default
+color   'CommitDate:'           221     default
+color   'Date:'                 81      default
 color   pp_refs                 213     default
 color   palette-0               226     default
 color   palette-1               213     default
@@ -97,16 +97,13 @@ color   commit                  156     default
 color   committer               213     default
 
 # commit message
-color   "    Signed-off-by"     221     default
-color   "    Acked-by"          221     default
-color   "    Tested-by"         221     default
-color   "    Reviewed-by"       221     default
+color   'Signed-off-by'         221     default
+color   'Acked-by'              221     default
+color   'Tested-by'             221     default
+color   'Reviewed-by'           221     default
 
 # tree
-color   tree.directory          221     default
-
-# help
-color   help-group              207     default
+color   tree.directory         221     default
 
 # LINE(PALETTE_0, "", COLOR_MAGENTA, COLOR_DEFAULT, 0), \
 #   LINE(PALETTE_1, "", COLOR_YELLOW, COLOR_DEFAULT, 0), \
