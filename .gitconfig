@@ -83,8 +83,12 @@
 [difftool]
 	prompt = false
 
+# push easily. http://stackoverflow.com/a/23918418/89484
 [push]
-	default = matching
+	default = current
+
+[help]
+	autocorrect = 1
 
 [http]
 	sslVerify = false
