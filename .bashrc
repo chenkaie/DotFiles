@@ -298,6 +298,17 @@ alias enjoy-proxy="source $TOOLS/use_proxy"
 #mkid
 alias mkid='mkid -m $DOTFILES/id-lang.map'
 
+# list serial console devices: Linux -> ttyUSB/ttyACM Darwin -> /dev/cu.usb*
+alias lstty='while true; do ll /dev/tty[AU]* /dev/cu.usb*; echo; sleep 1; done'
+
+# One of @janmoesen’s ProTip™s
+for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
+    alias "$method"="lwp-request -m '$method'"
+done
+
+# View HTTP traffic
+alias sniffHTTP="sudo ngrep -d 'eth0' -t '^(GET|POST) ' 'tcp and port 7080'"
+
 #######################
 # Bash SHell opts     #
 #######################
@@ -854,6 +865,13 @@ function whois () {
                     # this is the best whois server
                                                    # strip extra fluff
     /usr/bin/whois -h whois.internic.net $domain | sed '/NOTICE:/q'
+}
+
+# param 1: file
+# param 2: offset (decimal)
+# param 3: value  (decimal)
+function replaceByte() {
+	printf "$(printf '\\x%02X' $3)" | dd of="$1" bs=1 seek=$2 count=1 conv=notrunc
 }
 
 # Automatically add completion for all aliases to commands having completion functions
