@@ -299,7 +299,7 @@ alias enjoy-proxy="source $TOOLS/use_proxy"
 alias mkid='mkid -m $DOTFILES/id-lang.map'
 
 # list serial console devices: Linux -> ttyUSB/ttyACM Darwin -> /dev/cu.usb*
-alias lstty='while true; do ll /dev/tty[AU]* /dev/cu.usb*; echo; sleep 1; done'
+alias lstty='while true; do ll /dev/tty[AU]* /dev/cu.usb* 2>/dev/null; echo; sleep 1; done'
 
 # One of @janmoesen’s ProTip™s
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
