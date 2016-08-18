@@ -26,7 +26,7 @@ fi
 branchPath=$(git rev-parse --abbrev-ref HEAD)     # Somthing like refs/heads/myBranchName
 branchName=${branchPath##*/}                      # Get text behind the last / of the branch path
 projectName=$(echo $branchName | cut -d '-' -f 1)
-ticketNumber=$(echo $branchName | cut -d '-' -f 2)
+ticketNumber=$(echo $branchName | sed -r "s/^$projectName-([0-9]*).*/\1/")
 
 isNumRE='^[0-9]+$'
 if [[ $ticketNumber =~ $isNumRE ]]; then
