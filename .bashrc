@@ -805,7 +805,7 @@ function godir ()
 function gofile () { godir "$1" e; }
 
 # Trick a process to think it's stdout is tty(terminal) ALWAYS to avoid buffering issue
-function faketty { script -qfc "$(printf "'%s' " "$@")"; }
+function faketty () { script -qfc "$(printf "'%s' " "$@")"; }
 
 # Display ANSI colours. Found this on the interwebs, credited
 # to "HH".
