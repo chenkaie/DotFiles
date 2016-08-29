@@ -19,7 +19,8 @@
 	branchdiff = !bash -c \"git diff `git oldest-ancestor`...$@\"
 	branchdirdiff = !bash -c \"git dirdiff `git oldest-ancestor`...$@\"
 	branchlog = !bash -c \"git log `git oldest-ancestor`..$@\"
-	oldest-ancestor = !bash -c 'diff --old-line-format='' --new-line-format='' <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | head -1' -
+	branchall = !git for-each-ref --sort=committerdate --format='%(refname:short) * %(authorname) * %(committerdate:relative)' refs/remotes/ | column -t -s '*'
+	oldest-ancestor = !bash -c 'diff --old-line-format='' --new-line-format='' <(git rev-list --first-parent "${1:-develop}") <(git rev-list --first-parent "${2:-HEAD}") | head -1' -
 
 	ci = commit --verbose
 	co = checkout
@@ -38,13 +39,13 @@
 	;pull = pull --rebase
 
 	; For PR review
-	prdiff = !git diff master...
-	prdirdiff = !git dirdiff master...
-	prlog = !git log master..
-	prtig = !tig master..
+	prdiff = !git diff develop...
+	prdirdiff = !git dirdiff develop...
+	prlog = !git log develop..
+	prtig = !tig develop..
 
-	; git-flow: What else PRs to be merged between this branch and master
-	pr2merge = "!f() { git log --merges --pretty=format:\"%ai '%h' %s <%an>\" ..master | grep \"Merge pull request\" | sort; }; f"
+	; git-flow: What else PRs to be merged between this branch and develop
+	pr2merge = "!f() { git log --merges --pretty=format:\"%ai '%h' %s <%an>\" ..develop | grep \"Merge pull request\" | sort; }; f"
 
 	root = rev-parse --show-toplevel
 
@@ -57,7 +58,7 @@
 	sync-r = "!git stash; git pull --no-rebase --all; git stash pop"
 
 	; Undo a `git push`
-	undopush = push -f origin HEAD^:master
+	undopush = push -f origin HEAD^:develop
 
 	zip = !git archive --format tar.gz -o $(git log --date=short --pretty=format:"%ad" -1).tar.gz HEAD
 
