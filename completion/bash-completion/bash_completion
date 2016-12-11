@@ -1,7 +1,0 @@
-# NOTE for bash_completion
-echo '1. Please patch system-wide 'make' completion file as below to make it function well'
-echo '   Because of my alias make=colormake screw it up'
-echo '---'
-echo ' - make -npq "${makef[@]}" "${makef_dir[@]}" .DEFAULT 2>/dev/null | \'
-echo ' + /usr/bin/make -npq "${makef[@]}" "${makef_dir[@]}" .DEFAULT 2>/dev/null | \'
-echo '---'
