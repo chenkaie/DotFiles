@@ -4,6 +4,10 @@
 # This snippet helps to fix scp, sftp "Received message too long" issue..
 [ -z "$PS1" ] && return
 
+export EDITOR=vim
+export LC_ALL=en_US.UTF-8
+export LANG=en_US
+
 # Automatically attach tmux session if exist
 tmux attach-session > /dev/null 2>&1
 
@@ -19,10 +23,6 @@ TOOLS="${TOOLS:-$HOME/Repos/unix-env-deploy/Tools}"
 
 infocmp screen-256color > /dev/null 2>&1
 [ $? -eq 0 -a -n "$TMUX" ] && export TERM=screen-256color || export TERM=xterm-256color
-
-export EDITOR=vim
-export LC_ALL=en_US.UTF-8
-export LANG=en_US
 
 # helper function to check/detect beforehand
 exist () { type "$1" &> /dev/null; }
