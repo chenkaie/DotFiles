@@ -26,7 +26,7 @@
 	co = checkout
 	dc = diff --cached
 
-	dirdiff = difftool --dir-diff -x=dirdiff
+	dirdiff = difftool --dir-diff --extcmd=dirdiff
 	dt = difftool
 	meld = !git-meld.pl
 
