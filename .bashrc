@@ -118,7 +118,7 @@ case $OS in
 			export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
 
 			# brew_bash_completion.sh
-			source $(brew --repository)/Library/Contributions/brew_bash_completion.sh
+			source $(brew --repository)/completions/bash/brew
 		fi
 
 		# PATH
@@ -155,6 +155,7 @@ esac
 
 # golang
 export GOPATH=$HOME/usr/gocode
+export PATH=$GOPATH/bin:$PATH
 
 #######################
 # Alias               #
@@ -235,7 +236,7 @@ alias path='echo -e ${PATH//:/\\n}'
 alias perlpath='perl -le "print foreach @INC"'
 # Generate Windows CIFS path prepend with Network Drive id: "Z:"
 alias pwd-win='pwd | sed '"'"'s/\//\\/g'"'"' | sed '"'"'s/\(.*\)/Z:\1/'"'"''
-alias pwd-mac='pwd | sed "s/^\/home/\/Volumes/"'
+alias pwd-mac='pwd | sed "s/^\//\/Volumes\/kent\//"'
 # A simple python http file server
 alias hfs='python -m SimpleHTTPServer 8080'
 #
@@ -308,6 +309,7 @@ done
 
 # View HTTP traffic
 alias sniffHTTP="sudo ngrep -d 'eth0' -t '^(GET|POST) ' 'tcp and port 7080'"
+alias sniffHTTPVerbose="sudo ngrep -d 'eth0' -W byline port 80"
 
 #######################
 # Bash SHell opts     #
@@ -872,6 +874,12 @@ function whois () {
 # param 3: value  (decimal)
 function replaceByte() {
 	printf "$(printf '\\x%02X' $3)" | dd of="$1" bs=1 seek=$2 count=1 conv=notrunc
+}
+
+# hex string to binary
+# usage: hexstringToBinary 55424E54 -> UBNT
+function hexstringToBinary() {
+	echo "$1" | xxd -r -p
 }
 
 # Automatically add completion for all aliases to commands having completion functions
