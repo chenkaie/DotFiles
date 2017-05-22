@@ -25,6 +25,70 @@
 " Use Vim settings, rather then Vi settings (much better!). This must be first, because it changes other options as a side effect.
 set nocompatible
 
+	""""""""""""""""""""""""
+	" AWESOME Vundle
+	""""""""""""""""""""""""
+	filetype off " required
+	set runtimepath+=~/.vim/bundle/Vundle.vim
+	call vundle#begin()
+	
+	" let Vundle manage Vundle, required
+	Plugin 'VundleVim/Vundle.vim'
+	
+	Plugin 'gregsexton/gitv'
+	Plugin 'majutsushi/tagbar'
+	Plugin 'OmniCppComplete'
+	Plugin 'Shougo/neocomplcache'
+	"Plugin 'clang-complete'
+	Plugin 'matrix.vim--Yang'
+	Plugin 'chenkaie/DirDiff.vim'
+	Plugin 'chenkaie/smarthomekey.vim'
+	Plugin 'Lokaltog/vim-powerline'
+	Plugin 'EasyMotion'
+	Plugin 'Tabular'
+	Plugin 'CSApprox'
+	Plugin 'ctrlp.vim'
+	Plugin 'Decho'
+	Plugin 'tpope/vim-fugitive'
+	Plugin 'Indent-Guides'
+	Plugin 'vim-indent-object'
+	Plugin 'LargeFile'
+	Plugin 'matchit.zip'
+	Plugin 'scrooloose/nerdtree'
+	Plugin 'scrooloose/nerdcommenter'
+	Plugin 'tpope/vim-surround'
+	Plugin 'ervandew/supertab'
+	Plugin 'vcscommand.vim'
+	Plugin 'wokmarks.vim'
+	Plugin 'ShowMarks7'
+	Plugin 'smoothPageScroll.vim'
+	Plugin 'sessionman.vim'
+	Plugin 'nelstrom/vim-visual-star-search'
+	Plugin 'nelstrom/vim-markdown-folding'
+	Plugin 'Valloric/MatchTagAlways'
+	Plugin 'bad-whitespace'
+	Plugin 'rking/ag.vim'
+	Plugin 'MarcWeber/vim-addon-mw-utils'
+	Plugin 'tomtom/tlib_vim'
+	Plugin 'othree/javascript-libraries-syntax.vim'
+	Plugin 'mhinz/vim-signify'
+	Plugin 'gavinbeatty/dragvisuals.vim'
+	Plugin 'altercation/vim-colors-solarized'
+	Plugin 'int3/vim-extradite'
+	Plugin 'w0ng/vim-hybrid'
+	Plugin 'Valloric/YouCompleteMe'
+	Plugin 'bruno-/vim-man'
+	"Plugin 'Mizuchi/STL-Syntax'
+	Plugin 'terryma/vim-expand-region'
+	Plugin 'aceofall/gtags.vim'
+	Plugin 'chrisbra/vim-diff-enhanced'
+	Plugin 'octol/vim-cpp-enhanced-highlight'
+	Plugin 'fatih/vim-go'
+	Plugin 'SirVer/ultisnips'
+	Plugin 'honza/vim-snippets'
+
+	call vundle#end()
+
 "has("mac") & has("macunix") just work for MacVim
 if match(system('uname'),'Darwin') == 0
 	let OS = "Darwin"
@@ -530,12 +594,12 @@ endif
 	" cscope
 	""""""""""""""""""""""""""""""
 	" init cscope hotkey
-	let s:CscopeTagsDB = "$HOME/Project/AIRCAM-GM-GEN3"
+	let s:CscopeTagsDB = "/media/kent/SSD/project/unifi-video-firmware-rel/packages-other"
 	function! UseAwesomeCscope()
 		let l:srcdir=(isdirectory("../src") ? '../' : './')
 		try
 			exe "set tags+=". s:CscopeTagsDB . "/tags"
-			exe "cs add " . l:srcdir . "cscope.out " . l:srcdir
+			exe "cs add " . l:srcdir . "cscope.out " . getcwd()
 			exe "cs add " . s:CscopeTagsDB . "/cscope.out " . resolve(expand(s:CscopeTagsDB))
 		catch /duplicate/
 			silent exe "!tag_rebuild " . l:srcdir
@@ -545,7 +609,7 @@ endif
 		catch /stat/
 			silent exe "!tag_rebuild " . l:srcdir
 			try
-				exe "cs add " . l:srcdir . "cscope.out " . l:srcdir
+				exe "cs add " . l:srcdir . "cscope.out " . getcwd()
 				exe "cs add " . s:CscopeTagsDB . "/cscope.out " . resolve(expand(s:CscopeTagsDB))
 				exe "redraw!"
 				echohl Wildmenu | echo "cscope file not found, exec tag_rebuild" | echohl None
@@ -701,64 +765,6 @@ nnoremap <leader>x :Hexmode<CR>
 " [ Plugin configuration ]                                                   {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-	""""""""""""""""""""""""
-	" AWESOME Vundle
-	""""""""""""""""""""""""
-	set runtimepath+=~/.vim/vundle/
-	call vundle#begin()
-
-	Plugin 'gregsexton/gitv'
-	Plugin 'majutsushi/tagbar'
-	Plugin 'OmniCppComplete'
-	Plugin 'Shougo/neocomplcache'
-	"Plugin 'clang-complete'
-	Plugin 'matrix.vim--Yang'
-	Plugin 'chenkaie/DirDiff.vim'
-	Plugin 'chenkaie/smarthomekey.vim'
-	Plugin 'Lokaltog/vim-powerline'
-	Plugin 'EasyMotion'
-	Plugin 'Tabular'
-	Plugin 'CSApprox'
-	Plugin 'ctrlp.vim'
-	Plugin 'Decho'
-	Plugin 'tpope/vim-fugitive'
-	Plugin 'Indent-Guides'
-	Plugin 'vim-indent-object'
-	Plugin 'LargeFile'
-	Plugin 'matchit.zip'
-	Plugin 'scrooloose/nerdtree'
-	Plugin 'scrooloose/nerdcommenter'
-	Plugin 'tpope/vim-surround'
-	Plugin 'ervandew/supertab'
-	Plugin 'vcscommand.vim'
-	Plugin 'wokmarks.vim'
-	Plugin 'ShowMarks7'
-	Plugin 'smoothPageScroll.vim'
-	Plugin 'sessionman.vim'
-	Plugin 'nelstrom/vim-visual-star-search'
-	Plugin 'nelstrom/vim-markdown-folding'
-	Plugin 'Valloric/MatchTagAlways'
-	Plugin 'bad-whitespace'
-	Plugin 'rking/ag.vim'
-	Plugin 'MarcWeber/vim-addon-mw-utils'
-	Plugin 'tomtom/tlib_vim'
-	Plugin 'garbas/vim-snipmate'
-	Plugin 'honza/vim-snippets'
-	Plugin 'othree/javascript-libraries-syntax.vim'
-	Plugin 'mhinz/vim-signify'
-	Plugin 'gavinbeatty/dragvisuals.vim'
-	Plugin 'altercation/vim-colors-solarized'
-	Plugin 'int3/vim-extradite'
-	Plugin 'w0ng/vim-hybrid'
-	Plugin 'Valloric/YouCompleteMe'
-	Plugin 'bruno-/vim-man'
-	"Plugin 'Mizuchi/STL-Syntax'
-	Plugin 'terryma/vim-expand-region'
-	Plugin 'aceofall/gtags.vim'
-	Plugin 'chrisbra/vim-diff-enhanced'
-
-	call vundle#end()
-
 	""""""""""""""""""""""""""""""
 	" VCSCommand
 	""""""""""""""""""""""""""""""
@@ -882,16 +888,6 @@ nnoremap <leader>x :Hexmode<CR>
 	map <F3> <esc>:Ag <cword><cr>
 
 	""""""""""""""""""""""""""""""
-	" vim-snipmate
-	""""""""""""""""""""""""""""""
-	let g:snipMate = {}
-	let g:snipMate.scope_aliases = {}
-	let g:snipMate.scope_aliases['javascript'] = 'javascript,javascript-jquery'
-
-	" snippets expand trigger with ,, (Workaround due to <Tab> was stolen by YCM)
-	imap <leader>, <esc>a<Plug>snipMateNextOrTrigger
-
-	""""""""""""""""""""""""""""""
 	" vim-signify
 	""""""""""""""""""""""""""""""
 	let g:signify_vcs_list = [ 'git', 'svn' ]
@@ -912,6 +908,7 @@ nnoremap <leader>x :Hexmode<CR>
 	let g:ycm_confirm_extra_conf = 0
 	let g:ycm_min_num_of_chars_for_completion = 3
 	let g:ycm_key_invoke_completion = '<C-y>'
+	let g:ycm_use_ultisnips_completer = 1
 	nnoremap <C-G> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 	""""""""""""""""""""""""""""""
@@ -929,6 +926,35 @@ nnoremap <leader>x :Hexmode<CR>
 	let Gtags_Auto_Update = 1
 	" Set this on when "set autochdir"
 	let GtagsCscope_Absolute_Path = 1
+
+	""""""""""""""""""""""""""""""
+	" vim-cpp-enhanced-highlight
+	""""""""""""""""""""""""""""""
+	let g:cpp_class_scope_highlight = 1
+	let g:cpp_experimental_template_highlight = 1
+
+	""""""""""""""""""""""""""""""
+	" vim-go
+	""""""""""""""""""""""""""""""
+	let g:go_highlight_functions = 1
+	let g:go_highlight_methods = 1
+	let g:go_highlight_fields = 1
+	let g:go_highlight_types = 1
+	let g:go_highlight_operators = 1
+	let g:go_highlight_build_constraints = 1
+
+	au FileType go nmap <leader>r <Plug>(go-run)
+	au FileType go nmap <leader>b <Plug>(go-build)
+
+	let g:go_fmt_command = "goimports"
+
+	""""""""""""""""""""""""""""""
+	" ultisnips
+	""""""""""""""""""""""""""""""
+	" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+	let g:UltiSnipsExpandTrigger=",,"
+	let g:UltiSnipsJumpForwardTrigger="<c-b>"
+	let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " }}}
 

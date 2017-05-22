@@ -190,6 +190,7 @@ syn keyword cAnsiFunction	sleep usleep
 syn keyword cAnsiFunction	pipe fork execve waitpid
 syn keyword cAnsiFunction	popen pclose writev
 syn keyword cAnsiFunction	mmap munmap
+syn keyword cAnsiFunction	scandir
 
 " Common ANSI-standard Names
 syn keyword	cAnsiName	PRId8 PRIi16 PRIo32 PRIu64
