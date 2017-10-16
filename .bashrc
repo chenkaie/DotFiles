@@ -114,8 +114,9 @@ case $OS in
 		# Linuxbrew
 		if [ -x $HOME/.linuxbrew/bin/brew ]; then
 			export PATH="$HOME/.linuxbrew/bin:$PATH"
-			export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
-			export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
+			export PATH="$(brew --prefix)/bin:$PATH"
+			export MANPATH="$(brew --prefix)/share/man:$MANPATH"
+			export INFOPATH="$(brew --prefix)/share/info:$INFOPATH"
 
 			# brew_bash_completion.sh
 			source $(brew --repository)/completions/bash/brew
@@ -317,7 +318,7 @@ alias sniffHTTPVerbose="sudo ngrep -d 'eth0' -W byline port 80"
 
 #history control, ignorespace & ignoredups
 export HISTCONTROL=ignoreboth
-export HISTSIZE=100000
+export HISTSIZE=200000
 export HISTTIMEFORMAT="%Y-%m-%d_%H:%M:%S_%a  "
 export HISTIGNORE="&:bg:fg:ll:h"
 
