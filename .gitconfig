@@ -15,6 +15,8 @@
 	excludesfile = ~/.gitignore
 
 [alias]
+	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort
+
 	br = branch
 	branchdiff = !bash -c \"git diff `git oldest-ancestor`...$@\"
 	branchdirdiff = !bash -c \"git dirdiff `git oldest-ancestor`...$@\"
