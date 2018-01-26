@@ -584,6 +584,7 @@ compress ()
 		case $FILE in
 		*.tar) shift && tar cf $FILE $* ;;
 		*.tar.bz2) shift && tar cjf $FILE $* ;;
+		*.tar.xz) shift && tar cJf $FILE $* ;;
 		*.tar.gz) shift && tar czf $FILE $* ;;
 		*.tgz) shift && tar czf $FILE $* ;;
 		*.zip) shift && zip $FILE $* ;;
