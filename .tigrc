@@ -19,7 +19,7 @@ set main-view-id = true
 set mouse        = false
 set tab-size     = 4         # Number of spaces to use when expanding tabs
 set split-view-width = 50%
-#set line-graphics = utf-8
+set line-graphics = utf-8
 
 ######################################################
 # Color Setting                                      #
