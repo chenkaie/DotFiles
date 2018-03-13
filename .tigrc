@@ -11,8 +11,8 @@ bind   main       G             none            # Clear commit graph toggling
 bind   generic    G             move-last-line
 #bind  generic    c             @sh -c "tmux set-buffer 'git show-vim %(commit)'"
 bind   generic    c             @sh -c "printf 'git show-vim %.7s' %(commit) | pbcopy-nc"
-bind   main       [             move-prev-merge
-bind   main       ]             move-next-merge
+bind   main       ]             move-prev-merge
+bind   main       [             move-next-merge
 
 ######################################################
 # View Setting
