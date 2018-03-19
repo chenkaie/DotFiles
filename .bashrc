@@ -884,6 +884,13 @@ function hexstringToBinary() {
 	echo "$1" | xxd -r -p
 }
 
+# Check if your password is pwned
+# usage: checkpw "YourPassword"
+function checkpw() {
+	SHA1=$(echo -n "$1" | sha1sum); curl -s https://api.pwnedpasswords.com/range/${SHA1:0:5} | grep -i ${SHA1:5:35}
+	[ $? -eq 0 ] && echo "Oh no - pwned!!!" || echo "Safe!!!"
+}
+
 # Automatically add completion for all aliases to commands having completion functions
 function alias_completion {
     local namespace="alias_completion"
