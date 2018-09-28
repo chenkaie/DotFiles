@@ -13,6 +13,7 @@
 	whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
 	autocrlf = false
 	excludesfile = ~/.gitignore
+	commitGraph = true
 
 [alias]
 	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort
@@ -57,7 +58,7 @@
 	show-vim = "!f() { git dirdiff $1^ $1; }; f"
 
 	;sync = "!git stash; git pull --rebase --all; git push --all; git stash pop"
-	sync-r = "!git stash; git pull --no-rebase --all; git stash pop"
+	sync-r = "!git stash; git pull --no-rebase --all --tags; git remote prune origin; git pr clean; git stash pop"
 
 	; Undo a `git push`
 	undopush = push -f origin HEAD^:develop
@@ -68,6 +69,9 @@
 	# Use $1 instead of 'HEAD' if given
 	# Use $2 instead of curent branch if given
 	child = "!bash -c 'git log --format=%h --reverse --ancestry-path ${1:-HEAD}..${2:\"$(git rev-parse --abbrev-ref HEAD)\"} | head -1' -"
+
+	# Rebase onto origin/develop and test by push --dry-run
+	rebase-and-push = "!git fetch origin && git rebase origin/develop && git push -n --force-with-lease"
 
 [branch]
 	autosetupmerge = true
@@ -108,3 +112,9 @@
 [pager]
 	diff = diff-so-fancy | less --tabs=4 -RFX
 	show = diff-so-fancy | less --tabs=4 -RFX
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
