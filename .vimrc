@@ -86,6 +86,7 @@ set nocompatible
 	Plugin 'fatih/vim-go'
 	Plugin 'SirVer/ultisnips'
 	Plugin 'honza/vim-snippets'
+	Plugin 'martinda/Jenkinsfile-vim-syntax'
 
 	call vundle#end()
 
