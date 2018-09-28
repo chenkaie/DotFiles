@@ -138,6 +138,7 @@ case $OS in
 		exist colorgcc && export CC="colorgcc"
 
 		# UBNT
+		alias get_fw_version_string='hexdump -e '\''128/1 "%c""\n"'\'' -s4 -n64 $1'
 		#export UBNT_SECURITY=off
 		export UBNT_MIDDLEWARE_LOCAL=on
 		export DLDIR=$HOME/dl
@@ -241,7 +242,7 @@ alias pwd-mac='pwd | sed "s/^\//\/Volumes\/kent\//"'
 # A simple python http file server
 alias hfs='python -m SimpleHTTPServer 8080'
 #
-alias python="PYTHONSTARTUP=$TOOLS/inpy python"
+#alias python="PYTHONSTARTUP=$TOOLS/inpy python"
 
 #Personal Help
 alias l?='cat ~/.bashrc | grep "alias l.*=.ls" | grep ^a'
@@ -688,6 +689,12 @@ function lgcc ()
 	gcc -o ${1%.*}{.out,.${1##*.}} $2 $3 $4 $5
 }
 
+# lazy g++, default outfile: filename_prefix.out, eg: hello.cpp -> hello.out
+function lg++ ()
+{
+	g++ -std=c++11 -o ${1%.*}{.out,.${1##*.}} $2 $3 $4 $5
+}
+
 # lazy arm-linux-gcc, default outfile: filename_prefix.platform.out, eg: hello.c -> hello.arm.out
 function lagcc ()
 {
@@ -889,6 +896,11 @@ function hexstringToBinary() {
 function checkpw() {
 	SHA1=$(echo -n "$1" | sha1sum); curl -s https://api.pwnedpasswords.com/range/${SHA1:0:5} | grep -i ${SHA1:5:35}
 	[ $? -eq 0 ] && echo "Oh no - pwned!!!" || echo "Safe!!!"
+}
+
+# Find the default top 20 or top N `$1` largest files under current folder
+function largest() {
+	find . -type f  -exec du -h {} + | sort -r -h | head -n ${1:-20}
 }
 
 # Automatically add completion for all aliases to commands having completion functions
