@@ -63,6 +63,9 @@
 	; Undo a `git push`
 	undopush = push -f origin HEAD^:develop
 
+	# use --set-upstream by default
+	pushu = push -u
+
 	zip = !git archive --format tar.gz -o $(git log --date=short --pretty=format:"%ad" -1).tar.gz HEAD
 
 	# Get the child commit of the current commit
@@ -70,8 +73,8 @@
 	# Use $2 instead of curent branch if given
 	child = "!bash -c 'git log --format=%h --reverse --ancestry-path ${1:-HEAD}..${2:\"$(git rev-parse --abbrev-ref HEAD)\"} | head -1' -"
 
-	# Rebase onto origin/develop and test by push --dry-run
-	rebase-and-push = "!git fetch origin && git rebase origin/develop && git push -n --force-with-lease"
+	# Rebase onto origin/${1:-develop} and test by push --dry-run
+	rebase-and-push = "!f() { tgt_branch=${1:-develop}; git pull origin || git branch --set-upstream-to=origin/$(git rev-parse --abbrev-ref HEAD) && git fetch origin && git rebase origin/${tgt_branch} && git branch --set-upstream-to=origin/$(git rev-parse --abbrev-ref HEAD) && git push -n --force-with-lease && git push --force-with-lease; }; f"
 
 [branch]
 	autosetupmerge = true
@@ -118,3 +121,6 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+
+[rerere]
+	enabled = true
