@@ -76,6 +76,15 @@
 	# Rebase onto origin/${1:-develop} and test by push --dry-run
 	rebase-and-push = "!f() { tgt_branch=${1:-develop}; git pull origin || git branch --set-upstream-to=origin/$(git rev-parse --abbrev-ref HEAD) && git fetch origin && git rebase origin/${tgt_branch} && git branch --set-upstream-to=origin/$(git rev-parse --abbrev-ref HEAD) && git push -n --force-with-lease && git push --force-with-lease; }; f"
 
+	# sort git tags by date
+	tags = tag --sort=v:refname
+
+	# verbose tags info
+	tags-verbose = !"git for-each-ref \
+	--sort=taggerdate \
+	--format '%(tag)_,,,_%(taggerdate:raw)_,,,_%(taggername)_,,,_%(subject)' refs/tags \
+	| awk 'BEGIN { FS = \"_,,,_\"  } ; { t=strftime(\"%Y-%m-%d  %H:%M\",$2); printf \"%-20s %-18s %-25s %s\\n\", t, $1, $4, $3  }'"
+
 [branch]
 	autosetupmerge = true
 	autosetuprebase = always

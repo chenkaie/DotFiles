@@ -912,6 +912,11 @@ nnoremap <leader>x :Hexmode<CR>
 	let g:ycm_use_ultisnips_completer = 1
 	nnoremap <C-G> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
+	let g:ycm_use_clangd = 0
+	" Let clangd fully control code completion
+	let g:ycm_clangd_uses_ycmd_caching = 0
+	let g:ycm_clangd_args = ['-log=verbose', '-pretty']
+
 	""""""""""""""""""""""""""""""
 	" vim-expand-region
 	""""""""""""""""""""""""""""""

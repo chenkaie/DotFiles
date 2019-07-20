@@ -13,6 +13,7 @@ bind   generic    G             move-last-line
 bind   generic    c             @sh -c "printf 'git show-vim %.7s' %(commit) | pbcopy-nc"
 bind   main       ]             move-prev-merge
 bind   main       [             move-next-merge
+bind   main       .             @sh -c "git log --format=%h --reverse --ancestry-path %(commit)..\"$(git rev-parse --abbrev-ref HEAD)\" | head -n1 | pbcopy-nc"
 
 ######################################################
 # View Setting

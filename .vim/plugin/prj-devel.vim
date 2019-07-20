@@ -38,14 +38,16 @@ if has("cscope")
 	""""""""
 	" UBNT "
 	""""""""
-	let s:gen2_modules =
-	\ ['$HOME/project/aircam-gm-gen2/sources',
-	\  '$HOME/project/aircam-gm-gen2/packages-other',
+	let s:gen2_modules = [
+	\  '$HOME/project/unifi-video-firmware-gen2/packages-other',
+	\  '$HOME/project/build_dir_target',
 	\  '$HOME/project/uClibc',
-	\  '$HOME/project/linux-2.6.38.8']
+	\  '$HOME/project/linux-2.6.38.8'
+	\ ]
 	command! -nargs=* GEN2 call GEN2()
 	function! GEN2()
 		echohl Wildmenu | echo "<<<<< Use GEN2 related cscope/tags >>>>>" | echohl None
+		set cscopeprg=cscope
 		let i = 0
 		while i < len(s:gen2_modules)
 			exe "cs add " . s:gen2_modules[i] . "/cscope.out " . resolve(expand(s:gen2_modules[i]))
@@ -54,18 +56,36 @@ if has("cscope")
 		endwhile
 	endfunction
 
-	let s:gen3_modules =
-	\ ['$HOME/project/aircam-gm-gen3/sources',
-	\  '$HOME/project/aircam-gm-gen3/packages-other',
+	let s:gen3_modules = [
+	\  '$HOME/project/unifi-video-firmware-codetrace/',
 	\  '$HOME/project/uClibc',
-	\  '$HOME/project/linux-3.10']
+	\  '$HOME/project/linux-3.10'
+	\ ]
 	command! -nargs=* GEN3 call GEN3()
 	function! GEN3()
 		echohl Wildmenu | echo "<<<<< Use GEN3 related cscope/tags >>>>>" | echohl None
+		set cscopeprg=cscope
 		let i = 0
 		while i < len(s:gen3_modules)
 			exe "cs add " . s:gen3_modules[i] . "/cscope.out " . resolve(expand(s:gen3_modules[i]))
 			exe "set tags +=" . resolve(expand(s:gen3_modules[i])) . "/tags"
+			let i += 1
+		endwhile
+	endfunction
+
+	let s:gen4_modules = [
+	\  '$HOME/project/unifi-video-firmware-codetrace/',
+	\  '$HOME/project/glibc',
+	\  '$HOME/project/linux-4.9'
+	\ ]
+	command! -nargs=* GEN4 call GEN4()
+	function! GEN4()
+		echohl Wildmenu | echo "<<<<< Use GEN4 related cscope/tags >>>>>" | echohl None
+		set cscopeprg=cscope
+		let i = 0
+		while i < len(s:gen4_modules)
+			exe "cs add " . s:gen4_modules[i] . "/cscope.out " . resolve(expand(s:gen4_modules[i]))
+			exe "set tags +=" . resolve(expand(s:gen4_modules[i])) . "/tags"
 			let i += 1
 		endwhile
 	endfunction

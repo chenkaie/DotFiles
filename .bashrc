@@ -189,6 +189,7 @@ alias lsd='ls --group-directories-first'        # cool... but break the autocomp
 
 alias vim='vim -X -p'
 alias vi='vim'
+alias vim-git-m='vim $(git diff --name-only --diff-filter=AM)'
 alias cp='cp -i -v'
 alias mv='mv -i -v'
 alias rm='rm -i -v'
@@ -481,7 +482,7 @@ export PS4='+ \011\e[1;30m\t\011\e[1;34m${BASH_SOURCE}\e[0m:\e[1;36m${LINENO}\e[
 # enable commands in one terminal to be instantly be available in another
 #export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
-export PROMPT_COMMAND="ps1_chk_exitcode; history -a; $PROMPT_COMMAND"
+export PROMPT_COMMAND="ps1_chk_exitcode; history -a"
 
 #export MANPAGER="most -s"
 # Less Colors for Man Pages
