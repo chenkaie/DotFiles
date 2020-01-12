@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Wed Dec 16, 2015  02:09AM
+" Last Modified: Mon Jan 13, 2020  12:59AM
 " ==============================================================================
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -31,10 +31,10 @@ set nocompatible
 	filetype off " required
 	set runtimepath+=~/.vim/bundle/Vundle.vim
 	call vundle#begin()
-	
+
 	" let Vundle manage Vundle, required
 	Plugin 'VundleVim/Vundle.vim'
-	
+
 	Plugin 'gregsexton/gitv'
 	Plugin 'majutsushi/tagbar'
 	Plugin 'OmniCppComplete'
@@ -43,7 +43,8 @@ set nocompatible
 	Plugin 'matrix.vim--Yang'
 	Plugin 'chenkaie/DirDiff.vim'
 	Plugin 'chenkaie/smarthomekey.vim'
-	Plugin 'Lokaltog/vim-powerline'
+	Plugin 'vim-airline/vim-airline'
+	Plugin 'vim-airline/vim-airline-themes'
 	Plugin 'EasyMotion'
 	Plugin 'Tabular'
 	Plugin 'CSApprox'
@@ -87,6 +88,7 @@ set nocompatible
 	Plugin 'SirVer/ultisnips'
 	Plugin 'honza/vim-snippets'
 	Plugin 'martinda/Jenkinsfile-vim-syntax'
+	"Plugin 'ryanoasis/vim-devicons'
 
 	call vundle#end()
 
@@ -868,15 +870,10 @@ nnoremap <leader>x :Hexmode<CR>
 	nnoremap <leader>i :IndentGuidesToggle<CR>
 
 	""""""""""""""""""""""""""""""
-	" Powerline
+	" vim-airline
 	""""""""""""""""""""""""""""""
-	let g:Powerline_dividers_override = [ [0x2b80], [0x003e], [0x2b82], [0x003c] ]
-	if OS == "Darwin"
-		let g:Powerline_symbols='fancy'
-	else
-		let g:Powerline_symbols='fancy'
-	endif
-	"call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
+	let g:airline_powerline_fonts = 1
+	let g:airline#extensions#hunks#enabled = 0
 
 	""""""""""""""""""""""""""""""
 	" CtrlP
@@ -1189,10 +1186,10 @@ nmap <leader>M :call MBPR()<CR>
 
 " Ref: https://github.com/vivien/vim-addon-linux-coding-style
 function s:LinuxHighlighting()
-    highlight default link LinuxError ErrorMsg
-    syn match LinuxError / \+\ze\t/     " spaces before tab
-    syn match LinuxError /\s\+$/        " trailing whitespaces
-    "syn match LinuxError /\%81v.\+/     " virtual column 81 and more
+	highlight default link LinuxError ErrorMsg
+	syn match LinuxError / \+\ze\t/     " spaces before tab
+	syn match LinuxError /\s\+$/        " trailing whitespaces
+	"syn match LinuxError /\%81v.\+/     " virtual column 81 and more
 endfunction
 
 " }}}
