@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Mon Jan 13, 2020  12:59AM
+" Last Modified: Fri Jan 17, 2020  01:18AM
 " ==============================================================================
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -88,6 +88,8 @@ set nocompatible
 	Plugin 'SirVer/ultisnips'
 	Plugin 'honza/vim-snippets'
 	Plugin 'martinda/Jenkinsfile-vim-syntax'
+	Plugin 'tmux-plugins/vim-tmux'
+	Plugin 'mtdl9/vim-log-highlighting'
 	"Plugin 'ryanoasis/vim-devicons'
 
 	call vundle#end()

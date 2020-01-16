@@ -221,7 +221,7 @@ exist htop && alias top='htop'
 
 # `cat` with beautiful colors. (GH:paulirish/dotfiles)
 alias c='pygmentize -O style=monokai -f console256 -g'
-alias brew_update="brew -v update; brew -v upgrade --all; brew cleanup; brew cask cleanup; brew prune; brew doctor"
+alias brew_update="brew -v update; brew -v upgrade; brew cleanup; brew cask cleanup; brew prune; brew doctor"
 
 #export GREP_OPTIONS="--exclude-dir=\*/.svn/\* --exclude=\*~ --exclude=\*.swp"
 #alias wcgrep='wcgrep -inh --colour=auto' has been defined in wcgrep
