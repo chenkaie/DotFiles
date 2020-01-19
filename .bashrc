@@ -523,7 +523,7 @@ source $DOTFILES/completion/acd_func.sh
 source $DOTFILES/completion/hub.bash_completion.sh
 source $DOTFILES/completion/bash_completion_tmux.sh
 source $DOTFILES/completion/godir-completion.sh
-source $DOTFILES/completion/repo.bash_completion
+source $DOTFILES/completion/bash_completion && _bcpp --defaults
 # aws cli completion
 complete -C aws_completer aws
 
