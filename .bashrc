@@ -72,6 +72,9 @@ case $OS in
 			# bash_completion if installed
 			if [ -f `brew --prefix`/etc/bash_completion ]; then
 				. `brew --prefix`/etc/bash_completion
+				for i in brew tmux git-prompt.sh git-completion.bash tig-completion.bash; do
+					. `brew --prefix`/etc/bash_completion.d/$i
+				done
 			fi
 
 			# brew_bash_completion.sh
@@ -508,22 +511,18 @@ if [ -d "$DOTFILES/ascii-photo" ]; then
 	filepath=($DOTFILES/ascii-photo/*)
 	nfile=${#filepath[@]}
 	asciiwp="${filepath[RANDOM % nfile]}"
-	cat $asciiwp
+	#cat $asciiwp
 fi
 
 # Completion support
-[ -z "$BASH_COMPLETION_COMPAT_DIR" ] && source $DOTFILES/completion/bash-completion/bash_completion
 source $DOTFILES/completion/svn_completion
-source $DOTFILES/completion/git-completion.bash
-source $DOTFILES/completion/git-prompt.sh
 source $DOTFILES/completion/cdargs-bash.sh
 source $DOTFILES/completion/cdots.sh
-source $DOTFILES/completion/git-flow-completion.bash
 source $DOTFILES/completion/acd_func.sh
 source $DOTFILES/completion/hub.bash_completion.sh
-source $DOTFILES/completion/bash_completion_tmux.sh
 source $DOTFILES/completion/godir-completion.sh
-source $DOTFILES/completion/bash_completion && _bcpp --defaults
+source $DOTFILES/completion/bash-complete-partial-path && _bcpp --defaults
+#source $DOTFILES/completion/repo.bash_completion
 # aws cli completion
 complete -C aws_completer aws
 
