@@ -70,16 +70,11 @@ case $OS in
 			export MANPATH=/usr/local/share/man:$MANPATH
 
 			# bash_completion if installed
-			if [ -f `brew --prefix`/etc/bash_completion ]; then
-				. `brew --prefix`/etc/bash_completion
+			if [ -r $(brew --prefix)/etc/profile.d/bash_completion.sh ]; then
+				. "$(brew --prefix)/etc/profile.d/bash_completion.sh"
 				for i in brew tmux git-prompt.sh git-completion.bash tig-completion.bash; do
-					. `brew --prefix`/etc/bash_completion.d/$i
+					. $(brew --prefix)/etc/bash_completion.d/$i
 				done
-			fi
-
-			# brew_bash_completion.sh
-			if [ -f `brew --prefix`/Library/Contributions/brew_bash_completion.sh ]; then
-				. `brew --prefix`/Library/Contributions/brew_bash_completion.sh
 			fi
 		fi
 
@@ -121,8 +116,13 @@ case $OS in
 			export MANPATH="$(brew --prefix)/share/man:$MANPATH"
 			export INFOPATH="$(brew --prefix)/share/info:$INFOPATH"
 
-			# brew_bash_completion.sh
-			source $(brew --repository)/completions/bash/brew
+			# bash_completion if installed
+			if [ -r $(brew --prefix)/etc/profile.d/bash_completion.sh ]; then
+				. "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+				for i in brew tmux git-prompt.sh git-completion.bash tig-completion.bash; do
+					. $(brew --prefix)/etc/bash_completion.d/$i
+				done
+			fi
 		fi
 
 		# PATH
