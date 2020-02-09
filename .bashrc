@@ -111,7 +111,6 @@ case $OS in
 
 		# Linuxbrew
 		if [ -x $HOME/.linuxbrew/bin/brew ]; then
-			export PATH="$HOME/.linuxbrew/bin:$PATH"
 			export PATH="$(brew --prefix)/bin:$PATH"
 			export MANPATH="$(brew --prefix)/share/man:$MANPATH"
 			export INFOPATH="$(brew --prefix)/share/info:$INFOPATH"
@@ -253,6 +252,7 @@ alias l?='cat ~/.bashrc | grep "alias l.*=.ls" | grep ^a'
 alias a?='alias'
 alias f?='cat $DOTFILES/.function.help'
 alias dn='OPTIONS=$(\ls -F | grep /$); select s in $OPTIONS; do cd $PWD/$s; break;done'
+alias jumpserver='OPTIONS=$(grep "Host ufp" ~/.ssh/config | sort | awk '\''{print $2}'\''); select s in $OPTIONS; do ssh $s; break; done'
 #alias help='OPTIONS=$(\ls $DOTFILES/.tips -F);select s in $OPTIONS; do less $DOTFILES/.tips/$s; break;done'
 
 #delete

@@ -17,6 +17,4 @@ augroup filetypedetect
     au BufRead svn-commit.*tmp,COMMIT_EDITMSG :set spell
     " Syntax file for jQuery
     au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery synmaxcol=256
-    " Use better colorscheme for GoLang
-    au BufRead *.go* colorscheme molokai | call Pl#Load()
 augroup END
