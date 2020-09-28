@@ -46,6 +46,7 @@
 	prdirdiff = !git dirdiff develop...
 	prlog = !git log develop..
 	prtig = !tig develop..
+	prcr = "!f() { git pr $1 && git dirdiff develop...; }; f"
 
 	; git-flow: What else PRs to be merged between this branch and develop
 	pr2merge = "!f() { git log --merges --pretty=format:\"%ai '%h' %s <%an>\" ..develop | grep \"Merge pull request\" | sort; }; f"

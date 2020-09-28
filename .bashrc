@@ -137,7 +137,7 @@ case $OS in
 		# Python
 		[ -s "$HOME/.pythonbrew/etc/bashrc" ] && source "$HOME/.pythonbrew/etc/bashrc"
 
-		exist colorgcc && export CC="colorgcc"
+		#exist colorgcc && export CC="colorgcc"
 
 		# UBNT
 		alias get_fw_version_string='hexdump -e '\''128/1 "%c""\n"'\'' -s4 -n64 $1'
@@ -252,7 +252,6 @@ alias l?='cat ~/.bashrc | grep "alias l.*=.ls" | grep ^a'
 alias a?='alias'
 alias f?='cat $DOTFILES/.function.help'
 alias dn='OPTIONS=$(\ls -F | grep /$); select s in $OPTIONS; do cd $PWD/$s; break;done'
-alias jumpserver='OPTIONS=$(grep "Host ufp" ~/.ssh/config | sort | awk '\''{print $2}'\''); select s in $OPTIONS; do ssh $s; break; done'
 #alias help='OPTIONS=$(\ls $DOTFILES/.tips -F);select s in $OPTIONS; do less $DOTFILES/.tips/$s; break;done'
 
 #delete
@@ -277,7 +276,7 @@ alias mall='mca && m && mi'
 
 #gcc
 exist colorgcc && MY_GCC=colorgcc || MY_GCC=gcc
-MY_CC_FLAGS='-Wall -Wextra -Wconversion -ggdb3 -fno-omit-frame-pointer -fno-inline -Wcast-align -Wpadded -Wpacked -std=gnu99'
+MY_CC_FLAGS='-Wall -Wextra -Wconversion -ggdb3 -fno-omit-frame-pointer -fno-inline -Wcast-align -Wpadded -Wpacked -std=gnu99 -v'
 
 alias agcc='arm-linux-gcc ${MY_CC_FLAGS}'
 alias gcc='$MY_GCC ${MY_CC_FLAGS}'
@@ -692,7 +691,7 @@ function lgcc ()
 # lazy g++, default outfile: filename_prefix.out, eg: hello.cpp -> hello.out
 function lg++ ()
 {
-	g++ -std=c++11 -o ${1%.*}{.out,.${1##*.}} $2 $3 $4 $5
+	g++ -std=c++11 -O0 -ggdb3 -fno-omit-frame-pointer -fno-inline -Wcast-align -Wpadded -Wpacked -o ${1%.*}{.out,.${1##*.}} $2 $3 $4 $5
 }
 
 # lazy arm-linux-gcc, default outfile: filename_prefix.platform.out, eg: hello.c -> hello.arm.out
@@ -957,6 +956,22 @@ function alias_completion {
     done < <(alias -p | sed -Ene "s/$alias_regex/\1 '\2' '\3'/p")
     source "$tmp_file" && rm -f "$tmp_file"
 }; alias_completion
+
+
+# inspired by Jumpserver open source project
+# $ jumpanyserver "type" "host-string"
+function jumpanyserver() {
+	hosts=$(grep "$1" ~/.ssh/config | sort | awk '{print $2}' | grep "${2:-}")
+	select s in $hosts; do ssh $s; break; done
+}
+# $ jumpserver "host-string"
+function jumpserver() {
+	jumpanyserver "Host ufp" "$1"
+}
+# $ jumpjenkins "host-string"
+function jumpjenkins() {
+	jumpanyserver "Host jenkins" "$1"
+}
 
 #######################
 # EXIT                #

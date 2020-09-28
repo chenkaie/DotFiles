@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Fri Jan 17, 2020  01:18AM
+" Last Modified: Mon Apr 13, 2020  01:26AM
 " ==============================================================================
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -90,7 +90,10 @@ set nocompatible
 	Plugin 'martinda/Jenkinsfile-vim-syntax'
 	Plugin 'tmux-plugins/vim-tmux'
 	Plugin 'mtdl9/vim-log-highlighting'
+	Plugin 'tomasiser/vim-code-dark'
+	Plugin 'kylef/apiblueprint.vim'
 	"Plugin 'ryanoasis/vim-devicons'
+	"Plugin 'zxqfl/tabnine-vim'
 
 	call vundle#end()
 

@@ -57,7 +57,7 @@ if has("cscope")
 	endfunction
 
 	let s:gen3_modules = [
-	\  '$HOME/project/unifi-video-firmware-codetrace/',
+	\  '$HOME/project/unifi-video-firmware-codetrace/packages/',
 	\  '$HOME/project/uClibc',
 	\  '$HOME/project/linux-3.10'
 	\ ]
@@ -74,7 +74,7 @@ if has("cscope")
 	endfunction
 
 	let s:gen4_modules = [
-	\  '$HOME/project/unifi-video-firmware-codetrace/',
+	\  '$HOME/project/unifi-video-firmware-codetrace/packages/',
 	\  '$HOME/project/glibc',
 	\  '$HOME/project/linux-4.9'
 	\ ]

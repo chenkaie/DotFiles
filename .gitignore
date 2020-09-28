@@ -12,3 +12,9 @@ cscope.*out
 tags
 *.pyc
 .vnc
+rel-preload_image.bin
+rel-root_fs
+rel-firmware.bin
+rel-artifacts
+rootfs-owrt
+rootfs-ubnt
