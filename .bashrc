@@ -76,6 +76,9 @@ case $OS in
 					. $(brew --prefix)/etc/bash_completion.d/$i
 				done
 			fi
+			# homebrew-command-not-found
+			HB_CNF_HANDLER="$(brew --prefix)/Homebrew/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
+			[ -f "$HB_CNF_HANDLER" ] && source "$HB_CNF_HANDLER"
 		fi
 
 		# PATH
@@ -204,7 +207,7 @@ alias less='less -R --tabs=4'                   # colorful 'less', tab stops = 4
 alias more='less'
 alias mkdir='mkdir -p -v'
 alias reload='source ~/.bashrc'
-alias wget='wget -c'
+alias wget='aria2c -x 16 -s 16 --retry-wait=1'
 alias which='type -a'
 alias quota='quota -vs'
 alias grep='grep --color'
@@ -214,6 +217,7 @@ alias netstat='netstat -np'
 alias strings='strings -a'
 alias dig="dig +nocmd any +multiline +noall +answer"
 alias xmllint='xmllint --noout'
+alias cat='bat -p'
 
 # more responsive -f
 support "tail -s.1 /dev/null" && alias tail='tail -n $((${LINES:-12}-2)) -s.1'
@@ -674,13 +678,12 @@ function repeat()
 	done
 }
 
+# [ALTERNATIVE] `fd`: a simple, fast and user-friendly alternative to find.
+# https://github.com/sharkdp/fd
+#
 # Find a file with pattern $1 in name and Execute $2 on it:
 function fe()
 { wcfind . -type f -iname '*'${1:-}'*' -exec ${2:-ls} {} \;  ; }
-
-# Find with pattern $1 in name
-function fnd()
-{ wcfind . -iname '*'${1:-}'*' ; }
 
 # lazy gcc, default outfile: filename_prefix.out, eg: hello.c -> hello.out
 function lgcc ()
