@@ -66,7 +66,7 @@ case $OS in
 
 		# Homebrew stuff
 		if [ -x /usr/local/bin/brew ]; then
-			export PATH=$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:/usr/local/sbin:$PATH
+			export PATH=$(brew --prefix coreutils)/libexec/gnubin:$(brew --prefix grep)/libexec/gnubin:$(brew --prefix findutils)/libexec/gnubin:/usr/local/bin:/usr/local/sbin:$PATH
 			export MANPATH=/usr/local/share/man:$MANPATH
 
 			# bash_completion if installed
@@ -409,7 +409,7 @@ __svn_ps1 ()
 	printf "${1:- (%s:%s)}" $result $revision
 }
 
-PROMPT_SVN='$(__svn_ps1 "|'$TXTCYN'svn'$TXTRST':%s-r%s")'
+#PROMPT_SVN='$(__svn_ps1 "|'$TXTCYN'svn'$TXTRST':%s-r%s")'
 
 ps1_set()
 {
