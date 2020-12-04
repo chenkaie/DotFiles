@@ -90,6 +90,41 @@ if has("cscope")
 		endwhile
 	endfunction
 
+	let s:gen3s_modules = [
+	\  '$HOME/project/unifi-video-firmware-codetrace/packages/',
+	\  '$HOME/project/glibc',
+	\  '$HOME/dl/sstar-sdk-pretzel-gcc-8.2.1/kernel',
+	\  '$HOME/dl/sstar-sdk-pretzel-gcc-8.2.1/project/release/ipc',
+	\  '$HOME/.ubnt/cache/gen3s/barebones/staging_dir/target-arm-openwrt-linux-gnu_glibc/usr'
+	\ ]
+	command! -nargs=* GEN3S call GEN3S()
+	function! GEN3S()
+		echohl Wildmenu | echo "<<<<< Use GEN3S related cscope/tags >>>>>" | echohl None
+		set cscopeprg=cscope
+		let i = 0
+		while i < len(s:gen3s_modules)
+			exe "cs add " . s:gen3s_modules[i] . "/cscope.out " . resolve(expand(s:gen3s_modules[i]))
+			exe "set tags +=" . resolve(expand(s:gen3s_modules[i])) . "/tags"
+			let i += 1
+		endwhile
+	endfunction
+
+	let s:ufp_sfl_modules = [
+	\  '$HOME/project/protect-eot-firmware-codetrace',
+	\  '$HOME/project/uClibc'
+	\ ]
+	command! -nargs=* UFPSFL call UFPSFL()
+	function! UFPSFL()
+		echohl Wildmenu | echo "<<<<< Use UFPSFL related cscope/tags >>>>>" | echohl None
+		set cscopeprg=cscope
+		let i = 0
+		while i < len(s:ufp_sfl_modules)
+			exe "cs add " . s:ufp_sfl_modules[i] . "/cscope.out " . resolve(expand(s:ufp_sfl_modules[i]))
+			exe "set tags +=" . resolve(expand(s:ufp_sfl_modules[i])) . "/tags"
+			let i += 1
+		endwhile
+	endfunction
+
 endif
 
 

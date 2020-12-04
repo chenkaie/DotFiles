@@ -15,4 +15,6 @@ augroup filetypedetect
     au BufRead svn-commit.*tmp,COMMIT_EDITMSG :set spell
     " Syntax file for jQuery
     au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery synmaxcol=256
+	" generate a preview of the Refract structure for your API Blueprint in a split.
+	au FileType apiblueprint nnoremap <leader>b :call GenerateRefract()<cr>
 augroup END

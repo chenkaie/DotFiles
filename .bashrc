@@ -688,7 +688,7 @@ function fe()
 # lazy gcc, default outfile: filename_prefix.out, eg: hello.c -> hello.out
 function lgcc ()
 {
-	gcc -o ${1%.*}{.out,.${1##*.}} $2 $3 $4 $5
+	gcc -o ${1%.*}{.out,.${1##*.}} $2 $3 $4 $5 -lpthread
 }
 
 # lazy g++, default outfile: filename_prefix.out, eg: hello.cpp -> hello.out

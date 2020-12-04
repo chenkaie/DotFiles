@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Mon Apr 13, 2020  01:26AM
+" Last Modified: Fri Dec 04, 2020  11:36AM
 " ==============================================================================
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -41,7 +41,8 @@ set nocompatible
 	Plugin 'Shougo/neocomplcache'
 	"Plugin 'clang-complete'
 	Plugin 'matrix.vim--Yang'
-	Plugin 'chenkaie/DirDiff.vim'
+	"Plugin 'chenkaie/DirDiff.vim'
+	Plugin 'will133/vim-dirdiff'
 	Plugin 'chenkaie/smarthomekey.vim'
 	Plugin 'vim-airline/vim-airline'
 	Plugin 'vim-airline/vim-airline-themes'
@@ -92,8 +93,10 @@ set nocompatible
 	Plugin 'mtdl9/vim-log-highlighting'
 	Plugin 'tomasiser/vim-code-dark'
 	Plugin 'kylef/apiblueprint.vim'
-	"Plugin 'ryanoasis/vim-devicons'
+	Plugin 'jyelloz/vim-dts-indent'
 	"Plugin 'zxqfl/tabnine-vim'
+	Plugin 'APZelos/blamer.nvim'
+	Plugin 'rhysd/git-messenger.vim'
 
 	call vundle#end()
 
@@ -602,7 +605,7 @@ endif
 	" cscope
 	""""""""""""""""""""""""""""""
 	" init cscope hotkey
-	let s:CscopeTagsDB = "/media/kent/SSD/project/unifi-video-firmware-rel/packages-other"
+	let s:CscopeTagsDB = "$HOME/project/unifi-video-firmware-codetrace/packages/"
 	function! UseAwesomeCscope()
 		let l:srcdir=(isdirectory("../src") ? '../' : './')
 		try
@@ -623,7 +626,7 @@ endif
 				echohl Wildmenu | echo "cscope file not found, exec tag_rebuild" | echohl None
 			catch
 				exe "redraw!"
-				echohl ErrorMsg | echo "You don't have enough privilege XD, just add Horus db." | echohl None
+				echohl ErrorMsg | echo "You don't have enough privilege XD, just adding common db." | echohl None
 				exe "cs add " . s:CscopeTagsDB . "/cscope.out " . resolve(expand(s:CscopeTagsDB))
 			endtry
 		endtry
@@ -966,6 +969,16 @@ nnoremap <leader>x :Hexmode<CR>
 	let g:UltiSnipsExpandTrigger=",,"
 	let g:UltiSnipsJumpForwardTrigger="<c-b>"
 	let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+	""""""""""""""""""""""""""""""
+	" blamer (for git)
+	""""""""""""""""""""""""""""""
+	let g:blamer_delay = 500
+	let g:blamer_enabled = 1
+	let g:blamer_show_in_visual_modes = 0
+	let g:blamer_show_in_insert_modes = 0
+	let g:blamer_date_format = '%Y/%m/%d'
+	highlight Blamer ctermfg=244 ctermbg=236
 
 " }}}
 

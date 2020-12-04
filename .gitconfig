@@ -59,7 +59,7 @@
 	show-vim = "!f() { git dirdiff $1^ $1; }; f"
 
 	;sync = "!git stash; git pull --rebase --all; git push --all; git stash pop"
-	sync-r = "!git stash; git pull --no-rebase --all --tags; git remote prune origin; git pr clean; git stash pop"
+	sync-r = "!git stash; git pull --no-rebase --all --tags; git remote prune origin; git pr clean; git stash pop; git submodule update"
 
 	; Undo a `git push`
 	undopush = push -f origin HEAD^:develop
