@@ -194,8 +194,8 @@ alias lsd='ls --group-directories-first'        # cool... but break the autocomp
 
 alias vim='vim -X -p'
 alias vi='vim'
-alias vim-git-m='vim $(git ls-files -m)'        # Use `git add -N newfile` to catch new file
-alias vim-git-ls-files='vim $(git ls-files)'        # Use `git add -N newfile` to catch new file
+alias vim-git-m='vim $(git ls-files -m)'        # use `git add -N newfile` to catch new file
+alias vim-git-ls-files='vim $(git ls-files)'    # edit whole Git'ed files under this path altogether
 alias cp='cp -i -v'
 alias mv='mv -i -v'
 alias rm='rm -i -v'
