@@ -67,6 +67,8 @@
 	# use --set-upstream by default
 	pushu = push -u
 
+	pushf = push --force-with-lease
+
 	zip = !git archive --format tar.gz -o $(git log --date=short --pretty=format:"%ad" -1).tar.gz HEAD
 
 	# Get the child commit of the current commit
@@ -123,9 +125,9 @@
 	; custom git hooks
 	templatedir = ~/.git_template
 
-[pager]
-	diff = diff-so-fancy | less --tabs=4 -RFX
-	show = diff-so-fancy | less --tabs=4 -RFX
+;[pager]
+	;diff = diff-so-fancy | less --tabs=4 -RFX
+	;show = diff-so-fancy | less --tabs=4 -RFX
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
@@ -135,3 +137,19 @@
 
 [rerere]
 	enabled = true
+
+[core]
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	features = line-numbers decorations #side-by-side
+	whitespace-error-style = 22 reverse
+
+[delta "decorations"]
+	commit-decoration-style = bold yellow box ul
+	file-style = bold yellow ul
+	file-decoration-style = none
+

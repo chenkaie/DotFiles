@@ -291,12 +291,12 @@ map <F5> :set spell!<CR><BAR>:echo "Spell check: " . strpart("OffOn", 3 * &spell
 
 if OS == "Darwin"
 	" Use custom fillchars/listchars/showbreak icons
-	set fillchars=vert:│,fold:┄,diff:╱
+	set fillchars=vert:│,fold:┄,diff:\ 
 	set listchars=tab:⋮\ ,trail:⌴,eol:·,precedes:◂,extends:▸
 	set showbreak=↪
 else
 	"Visualize some special chars
-	set fillchars=vert:│,fold:-,diff:╱
+	set fillchars=vert:│,fold:-,diff:\ 
 	set listchars=tab:⋮\ ,trail:⌴,eol:·,precedes:◂,extends:▸
 	" Use below line if you don't have font patched.
 	"set listchars=tab:»\ ,trail:·,eol:$,nbsp:%,extends:>,precedes:<
@@ -545,7 +545,7 @@ nmap tt :call SwitchLastUsedTab()<CR>
 "set diffopt+=iwhite
 " highlight diff color
 hi diffchange ctermbg=237
-hi diffadd ctermbg=20
+hi diffadd ctermbg=22
 hi DiffDelete ctermbg=234
 hi difftext ctermbg=8 ctermfg=none
 
