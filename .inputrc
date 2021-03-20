@@ -11,6 +11,7 @@ set meta-flag on
 set input-meta on
 set output-meta on
 set convert-meta off
+set bind-tty-special-chars off
 
 # This alters the default behavior of the completion functions.
 # If set to 'on', words which have more than one possible completion cause the matches to be listed immediately instead of ringing the bell.
@@ -67,6 +68,17 @@ set skip-completed-text on
 # Ctrl + p/n : history search
 "\C-p": history-search-backward
 "\C-n": history-search-forward
+
+# Ctrl + u/k/y : kill/yank
+"\C-u": unix-line-discard
+"\C-k": kill-line
+"\C-w": unix-word-rubout
+
+# Reload .inputrc
+"\C-x\C-r": re-read-init-file
+
+# Alt+W: send `who`
+"\eW":"who\n"
 
 # Disable CTRL-S and CTRL-Q
 "\C-s": self-insert

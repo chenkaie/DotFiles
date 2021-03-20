@@ -616,7 +616,7 @@ function sysinfo()
 # get public IP
 function myip ()
 {
-	echo "$(dig +short myip.opendns.com @resolver1.opendns.com)"
+	echo "$(curl -s https://api.myip.com)"
 }
 
 # get all IPs
