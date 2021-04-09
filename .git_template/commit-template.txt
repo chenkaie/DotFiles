@@ -1,0 +1,29 @@
+type(scope): summarize changes in around 50 characters or less
+
+More detailed explanatory text, if necessary.  Wrap it to about 72
+characters or so.
+
+Further paragraphs come after blank lines.
+
+- Bullet points are okay, too
+* Asterisk points are okay, too
+
+# --- COMMIT END ---
+
+# Title:
+# type: description
+# type!: description
+# type(scope1|scope2)!: description
+#
+# Optional body:
+#
+# Optional footers:
+# JIRA #UPF-1234
+# BREAKING CHANGE: description
+# Refs: 676104e, a215868
+
+# types = fix, feat, style, refactor, revert, port, hack, update, perf,
+#         bump, chore, test, dbg, diag, docs, version, build, ci, WIP
+
+# scopes = gen.*, ubnt_.+, ubnt-.+, cv2.*, unit-tests, common, cmake, make, sdk, tools,
+#          git, gitlint, config, core, ipc, jenkins, docker

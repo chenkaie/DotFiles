@@ -48,8 +48,8 @@ export LC_ALL=zh_TW.UTF-8
 export LANG=$LC_ALL
 export EDITOR="vim"
 export GREP_OPTIONS='--color=auto'
-export HISTSIZE=1000
-export SAVEHIST=1000
+export HISTSIZE=10000
+export SAVEHIST=10000
 export HISTFILE=~/.history
 export JS_CMD="js"
 
@@ -151,8 +151,10 @@ bindkey "\e[2~" overwrite-mode           # Ins
 bindkey "\e[3~" delete-char              # Delete
 bindkey "\e[4~" end-of-line              # End
 bindkey "\e[8~" end-of-line              # End rxvt
-bindkey "\e[5~" history-search-backward  # PageUp
-bindkey "\e[6~" history-search-forward   # PageDown
+#bindkey "\e[5~" history-search-backward  # PageUp
+#bindkey "\e[6~" history-search-forward   # PageDown
+bindkey "^P" history-search-backward
+bindkey "^N" history-search-forward
 bindkey "^Q" push-line
 bindkey "^G" get-line
 bindkey "^Z" undo

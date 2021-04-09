@@ -7,7 +7,7 @@
 
 [user]
 	name = Kent Chen
-	email = kent.chen@ubnt.com
+	email = kent.chen@ui.com
 
 [core]
 	whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
@@ -67,7 +67,7 @@
 	# use --set-upstream by default
 	pushu = push -u
 
-	pushf = push --force-with-lease
+	pushf = push --force-with-lease --force-if-includes
 
 	zip = !git archive --format tar.gz -o $(git log --date=short --pretty=format:"%ad" -1).tar.gz HEAD
 
@@ -77,7 +77,7 @@
 	child = "!bash -c 'git log --format=%h --reverse --ancestry-path ${1:-HEAD}..${2:\"$(git rev-parse --abbrev-ref HEAD)\"} | head -1' -"
 
 	# Rebase onto origin/${1:-develop} and test by push --dry-run
-	rebase-and-push = "!f() { tgt_branch=${1:-develop}; git pull origin || git branch --set-upstream-to=origin/$(git rev-parse --abbrev-ref HEAD) && git fetch origin && git rebase origin/${tgt_branch} && git branch --set-upstream-to=origin/$(git rev-parse --abbrev-ref HEAD) && git push -n --force-with-lease && git push --force-with-lease; }; f"
+	rebase-and-push = "!f() { tgt_branch=${1:-develop}; git pull origin || git branch --set-upstream-to=origin/$(git rev-parse --abbrev-ref HEAD) && git fetch origin && git rebase origin/${tgt_branch} && git branch --set-upstream-to=origin/$(git rev-parse --abbrev-ref HEAD) && git push -n --force-with-lease --force-if-includes && git push --force-with-lease --force-if-includes; }; f"
 	rap = !git rebase-and-push
 
 	# sort git tags by date
@@ -124,6 +124,9 @@
 [init]
 	; custom git hooks
 	templatedir = ~/.git_template
+
+[commit]
+	template = ~/.git_template/commit-template.txt
 
 ;[pager]
 	;diff = diff-so-fancy | less --tabs=4 -RFX
