@@ -90,6 +90,23 @@ if has("cscope")
 		endwhile
 	endfunction
 
+	let s:gen4c_modules = [
+	\  '$HOME/project/unifi-video-firmware-codetrace/packages/',
+	\  '$HOME/project/glibc',
+	\  '$HOME/project/linux-5.4.61'
+	\ ]
+	command! -nargs=* GEN4C call GEN4C()
+	function! GEN4C()
+		echohl Wildmenu | echo "<<<<< Use GEN4C related cscope/tags >>>>>" | echohl None
+		set cscopeprg=cscope
+		let i = 0
+		while i < len(s:gen4c_modules)
+			exe "cs add " . s:gen4c_modules[i] . "/cscope.out " . resolve(expand(s:gen4c_modules[i]))
+			exe "set tags +=" . resolve(expand(s:gen4c_modules[i])) . "/tags"
+			let i += 1
+		endwhile
+	endfunction
+
 	let s:gen3s_modules = [
 	\  '$HOME/project/unifi-video-firmware-codetrace/packages/',
 	\  '$HOME/project/glibc',
@@ -111,6 +128,7 @@ if has("cscope")
 
 	let s:ufp_sfl_modules = [
 	\  '$HOME/project/protect-eot-firmware-codetrace',
+	\  '$HOME/project/linux-eot-sfl',
 	\  '$HOME/project/uClibc'
 	\ ]
 	command! -nargs=* UFPSFL call UFPSFL()
