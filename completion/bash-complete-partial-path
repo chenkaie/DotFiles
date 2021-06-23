@@ -86,7 +86,8 @@ _bcpp_put_wildcards() {
 # https://stackoverflow.com/a/51061046
 _bcpp_silent_bg() {
     { 2>&3 "$@"& } 3>&2 2>/dev/null
-    builtin disown &>/dev/null  # Prevent whine if job has already completed
+    # Kent@20210624 disable this line to prevent background jobs been disown
+    #builtin disown &>/dev/null  # Prevent whine if job has already completed
     return 0  # do not clutter $? value (last exit code)
 }
 
