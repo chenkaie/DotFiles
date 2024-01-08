@@ -143,6 +143,35 @@ if has("cscope")
 		endwhile
 	endfunction
 
+	let s:eot_lighting_modules = [
+	\  '$HOME/project/eot-lighting-codetrace/packages-other'
+	\ ]
+	command! -nargs=* EOT call EOT()
+	function! EOT()
+		echohl Wildmenu | echo "<<<<< Use EOT related cscope/tags >>>>>" | echohl None
+		set cscopeprg=cscope
+		let i = 0
+		while i < len(s:eot_lighting_modules)
+			exe "cs add " . s:eot_lighting_modules[i] . "/cscope.out " . resolve(expand(s:eot_lighting_modules[i]))
+			exe "set tags +=" . resolve(expand(s:eot_lighting_modules[i])) . "/tags"
+			let i += 1
+		endwhile
+	endfunction
+
+	let s:eot_esp32_modules = [
+	\  '$HOME/project/esp32-uled-instant/main'
+	\ ]
+	command! -nargs=* ESP32 call ESP32()
+	function! ESP32()
+		echohl Wildmenu | echo "<<<<< Use ESP32 related cscope/tags >>>>>" | echohl None
+		set cscopeprg=cscope
+		let i = 0
+		while i < len(s:eot_esp32_modules)
+			exe "cs add " . s:eot_esp32_modules[i] . "/cscope.out " . resolve(expand(s:eot_esp32_modules[i]))
+			exe "set tags +=" . resolve(expand(s:eot_esp32_modules[i])) . "/tags"
+			let i += 1
+		endwhile
+	endfunction
 endif
 
 

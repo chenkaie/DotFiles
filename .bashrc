@@ -8,9 +8,6 @@ export EDITOR=vim
 export LC_ALL=en_US.UTF-8
 export LANG=en_US
 
-# Automatically attach tmux session if exist
-tmux attach-session > /dev/null 2>&1
-
 # Source global definitions
 [ -f /etc/bashrc ] && . /etc/bashrc
 [ -f /etc/profile ] && . /etc/profile
@@ -72,7 +69,7 @@ case $OS in
 			# bash_completion if installed
 			if [ -r $(brew --prefix)/etc/profile.d/bash_completion.sh ]; then
 				. "$(brew --prefix)/etc/profile.d/bash_completion.sh"
-				for i in brew tmux git-prompt.sh git-completion.bash tig-completion.bash; do
+				for i in brew tmux tig-completion.bash; do
 					. $(brew --prefix)/etc/bash_completion.d/$i
 				done
 			fi
@@ -121,7 +118,7 @@ case $OS in
 			# bash_completion if installed
 			if [ -r $(brew --prefix)/etc/profile.d/bash_completion.sh ]; then
 				. "$(brew --prefix)/etc/profile.d/bash_completion.sh"
-				for i in brew tmux git-prompt.sh git-completion.bash tig-completion.bash; do
+				for i in brew tmux tig-completion.bash; do
 					. $(brew --prefix)/etc/bash_completion.d/$i
 				done
 			fi
@@ -163,6 +160,9 @@ esac
 # golang
 export GOPATH=$HOME/usr/gocode
 export PATH=$GOPATH/bin:$PATH
+
+# Automatically attach tmux session if exist
+tmux attach-session > /dev/null 2>&1
 
 #######################
 # Alias               #
@@ -219,6 +219,8 @@ alias strings='strings -a'
 alias dig="dig +nocmd any +multiline +noall +answer"
 alias xmllint='xmllint --noout'
 alias cat='bat -p'
+alias tailer="tail --follow=name --retry"       # follow closely even the file is rotated
+alias sync-r="pcd; git sync-r; mcd; git sync-r; pcd"
 
 # more responsive -f
 support "tail -s.1 /dev/null" && alias tail='tail -n $((${LINES:-12}-2)) -s.1'
@@ -526,6 +528,7 @@ source $DOTFILES/completion/acd_func.sh
 source $DOTFILES/completion/hub.bash_completion.sh
 source $DOTFILES/completion/godir-completion.sh
 source $DOTFILES/completion/bash-complete-partial-path && _bcpp --defaults
+source $DOTFILES/completion/git-completion.bash
 #source $DOTFILES/completion/repo.bash_completion
 # aws cli completion
 complete -C aws_completer aws
@@ -736,6 +739,11 @@ function lagcc ()
 	agcc -o ${1%.*}{.${outfilesuffix}.out,.${1##*.}} $2 $3 $4 $5
 }
 
+function lag++ ()
+{
+	arm-linux-g++ -std=c++11 -O0 -ggdb3 -fno-omit-frame-pointer -fno-inline -Wall -Wextra -Wcast-align -Wpadded -Wconversion -Wpacked -o ${1%.*}{.${outfilesuffix}.out,.${1##*.}} $2 $3 $4 $5
+}
+
 function ps1_counter()
 {
 	case $1 in *-h*) echo "(jobnum|dirnum)" ;; esac
@@ -760,7 +768,7 @@ ord() { printf "0x%x\n" "'$1"; }
 # Returns a character from a specified ASCII value
 chr() { printf $(printf '\\%03o\\n' "$1"); }
 
-export GODIR_IGNORE=".*~$\|\./\..*\|.*/\(.git\|.hg\|.svn\|openwrt-gen.*\|builders\)\(/\|$\)"
+export GODIR_IGNORE=".*~$\|\./\..*\|.*/\(.git\|.hg\|.svn\|openwrt-gen.*\|builders\|build\)\(/\|$\)"
 # Steal from AOSP
 function godir ()
 {

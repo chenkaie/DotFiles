@@ -18,6 +18,7 @@ Further paragraphs come after blank lines.
 # Optional body:
 #
 # Optional footers:
+# Run-Cppcheck: yes
 # JIRA #UPF-1234
 # BREAKING CHANGE: description
 # Refs: 676104e, a215868

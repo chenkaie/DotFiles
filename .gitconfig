@@ -59,7 +59,7 @@
 	show-vim = "!f() { git dirdiff $1^ $1; }; f"
 
 	;sync = "!git stash; git pull --rebase --all; git push --all; git stash pop"
-	sync-r = "!git stash; git pull --no-rebase --all --tags; git remote prune origin; git pr clean; git stash pop; git submodule update"
+	sync-r = "!git stash; git pull --no-rebase --all --tags -f; git remote prune origin; git pr clean; git stash pop; git submodule update --init"
 
 	; Undo a `git push`
 	undopush = push -f origin HEAD^:develop
@@ -88,6 +88,11 @@
 	--sort=taggerdate \
 	--format '%(tag)_,,,_%(taggerdate:raw)_,,,_%(taggername)_,,,_%(subject)' refs/tags \
 	| awk 'BEGIN { FS = \"_,,,_\"  } ; { t=strftime(\"%Y-%m-%d  %H:%M\",$2); printf \"%-20s %-18s %-25s %s\\n\", t, $1, $4, $3  }'"
+
+	fixup = "!git rebase -i --autosquash HEAD~2"
+	;fixupraw = "!git add -p && git commit --fixup=HEAD && git stash && EDITOR=true git rebase -i --autosquash HEAD~2 && git stash pop"
+
+	search = "!git branch -a --contains"
 
 [branch]
 	autosetupmerge = true
