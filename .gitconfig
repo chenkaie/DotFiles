@@ -59,10 +59,13 @@
 	show-vim = "!f() { git dirdiff $1^ $1; }; f"
 
 	;sync = "!git stash; git pull --rebase --all; git push --all; git stash pop"
-	sync-r = "!git stash; git pull --no-rebase --all --tags -f; git remote prune origin; git pr clean; git stash pop; git submodule update --init"
+	sync-r = "!git stash; git pull --no-rebase --all --tags -f; git remote prune origin; git pr clean; git stash pop; git sub-update"
+
+	; purge
+	purge = "!f() { read -p 'Continue (Y/n)? ' CONFIRM; [ $CONFIRM = 'Y' ] && { git stash drop; git reset --hard; git clean -dfx; } }; f"
 
 	; Undo a `git push`
-	undopush = push -f origin HEAD^:develop
+	undopush = push -f origin HEAD^:master
 
 	# use --set-upstream by default
 	pushu = push -u
@@ -76,23 +79,39 @@
 	# Use $2 instead of curent branch if given
 	child = "!bash -c 'git log --format=%h --reverse --ancestry-path ${1:-HEAD}..${2:\"$(git rev-parse --abbrev-ref HEAD)\"} | head -1' -"
 
-	# Rebase onto origin/${1:-develop} and test by push --dry-run
-	rebase-and-push = "!f() { tgt_branch=${1:-develop}; git pull origin || git branch --set-upstream-to=origin/$(git rev-parse --abbrev-ref HEAD) && git fetch origin && git rebase origin/${tgt_branch} && git branch --set-upstream-to=origin/$(git rev-parse --abbrev-ref HEAD) && git push -n --force-with-lease --force-if-includes && git push --force-with-lease --force-if-includes; }; f"
+	# Rebase onto origin/${1:-master} and test by push --dry-run
+	rebase-and-push = "!f() { tgt_branch=${1:-master}; git pull origin || git branch --set-upstream-to=origin/$(git rev-parse --abbrev-ref HEAD) && git fetch origin && git rebase origin/${tgt_branch} && git branch --set-upstream-to=origin/$(git rev-parse --abbrev-ref HEAD) && git push -n --force-with-lease --force-if-includes && git push --force-with-lease --force-if-includes; }; f"
 	rap = !git rebase-and-push
 
 	# sort git tags by date
 	tags = tag --sort=v:refname
 
 	# verbose tags info
-	tags-verbose = !"git for-each-ref \
+	tags-annotated-verbose = !"git for-each-ref \
 	--sort=taggerdate \
 	--format '%(tag)_,,,_%(taggerdate:raw)_,,,_%(taggername)_,,,_%(subject)' refs/tags \
+	| awk 'BEGIN { FS = \"_,,,_\"  } ; { t=strftime(\"%Y-%m-%d  %H:%M\",$2); printf \"%-20s %-18s %-25s %s\\n\", t, $1, $4, $3  }'"
+
+	tags-verbose = !"git for-each-ref \
+	--sort=taggerdate \
+	--format '%(refname:short)_,,,_%(taggerdate:raw)_,,,_%(taggername)_,,,_%(subject)' refs/tags \
 	| awk 'BEGIN { FS = \"_,,,_\"  } ; { t=strftime(\"%Y-%m-%d  %H:%M\",$2); printf \"%-20s %-18s %-25s %s\\n\", t, $1, $4, $3  }'"
 
 	fixup = "!git rebase -i --autosquash HEAD~2"
 	;fixupraw = "!git add -p && git commit --fixup=HEAD && git stash && EDITOR=true git rebase -i --autosquash HEAD~2 && git stash pop"
 
 	search = "!git branch -a --contains"
+
+	# Recursively sync all submodules according to what has been committed on the current branch.
+	# Also recursively clone any submodules that haven't been cloned yet.
+	sub-update = "!git submodule foreach 'git stash'; git submodule sync && git submodule update --init --recursive; git submodule foreach 'git stash pop || true'"
+
+	# purge all submodules
+	sub-purge = "!git submodule foreach 'git purge || true'"
+
+	# handy for submodules in use cases
+	clone-all = clone --recurse-submodules
+	pull-all = pull --recurse-submodules
 
 [branch]
 	autosetupmerge = true

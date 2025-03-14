@@ -105,15 +105,13 @@ case $OS in
 		# You can check this file ~/.xsession-errors to find out why you login GNOME failed.
 		IsUbuntu=$(lsb_release -a | grep Ubuntu)
 		# enable bash completion
-		if [ -z "$IsUbuntu" ] && [ -f /etc/bash_completion ]; then
+		if [ -n "$IsUbuntu" ] && [ -f /etc/bash_completion ]; then
 			. /etc/bash_completion
 		fi
 
 		# Linuxbrew
-		if [ -x $HOME/.linuxbrew/bin/brew ]; then
-			export PATH="$(brew --prefix)/bin:$PATH"
-			export MANPATH="$(brew --prefix)/share/man:$MANPATH"
-			export INFOPATH="$(brew --prefix)/share/info:$INFOPATH"
+		if [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
+			eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 			# bash_completion if installed
 			if [ -r $(brew --prefix)/etc/profile.d/bash_completion.sh ]; then
@@ -125,7 +123,7 @@ case $OS in
 		fi
 
 		# PATH
-		export PATH=$HOME/hr:$HOME/perl5/bin:$TOOLS:$TOOLS/subversion-scripts:$TOOLS/git-scripts:$TOOLS/tmux-scripts:$HOME/usr/bin:$HOME/usr/sbin:$PATH
+		export PATH=$HOME/hr:$HOME/perl5/bin:$TOOLS:$TOOLS/subversion-scripts:$TOOLS/git-scripts:$TOOLS/tmux-scripts:$HOME/usr/bin:$HOME/usr/sbin:$HOME/.local/bin:$PATH
 		# MANPATH
 		export MANPATH=$HOME/usr/man:$HOME/usr/share/man:$HOME/usr/cpan/share/man:$MANPATH
 
@@ -208,7 +206,7 @@ alias less='less -R --tabs=4'                   # colorful 'less', tab stops = 4
 alias more='less'
 alias mkdir='mkdir -p -v'
 alias reload='source ~/.bashrc'
-alias wget='aria2c -x 16 -s 16 --retry-wait=1'
+#alias wget='aria2c -x 16 -s 16 --retry-wait=1'
 alias which='type -a'
 alias quota='quota -vs'
 alias grep='grep --color'
@@ -218,9 +216,11 @@ alias netstat='netstat -np'
 alias strings='strings -a'
 alias dig="dig +nocmd any +multiline +noall +answer"
 alias xmllint='xmllint --noout'
-alias cat='bat -p'
+alias cat='batcat -p'
 alias tailer="tail --follow=name --retry"       # follow closely even the file is rotated
 alias sync-r="pcd; git sync-r; mcd; git sync-r; pcd"
+alias rg="rg --line-number --smart-case --no-heading --hidden"
+alias tigf='tig HEAD~100..HEAD'                 # tig-fast (inherit from TGIF)
 
 # more responsive -f
 support "tail -s.1 /dev/null" && alias tail='tail -n $((${LINES:-12}-2)) -s.1'
@@ -230,7 +230,7 @@ exist htop && alias top='htop'
 
 # `cat` with beautiful colors. (GH:paulirish/dotfiles)
 alias c='pygmentize -O style=monokai -f console256 -g'
-alias brew_update="brew -v update; brew -v upgrade; brew cleanup; brew cask cleanup; brew prune; brew doctor"
+alias brew_update="brew -v update; brew -v upgrade; brew cleanup; brew prune; brew doctor"
 
 #export GREP_OPTIONS="--exclude-dir=\*/.svn/\* --exclude=\*~ --exclude=\*.swp"
 #alias wcgrep='wcgrep -inh --colour=auto' has been defined in wcgrep
@@ -250,7 +250,7 @@ alias perlpath='perl -le "print foreach @INC"'
 alias pwd-win='pwd | sed '"'"'s/\//\\/g'"'"' | sed '"'"'s/\(.*\)/Z:\1/'"'"''
 alias pwd-mac='pwd | sed "s/^\//\/Volumes\/kent\//"'
 # A simple python http file server
-alias hfs='python -m SimpleHTTPServer 8080'
+alias hfs='python3 -m http.server 8080'
 #
 #alias python="PYTHONSTARTUP=$TOOLS/inpy python"
 
@@ -416,7 +416,7 @@ __svn_ps1 ()
 
 ps1_set()
 {
-	local prompt_char="$" separator="\n" prompt_time="" workding_dir="\w" prompt_verbose=$TXTYLW'\u@''\h'$TXTWHT':'
+	local prompt_char="$" separator="\n" prompt_time="" workding_dir="\w" prompt_verbose=$BLDGRN'\u@''\h'$TXTBLU':'
 
 	# root privilege
 	[ $UID -eq 0 ] && prompt_charclr=$TXTRED || prompt_charclr=$TXTWHT
@@ -528,13 +528,17 @@ source $DOTFILES/completion/acd_func.sh
 source $DOTFILES/completion/hub.bash_completion.sh
 source $DOTFILES/completion/godir-completion.sh
 source $DOTFILES/completion/bash-complete-partial-path && _bcpp --defaults
-source $DOTFILES/completion/git-completion.bash
+#source $DOTFILES/completion/git-completion.bash
 #source $DOTFILES/completion/repo.bash_completion
 # aws cli completion
 complete -C aws_completer aws
 
+# complete alias
+source $DOTFILES/completion/complete_alias
+complete -F _complete_alias g
+
 # make less more friendly for non-text input files, see lesspipe(1)
-exist lesspipe && eval "$(lesspipe)"
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 #export LESS='-i -N -w  -z-4 -g -e -M -X -F -R -P%t?f%f :stdin .?pb%pb\%:?lbLine %lb:?bbByte %bb:-...'
 export LESS='-FRXM --tabs=4 -i'
@@ -574,9 +578,12 @@ extract ()
 		*.tar)       tar xvf $1     ;;
 		*.tbz2)      tar xvjf $1    ;;
 		*.tgz)       tar xvzf $1    ;;
+		*.sup)       tar xvzf $1    ;;
 		*.zip)       unzip $1       ;;
 		*.Z)         uncompress $1  ;;
 		*.7z)        7z x $1        ;;
+		# rpm, deb, ... packages
+		*.rpm)       rpm2cpio $1 | cpio -idmv;;
 		*)           echo "don't know how to extract '$1'..." ;;
 		esac
 	else
@@ -626,11 +633,8 @@ function myip ()
 function ips ()
 {
 	case $OS in
-	Darwin|*BSD)
+	Linux|Darwin|*BSD)
 		local ip=$(ifconfig  | grep -E 'inet.[0-9]' | grep -v '127.0.0.1' | awk '{ print $2}')
-		;;
-	Linux)
-		local ip=$(ifconfig | grep 'inet addr:'| grep -v '127.0.0.1' | cut -d: -f2 | awk '{ print $1}')
 		;;
 	esac
 
@@ -768,7 +772,7 @@ ord() { printf "0x%x\n" "'$1"; }
 # Returns a character from a specified ASCII value
 chr() { printf $(printf '\\%03o\\n' "$1"); }
 
-export GODIR_IGNORE=".*~$\|\./\..*\|.*/\(.git\|.hg\|.svn\|openwrt-gen.*\|builders\|build\)\(/\|$\)"
+export GODIR_IGNORE=".*~$\|\./\..*\|.*/\(.git\|.hg\|.svn\|openwrt-gen.*\|builders\|build\|build-.*\)\(/\|$\)"
 # Steal from AOSP
 function godir ()
 {
@@ -915,62 +919,6 @@ function largest() {
 	find . -type f  -exec du -h {} + | sort -r -h | head -n ${1:-20}
 }
 
-# Automatically add completion for all aliases to commands having completion functions
-function alias_completion {
-    local namespace="alias_completion"
-
-    # parse function based completion definitions, where capture group 2 => function and 3 => trigger
-    local compl_regex='complete( +[^ ]+)* -F ([^ ]+) ("[^"]+"|[^ ]+)'
-    # parse alias definitions, where capture group 1 => trigger, 2 => command, 3 => command arguments
-    local alias_regex="alias ([^=]+)='(\"[^\"]+\"|[^ ]+)(( +[^ ]+)*)'"
-
-    # create array of function completion triggers, keeping multi-word triggers together
-    eval "local completions=($(complete -p | sed -Ene "/$compl_regex/s//'\3'/p"))"
-    (( ${#completions[@]} == 0 )) && return 0
-
-    # create temporary file for wrapper functions and completions
-    rm -f "/tmp/${namespace}-*.tmp" # preliminary cleanup
-    local tmp_file; tmp_file="$(mktemp "/tmp/${namespace}-${RANDOM}XXX.tmp")" || return 1
-
-    # read in "<alias> '<aliased command>' '<command args>'" lines from defined aliases
-    local line; while read line; do
-        eval "local alias_tokens; alias_tokens=($line)" 2>/dev/null || continue # some alias arg patterns cause an eval parse error
-        local alias_name="${alias_tokens[0]}" alias_cmd="${alias_tokens[1]}" alias_args="${alias_tokens[2]# }"
-
-        # skip aliases to pipes, boolan control structures and other command lists
-        # (leveraging that eval errs out if $alias_args contains unquoted shell metacharacters)
-        eval "local alias_arg_words; alias_arg_words=($alias_args)" 2>/dev/null || continue
-
-        # skip alias if there is no completion function triggered by the aliased command
-        [[ " ${completions[*]} " =~ " $alias_cmd " ]] || continue
-        local new_completion="$(complete -p "$alias_cmd")"
-
-        # create a wrapper inserting the alias arguments if any
-        if [[ -n $alias_args ]]; then
-            local compl_func="${new_completion/#* -F /}"; compl_func="${compl_func%% *}"
-            # avoid recursive call loops by ignoring our own functions
-            if [[ "${compl_func#_$namespace::}" == $compl_func ]]; then
-                local compl_wrapper="_${namespace}::${alias_name}"
-                    echo "function $compl_wrapper {
-                        (( COMP_CWORD += ${#alias_arg_words[@]} ))
-                        COMP_WORDS=($alias_cmd $alias_args \${COMP_WORDS[@]:1})
-                        (( COMP_POINT -= \${#COMP_LINE} ))
-                        COMP_LINE=\${COMP_LINE/$alias_name/$alias_cmd $alias_args}
-                        (( COMP_POINT += \${#COMP_LINE} ))
-                        $compl_func
-                    }" >> "$tmp_file"
-                    new_completion="${new_completion/ -F $compl_func / -F $compl_wrapper }"
-            fi
-        fi
-
-        # replace completion trigger by alias
-        new_completion="${new_completion% *} $alias_name"
-        echo "$new_completion" >> "$tmp_file"
-    done < <(alias -p | sed -Ene "s/$alias_regex/\1 '\2' '\3'/p")
-    source "$tmp_file" && rm -f "$tmp_file"
-}; alias_completion
-
-
 # inspired by Jumpserver open source project
 # $ jumpanyserver "type" "host-string"
 function jumpanyserver() {
@@ -999,4 +947,4 @@ function _exit() {
 trap _exit EXIT
 
 # vim: fdm=marker ts=4 sw=4:
-
+. "$HOME/.cargo/env"
