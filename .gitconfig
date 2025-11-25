@@ -23,10 +23,11 @@
 	branchdirdiff = !bash -c \"git dirdiff `git oldest-ancestor`...$@\"
 	branchlog = !bash -c \"git log `git oldest-ancestor`..$@\"
 	branchall = !git for-each-ref --sort=committerdate --format='%(refname:short) * %(authorname) * %(committerdate:relative)' refs/remotes/ | column -t -s '*'
-	oldest-ancestor = !bash -c 'diff --old-line-format='' --new-line-format='' <(git rev-list --first-parent "${1:-develop}") <(git rev-list --first-parent "${2:-HEAD}") | head -1' -
+	oldest-ancestor = !bash -c 'diff --old-line-format='' --new-line-format='' <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | head -1' -
 
 	ci = commit --verbose
 	co = checkout
+	co-master-force = "!f() { git reset --hard; git checkout master; git sub-update; }; f"
 	dc = diff --cached
 
 	dirdiff = difftool --dir-diff --extcmd=dirdiff
@@ -41,15 +42,19 @@
 
 	;pull = pull --rebase
 
-	; For PR review
-	prdiff = !git diff develop...
-	prdirdiff = !git dirdiff develop...
-	prlog = !git log develop..
-	prtig = !tig develop..
-	prcr = "!f() { git pr $1 && git dirdiff develop...; }; f"
+	; For Github PR review
+	prdiff = !git diff master...
+	prdirdiff = !git dirdiff master...
+	prlog = !git log master..
+	prtig = !tig master..
+	prcr = "!f() { git pr $1 && git dirdiff master...; }; f"
 
-	; git-flow: What else PRs to be merged between this branch and develop
-	pr2merge = "!f() { git log --merges --pretty=format:\"%ai '%h' %s <%an>\" ..develop | grep \"Merge pull request\" | sort; }; f"
+	; For Gitlab MR review
+	;mr = "!f() { git fetch origin refs/merge-requests/$1/head:mr-$1 && git checkout mr-$1; }; f"
+	mrcr = "!f() { git mr $1 && git dirdiff master...; }; f"
+
+	; git-flow: What else PRs to be merged between this branch and master
+	pr2merge = "!f() { git log --merges --pretty=format:\"%ai '%h' %s <%an>\" ..master | grep \"Merge pull request\" | sort; }; f"
 
 	root = rev-parse --show-toplevel
 
@@ -59,10 +64,11 @@
 	show-vim = "!f() { git dirdiff $1^ $1; }; f"
 
 	;sync = "!git stash; git pull --rebase --all; git push --all; git stash pop"
-	sync-r = "!git stash; git pull --no-rebase --all --tags -f; git remote prune origin; git pr clean; git stash pop; git sub-update"
+	sync-r = "!git stash; git pull --force --all --tags -f; git remote prune origin; git pr clean; git stash pop; git sub-update"
 
 	; purge
 	purge = "!f() { read -p 'Continue (Y/n)? ' CONFIRM; [ $CONFIRM = 'Y' ] && { git stash drop; git reset --hard; git clean -dfx; } }; f"
+	purge-force = "!f() { git stash drop; git reset --hard; git clean -dfx; }; f"
 
 	; Undo a `git push`
 	undopush = push -f origin HEAD^:master
@@ -71,6 +77,7 @@
 	pushu = push -u
 
 	pushf = push --force-with-lease --force-if-includes
+	branchpushf = "!f() { git push -f origin HEAD:refs/heads/$1; }; f"
 
 	zip = !git archive --format tar.gz -o $(git log --date=short --pretty=format:"%ad" -1).tar.gz HEAD
 
@@ -97,7 +104,7 @@
 	--format '%(refname:short)_,,,_%(taggerdate:raw)_,,,_%(taggername)_,,,_%(subject)' refs/tags \
 	| awk 'BEGIN { FS = \"_,,,_\"  } ; { t=strftime(\"%Y-%m-%d  %H:%M\",$2); printf \"%-20s %-18s %-25s %s\\n\", t, $1, $4, $3  }'"
 
-	fixup = "!git rebase -i --autosquash HEAD~2"
+	fixup = "!git stash; git rebase -i --autosquash HEAD~2"
 	;fixupraw = "!git add -p && git commit --fixup=HEAD && git stash && EDITOR=true git rebase -i --autosquash HEAD~2 && git stash pop"
 
 	search = "!git branch -a --contains"
@@ -107,7 +114,8 @@
 	sub-update = "!git submodule foreach 'git stash'; git submodule sync && git submodule update --init --recursive; git submodule foreach 'git stash pop || true'"
 
 	# purge all submodules
-	sub-purge = "!git submodule foreach 'git purge || true'"
+	sub-purge = "!git submodule foreach --recursive 'git purge || true'; git sub-update"
+	sub-purge-force = "!git submodule foreach --recursive 'git purge-force || true'; git sub-update"
 
 	# handy for submodules in use cases
 	clone-all = clone --recurse-submodules
@@ -147,10 +155,11 @@
 
 [init]
 	; custom git hooks
-	templatedir = ~/.git_template
+	;templatedir = ~/.git_template
+	defaultBranch = main
 
 [commit]
-	template = ~/.git_template/commit-template.txt
+	;template = ~/.git_template/commit-template.txt
 
 ;[pager]
 	;diff = diff-so-fancy | less --tabs=4 -RFX

@@ -78,7 +78,7 @@ set nocompatible
 	Plugin 'altercation/vim-colors-solarized'
 	Plugin 'int3/vim-extradite'
 	Plugin 'w0ng/vim-hybrid'
-	Plugin 'Valloric/YouCompleteMe'
+	"Plugin 'Valloric/YouCompleteMe'
 	Plugin 'bruno-/vim-man'
 	"Plugin 'Mizuchi/STL-Syntax'
 	Plugin 'terryma/vim-expand-region'
@@ -979,6 +979,21 @@ nnoremap <leader>x :Hexmode<CR>
 	let g:blamer_show_in_insert_modes = 0
 	let g:blamer_date_format = '%Y/%m/%d'
 	highlight Blamer ctermfg=244 ctermbg=236
+
+
+	""""""""""""""""""""""""""""""
+	" Codeium
+	""""""""""""""""""""""""""""""
+	"let g:codeium_disable_bindings = 1
+	"imap <script><silent><nowait><expr> <C-g> codeium#Accept()
+	"imap <script><silent><nowait><expr> h  codeium#AcceptNextWord()
+	"imap <script><silent><nowait><expr> j  codeium#AcceptNextLine()
+	imap . <Cmd>call codeium#CycleCompletions(1)<CR>
+	imap , <Cmd>call codeium#CycleCompletions(-1)<CR>
+	imap x <Cmd>call codeium#Clear()<CR>
+
+	set statusline+=\{…\}%3{codeium#GetStatusString()}
+
 
 " }}}
 

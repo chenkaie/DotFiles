@@ -5,7 +5,7 @@ augroup filetypedetect
     " filetype for mkd
     au BufNewFile,BufRead *.mkd,*.markdown setfiletype markdown
     " lowlight ^M symbol.
-    au BufRead *.c,*.h match Ignore /\r$/ | hi Ignore ctermfg=bg
+    "au BufRead *.c,*.h match Ignore /\r$/ | hi Ignore ctermfg=bg
     " increase the maximum nesting of folds for HTML
     au BufRead *.htm* set foldnestmax=10
     " Set default fdm for *.c,*.h file

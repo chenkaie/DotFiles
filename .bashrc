@@ -6,7 +6,7 @@
 
 export EDITOR=vim
 export LC_ALL=en_US.UTF-8
-export LANG=en_US
+export LANG=en_US.UTF-8
 
 # Source global definitions
 [ -f /etc/bashrc ] && . /etc/bashrc
@@ -122,6 +122,13 @@ case $OS in
 			fi
 		fi
 
+		export PYENV_ROOT="$HOME/.pyenv"
+		export PATH="$PYENV_ROOT/bin:$PATH"
+		eval "$(pyenv init --path)"
+		eval "$(pyenv init -)"
+		#eval "$(ssh-agent)"
+		eval "$(keychain --eval id_rsa)"
+
 		# PATH
 		export PATH=$HOME/hr:$HOME/perl5/bin:$TOOLS:$TOOLS/subversion-scripts:$TOOLS/git-scripts:$TOOLS/tmux-scripts:$HOME/usr/bin:$HOME/usr/sbin:$HOME/.local/bin:$PATH
 		# MANPATH
@@ -160,7 +167,7 @@ export GOPATH=$HOME/usr/gocode
 export PATH=$GOPATH/bin:$PATH
 
 # Automatically attach tmux session if exist
-tmux attach-session > /dev/null 2>&1
+#tmux attach-session > /dev/null 2>&1
 
 #######################
 # Alias               #
@@ -198,6 +205,7 @@ alias cp='cp -i -v'
 alias mv='mv -i -v'
 alias rm='rm -i -v'
 alias df='df -kTH'
+alias du='du --apparent-size'
 alias ln='ln -i -n'
 alias psg='ps -ef | grep $1'
 alias h='history | grep $1'
@@ -219,8 +227,11 @@ alias xmllint='xmllint --noout'
 alias cat='batcat -p'
 alias tailer="tail --follow=name --retry"       # follow closely even the file is rotated
 alias sync-r="pcd; git sync-r; mcd; git sync-r; pcd"
-alias rg="rg --line-number --smart-case --no-heading --hidden"
+alias rg='rg --line-number --smart-case --no-heading --hidden -g "!.git/"'
 alias tigf='tig HEAD~100..HEAD'                 # tig-fast (inherit from TGIF)
+alias scp_mba='scp_helper() { scp -r "$@" kent@192.168.10.187:~/Downloads/; }; scp_helper '
+alias scp_mbp='scp_helper() { scp -r "$@" kent@192.168.1.202:~/Downloads/; }; scp_helper '
+alias scp_dell='scp_helper() { scp -r "$@" kent@192.168.10.87:~/Downloads/; }; scp_helper '
 
 # more responsive -f
 support "tail -s.1 /dev/null" && alias tail='tail -n $((${LINES:-12}-2)) -s.1'
@@ -235,7 +246,7 @@ alias brew_update="brew -v update; brew -v upgrade; brew cleanup; brew prune; br
 #export GREP_OPTIONS="--exclude-dir=\*/.svn/\* --exclude=\*~ --exclude=\*.swp"
 #alias wcgrep='wcgrep -inh --colour=auto' has been defined in wcgrep
 alias mdiff='diff -ruN --exclude=.svn'
-alias diff='colordiff.pl'
+#alias diff='colordiff.pl'
 
 # Moving around & all that jazz
 #alias cd='pushd > /dev/null'
@@ -454,7 +465,7 @@ ps1_set()
 			;;
 		esac
 	done
-	PS1=$BLDBLK'['${prompt_time}${prompt_verbose}$TXTWHT'pts/\l'$TXTWHT${PROMPT_GIT}${PROMPT_SVN}$BLDBLK'$(ps1_counter)''] '$BLDWHT${workding_dir}${separator}${prompt_charclr}${prompt_char}$TXTWHT
+	PS1=$BLDWHT'['${prompt_time}${prompt_verbose}$TXTWHT'pts/\l'$TXTWHT${PROMPT_GIT}${PROMPT_SVN}$BLDWHT'$(ps1_counter)''] '$BLDBLU${workding_dir}${separator}${prompt_charclr}${prompt_char}$TXTWHT
 }
 
 #PS1=$TXTYLW'\u'$TXTWHT'@'${PROMPT_HOSTCOLOR}'\h'$TXTWHT':'$TXTGRN'\W'$TXTWHT${PROMPT_GIT}${PROMPT_SVN}$BLDBLK'$(ps1_counter)'$TXTGRN' >'$BLDGRN'>'$BLDWHT'> '$TXTWHT
@@ -502,6 +513,11 @@ export LESS_TERMCAP_se=$'\E[0m'           # end standout-mode
 export LESS_TERMCAP_so=$'\E[01;44;33m'    # begin standout-mode - info box
 export LESS_TERMCAP_ue=$'\E[0m'           # end underline
 export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
 
 #for X-Win32
 #export DISPLAY="172.16.2.54:0:0"
@@ -692,18 +708,18 @@ function repeat()
 #
 # Find a file with pattern $1 in name and Execute $2 on it:
 function fe()
-{ wcfind . -type f -iname '*'${1:-}'*' -exec ${2:-ls} {} \;  ; }
+{ /usr/bin/fdfind --no-ignore --no-hidden "$1"; }
 
 # lazy gcc, default outfile: filename_prefix.out, eg: hello.c -> hello.out
 function lgcc ()
 {
-	gcc -o ${1%.*}{.out,.${1##*.}} $2 $3 $4 $5 -lpthread -lz
+	gcc -o ${1%.*}{.out,.${1##*.}} $2 $3 $4 $5 -lpthread
 }
 
 # lazy g++, default outfile: filename_prefix.out, eg: hello.cpp -> hello.out
 function lg++ ()
 {
-	g++ -std=c++11 -O0 -ggdb3 -fno-omit-frame-pointer -fno-inline -Wcast-align -Wpadded -Wpacked -o ${1%.*}{.out,.${1##*.}} $2 $3 $4 $5
+	g++ -O0 -ggdb3 -fno-omit-frame-pointer -fno-inline -Wcast-align -Wpadded -Wpacked -o ${1%.*}{.out,.${1##*.}} $2 $3 $4 $5
 }
 
 # lazy arm-linux-gcc, default outfile: filename_prefix.platform.out, eg: hello.c -> hello.arm.out
@@ -948,3 +964,10 @@ trap _exit EXIT
 
 # vim: fdm=marker ts=4 sw=4:
 . "$HOME/.cargo/env"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# opencode
+export PATH=/home/kent/.opencode/bin:$PATH
