@@ -1,0 +1,38 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": [
+    "~/.config/opencode/instructions/*.md"
+  ],
+  "plugin": [
+    "opencode-gemini-auth@latest",
+    "oh-my-openagent@latest",
+    "@slkiser/opencode-quota",
+    "opencode-openai-codex-auth"
+  ],
+  "permission": {
+    "write": "allow",
+    "bash": {
+      "*": "allow",
+      "git push *": "ask",
+      "git push": "ask"
+    },
+    "external_directory": "allow"
+  },
+  "tools": {
+    "write": true,
+    "bash": true,
+    "webfetch": true
+  },
+  "mcp": {
+    "atlassian": {
+      "type": "remote",
+      "enabled": true,
+      "url": "https://mcp.atlassian.com/v1/mcp"
+    },
+    "gitlab": {
+        "type": "local",
+        "command": ["glab", "mcp", "serve"],
+        "enabled": true
+    }
+  }
+}
