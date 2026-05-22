@@ -1,7 +1,7 @@
 ---
 description: Quick local code review of a GitLab MR — checkout, analyze diff, and fix issues directly in the source code. No GitLab API or tokens needed.
 mode: subagent
-model: github-copilot/claude-sonnet-4.6
+<!--model: github-copilot/claude-sonnet-4.6-->
 tools:
   write: true
   edit: true
@@ -135,8 +135,8 @@ For each fix:
 
 ## Rules
 
-- **NEVER** push changes or post comments to GitLab
-- **NEVER** amend existing commits — fixes stay as unstaged changes for the user to review
+- **ASK** to push changes or post comments to GitLab
+- **ASK** to amend existing commits — fixes stay as unstaged changes for the user to review
 - Fix bugs and clear issues; skip subjective style preferences
 - When unsure if something is a bug, read the surrounding code and tests before deciding
 - Group related fixes when they address the same concern

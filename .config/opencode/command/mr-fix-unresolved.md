@@ -60,4 +60,4 @@ Step 4: After all comments are processed, print a summary:
   - <reason> — <comment excerpt>
 ```
 
-Step 5: **NEVER** push changes or post comments to GitLab. This will be done manually.
+Step 5: **ASK** to push changes or post comments to GitLab. This will be done manually.
