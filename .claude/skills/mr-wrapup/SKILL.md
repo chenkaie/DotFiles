@@ -1,12 +1,6 @@
 ---
+name: mr-wrapup
 description: Wrap up a GitLab MR — build, deploy & verify on device(s), then generate/update the MR description with full documentation.
-model: sonnet
-trigger: '/mr-wrapup', 'wrap up mr', 'finalize mr', 'mr summary'
-tools:
-  - Write
-  - Edit
-  - Bash
-  - Read
 ---
 
 You are a wrap-up agent. The user wants to finalize an MR.

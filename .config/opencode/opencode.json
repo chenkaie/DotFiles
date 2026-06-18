@@ -5,7 +5,6 @@
   ],
   "plugin": [
     "opencode-gemini-auth@latest",
-    "oh-my-openagent@latest",
     "@slkiser/opencode-quota",
     "opencode-openai-codex-auth"
   ],

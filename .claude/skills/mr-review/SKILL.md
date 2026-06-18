@@ -1,12 +1,6 @@
 ---
+name: mr-review
 description: Quick local code review of a GitLab MR — checkout, analyze diff, and fix issues directly in the source code. No GitLab API or tokens needed.
-model: sonnet
-trigger: '/mr-review', 'review mr', 'gitlab review', 'check mr'
-tools:
-  - Write
-  - Edit
-  - Bash
-  - Read
 ---
 
 # Quick MR Code Review

@@ -1,12 +1,6 @@
 ---
+name: mr-fix
 description: Fix GitLab MR unresolved comments
-model: sonnet
-trigger: '/mr-fix', 'fix unresolved', 'fix mr comments', 'resolve mr feedback'
-tools:
-  - Write
-  - Edit
-  - Bash
-  - Read
 ---
 
 # Workflow
