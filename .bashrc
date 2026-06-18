@@ -153,6 +153,19 @@ case $OS in
 		export PATH=/usr/lib/ccache:$PATH
 		export CCACHE_DIR=$UBNT_CACHE_DIR/ccache
 		ccache --max-size=10G -s > /dev/null 2>&1
+
+		# ─── Vivint / NRG build vars ──────────────────────────────────────────────────
+		export NRG_PROXY=http://localhost:13128
+		export VVNT_BUILD_YOCTO_DIR=$HOME/Project/cache/build-yocto
+		export VVNT_DEVELOPER_DIR=$HOME/Project/.developer
+		export VVNT_NINJA_ARGS=-l32
+		export VVNT_SCCACHE_DIR=$HOME/Project/cache/build-yocto/.sccache
+		export UBNT_MIDDLEWARE_LOCAL=on
+		export ENV_MIRROR_URL=http://192.168.1.200:8080/
+		export OLLAMA_MODELS=/media/kent/SSD/ollama-models
+		# ─── Secrets (kept in ~/.bashrc.local, not committed) ────────────────────────
+		# GITLAB_TOKEN, CLOUDSMITH_API_KEY, OPENAI_API_KEY, GOOGLE_APPLICATION_CREDENTIALS
+		[ -f ~/.bashrc.local ] && source ~/.bashrc.local
 		;;
 
 	*)

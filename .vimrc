@@ -15,7 +15,7 @@
 " GitHub:        http://github.com/chenkaie/DotFiles/blob/master/.vimrc
 "                http://github.com/chenkaie/DotFiles/tree/master/.vim/
 "
-" Last Modified: Fri Dec 04, 2020  11:36AM
+" Last Modified: Thu Jun 18, 2026  01:04PM
 " ==============================================================================
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -67,7 +67,7 @@ set nocompatible
 	Plugin 'sessionman.vim'
 	Plugin 'nelstrom/vim-visual-star-search'
 	Plugin 'nelstrom/vim-markdown-folding'
-	Plugin 'Valloric/MatchTagAlways'
+	"Plugin 'Valloric/MatchTagAlways'
 	Plugin 'bad-whitespace'
 	Plugin 'rking/ag.vim'
 	Plugin 'MarcWeber/vim-addon-mw-utils'

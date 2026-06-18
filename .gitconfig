@@ -7,7 +7,7 @@
 
 [user]
 	name = Kent Chen
-	email = kent.chen@ui.com
+	email = kent.chen@vivint.com
 
 [core]
 	whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
