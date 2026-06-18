@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "deny": [
+      "Bash(rm -rf /:*)",
+      "Bash(rm -rf ~:*)",
+      "Read(./.env)",
+      "Read(./**/.env)",
+      "Read(./**/.env.*)",
+      "Read(./**/*secret*)",
+      "Read(./**/id_rsa)"
+    ],
+    "ask": [
+      "Bash(git push)",
+      "Bash(git push:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(git clean -fd:*)"
+    ],
+    "defaultMode": "bypassPermissions"
+  },
+  "model": "sonnet[1m]",
+  "tui": "fullscreen",
+  "skipDangerousModePermissionPrompt": true,
+  "theme": "dark",
+  "verbose": true,
+  "autoScrollEnabled": true,
+  "remoteControlAtStartup": true
+}

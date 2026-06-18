@@ -1,0 +1,31 @@
+# Secrets & credentials
+.credentials.json
+
+# Conversation history & sessions
+history.jsonl
+sessions/
+session-env/
+shell-snapshots/
+file-history/
+
+# Per-project runtime state
+projects/
+
+# Daemon & runtime
+daemon/
+daemon.lock
+daemon.log
+daemon.status.json
+
+# Cache & ephemeral
+cache/
+backups/
+jobs/
+*.log
+.last-*
+*-cache.json
+remote-settings.json
+policy-limits.json
+
+# Auto-managed plugins (reinstallable)
+plugins/
