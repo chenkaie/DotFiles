@@ -17,7 +17,6 @@
     ],
     "defaultMode": "bypassPermissions"
   },
-  "model": "sonnet[1m]",
   "tui": "fullscreen",
   "skipDangerousModePermissionPrompt": true,
   "theme": "dark",

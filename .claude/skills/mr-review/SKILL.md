@@ -1,13 +1,13 @@
 ---
 name: mr-review
-description: Quick local code review of a GitLab MR — checkout, analyze diff, and fix issues directly in the source code. No GitLab API or tokens needed.
+description: Quick GitLab MR review — checkout, analyze the diff, fix confirmed issues locally, and publish concise inline findings with suggested patches.
 ---
 
 # Quick MR Code Review
 
-Lightweight local review of a GitLab MR. Checks out the branch, analyzes the diff, fixes issues directly in source. Uses `glab` CLI only — no API tokens needed.
+Lightweight review of a GitLab MR. Checks out the branch, analyzes the diff, fixes issues directly in source, and publishes confirmed findings as inline GitLab discussions. Uses the authenticated `glab` CLI.
 
-> For comprehensive workflows (resolving reviewer comments, posting findings to GitLab, git commit/rebase help), use the `gitlab-review-kiran` agent instead.
+> For comprehensive workflows (resolving reviewer comments or git commit/rebase help), use the `gitlab-review-kiran` agent instead.
 
 ## Workflow
 
@@ -91,7 +91,21 @@ For each fix:
 2. Make the minimal change that addresses the issue
 3. Verify with diagnostics on changed files
 
-### Step 6: Report summary
+### Step 6: Publish inline findings
+
+Before posting, fetch all existing MR discussions and compare their file, line, title, and substance against the confirmed findings. Do not post a duplicate even if an existing discussion is resolved or outdated.
+
+For every confirmed issue:
+
+1. Publish a brief inline comment on the corresponding changed line in the GitLab MR.
+2. State the concrete impact and the condition that triggers it.
+3. Include a minimal GitLab `suggestion` patch when the fix can be represented safely on that line or range.
+4. Do not post speculative findings, subjective style preferences, or issues that require an unverified assumption.
+5. Keep related symptoms and fixes in one discussion rather than posting several comments for the same root cause.
+
+If a confirmed issue cannot be anchored to a changed line, list it in the final summary as not posted and explain why. Record the URL of every discussion created.
+
+### Step 7: Report summary
 
 ```
 ## MR Review Summary
@@ -105,20 +119,30 @@ For each fix:
 ### Noted but not fixed (<count>)
 - <description> — <reason skipped (subjective, out of scope, needs discussion)>
 
+### Inline comments posted (<count>)
+- `<file>:<line>` — <brief finding> — <discussion URL>
+
+### Not posted (<count>)
+- <finding> — <duplicate, speculative, or no changed-line anchor>
+
 ### Clean areas
 - <areas reviewed that looked good>
 ```
 
 ## Rules
 
-- **ASK** to jpush changes or post comments to GitLab
+- Publish confirmed inline findings without asking again; the skill invocation authorizes these review comments
+- **ASK** before pushing changes to GitLab
 - **ASK** to amend existing commits — fixes stay as unstaged changes for the user to review
 - Fix bugs and clear issues; skip subjective style preferences
 - When unsure if something is a bug, read the surrounding code and tests before deciding
 - Group related fixes when they address the same concern
+- Never resolve existing discussions unless the user explicitly requests it
 
 ## Permissions
 
 Bash commands allowed except:
 - git push (any form) - DENIED
-- glab mr note/comment/approve/merge/close/reopen/update - DENIED
+- glab mr approve/merge/close/reopen/update - DENIED
+
+Creating inline MR discussions/comments for confirmed findings is allowed. Updating a comment created during the current review is allowed only to correct formatting or factual mistakes.

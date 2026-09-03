@@ -18,3 +18,5 @@ rel-firmware.bin
 rel-artifacts
 rootfs-owrt
 rootfs-ubnt
+
+**/.claude/settings.local.json

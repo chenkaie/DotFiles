@@ -5,8 +5,8 @@
   ],
   "plugin": [
     "opencode-gemini-auth@latest",
-    "@slkiser/opencode-quota",
-    "opencode-openai-codex-auth"
+    "opencode-openai-codex-auth",
+    "opencode-claude-auth@latest"
   ],
   "permission": {
     "write": "allow",

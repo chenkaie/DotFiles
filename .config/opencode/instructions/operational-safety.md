@@ -41,10 +41,12 @@ These rules capture durable agent-workflow lessons that apply regardless of mode
 
 ## GitLab interaction boundaries
 
-- When fixing MR issues, make code changes and commit them, but never automatically resolve discussions or mark comments as resolved.
-- Never use `glab` commands that modify discussion state (e.g., `glab mr note resolve`, `glab api` calls that resolve threads).
-- Let the human review fixes and manually resolve discussions after verifying the changes.
-- Report what was fixed and which comments were addressed, but leave discussion resolution to the user.
+- When fixing MR issues, make code changes and commit them. Do not push without explicit approval.
+- Reply in the original inline thread for each comment you address, including what changed, the commit SHA, and the verification result.
+- Resolving a thread you replied to is allowed. Resolve only threads actually addressed — fixed in code, or answered with concrete evidence.
+- Do not resolve threads skipped as subjective or opinion-based unless the user says to.
+- Never `approve`, `merge`, `close`, or `reopen` an MR on the user's behalf.
+- Report what was fixed, what was skipped and why, and which threads were resolved.
 
 ## Keep instruction files high value
 

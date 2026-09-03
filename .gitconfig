@@ -38,6 +38,7 @@
 
 	clog = log --graph --date=short --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --abbrev-commit
 	lg = log --stat --decorate
+	lg-verbose = log --stat --decorate -p
 	lo = log --oneline
 
 	;pull = pull --rebase
@@ -65,10 +66,11 @@
 
 	;sync = "!git stash; git pull --rebase --all; git push --all; git stash pop"
 	sync-r = "!git stash; git pull --force --all --tags -f; git remote prune origin; git pr clean; git stash pop; git sub-update"
+	pullf = "!git fetch origin && git reset --hard origin/$(git branch --show-current) && git clean -fd"
 
 	; purge
-	purge = "!f() { read -p 'Continue (Y/n)? ' CONFIRM; [ $CONFIRM = 'Y' ] && { git stash drop; git reset --hard; git clean -dfx; } }; f"
-	purge-force = "!f() { git stash drop; git reset --hard; git clean -dfx; }; f"
+	purge = "!f() { read -p 'Continue (Y/n)? ' CONFIRM; [ $CONFIRM = 'Y' ] && { git stash drop; git reset --hard; git clean -dffx; } }; f"
+	purge-force = "!f() { git stash drop; git reset --hard; git clean -dffx; }; f"
 
 	; Undo a `git push`
 	undopush = push -f origin HEAD^:master
