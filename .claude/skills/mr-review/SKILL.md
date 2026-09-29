@@ -1,11 +1,11 @@
 ---
 name: mr-review
-description: Quick GitLab MR review — checkout, analyze the diff, fix confirmed issues locally, and publish concise inline findings with suggested patches.
+description: Quick GitLab MR review — checkout, analyze the diff, fix confirmed issues locally, and (after asking permission) publish concise inline findings with suggested patches.
 ---
 
 # Quick MR Code Review
 
-Lightweight review of a GitLab MR. Checks out the branch, analyzes the diff, fixes issues directly in source, and publishes confirmed findings as inline GitLab discussions. Uses the authenticated `glab` CLI.
+Lightweight review of a GitLab MR. Checks out the branch, analyzes the diff, fixes issues directly in source, and — after asking the user for permission — publishes confirmed findings as inline GitLab discussions. Uses the authenticated `glab` CLI.
 
 > For comprehensive workflows (resolving reviewer comments or git commit/rebase help), use the `gitlab-review-kiran` agent instead.
 
@@ -19,15 +19,14 @@ This step is **mandatory** when a full GitLab URL is given. A bare MR ID (e.g. `
 
 Given `https://gitlab.com/NAMESPACE/PROJECT/-/merge_requests/ID`, extract `NAMESPACE/PROJECT`.
 
-**Get the current repo's remote origin and normalize it:**
+**Get the current repo's project path from glab (no raw `git` calls):**
 
 ```bash
-git remote get-url origin
-# SSH:   git@gitlab.com:company/camera/camera-build.git  → company/camera/camera-build
-# HTTPS: https://gitlab.com/company/camera/camera-build.git → company/camera/camera-build
+glab repo view --output json --jq .path_with_namespace
+# → company/camera/camera-build
 ```
 
-Strip the `.git` suffix and the host prefix to get the bare `NAMESPACE/PROJECT` path.
+This returns the bare `NAMESPACE/PROJECT` path directly. Do not use `git remote get-url`, `git status`, or `git branch` for this step. Use `glab` for all repo/MR context (see "Use glab, not raw git" below).
 
 **Compare the two project paths:**
 
@@ -62,10 +61,25 @@ glab mr view <MR_ID>
 glab mr checkout <MR_ID>
 ```
 
+If `glab mr checkout` fails, **do not fall back to raw `git fetch` / `git checkout -b` / `git log`**. Those commands can trigger interactive credential prompts, and they bypass glab's authentication. Instead:
+
+1. Report the error to the user. For an HTTPS `Authentication failed`, the usual cause is `glab config get git_protocol --host <host>` returning `https`. Suggest that the user run `glab config set git_protocol ssh --host <host>` themselves, then retry. Do not change glab config without asking.
+2. Meanwhile, continue the review read-only through the API. This needs no local checkout:
+
+```bash
+glab mr view <MR_ID> --output json --jq '.diff_refs'          # base_sha / head_sha
+glab mr diff <MR_ID> --color=never                             # full diff
+glab api "projects/:id/merge_requests/<MR_ID>/commits"         # commit list (replaces git log base..head)
+glab api "projects/:id/merge_requests/<MR_ID>/diffs?per_page=100"   # per-file diffs / stat (replaces git diff --stat)
+glab api "projects/:id/repository/files/<url-encoded-path>/raw?ref=<head_sha>"   # full source at MR head, for context
+```
+
+Step 5 (local fixes) needs a real checkout. If checkout is unavailable, record fixes as proposed diffs in the findings instead of editing files.
+
 ### Step 3: Analyze the diff
 
 ```bash
-glab mr diff <MR_ID>
+glab mr diff <MR_ID> --color=never
 ```
 
 Read the full diff **and** surrounding source files for context — don't review the diff in isolation.
@@ -93,17 +107,38 @@ For each fix:
 
 ### Step 6: Publish inline findings
 
-Before posting, fetch all existing MR discussions and compare their file, line, title, and substance against the confirmed findings. Do not post a duplicate even if an existing discussion is resolved or outdated.
+Before posting, fetch all existing MR discussions (`glab api projects/:id/merge_requests/:iid/discussions --paginate`) and compare their file, line, title, and substance against the confirmed findings. Do not post a duplicate even if an existing discussion is resolved or outdated.
 
-For every confirmed issue:
+**ASK before posting.** Once the confirmed findings (and any fixes) are ready, present the list of intended comments (file:line + one-line summary of each finding, and whether a fix/diff is attached) and ask the user to confirm before creating any inline comments. Do not post anything until the user explicitly approves. If the user approves only a subset, post only those.
 
-1. Publish a brief inline comment on the corresponding changed line in the GitLab MR.
-2. State the concrete impact and the condition that triggers it.
-3. Include a minimal GitLab `suggestion` patch when the fix can be represented safely on that line or range.
-4. Do not post speculative findings, subjective style preferences, or issues that require an unverified assumption.
-5. Keep related symptoms and fixes in one discussion rather than posting several comments for the same root cause.
+Always use `glab mr note create` (or the equivalent `mr_note_create` tool) for every comment, anchored or not. **Never use `glab mr note --message`** — it is deprecated and has been observed to print a plausible-looking `#note_<id>` URL for a note that was never actually created server-side (see Step 6b). If a top-level, non-anchored comment is needed, call `mr_note_create` with no `file`/`line`/`reply` — do not fall back to the deprecated command.
 
-If a confirmed issue cannot be anchored to a changed line, list it in the final summary as not posted and explain why. Record the URL of every discussion created.
+For every confirmed issue, post one comment (or a small reply thread, see below) that includes:
+
+1. **Impact statement**: the concrete impact and the exact condition that triggers it.
+2. **A real diff, always** — not just a prose description or an inline code snippet. Generate it from the actual change (`git diff -- <file>` for a fixed issue, scoped to the relevant hunk) and paste it as a fenced ` ```diff ` block. This applies whether or not the fix is representable as a single-line GitLab `suggestion`.
+3. **A GitLab `suggestion` block in addition**, only when the whole fix is safely expressible as one contiguous range in one file. Skip it (diff-only) when the fix spans multiple functions, files, or call sites — an isolated `suggestion` applied there would leave the tree in a broken/incomplete state.
+4. For a **confirmed-but-unfixed** issue (needs author input, too invasive for a same-session drive-by, etc.), still post the impact + suggested direction, but explicitly state **"No diff attached — not fixed"** so the reviewer isn't left guessing whether a patch exists.
+5. Do not post speculative findings, subjective style preferences, or issues that require an unverified assumption.
+6. Keep related symptoms and fixes in one discussion rather than posting several top-level comments for the same root cause — if a fix cascades into a second file (e.g. a signature change), reply in the same discussion thread noting the second file's diff and that the two must move together, rather than opening a new discussion for it.
+
+If a confirmed issue cannot be anchored to a changed line (the file isn't part of this MR's diff at all, e.g. a dependency that should have been updated alongside it), do not silently skip it: post it as a top-level `mr_note_create` comment (no `file`/`line`) with the same impact + diff format, and note in the final summary that it was posted as a general comment rather than an inline one, with the reason.
+
+### Step 6b: Verify every comment actually landed
+
+Tool-reported URLs are not proof of success — confirm each note exists before including it in the summary or trusting it in a later reply:
+
+```bash
+glab api "projects/:id/merge_requests/:iid/notes" --paginate | python3 -c "
+import json, sys
+ids = {n['id'] for n in json.load(sys.stdin)}
+print([i for i in EXPECTED_IDS if i not in ids])   # should be empty
+"
+```
+
+If a note is missing despite a reported success URL, re-post it via `mr_note_create` (never retry with the deprecated `--message` path) and re-verify.
+
+Record the URL of every discussion/note confirmed to exist.
 
 ### Step 7: Report summary
 
@@ -120,10 +155,10 @@ If a confirmed issue cannot be anchored to a changed line, list it in the final 
 - <description> — <reason skipped (subjective, out of scope, needs discussion)>
 
 ### Inline comments posted (<count>)
-- `<file>:<line>` — <brief finding> — <discussion URL>
+- `<file>:<line>` — <brief finding> — diff attached: yes/no — <discussion URL>
 
 ### Not posted (<count>)
-- <finding> — <duplicate, speculative, or no changed-line anchor>
+- <finding> — <duplicate or speculative — not "no changed-line anchor": those go as general comments instead, see Step 6>
 
 ### Clean areas
 - <areas reviewed that looked good>
@@ -131,7 +166,12 @@ If a confirmed issue cannot be anchored to a changed line, list it in the final 
 
 ## Rules
 
-- Publish confirmed inline findings without asking again; the skill invocation authorizes these review comments
+- **Use glab, not raw git**, for repo identity, fetching, checkout, commit lists, and diffs: `glab repo view`, `glab mr view`, `glab mr checkout`, `glab mr diff`, `glab api`. Raw `git fetch` / `git checkout` / `git log <range>` / `git remote` can prompt for credentials interactively, so do not use them. If glab checkout fails, follow the Step 2 fallback, which reviews through the API without prompting. Local-only `git diff -- <file>` on your own uncommitted fixes (Step 6) is still fine.
+- **ASK** before posting any inline finding to GitLab — present the intended comments first and wait for explicit approval; the skill invocation does not by itself authorize posting
+- Every confirmed finding gets a real diff attached (fixed) or an explicit "not fixed, no diff" note (unfixed) — never just prose. See Step 6.
+- Always post via `mr_note_create` / `glab mr note create`; never `glab mr note --message` (deprecated, can silently no-op while reporting a fake success URL)
+- Always verify posted notes exist via the notes/discussions API (Step 6b) before reporting their URLs
+- A missing diff line (file not in the MR's diff) is not a reason to skip a finding — post it as a general comment instead
 - **ASK** before pushing changes to GitLab
 - **ASK** to amend existing commits — fixes stay as unstaged changes for the user to review
 - Fix bugs and clear issues; skip subjective style preferences
@@ -145,4 +185,4 @@ Bash commands allowed except:
 - git push (any form) - DENIED
 - glab mr approve/merge/close/reopen/update - DENIED
 
-Creating inline MR discussions/comments for confirmed findings is allowed. Updating a comment created during the current review is allowed only to correct formatting or factual mistakes.
+Creating inline MR discussions/comments for confirmed findings requires asking the user first (Step 6) — do not post without explicit approval. Updating a comment created during the current review is allowed only to correct formatting or factual mistakes.

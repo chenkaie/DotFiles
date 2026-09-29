@@ -48,6 +48,12 @@ These rules capture durable agent-workflow lessons that apply regardless of mode
 - Never `approve`, `merge`, `close`, or `reopen` an MR on the user's behalf.
 - Report what was fixed, what was skipped and why, and which threads were resolved.
 
+## Privileged access
+
+- When root privileges are required, test whether non-interactive sudo is already available. If not, pause and ask the user to run the exact privileged command themselves or grant the narrowest temporary sudo permission needed.
+- Never ask the user to provide or paste a password, and never attempt to pass a password through a command or tool.
+- Use granted root access only for the requested task. After privileged work is complete and verified, remind the user to revoke any temporary sudoers entry.
+
 ## Keep instruction files high value
 
 - Put reusable behavior rules here, not one-off task notes.

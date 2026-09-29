@@ -20,7 +20,60 @@ If no argument is given, auto-detect the open MR for the current branch via `gla
 
 ---
 
-## PHASE 2 — BUILD
+## PHASE 2 — DOCUMENTATION BUILD CHECK (camera-build repo)
+
+Applies specifically to the **camera-build** repo (detect via `scripts/activate-docs-env` +
+`mkdocs.yml` at repo root). Skip this phase entirely for other repos (bartleby, rant, ...)
+that don't have this tooling.
+
+Run this whenever the branch touches any `docs/**/*.md` file — check with
+`git diff <base-branch>..HEAD --name-only | grep '^docs/'` — even if the MR is primarily a
+code change with incidental doc updates. CI's `build-docs` job runs the same checks and will
+hard-fail the pipeline if skipped; catching it locally first is much faster than a
+round-trip through CI.
+
+1. Activate the docs environment once per shell (creates/reuses a local `.docs.venv`):
+   ```bash
+   source scripts/activate-docs-env
+   ```
+2. Run the same check CI runs:
+   ```bash
+   docs-check
+   ```
+   This runs, in order: Prettier formatting check, markdownlint, and a **strict-mode**
+   `mkdocs build` (warnings are fatal in strict mode — a clean build with 0 warnings is
+   required, not just 0 errors).
+3. **If Prettier/markdownlint report issues** (most common: `MD060/table-column-style` —
+   Markdown table pipes not aligned to the style markdownlint expects): run the auto-fixer,
+   then re-check:
+   ```bash
+   docs-format
+   docs-check
+   ```
+4. **If the strict `mkdocs build` step aborts** with `Doc file '...' contains a link '...',
+   but the target '...' is not found among documentation files` — this is a structural issue,
+   not a formatting one, and `docs-format` will not fix it. The near-universal cause in this
+   repo: **a Markdown link pointing outside `docs/` to a source file** (a `.bb`/`.bbappend`
+   Yocto recipe, a `.rs`/`.py` source file, etc.). MkDocs's strict link validator only
+   resolves links against files it tracks inside `docs_dir` (`docs/`) — a relative link that
+   walks up and out of `docs/` into `yocto/`, `src/`, etc. will **always** report "target not
+   found," no matter how many `../` segments are used. Adjusting the `../` count does not fix
+   it (this looks like an off-by-one path bug but isn't one — don't waste time recalculating
+   relative depth).
+   - **Fix**: remove the hyperlink; use a plain backtick-quoted path instead. Same
+     information for the reader, no broken link, and it survives any future MkDocs
+     `docs_dir`/`use_directory_urls` config changes.
+     ```diff
+     - [`foo.bb`](../../../yocto/meta-vivint-camera-lite/recipes-core/foo.bb)
+     + `yocto/meta-vivint-camera-lite/recipes-core/foo.bb`
+     ```
+5. Repeat steps 3-4 and re-run `docs-check` until it passes with **0 errors and 0 warnings**
+   before proceeding to Phase 6 (create/update the MR). A doc-only fix belongs in its own
+   small commit/diff, not silently folded into an unrelated code commit.
+
+---
+
+## PHASE 3 — BUILD
 
 1. Determine the build command from project context (e.g. `echo ./build.sh | ./shell.sh` for bartleby).
 2. Run a **release** (stripped) build.
@@ -29,7 +82,7 @@ If no argument is given, auto-detect the open MR for the current branch via `gla
 
 ---
 
-## PHASE 3 — DEPLOY & VERIFY
+## PHASE 4 — DEPLOY & VERIFY
 
 For each configured device:
 
@@ -47,7 +100,7 @@ If any device fails 2+ checks or shows a crash loop, stop and report before upda
 
 ---
 
-## PHASE 4 — PROJECT-SPECIFIC VERIFICATION
+## PHASE 5 — PROJECT-SPECIFIC VERIFICATION
 
 After confirming the service is healthy, run any project-specific sanity checks that are relevant to the changes:
 
@@ -57,7 +110,7 @@ After confirming the service is healthy, run any project-specific sanity checks 
 
 ---
 
-## PHASE 5 — GENERATE MR DESCRIPTION
+## PHASE 6 — GENERATE MR DESCRIPTION
 
 Write a comprehensive MR description. Only include sections that apply to the actual changes.
 
@@ -115,7 +168,7 @@ Closes <JIRA-TICKET>
 
 ---
 
-## PHASE 6 — UPDATE THE MR
+## PHASE 7 — UPDATE THE MR
 
 1. Run `glab mr update <MR_NUMBER> --description "$(cat <<'EOF' ... EOF)"` with the generated description.
 2. Confirm the update succeeded.
@@ -126,6 +179,7 @@ Closes <JIRA-TICKET>
 ## DELIVERY CHECKLIST
 
 Before finishing, confirm:
+- [ ] (camera-build repo, if `docs/**/*.md` changed) `docs-check` passes with 0 errors and 0 warnings
 - [ ] Build succeeded (release binary, not debug)
 - [ ] All devices passed 3/3 checks
 - [ ] No crash loops or fatal errors observed

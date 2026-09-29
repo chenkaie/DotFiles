@@ -22,6 +22,29 @@
     "bash": true,
     "webfetch": true
   },
+  "provider": {
+    "dgx": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "DGX LiteLLM",
+      "options": {
+        "baseURL": "http://100.81.186.117:4000/v1",
+        "apiKey": "sk-GowFsAA5TWlSsqVMoB_71w"
+      },
+      "models": {
+        "qwen3.8-27b": {
+          "name": "Qwen3.8 27B (DGX)",
+          "tool_call": true,
+          "reasoning": true,
+          "attachment": true,
+          "limit": {
+            "context": 262144,
+            "input": 229376,
+            "output": 32768
+          }
+        }
+      }
+    }
+  },
   "mcp": {
     "atlassian": {
       "type": "remote",
