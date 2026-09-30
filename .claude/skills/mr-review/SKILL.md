@@ -57,13 +57,25 @@ glab mr view <MR_ID>
 
 ### Step 2: Checkout the MR branch
 
+**2a. Preflight the git protocol.** `glab mr checkout` does not fetch through `origin`. It builds its own fetch URL from glab's `git_protocol` setting. An SSH `origin` does not help if glab is set to HTTPS. A per-host value in `~/.config/glab-cli/config.yml` (`hosts: <host>: git_protocol`) overrides the global value.
+
 ```bash
-glab mr checkout <MR_ID>
+glab config get git_protocol --host <host>     # must print "ssh"
 ```
+
+If it prints `https`, git needs HTTPS credentials for the fetch. `GITLAB_TOKEN` is used by glab only, not by git, and glab (as of v1.114) has no git credential helper. Unless a `credential.helper` is configured, git will prompt for a username. Do not run the checkout in that state. Tell the user and offer to run `glab config set git_protocol ssh --host <host>`. Change the config only after the user approves. Check that SSH works with `ssh -o BatchMode=yes -T git@<host>`.
+
+**2b. Check out non-interactively.** Run the checkout through Bash, with prompts disabled and a timeout. Do not use the `glab_mr_checkout` MCP tool, because it has no way to disable prompts. If git prompts inside that tool, it hangs until the request times out.
+
+```bash
+GIT_TERMINAL_PROMPT=0 GIT_SSH_COMMAND="ssh -o BatchMode=yes" timeout 120 glab mr checkout <MR_ID>
+```
+
+Confirm that `git log -1 --format=%H` matches `diff_refs.head_sha` from Step 1.
 
 If `glab mr checkout` fails, **do not fall back to raw `git fetch` / `git checkout -b` / `git log`**. Those commands can trigger interactive credential prompts, and they bypass glab's authentication. Instead:
 
-1. Report the error to the user. For an HTTPS `Authentication failed`, the usual cause is `glab config get git_protocol --host <host>` returning `https`. Suggest that the user run `glab config set git_protocol ssh --host <host>` themselves, then retry. Do not change glab config without asking.
+1. Report the exact error to the user. `could not read Username for 'https://...'` or `Authentication failed` means the protocol is HTTPS (see 2a). Offer to switch it to SSH, then retry.
 2. Meanwhile, continue the review read-only through the API. This needs no local checkout:
 
 ```bash
@@ -166,7 +178,7 @@ Record the URL of every discussion/note confirmed to exist.
 
 ## Rules
 
-- **Use glab, not raw git**, for repo identity, fetching, checkout, commit lists, and diffs: `glab repo view`, `glab mr view`, `glab mr checkout`, `glab mr diff`, `glab api`. Raw `git fetch` / `git checkout` / `git log <range>` / `git remote` can prompt for credentials interactively, so do not use them. If glab checkout fails, follow the Step 2 fallback, which reviews through the API without prompting. Local-only `git diff -- <file>` on your own uncommitted fixes (Step 6) is still fine.
+- **Use glab, not raw git**, for repo identity, fetching, checkout, commit lists, and diffs: `glab repo view`, `glab mr view`, `glab mr checkout`, `glab mr diff`, `glab api`. Raw `git fetch` / `git checkout` / `git log <range>` / `git remote` can prompt for credentials interactively, so do not use them. Always run `glab mr checkout` with `GIT_TERMINAL_PROMPT=0` and a timeout after the Step 2a protocol preflight, never through the MCP checkout tool. If glab checkout fails, follow the Step 2 fallback, which reviews through the API without prompting. Local-only `git diff -- <file>` on your own uncommitted fixes (Step 6) is still fine.
 - **ASK** before posting any inline finding to GitLab — present the intended comments first and wait for explicit approval; the skill invocation does not by itself authorize posting
 - Every confirmed finding gets a real diff attached (fixed) or an explicit "not fixed, no diff" note (unfixed) — never just prose. See Step 6.
 - Always post via `mr_note_create` / `glab mr note create`; never `glab mr note --message` (deprecated, can silently no-op while reporting a fake success URL)
