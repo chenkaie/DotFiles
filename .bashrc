@@ -69,7 +69,7 @@ case $OS in
 			# bash_completion if installed
 			if [ -r $(brew --prefix)/etc/profile.d/bash_completion.sh ]; then
 				. "$(brew --prefix)/etc/profile.d/bash_completion.sh"
-				for i in brew tmux tig-completion.bash; do
+				for i in brew tig-completion.bash; do
 					. $(brew --prefix)/etc/bash_completion.d/$i
 				done
 			fi
@@ -346,6 +346,8 @@ done
 # View HTTP traffic
 alias sniffHTTP="sudo ngrep -d 'eth0' -t '^(GET|POST) ' 'tcp and port 7080'"
 alias sniffHTTPVerbose="sudo ngrep -d 'eth0' -W byline port 80"
+
+alias ncdu="dua i"
 
 #######################
 # Bash SHell opts     #
@@ -633,6 +635,7 @@ compress ()
 		*.tgz) shift && tar czf $FILE $* ;;
 		*.zip) shift && zip $FILE $* ;;
 		*.rar) shift && rar $FILE $* ;;
+		*.7z) shift && 7z a "$FILE" "$@" ;;
 		esac
 	else
 		echo "usage: compress <foo.tar.gz> ./foo ./bar"
